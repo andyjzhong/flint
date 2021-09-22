@@ -4,7 +4,7 @@ import TableComponent from './Table.js'
 const Transactions = () => {
     return (
         <div className="transactions">
-            Transactions Page
+            <h1>Transactions Page</h1>
             <TableComponent />
         </div>
     )

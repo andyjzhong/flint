@@ -3,7 +3,7 @@ import React from 'react';
 const Budgets = () => {
     return (
         <div className="budgets">
-            Budgets Page
+            <h1>Budgets Page</h1>
         </div>
     )
 }

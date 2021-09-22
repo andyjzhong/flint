@@ -30,7 +30,7 @@ const TableComponent = () => {
                         <Td>September 12, 2021</Td>
                         <Td>Expense</Td>
                         <Td>Food</Td>
-                        <Td>Fast Foos</Td>
+                        <Td>Fast Food</Td>
                         <Td isNumeric>14.75</Td>
                     </Tr>
                     <Tr>
