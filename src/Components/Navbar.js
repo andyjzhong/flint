@@ -111,7 +111,7 @@ const DesktopNav = () => {
             <PopoverTrigger>
               <Link
                 p={2}
-                href={navItem.href ?? '#'}
+                href={navItem.href}
                 fontSize={'sm'}
                 fontWeight={500}
                 color={linkColor}
@@ -256,40 +256,40 @@ const NAV_ITEMS: Array<NavItem> = [
       {
         label: 'Explore Design Work',
         subLabel: 'Trending Design to inspire you',
-        href: '#',
+        href: 'home',
       },
       {
         label: 'New & Noteworthy',
         subLabel: 'Up-and-coming Designers',
-        href: '#',
+        href: 'home',
       },
     ],
   },
   {
     label: 'Dashboard',
-    href: '#',
+    href: 'dashboard',
   },
   {
     label: 'Transactions',
     children: [
       {
-        label: 'Job Board',
+        label: 'Transactions 1',
         subLabel: 'Find your dream design job',
-        href: '#',
+        href: 'transactions',
       },
       {
-        label: 'Freelance Projects',
+        label: 'Transactions 2',
         subLabel: 'An exclusive list for contract work',
-        href: '#',
+        href: 'transactions',
       },
     ],
   },
   {
     label: 'Budgets',
-    href: '#',
+    href: 'budgets',
   },
   {
     label: 'About',
-    href: '#',
+    href: 'about',
   },
 ];
