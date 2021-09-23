@@ -1,8 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Table, Thead, Tr, Th, Td, Tbody } from '@chakra-ui/react';
 import './Table.css';
+import axios from 'axios';
 
 const TableComponent = () => {
+
+    const getAllTransactions = async () => {
+        console.log("Attempting to retrieve all transactions...")
+
+        try {
+            const url =
+                process.env.NODE_ENV === 'production'
+                    ? `http://flint-server.herokuapp.com/transactions`
+                    : `http://localhost:8000/transactions`
+
+            const response = await axios(url)
+            console.log("Response data: ", response);
+
+        } catch (error) {
+            console.warn("Error when retrieving all transactions.")
+        }
+    }
+
+    useEffect(() => {
+        getAllTransactions()
+    }, [])
+
     return (
         <div className="table">
             <Table size="sm">
