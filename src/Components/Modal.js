@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import DatePickerComponent from './DatePicker.js'
+import axios from 'axios';
 import {
     Modal,
     ModalOverlay,
@@ -21,6 +22,42 @@ import {
 } from "@chakra-ui/react"
 
 const ModalComponent = (props) => {
+
+    const [transactionData, setTransactionData] = useState("")
+
+    const createTransaction = async () => {
+        console.log("Attempting to create a new transaction...")
+
+        const url =
+            process.env.NODE_ENV === 'production'
+                ? `http://flint-server.herokuapp.com/transactions`
+                : `http://localhost:8000/transactions`
+
+        axios.post(url, {
+            "description": "Taco Bell",
+            "date": "July 1, 2021",
+            "type": "Expense",
+            "category": "Food",
+            "subcategory": "Fast Food",
+            "amount": 2.00
+            // "description": transactionData.description,
+            // "date": transactionData.date,
+            // "type": transactionData.type,
+            // "category": transactionData.category,
+            // "subcategory": transactionData.subcategory,
+            // "amount": transactionData.amount
+        })
+        .then((res) => {
+            console.log("Success!")
+            props.onClose()
+        })
+        .catch(console.error)
+    }
+
+    const setupNewTransaction = () => {
+        let inputData
+        setTransactionData(inputData);
+    }
 
     return (
         <>
@@ -84,7 +121,7 @@ const ModalComponent = (props) => {
                     </ModalBody>
 
                     <ModalFooter>
-                        <Button colorScheme="blue" mr={3} onClick={props.onClose}>Save</Button>
+                        <Button colorScheme="blue" mr={3} onClick={createTransaction} type="submit">Save</Button>
                         <Button onClick={props.onClose}>Cancel</Button>
                     </ModalFooter>
                 </ModalContent>
