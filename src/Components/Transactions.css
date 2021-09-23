@@ -1,0 +1,9 @@
+.transactions-table-container {
+    margin: 0 auto;
+    width: 80vw;
+}
+
+.btn-add-transaction {
+    float: right;
+    margin: 20px 10px;
+}
