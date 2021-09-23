@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { DataContext } from './DataContext';
 import DatePickerComponent from './DatePicker.js'
 import axios from 'axios';
 import {
@@ -23,7 +24,12 @@ import {
 
 const ModalComponent = (props) => {
 
-    const [transactionData, setTransactionData] = useState("")
+    const { transactionDate } = useContext(DataContext);
+    const [description, setDescription] = useState("")
+    const [type, setType] = useState("")
+    const [category, setCategory] = useState("")
+    const [subcategory, setSubcategory] = useState("")
+    const [amount, setAmount] = useState("")
 
     const createTransaction = async () => {
         console.log("Attempting to create a new transaction...")
@@ -34,18 +40,12 @@ const ModalComponent = (props) => {
                 : `http://localhost:8000/transactions`
 
         axios.post(url, {
-            "description": "Taco Bell",
-            "date": "July 1, 2021",
-            "type": "Expense",
-            "category": "Food",
-            "subcategory": "Fast Food",
-            "amount": 2.00
-            // "description": transactionData.description,
-            // "date": transactionData.date,
-            // "type": transactionData.type,
-            // "category": transactionData.category,
-            // "subcategory": transactionData.subcategory,
-            // "amount": transactionData.amount
+            "description": description,
+            "date": transactionDate,
+            "type": type,
+            "category": category,
+            "subcategory": subcategory,
+            "amount": amount
         })
         .then((res) => {
             console.log("Success!")
@@ -54,10 +54,25 @@ const ModalComponent = (props) => {
         .catch(console.error)
     }
 
-    const setupNewTransaction = () => {
-        let inputData
-        setTransactionData(inputData);
-    }
+    const storeDescription = ((e) => {
+        setDescription(e.target.value)
+    })
+
+    const storeType = ((e) => {
+        setType(e.target.value)
+    })
+
+    const storeCategory = ((e) => {
+        setCategory(e.target.value)
+    })
+
+    const storeSubcategory = ((e) => {
+        setSubcategory(e.target.value)
+    })
+
+    const storeAmount = ((e) => {
+        setAmount(e.target.value)
+    })
 
     return (
         <>
@@ -69,22 +84,22 @@ const ModalComponent = (props) => {
                     <ModalBody pb={6}>
                         <FormControl>
                             <FormLabel>Description</FormLabel>
-                            <Input placeholder="i.e. Starbucks" />
+                            <Input name="input-description" onChange={storeDescription} placeholder="i.e. Starbucks" />
                         </FormControl>
 
                         <FormControl>
                             <FormLabel>Type</FormLabel>
                             <RadioGroup defaultValue="2">
                                 <Stack spacing={5} direction="row">
-                                    <Radio colorScheme="green" value="1">Income</Radio>
-                                    <Radio colorScheme="red" value="2">Expense</Radio>
+                                    <Radio name="input-type" onChange={storeType} colorScheme="green" value="Income">Income</Radio>
+                                    <Radio name="input-type" onChange={storeType} colorScheme="red" value="Expense">Expense</Radio>
                                 </Stack>
                             </RadioGroup>
                         </FormControl>
 
                         <FormControl>
                             <FormLabel>Category</FormLabel>
-                            <Select placeholder="Select category">
+                            <Select name="input-category" onChange={storeCategory} placeholder="Select category">
                                 <option value="option1">Option 1</option>
                                 <option value="option2">Option 2</option>
                                 <option value="option3">Option 3</option>
@@ -93,7 +108,7 @@ const ModalComponent = (props) => {
 
                         <FormControl>
                             <FormLabel>Subcategory</FormLabel>
-                            <Select placeholder="Select category">
+                            <Select name="input-subcategory" onChange={storeSubcategory} placeholder="Select category">
                                 <option value="option1">Option 1</option>
                                 <option value="option2">Option 2</option>
                                 <option value="option3">Option 3</option>
@@ -102,7 +117,7 @@ const ModalComponent = (props) => {
 
                         <FormControl>
                             <FormLabel>Date</FormLabel>
-                            <DatePickerComponent className="transaction-date-picker"/>
+                            <DatePickerComponent name="input-date" className="transaction-date-picker"/>
                         </FormControl>
 
 
@@ -115,7 +130,7 @@ const ModalComponent = (props) => {
                                     fontSize="1.2em"
                                     children="$"
                                 />
-                                <Input placeholder="Enter amount" />
+                                <Input name="input-amount" onChange={storeAmount} placeholder="Enter amount" />
                             </InputGroup>
                         </FormControl>
                     </ModalBody>

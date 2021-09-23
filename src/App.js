@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route } from 'react-router-dom';
 import { ChakraProvider, theme } from '@chakra-ui/react';
 import WithSubnavigation from './Components/Navbar.js';
@@ -10,10 +10,13 @@ import Budgets from './Components/Budgets.js';
 import About from './Components/About.js';
 
 function App() {
+
+    const [transactionDate, setTransactionDate] = useState();
+
     return (
         <ChakraProvider theme={theme}>
             <DataContext.Provider
-                value = {{}}
+                value = {{ transactionDate, setTransactionDate }}
             >
                 <WithSubnavigation />
                 <Route exact path="/" component={Home} />
