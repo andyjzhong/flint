@@ -14,9 +14,11 @@ import {
     InputGroup,
     InputLeftElement,
     Select,
-    Button
+    Button,
+    RadioGroup,
+    Radio,
+    Stack
 } from "@chakra-ui/react"
-import "./Modal.css"
 
 const ModalComponent = (props) => {
 
@@ -25,12 +27,22 @@ const ModalComponent = (props) => {
             <Modal isOpen={props.isOpen} onClose={props.onClose}>
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>Create your account</ModalHeader>
+                    <ModalHeader>Add New Transaction</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody pb={6}>
                         <FormControl>
                             <FormLabel>Description</FormLabel>
                             <Input placeholder="i.e. Starbucks" />
+                        </FormControl>
+
+                        <FormControl>
+                            <FormLabel>Type</FormLabel>
+                            <RadioGroup defaultValue="2">
+                                <Stack spacing={5} direction="row">
+                                    <Radio colorScheme="green" value="1">Income</Radio>
+                                    <Radio colorScheme="red" value="2">Expense</Radio>
+                                </Stack>
+                            </RadioGroup>
                         </FormControl>
 
                         <FormControl>
