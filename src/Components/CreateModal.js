@@ -92,14 +92,12 @@ const CreateModal = (props) => {
                 : `http://localhost:8000/users/${userId}/addtransaction`
 
         axios.put(url, {
-            transactions: {
-                "description": description,
-                "date": transactionDate,
-                "type": type,
-                "category": category,
-                "subcategory": subcategory,
-                "amount": amount
-            }
+            "description": description,
+            "date": transactionDate,
+            "type": type,
+            "category": category,
+            "subcategory": subcategory,
+            "amount": amount
         })
         .then((res) => {
             console.log("Success!")
