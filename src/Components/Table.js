@@ -45,13 +45,21 @@ const TableComponent = () => {
                 <Td>{item.category}</Td>
                 <Td>{item.subcategory}</Td>
                 <Td isNumeric>{item.amount}</Td>
-                <Td><Button
-                    name={item._id}
-                    className="btn-edit-transaction"
-                    colorScheme="orange"
-                    onClick={selectedTransaction}
-                >Edit</Button></Td>
-                <Td><Button className="btn-edit-transaction" colorScheme="red">Delete</Button></Td>
+                <Td>
+                    <Button
+                        name={item._id}
+                        className="btn-edit-transaction"
+                        colorScheme="orange"
+                        onClick={selectedTransaction}
+                    >Edit</Button>
+                </Td>
+                <Td>
+                    <Button
+                        name={item._id}
+                        className="btn-edit-transaction"
+                        onClick={selectedTransaction}
+                        colorScheme="red">Delete</Button>
+                </Td>
             </Tr>
         )
     })
