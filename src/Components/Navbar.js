@@ -296,4 +296,8 @@ const NAV_ITEMS: Array<NavItem> = [
     label: 'Signup',
     href: 'signup',
   },
+  {
+    label: 'Login',
+    href: 'login',
+  },
 ];
