@@ -1,9 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { DataContext } from './DataContext';
 import { Table, Thead, Tr, Th, Td, Tbody, Button } from '@chakra-ui/react';
 import './Table.css';
 import axios from 'axios';
 
 const TableComponent = () => {
+
+    const userId = "614dd60e29fe32ab9541683b";
+    const { transactionsList, setTransactionsList } = useContext(DataContext);
 
     const getAllTransactions = async () => {
         console.log("Attempting to retrieve all transactions...")
@@ -11,11 +15,12 @@ const TableComponent = () => {
         try {
             const url =
                 process.env.NODE_ENV === 'production'
-                    ? `http://flint-server.herokuapp.com/transactions`
-                    : `http://localhost:8000/transactions`
+                    ? `http://flint-server.herokuapp.com/users/${userId}`
+                    : `http://localhost:8000/users/${userId}`
 
             const response = await axios(url)
-            console.log("Response data: ", response);
+            console.log("Response data: ", response.data.transactions);
+            setTransactionsList(response.data.transactions)
 
         } catch (error) {
             console.warn("Error when retrieving all transactions.")
@@ -25,6 +30,23 @@ const TableComponent = () => {
     useEffect(() => {
         getAllTransactions()
     }, [])
+
+    let transactionItem = {}
+
+    let transactionRow = transactionsList.map((item, index) => {
+        return (
+            <Tr>
+                <Td>Starbucks</Td>
+                <Td>September 21, 2021</Td>
+                <Td>Expense</Td>
+                <Td>Food</Td>
+                <Td>Coffee Shops</Td>
+                <Td isNumeric>8.25</Td>
+                <Td><Button className="btn-edit-transaction" colorScheme="orange">Edit</Button></Td>
+                <Td><Button className="btn-edit-transaction" colorScheme="red">Delete</Button></Td>
+            </Tr>
+        )
+    })
 
     return (
         <div className="table">
@@ -42,36 +64,7 @@ const TableComponent = () => {
                     </Tr>
                 </Thead>
                 <Tbody>
-                    <Tr>
-                        <Td>Starbucks</Td>
-                        <Td>September 21, 2021</Td>
-                        <Td>Expense</Td>
-                        <Td>Food</Td>
-                        <Td>Coffee Shops</Td>
-                        <Td isNumeric>8.25</Td>
-                        <Td><Button className="btn-edit-transaction" colorScheme="orange">Edit</Button></Td>
-                        <Td><Button className="btn-edit-transaction" colorScheme="red">Delete</Button></Td>
-                    </Tr>
-                    <Tr>
-                        <Td>McDonalds</Td>
-                        <Td>September 12, 2021</Td>
-                        <Td>Expense</Td>
-                        <Td>Food</Td>
-                        <Td>Fast Food</Td>
-                        <Td isNumeric>14.75</Td>
-                        <Td><Button className="btn-edit-transaction" colorScheme="orange">Edit</Button></Td>
-                        <Td><Button className="btn-edit-transaction" colorScheme="red">Delete</Button></Td>
-                    </Tr>
-                    <Tr>
-                        <Td>Wal-Mart</Td>
-                        <Td>September 6, 2021</Td>
-                        <Td>Expense</Td>
-                        <Td>Food</Td>
-                        <Td>Groceries</Td>
-                        <Td isNumeric>38.33</Td>
-                        <Td><Button className="btn-edit-transaction" colorScheme="orange">Edit</Button></Td>
-                        <Td><Button className="btn-edit-transaction" colorScheme="red">Delete</Button></Td>
-                    </Tr>
+                    {transactionRow}
                 </Tbody>
             </Table>
         </div>
