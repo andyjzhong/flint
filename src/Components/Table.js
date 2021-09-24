@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { DataContext } from './DataContext';
 import DeleteModal from './DeleteModal';
+import EditModal from './EditModal';
 import { Table, Thead, Tr, Th, Td, Tbody, Button } from '@chakra-ui/react';
 import { useDisclosure } from "@chakra-ui/react"
 import './Table.css';
@@ -46,6 +47,12 @@ const TableComponent = () => {
         onOpen()
     }
 
+    const handleEdit = (e) => {
+        selectedTransaction(e)
+        console.log("Clicked Edit");
+        onOpen()
+    }
+
     let transactionRow = transactionsList.map((item, index) => {
         return (
             <Tr key={item._id}>
@@ -60,7 +67,7 @@ const TableComponent = () => {
                         name={item._id}
                         className="btn-edit-transaction"
                         colorScheme="orange"
-                        onClick={selectedTransaction}
+                        onClick={handleEdit}
                     >Edit</Button>
                 </Td>
                 <Td>
@@ -95,6 +102,7 @@ const TableComponent = () => {
             </Table>
 
             <DeleteModal isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>
+            <EditModal isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>
         </div>
     )
 }

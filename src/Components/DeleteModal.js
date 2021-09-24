@@ -1,18 +1,15 @@
 import React, { useContext } from 'react';
 import { DataContext } from './DataContext';
 import { Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter } from '@chakra-ui/react';
-import { useDisclosure } from "@chakra-ui/react"
 import axios from 'axios';
 
 const userId = "614dd60e29fe32ab9541683b";
 
 const DeleteModal = (props) => {
     const { transactionId } = useContext(DataContext);
-    // const { onClose } = useDisclosure()
 
     const handleDelete = async (props) => {
         console.log("Attempting to delete one transaction...")
-        console.log("Transaction ID to be deleted: ", transactionId)
 
         try {
             const url =

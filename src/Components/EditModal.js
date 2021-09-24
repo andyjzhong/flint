@@ -80,7 +80,7 @@ const EditModal = (props) => {
 
     return (
         <>
-            <Modal isOpen2={props.isOpen2} onClose={props.onClose}>
+            <Modal isOpen={props.isOpen} onClose={props.onClose}>
                 <ModalOverlay />
                 <ModalContent>
                     <ModalHeader>Edit Transaction</ModalHeader>
