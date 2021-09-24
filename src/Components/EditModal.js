@@ -22,7 +22,9 @@ import {
     Stack
 } from "@chakra-ui/react"
 
-const ModalComponent = (props) => {
+const EditModal = (props) => {
+
+    const userId = "614dd60e29fe32ab9541683b";
 
     const { transactionDate } = useContext(DataContext);
     const [description, setDescription] = useState("")
@@ -36,16 +38,18 @@ const ModalComponent = (props) => {
 
         const url =
             process.env.NODE_ENV === 'production'
-                ? `http://flint-server.herokuapp.com/transactions`
-                : `http://localhost:8000/transactions`
+                ? `http://flint-server.herokuapp.com/users/${userId}/addtransaction`
+                : `http://localhost:8000/users/${userId}/addtransaction`
 
-        axios.post(url, {
-            "description": description,
-            "date": transactionDate,
-            "type": type,
-            "category": category,
-            "subcategory": subcategory,
-            "amount": amount
+        axios.put(url, {
+            transactions: {
+                "description": description,
+                "date": transactionDate,
+                "type": type,
+                "category": category,
+                "subcategory": subcategory,
+                "amount": amount
+            }
         })
         .then((res) => {
             console.log("Success!")
@@ -79,7 +83,7 @@ const ModalComponent = (props) => {
             <Modal isOpen={props.isOpen} onClose={props.onClose}>
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>Add New Transaction</ModalHeader>
+                    <ModalHeader>Edit Transaction</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody pb={6}>
                         <FormControl>
@@ -120,7 +124,6 @@ const ModalComponent = (props) => {
                             <DatePickerComponent name="input-date" className="transaction-date-picker"/>
                         </FormControl>
 
-
                         <FormControl mt={4}>
                             <FormLabel>Amount</FormLabel>
                             <InputGroup>
@@ -145,4 +148,4 @@ const ModalComponent = (props) => {
     )
 }
 
-export default ModalComponent;
+export default EditModal;

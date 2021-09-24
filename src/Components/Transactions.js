@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Button } from "@chakra-ui/react"
 import TableComponent from './Table.js'
-import ModalComponent from './Modal.js'
+import CreateModal from './CreateModal.js'
 import { useDisclosure } from "@chakra-ui/react"
 import './Transactions.css';
 
@@ -25,7 +25,7 @@ const Transactions = () => {
                     Add Transaction
                 </Button>
                 <TableComponent />
-                <ModalComponent isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>
+                <CreateModal isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>
             </div>
         </div>
     )
