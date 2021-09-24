@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from "axios";
 
 import {
   Box,
@@ -16,6 +17,34 @@ import {
 export default function Signup() {
     const [show, setShow] = React.useState(false)
     const handleClick = () => setShow(!show)
+
+    // input states
+    const [userName, setUserName] = React.useState('')
+    const [email, setEmail] = React.useState('')
+    const [firstName, setFirstName] = React.useState('')
+    const [lastName, setLastName] = React.useState('')
+    const [password, setPassword] = React.useState('')
+
+    function postUser(username, email, password, firstName, lastName) {
+      axios
+        .post("http://localhost:8000/users", {
+          username: `${username}`,
+          email: `${email}`,
+          firstName: `${firstName}`,
+          lastName: `${lastName}`,
+          password: `${password}`
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+
+    function handleClick2(){
+      postUser(userName, email, password, firstName, lastName)
+    }
 
   return (
     <Box position={'relative'}>
@@ -72,6 +101,8 @@ export default function Signup() {
                 _placeholder={{
                   color: 'gray.500',
                 }}
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
               />
               <Input
                 placeholder="Email"
@@ -81,6 +112,8 @@ export default function Signup() {
                 _placeholder={{
                   color: 'gray.500',
                 }}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
               <Input
                 placeholder="First Name"
@@ -90,6 +123,8 @@ export default function Signup() {
                 _placeholder={{
                   color: 'gray.500',
                 }}
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
               />
               <Input
                 placeholder="Last Name"
@@ -99,6 +134,8 @@ export default function Signup() {
                 _placeholder={{
                   color: 'gray.500',
                 }}
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
               />
                 <InputGroup size="md">
                     <Input
@@ -111,6 +148,8 @@ export default function Signup() {
                         _placeholder={{
                           color: 'gray.500',
                         }}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                     />
                     <InputRightElement width="4.5rem">
                         <Button h="1.75rem" size="sm" onClick={handleClick}>
@@ -128,7 +167,9 @@ export default function Signup() {
               _hover={{
                 bgGradient: 'linear(to-r, red.400,pink.400)',
                 boxShadow: 'xl',
-              }}>
+              }}
+              onClick={handleClick2}
+              >
               Create Account
             </Button>
           </Box>
