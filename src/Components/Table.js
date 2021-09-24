@@ -10,8 +10,8 @@ import axios from 'axios';
 const TableComponent = () => {
 
     const userId = "614dd60e29fe32ab9541683b";
-    const { transactionsList, setTransactionsList, setTransactionId } = useContext(DataContext);
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const { userAction, transactionsList, setTransactionsList, setTransactionId } = useContext(DataContext);
+    const { isOpen, onOpen, onClose, isEditOpen, onEditOpen, onEditClose } = useDisclosure()
 
     const getAllTransactions = async () => {
         console.log("Attempting to retrieve all transactions...")
@@ -33,7 +33,7 @@ const TableComponent = () => {
 
     useEffect(() => {
         getAllTransactions()
-    }, [])
+    }, [userAction])
 
     const selectedTransaction = (e) => {
         let key = e.currentTarget.name;
@@ -50,7 +50,7 @@ const TableComponent = () => {
     const handleEdit = (e) => {
         selectedTransaction(e)
         console.log("Clicked Edit");
-        onOpen()
+        onEditOpen()
     }
 
     let transactionRow = transactionsList.map((item, index) => {
@@ -102,7 +102,7 @@ const TableComponent = () => {
             </Table>
 
             <DeleteModal isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>
-            <EditModal isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>
+            <EditModal isEditOpen={isEditOpen} onEditOpen={onEditOpen} onEditClose={onEditClose}/>
         </div>
     )
 }

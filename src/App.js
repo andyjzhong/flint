@@ -13,6 +13,7 @@ import Login from './Components/Login.js';
 
 function App() {
 
+    const [userAction, setUserAction] = useState();
     const [transactionDate, setTransactionDate] = useState();
     const [transactionId, setTransactionId] = useState();
     const [transactionsList, setTransactionsList] = useState([]);
@@ -23,6 +24,8 @@ function App() {
         <ChakraProvider theme={theme}>
             <DataContext.Provider
                 value = {{
+                    userAction,
+                    setUserAction,
                     transactionDate,
                     setTransactionDate,
                     isLoggedIn,

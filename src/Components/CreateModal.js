@@ -49,7 +49,7 @@ const CreateModal = (props) => {
 
     const userId = "614dd60e29fe32ab9541683b";
 
-    const { transactionDate } = useContext(DataContext);
+    const { transactionDate, setUserAction } = useContext(DataContext);
     const [description, setDescription] = useState("")
     const [type, setType] = useState("")
     const [category, setCategory] = useState("")
@@ -104,6 +104,7 @@ const CreateModal = (props) => {
         .then((res) => {
             console.log("Success!")
             props.onClose()
+            setUserAction("create")
         })
         .catch(console.error)
     }

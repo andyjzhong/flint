@@ -80,7 +80,7 @@ const EditModal = (props) => {
 
     return (
         <>
-            <Modal isOpen={props.isOpen} onClose={props.onClose}>
+            <Modal isOpen={props.isEditOpen} onClose={props.onEditClose}>
                 <ModalOverlay />
                 <ModalContent>
                     <ModalHeader>Edit Transaction</ModalHeader>
@@ -140,7 +140,7 @@ const EditModal = (props) => {
 
                     <ModalFooter>
                         <Button colorScheme="blue" mr={3} onClick={createTransaction} type="submit">Save</Button>
-                        <Button onClick={props.onClose}>Cancel</Button>
+                        <Button onClick={props.onEditClose}>Cancel</Button>
                     </ModalFooter>
                 </ModalContent>
             </Modal>

@@ -6,7 +6,7 @@ import axios from 'axios';
 const userId = "614dd60e29fe32ab9541683b";
 
 const DeleteModal = (props) => {
-    const { transactionId } = useContext(DataContext);
+    const { transactionId, setUserAction } = useContext(DataContext);
 
     const handleDelete = async (props) => {
         console.log("Attempting to delete one transaction...")
@@ -19,6 +19,7 @@ const DeleteModal = (props) => {
 
             axios.put(url);
             console.log("Delete successful!");
+            setUserAction("delete")
         } catch (error) {
             console.warn("Error when deleting one transaction.")
         }
