@@ -21,7 +21,8 @@ export default function Signup() {
         username: "username",
         email: "email",
         firstName: "firstName",
-        lastName: "lastName"
+        lastName: "lastName",
+        password: "password"
     }
 
     const updateNewAccount = (e) => {
@@ -41,6 +42,10 @@ export default function Signup() {
             newAccount.lastName = e.target.value
         }
 
+        if (e.target.name === "input-password") {
+          newAccount.password = e.target.value
+        }
+
         console.log("newAccount is", newAccount)
     }
 
@@ -56,7 +61,8 @@ export default function Signup() {
             "username": newAccount.username,
             "email": newAccount.email,
             "firstName": newAccount.firstName,
-            "lastName": newAccount.lastName
+            "lastName": newAccount.lastName,
+            "password": newAccount.password
         })
         .then((res) => {
             console.log("Success!")
@@ -160,6 +166,8 @@ export default function Signup() {
                                     <Input
                                         pr="4.5rem"
                                         type={show ? "text" : "password"}
+                                        name="input-password"
+                                        onChange={updateNewAccount}
                                         placeholder="Enter password"
                                         bg={'gray.100'}
                                         border={0}
