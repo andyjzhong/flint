@@ -11,7 +11,9 @@ const TableComponent = () => {
 
     const userId = "614dd60e29fe32ab9541683b";
     const { userAction, setUserAction, transactionsList, setTransactionsList, setTransactionId } = useContext(DataContext);
-    const { isOpen, onOpen, onClose, isEditOpen, onEditOpen, onEditClose } = useDisclosure()
+
+    const { isOpen: isEditOpen , onOpen: onEditOpen, onClose: onEditClose } = useDisclosure()
+    const { isOpen: isDeleteOpen , onOpen: onDeleteOpen, onClose: onDeleteClose } = useDisclosure()
 
     const getAllTransactions = async () => {
         console.log("Attempting to retrieve all transactions...")
@@ -44,7 +46,7 @@ const TableComponent = () => {
     const handleDelete = (e) => {
         selectedTransaction(e)
         console.log("Clicked Delete");
-        onOpen()
+        onDeleteOpen()
     }
 
     const handleEdit = (e) => {
@@ -101,8 +103,8 @@ const TableComponent = () => {
                 </Tbody>
             </Table>
 
-            <DeleteModal isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>
             <EditModal isEditOpen={isEditOpen} onEditOpen={onEditOpen} onEditClose={onEditClose}/>
+            <DeleteModal isOpen={isDeleteOpen} onOpen={onDeleteOpen} onClose={onDeleteClose}/>
         </div>
     )
 }

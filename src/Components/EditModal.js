@@ -26,33 +26,34 @@ const EditModal = (props) => {
 
     const userId = "614dd60e29fe32ab9541683b";
 
-    const { transactionDate } = useContext(DataContext);
+    const { transactionDate, transactionId, setUserAction } = useContext(DataContext);
     const [description, setDescription] = useState("")
     const [type, setType] = useState("")
     const [category, setCategory] = useState("")
     const [subcategory, setSubcategory] = useState("")
     const [amount, setAmount] = useState("")
 
-    const createTransaction = async () => {
-        console.log("Attempting to create a new transaction...")
+    const editTransaction = async () => {
+        console.log(`Attempting to edit a transaction with id of ${transactionId}...`)
 
         const url =
             process.env.NODE_ENV === 'production'
-                ? `http://flint-server.herokuapp.com/users/${userId}/addtransaction`
-                : `http://localhost:8000/users/${userId}/addtransaction`
+                ? `http://flint-server.herokuapp.com/users/${userId}/edittransaction/${transactionId}`
+                : `http://localhost:8000/users/${userId}/edittransaction/${transactionId}`
 
+
+        console.log("url @@@@@", url);
         axios.put(url, {
-            transactions: {
-                "description": description,
-                "date": transactionDate,
-                "type": type,
-                "category": category,
-                "subcategory": subcategory,
-                "amount": amount
-            }
+            "description": description,
+            "date": transactionDate,
+            "type": type,
+            "category": category,
+            "subcategory": subcategory,
+            "amount": amount
         })
         .then((res) => {
             console.log("Success!")
+            setUserAction("edit")
             props.onClose()
         })
         .catch(console.error)
@@ -139,7 +140,7 @@ const EditModal = (props) => {
                     </ModalBody>
 
                     <ModalFooter>
-                        <Button colorScheme="blue" mr={3} onClick={createTransaction} type="submit">Save</Button>
+                        <Button colorScheme="blue" mr={3} onClick={editTransaction} type="submit">Save</Button>
                         <Button onClick={props.onEditClose}>Cancel</Button>
                     </ModalFooter>
                 </ModalContent>
