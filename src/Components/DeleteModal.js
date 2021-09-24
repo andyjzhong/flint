@@ -8,7 +8,7 @@ const userId = "614dd60e29fe32ab9541683b";
 
 const DeleteModal = (props) => {
     const { transactionId } = useContext(DataContext);
-    const { onClose } = useDisclosure()
+    // const { onClose } = useDisclosure()
 
     const handleDelete = async (props) => {
         console.log("Attempting to delete one transaction...")
@@ -25,9 +25,7 @@ const DeleteModal = (props) => {
         } catch (error) {
             console.warn("Error when deleting one transaction.")
         }
-
-        // onClose()
-        }
+    }
 
     return (
         <Modal isOpen={props.isOpen} onClose={props.onClose}>
@@ -41,7 +39,10 @@ const DeleteModal = (props) => {
 
                 <ModalFooter>
                     <Button variant="ghost">Cancel</Button>
-                    <Button colorScheme="blue" mr={3} onClick={handleDelete}>
+                    <Button colorScheme="blue" mr={3} onClick={() => {
+                        handleDelete()
+                        props.onClose()
+                    }}>
                         Confirm
                     </Button>
                 </ModalFooter>
