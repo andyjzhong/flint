@@ -17,6 +17,8 @@ function App() {
     const [transactionDate, setTransactionDate] = useState();
     const [transactionId, setTransactionId] = useState();
     const [transactionsList, setTransactionsList] = useState([]);
+    const [budgetId, setBudgetId] = useState();
+    const [budgetsList, setBudgetsList] = useState([]);
     const [currentUserId, setCurrentUserId] = useState();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -35,7 +37,11 @@ function App() {
                     transactionsList,
                     setTransactionsList,
                     transactionId,
-                    setTransactionId
+                    setTransactionId,
+                    budgetsList,
+                    setBudgetsList,
+                    budgetId,
+                    setBudgetId
                 }}
             >
                 <WithSubnavigation />

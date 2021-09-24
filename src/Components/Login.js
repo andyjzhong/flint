@@ -21,9 +21,12 @@ export default function Login() {
 
     const { isLoggedIn, setIsLoggedIn } = useContext(DataContext);
     const { currentUserId, setCurrentUserId } = useContext(DataContext);
+    const [email, setEmail] = React.useState('')
+    const [password, setPassword] = React.useState('')
 
     const login = () => {
         console.log("Just tried to log in.");
+        getAccountDetail()
         setIsLoggedIn(true)
     }
 
@@ -35,10 +38,13 @@ export default function Login() {
         try {
             const url =
                 process.env.NODE_ENV === 'production'
-                    ? `http://flint-server.herokuapp.com/users/${mongoId}`
-                    : `http://localhost:8000/users/${mongoId}`
-
-            const response = await axios(url)
+                    ? `http://flint-server.herokuapp.com/users/login`
+                    : `http://localhost:8000/users/login`
+            
+            const response = await axios.post(url, {
+                "email": `${email.toLowerCase()}`,
+                "password": `${password}`
+            })
             console.log("Response data: ", response);
             setCurrentUserId(response.data)
             console.log("Current User is:", currentUserId);
@@ -47,9 +53,6 @@ export default function Login() {
         }
     }
 
-    useEffect(() => {
-        getAccountDetail()
-    }, [isLoggedIn])
 
     return (
         <Flex
@@ -74,11 +77,19 @@ export default function Login() {
                     <Stack spacing={4}>
                         <FormControl id="email">
                             <FormLabel>Email address</FormLabel>
-                            <Input type="email" />
+                            <Input 
+                            type="email" 
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            />
                         </FormControl>
                         <FormControl id="password">
                             <FormLabel>Password</FormLabel>
-                            <Input type="password" />
+                            <Input 
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            />
                         </FormControl>
 
                         <Stack spacing={10}>
