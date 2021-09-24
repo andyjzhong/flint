@@ -8,6 +8,7 @@ import Dashboard from './Components/Dashboard.js';
 import Transactions from './Components/Transactions.js';
 import Budgets from './Components/Budgets.js';
 import About from './Components/About.js';
+import Signup from './Components/Signup.js';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
                 <Route exact path="/transactions" component={Transactions} />
                 <Route exact path="/budgets" component={Budgets} />
                 <Route exact path="/about" component={About} />
+                <Route exact path="/signup" component={Signup} />
 
             </DataContext.Provider>
         </ChakraProvider>
