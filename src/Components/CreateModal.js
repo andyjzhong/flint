@@ -70,9 +70,17 @@ const CreateModal = (props) => {
     })
 
     let subcategoryOptions = matchingCategory[0].minor.map((item, index) => {
-        return (
-            <option key={item} value={item}>{item}</option>
-        )
+
+        if (selectedCategory.length > 0) {
+            return (
+                <option key={item} value={item}>{item}</option>
+            )
+        } else {
+            return (
+                <option>No Category Selected</option>
+            )
+        }
+
     })
 
     const createTransaction = async () => {
