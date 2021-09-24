@@ -38,7 +38,7 @@ const DeleteModal = (props) => {
                 </ModalBody>
 
                 <ModalFooter>
-                    <Button variant="ghost">Cancel</Button>
+                    <Button variant="ghost" onClick={props.onClose}>Cancel</Button>
                     <Button colorScheme="blue" mr={3} onClick={() => {
                         handleDelete()
                         props.onClose()
