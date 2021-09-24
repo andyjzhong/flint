@@ -14,6 +14,7 @@ import Login from './Components/Login.js';
 function App() {
 
     const [transactionDate, setTransactionDate] = useState();
+    const [transactionId, setTransactionId] = useState();
     const [transactionsList, setTransactionsList] = useState([]);
     const [currentUserId, setCurrentUserId] = useState();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -29,7 +30,9 @@ function App() {
                     currentUserId,
                     setCurrentUserId,
                     transactionsList,
-                    setTransactionsList
+                    setTransactionsList,
+                    transactionId,
+                    setTransactionId
                 }}
             >
                 <WithSubnavigation />

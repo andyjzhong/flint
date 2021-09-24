@@ -1,13 +1,16 @@
 import React, { useContext, useEffect } from 'react';
 import { DataContext } from './DataContext';
+import DeleteModal from './DeleteModal';
 import { Table, Thead, Tr, Th, Td, Tbody, Button } from '@chakra-ui/react';
+import { useDisclosure } from "@chakra-ui/react"
 import './Table.css';
 import axios from 'axios';
 
 const TableComponent = () => {
 
     const userId = "614dd60e29fe32ab9541683b";
-    const { transactionsList, setTransactionsList } = useContext(DataContext);
+    const { transactionsList, setTransactionsList, setTransactionId } = useContext(DataContext);
+    const { isOpen, onOpen, onClose } = useDisclosure()
 
     const getAllTransactions = async () => {
         console.log("Attempting to retrieve all transactions...")
@@ -33,7 +36,14 @@ const TableComponent = () => {
 
     const selectedTransaction = (e) => {
         let key = e.currentTarget.name;
+        setTransactionId(key);
         console.log("The selected transaction's id is:", key);
+    }
+
+    const handleDelete = (e) => {
+        selectedTransaction(e)
+        console.log("Clicked Delete");
+        onOpen()
     }
 
     let transactionRow = transactionsList.map((item, index) => {
@@ -57,7 +67,7 @@ const TableComponent = () => {
                     <Button
                         name={item._id}
                         className="btn-edit-transaction"
-                        onClick={selectedTransaction}
+                        onClick={handleDelete}
                         colorScheme="red">Delete</Button>
                 </Td>
             </Tr>
@@ -83,6 +93,8 @@ const TableComponent = () => {
                     {transactionRow}
                 </Tbody>
             </Table>
+
+            <DeleteModal isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>
         </div>
     )
 }
