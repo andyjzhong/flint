@@ -10,7 +10,7 @@ import axios from 'axios';
 const TableComponent = () => {
 
     const userId = "614dd60e29fe32ab9541683b";
-    const { userAction, transactionsList, setTransactionsList, setTransactionId } = useContext(DataContext);
+    const { userAction, setUserAction, transactionsList, setTransactionsList, setTransactionId } = useContext(DataContext);
     const { isOpen, onOpen, onClose, isEditOpen, onEditOpen, onEditClose } = useDisclosure()
 
     const getAllTransactions = async () => {
@@ -25,7 +25,7 @@ const TableComponent = () => {
             const response = await axios(url)
             console.log("Response data: ", response.data.transactions);
             setTransactionsList(response.data.transactions)
-
+            setUserAction("")
         } catch (error) {
             console.warn("Error when retrieving all transactions.")
         }
