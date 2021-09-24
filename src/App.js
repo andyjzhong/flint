@@ -14,11 +14,13 @@ import Login from './Components/Login.js';
 function App() {
 
     const [transactionDate, setTransactionDate] = useState();
+    const [currentUserId, setCurrentUserId] = useState();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     return (
         <ChakraProvider theme={theme}>
             <DataContext.Provider
-                value = {{ transactionDate, setTransactionDate }}
+                value = {{ transactionDate, setTransactionDate, isLoggedIn, setIsLoggedIn, currentUserId, setCurrentUserId }}
             >
                 <WithSubnavigation />
                 <Route exact path="/" component={Home} />

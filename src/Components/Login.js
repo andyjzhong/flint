@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
+import { DataContext } from './DataContext';
+import axios from 'axios';
+
 import {
     Flex,
     Box,
@@ -16,7 +19,37 @@ import {
 
 export default function Login() {
 
+    const { isLoggedIn, setIsLoggedIn } = useContext(DataContext);
+    const { currentUserId, setCurrentUserId } = useContext(DataContext);
 
+    const login = () => {
+        console.log("Just tried to log in.");
+        setIsLoggedIn(true)
+    }
+
+    // TODO: Hardcoded for now
+    let mongoId = "614d22f830865d8b0b13b326"
+
+    const getAccountDetail = async () => {
+        console.log("Attempting to retrieve one user...")
+        try {
+            const url =
+                process.env.NODE_ENV === 'production'
+                    ? `http://flint-server.herokuapp.com/users/${mongoId}`
+                    : `http://localhost:8000/users/${mongoId}`
+
+            const response = await axios(url)
+            console.log("Response data: ", response);
+            setCurrentUserId(response.data)
+            console.log("Current User is:", currentUserId);
+        } catch (error) {
+            console.warn("Error when retrieving one user.")
+        }
+    }
+
+    useEffect(() => {
+        getAccountDetail()
+    }, [isLoggedIn])
 
     return (
         <Flex
@@ -58,6 +91,7 @@ export default function Login() {
                                 <Link color={'blue.400'}>Forgot password?</Link>
                             </Stack>
                             <Button
+                                onClick={login}
                                 bg={'blue.400'}
                                 color={'white'}
                                 _hover={{
