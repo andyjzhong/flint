@@ -47,7 +47,7 @@ const categoryOptionsRaw = [
 
 const CreateModal = (props) => {
 
-    const userId = "614dd60e29fe32ab9541683b";
+    const userId = "614e9408d9146b8e0059b3db";
 
     const { transactionDate, setUserAction } = useContext(DataContext);
     const [description, setDescription] = useState("")

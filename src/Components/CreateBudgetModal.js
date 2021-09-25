@@ -46,7 +46,7 @@ const categoryOptionsRaw = [
 
 const CreateBudgetModal = (props) => {
 
-    const userId = "614e1fb9d09999616f819944";
+    const userId = "614e9408d9146b8e0059b3db";
 
     const { budgetDate, setUserAction } = useContext(DataContext);
     const [category, setCategory] = useState("")

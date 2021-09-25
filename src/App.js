@@ -20,7 +20,7 @@ function App() {
     const [transactionsList, setTransactionsList] = useState([]);
     const [budgetId, setBudgetId] = useState();
     const [budgetsList, setBudgetsList] = useState([]);
-    const [currentUserId, setCurrentUserId] = useState();
+    const [currentUserId, setCurrentUserId] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     return (
