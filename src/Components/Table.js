@@ -5,6 +5,7 @@ import EditModal from './EditModal';
 import { Table, Thead, Tr, Th, Td, Tbody, Button } from '@chakra-ui/react';
 import { useDisclosure } from "@chakra-ui/react"
 import './Table.css';
+import moment from 'moment';
 import axios from 'axios';
 
 const TableComponent = () => {
@@ -66,16 +67,18 @@ const TableComponent = () => {
         return (
             <Tr key={item._id}>
                 <Td>{item.description}</Td>
-                <Td>{item.date}</Td>
+                <Td>{moment(item.date).format('MMM D, YYYY')}</Td>
                 <Td>{item.type}</Td>
                 <Td>{item.category}</Td>
                 <Td>{item.subcategory}</Td>
-                <Td isNumeric>{item.amount}</Td>
+                <Td isNumeric>${item.amount}</Td>
                 <Td>
                     <Button
                         name={item._id}
                         className="btn-edit-transaction"
-                        colorScheme="orange"
+                        color={'white'}
+                        bgGradient="linear(to-r, orange.400,orange.400)"
+                        _hover={{bgGradient: 'linear(to-r, orange.400,orange.400)', boxShadow: 'xl'}}
                         onClick={handleEdit}
                     >Edit</Button>
                 </Td>
@@ -83,8 +86,11 @@ const TableComponent = () => {
                     <Button
                         name={item._id}
                         className="btn-edit-transaction"
+                        color={'white'}
+                        bgGradient="linear(to-r, red.500,red.500)"
+                        _hover={{bgGradient: 'linear(to-r, red.500,red.500)', boxShadow: 'xl'}}
                         onClick={handleDelete}
-                        colorScheme="red">Delete</Button>
+                    >Delete</Button>
                 </Td>
             </Tr>
         )
@@ -97,16 +103,18 @@ const TableComponent = () => {
             return (
                 <Tr key={item._id}>
                     <Td>{item.description}</Td>
-                    <Td>{item.date}</Td>
+                    <Td>{moment(item.date).format('MMM D, YYYY')}</Td>
                     <Td>{item.type}</Td>
                     <Td>{item.category}</Td>
                     <Td>{item.subcategory}</Td>
-                    <Td isNumeric>{item.amount}</Td>
+                    <Td isNumeric>${item.amount}</Td>
                     <Td>
                         <Button
                             name={item._id}
                             className="btn-edit-transaction"
-                            colorScheme="orange"
+                            color={'white'}
+                            bgGradient="linear(to-r, orange.400,orange.400)"
+                            _hover={{bgGradient: 'linear(to-r, orange.400,orange.400)', boxShadow: 'xl'}}
                             onClick={handleEdit}
                         >Edit</Button>
                     </Td>
@@ -114,8 +122,11 @@ const TableComponent = () => {
                         <Button
                             name={item._id}
                             className="btn-edit-transaction"
+                            color={'white'}
+                            bgGradient="linear(to-r, red.500,red.500)"
+                            _hover={{bgGradient: 'linear(to-r, red.500,red.500)', boxShadow: 'xl'}}
                             onClick={handleDelete}
-                            colorScheme="red">Delete</Button>
+                            >Delete</Button>
                     </Td>
                 </Tr>
             )
