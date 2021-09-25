@@ -1,68 +1,107 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Flint Personal Finance
 
-## Available Scripts
+## Overview
+A personal finance application inspired by Mint to help track income and expense transactions. Users have the ability to manually enter income and expense transactions with categories and dates which will be used to display graphs and spending habits. Users will also be able to set budgets for specific expense categories to help track monthly spending and view trends.
 
-In the project directory, you can run:
+#### Members
+-   Andy Zhong
+-   Jesse Watson
 
-### `npm start`
+#### Timeframe: Sep 23 to Oct 4 (11 days)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Tech Stack
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+-   MERN Stack: MongoDB, Express, React, NodeJS
+-   Charting Library: [ChartJS](https://www.chartjs.org/) / [React ChartJS](http://reactchartjs.github.io/react-chartjs-2/#/)
+-   [Chakra UI](https://chakra-ui.com/) React UI Framework
+-   JWT User Authentication
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Wireframes
+![Wireframe](https://i.imgur.com/otFgP6G.png)
+![Wireframe](https://i.imgur.com/4cdojTv.png)
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## User Stories
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+- As a User, I would like to manually enter a transaction so that I can keep track of my earnings and spending.
+- As a User, I would like to edit and delete a transaction so that I can correct or remove any transactions I've previously added.
+- As a User, I would like to see charts of my spending data so that I can understand where my money is going.
+- As a User, I would like to be able to create my own account so that I can log in and only see my own transactions.
+- As a user, I would like to set a budget for any major or minor category so that I can see the variance between my monthly budget and monthly spending.
+- As a User, I would like to edit and delete a budget so that I can correct or remove any budgets I've previously set.
+- As a User, I would like to see a navbar so that I can navigate to the Home, Dashboard, Transactions, Budgets, or About page.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Stretch Goals
 
-### `npm run eject`
+- Integrate with Plaid
+- Create additional charts and tables based on data
+- Add support for Upcoming Bills and Reminders
+- Dark Mode
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Component Hierarchy
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- **App**
+    - Navigation
+        - Links / Buttons
+    - Home
+        - Buttons
+    - Dashboard
+        - Charts
+        - Table
+        - Select View
+    - Transactions
+        - Table
+        - Searchbar
+        - Dropdowns
+        - DatePicker
+        - Modal
+        - TextFields
+        - Button
+    - Budgets
+        - Chart
+        - Table
+        - Modal
+        - TextFields
+        - Button
+    - About
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Resource Models
 
-## Learn More
+- **Users**
+    - firstName
+    - lastName
+    - email
+    - password
+    - isLoggedIn
+    - **Transactions**
+        - description
+        - date
+        - type
+        - category
+        - subcategory
+        - amount
+    - **Budgets**
+        - category
+        - subcategory
+        - amount
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## CRUD Actions
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Create Users, Read User Data, Update Password, Delete Account
+- Create, Read, Update, and Delete Transactions
+- Create, Read, Update, and Delete Budgets
 
-### Code Splitting
+## MVP
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+| Task                    | Screen        | Completed  |
+| ----------------------- | ------------- | ---------- |
+| Build Navbar w/ Routes  | Home          | Sep 25     |
+| Set Up & HTML           | Home          | Sep 25     |
+| Set Up & HTML           | Signup        | Sep 23     |
+| Set Up & HTML           | Login         | Sep 23     |
+| Set Up & HTML           | Dashboard     | Sep 25     |
+| Set Up & HTML           | Transactions  | Sep 25     |
+| Set Up & HTML           | Budgets       | Sep 25     |
+| Connect to API & Render | About         | Sep 25     |
