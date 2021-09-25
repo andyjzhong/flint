@@ -15,7 +15,7 @@ const Home = () => {
     return (
         <Flex
             w={'full'}
-            h={'100vh'}
+            h={'93vh'}
             backgroundImage={
             'url(https://image.cnbcfm.com/api/v1/image/106435772-1583893683724gettyimages-1162855475.jpeg?v=1604611798&w=1600&h=900)'
             }

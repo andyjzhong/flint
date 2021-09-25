@@ -1,4 +1,5 @@
 import { Link as RouterLink } from 'react-router-dom';
+import { FaMountain } from 'react-icons/fa';
 
 import {
   Box,
@@ -53,9 +54,11 @@ export default function WithSubnavigation() {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
+        <FaMountain className="logo-icon" style={{margin: "5px"}}/>
           <Text
             textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
             fontFamily={'heading'}
+            fontSize={'lg'}
             color={useColorModeValue('gray.800', 'white')}>
             Flint
           </Text>
