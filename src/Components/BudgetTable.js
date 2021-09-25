@@ -1,22 +1,22 @@
 import React, { useContext, useEffect } from 'react';
 import { DataContext } from './DataContext';
-import DeleteModal from './DeleteModal';
-import EditModal from './EditModal';
+import DeleteBudgetModal from './DeleteBudgetModal';
+import EditBudgetModal from './EditBudgetModal';
 import { Table, Thead, Tr, Th, Td, Tbody, Button } from '@chakra-ui/react';
 import { useDisclosure } from "@chakra-ui/react"
 import './Table.css';
 import axios from 'axios';
 
-const TableComponent = () => {
+const BudgetTableComponent = () => {
 
     const userId = "614e1fb9d09999616f819944";
-    const { userAction, setUserAction, transactionsList, setTransactionsList, setTransactionId } = useContext(DataContext);
+    const { userAction, setUserAction, budgetsList, setBudgetsList, setBudgetId } = useContext(DataContext);
 
     const { isOpen: isEditOpen , onOpen: onEditOpen, onClose: onEditClose } = useDisclosure()
     const { isOpen: isDeleteOpen , onOpen: onDeleteOpen, onClose: onDeleteClose } = useDisclosure()
 
-    const getAllTransactions = async () => {
-        console.log("Attempting to retrieve all transactions...")
+    const getAllBudgets = async () => {
+        console.log("Attempting to retrieve all budgets...")
 
         try {
             const url =
@@ -25,42 +25,39 @@ const TableComponent = () => {
                     : `http://localhost:8000/users/${userId}`
 
             const response = await axios(url)
-            console.log("Response data: ", response.data.transactions);
-            setTransactionsList(response.data.transactions)
+            console.log("Response data: ", response.data.budgets);
+            setBudgetsList(response.data.budgets)
             setUserAction("")
         } catch (error) {
-            console.warn("Error when retrieving all transactions.")
+            console.warn("Error when retrieving all budgets.")
         }
     }
 
     useEffect(() => {
-        getAllTransactions()
+        getAllBudgets()
     }, [userAction])
 
-    const selectedTransaction = (e) => {
+    const selectedBudget = (e) => {
         let key = e.currentTarget.name;
-        setTransactionId(key);
+        setBudgetId(key);
         console.log("The selected transaction's id is:", key);
     }
 
     const handleDelete = (e) => {
-        selectedTransaction(e)
+        selectedBudget(e)
         console.log("Clicked Delete");
         onDeleteOpen()
     }
 
     const handleEdit = (e) => {
-        selectedTransaction(e)
+        selectedBudget(e)
         console.log("Clicked Edit");
         onEditOpen()
     }
 
-    let transactionRow = transactionsList.map((item, index) => {
+    let budgetRow = budgetsList.map((item, index) => {
         return (
             <Tr key={item._id}>
-                <Td>{item.description}</Td>
-                <Td>{item.date}</Td>
-                <Td>{item.type}</Td>
                 <Td>{item.category}</Td>
                 <Td>{item.subcategory}</Td>
                 <Td isNumeric>{item.amount}</Td>
@@ -88,9 +85,6 @@ const TableComponent = () => {
             <Table size="sm">
                 <Thead>
                     <Tr>
-                        <Th>Description</Th>
-                        <Th>Date</Th>
-                        <Th>Type</Th>
                         <Th>Category</Th>
                         <Th>Subcategory</Th>
                         <Th isNumeric>Amount</Th>
@@ -99,14 +93,14 @@ const TableComponent = () => {
                     </Tr>
                 </Thead>
                 <Tbody>
-                    {transactionRow}
+                    {budgetRow}
                 </Tbody>
             </Table>
 
-            <EditModal isEditOpen={isEditOpen} onEditOpen={onEditOpen} onEditClose={onEditClose}/>
-            <DeleteModal isOpen={isDeleteOpen} onOpen={onDeleteOpen} onClose={onDeleteClose}/>
+            <EditBudgetModal isEditOpen={isEditOpen} onEditOpen={onEditOpen} onEditClose={onEditClose}/>
+            <DeleteBudgetModal isOpen={isDeleteOpen} onOpen={onDeleteOpen} onClose={onDeleteClose}/>
         </div>
     )
 }
 
-export default TableComponent;
+export default BudgetTableComponent;
