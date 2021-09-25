@@ -81,6 +81,7 @@ const TableComponent = () => {
                 <Td isNumeric>${item.amount}</Td>
                 <Td>
                     <Button
+                        size="sm"
                         name={item._id}
                         className="btn-edit-transaction"
                         color={'white'}
@@ -91,6 +92,7 @@ const TableComponent = () => {
                 </Td>
                 <Td>
                     <Button
+                        size="sm"
                         name={item._id}
                         className="btn-edit-transaction"
                         color={'white'}
@@ -117,6 +119,7 @@ const TableComponent = () => {
                     <Td isNumeric>${item.amount}</Td>
                     <Td>
                         <Button
+                            size="sm"
                             name={item._id}
                             className="btn-edit-transaction"
                             color={'white'}
@@ -127,6 +130,7 @@ const TableComponent = () => {
                     </Td>
                     <Td>
                         <Button
+                            size="sm"
                             name={item._id}
                             className="btn-edit-transaction"
                             color={'white'}

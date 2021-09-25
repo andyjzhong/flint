@@ -25,6 +25,8 @@ function App() {
     const [filteredTransactionsList, setFilteredTransactionsList] = useState(false);
     const [searchValue, setSearchValue] = useState("");
     const [searchCategory, setSearchCategory] = useState("");
+    const [searchStartDate, setSearchStartDate] = useState("");
+    const [searchEndDate, setSearchEndDate] = useState("");
 
     return (
         <ChakraProvider theme={theme}>
@@ -53,7 +55,11 @@ function App() {
                     searchValue,
                     setSearchValue,
                     searchCategory,
-                    setSearchCategory
+                    setSearchCategory,
+                    searchStartDate,
+                    setSearchStartDate,
+                    searchEndDate,
+                    setSearchEndDate
                 }}
             >
                 <WithSubnavigation />

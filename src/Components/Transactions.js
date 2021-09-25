@@ -84,7 +84,13 @@ const Transactions = () => {
                         </FormControl>
                     </GridItem>
                 </Grid>
-                <Button className="btn-add-transaction" color={'white'} bgGradient="linear(to-r, green.400,green.400)" _hover={{bgGradient: 'linear(to-r, green.400,green.400)', boxShadow: 'xl'}} onClick={onOpen}>
+                <Button
+                    className="btn-add-transaction"
+                    size="sm"
+                    color={'white'}
+                    bgGradient="linear(to-r, green.400,green.400)"
+                    _hover={{bgGradient: 'linear(to-r, green.400,green.400)', boxShadow: 'xl'}}
+                    onClick={onOpen}>
                     Add Transaction
                 </Button>
                 <TableComponent />
