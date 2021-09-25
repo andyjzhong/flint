@@ -6,15 +6,27 @@ function BudgetChart(props) {
 
     const { budgetsList } = useContext(DataContext)
 
+    const budgetCategoriesList = budgetsList.map((item) => {
+        return item.category
+    })
+    const budgetSubCategoriesList = budgetsList.map((item) => {
+        return item.subcategory
+    })
+    const budgetAmountList = budgetsList.map((item) => {
+        return item.amount
+    })
+    
 
     return (
         <div>
             <Bar 
+            height={400}
+            width={400}
             data= {{
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                labels: budgetCategoriesList,
                 datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
+                    label: '',
+                    data: budgetAmountList,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -39,7 +51,8 @@ function BudgetChart(props) {
                     y: {
                         beginAtZero: true
                     }
-                }
+                },
+                indexAxis: 'y'
             }}
             />
         </div>

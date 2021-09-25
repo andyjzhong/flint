@@ -62,7 +62,8 @@ export default function Signup() {
             "email": newAccount.email,
             "firstName": newAccount.firstName,
             "lastName": newAccount.lastName,
-            "password": newAccount.password
+            "password": newAccount.password,
+            "isAdmin": false
         })
         .then((res) => {
             console.log("Success!")
