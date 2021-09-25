@@ -10,7 +10,7 @@ import axios from 'axios';
 const BudgetTableComponent = () => {
 
     const { userAction, setUserAction, budgetsList, setBudgetsList, setBudgetId, currentUserId } = useContext(DataContext);
-    const userId = "614e9408d9146b8e0059b3db";
+    const userId = "614dd60e29fe32ab9541683b";
 
     const { isOpen: isEditOpen , onOpen: onEditOpen, onClose: onEditClose } = useDisclosure()
     const { isOpen: isDeleteOpen , onOpen: onDeleteOpen, onClose: onDeleteClose } = useDisclosure()
