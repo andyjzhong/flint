@@ -14,6 +14,7 @@ import Login from './Components/Login.js';
 function App() {
 
     const [userAction, setUserAction] = useState();
+    const [matchingTransactionData, setMatchingTransactionData] = useState();
     const [transactionDate, setTransactionDate] = useState();
     const [transactionId, setTransactionId] = useState();
     const [transactionsList, setTransactionsList] = useState([]);
@@ -41,7 +42,9 @@ function App() {
                     budgetsList,
                     setBudgetsList,
                     budgetId,
-                    setBudgetId
+                    setBudgetId,
+                    matchingTransactionData,
+                    setMatchingTransactionData
                 }}
             >
                 <WithSubnavigation />

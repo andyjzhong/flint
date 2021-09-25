@@ -22,16 +22,68 @@ import {
     Stack
 } from "@chakra-ui/react"
 
+const categoryOptionsRaw = [
+    {
+        id: 1,
+        major: "Food",
+        minor: ["Groceries", "Fast Food"]
+    },
+    {
+        id: 2,
+        major: "Education",
+        minor: ["Books", "Supplies"]
+    },
+    {
+        id: 3,
+        major: "Travel",
+        minor: ["Tolls", "Hotel"]
+    },
+    {
+        id: 4,
+        major: "Utilities",
+        minor: ["Phone", "Gas", "Sewage"]
+    }
+]
+
 const EditModal = (props) => {
 
     const userId = "614dd60e29fe32ab9541683b";
 
-    const { transactionDate, transactionId, setUserAction } = useContext(DataContext);
+    const { transactionDate, transactionId, setUserAction, matchingTransactionData } = useContext(DataContext);
     const [description, setDescription] = useState("")
     const [type, setType] = useState("")
     const [category, setCategory] = useState("")
     const [subcategory, setSubcategory] = useState("")
     const [amount, setAmount] = useState("")
+
+    console.log("matchingTransactionData is", matchingTransactionData);
+
+    let categoryOptions = categoryOptionsRaw.map((item, index) => {
+        return (
+            <option key={item.id} value={item.major}>{item.major}</option>
+        )
+    })
+
+    // TODO: Currently hardcoded.
+    let selectedCategory = "Utilities"
+
+    const matchingCategory = categoryOptionsRaw.filter((item, index) => {
+        return item.major === selectedCategory;
+    })
+
+    let subcategoryOptions = matchingCategory[0].minor.map((item, index) => {
+
+        if (selectedCategory.length > 0) {
+            return (
+                <option key={item} value={item}>{item}</option>
+            )
+        } else {
+            return (
+                <option>No Category Selected</option>
+            )
+        }
+
+    })
 
     const editTransaction = async () => {
         console.log(`Attempting to edit a transaction with id of ${transactionId}...`)
@@ -54,7 +106,7 @@ const EditModal = (props) => {
         .then((res) => {
             console.log("Success!")
             setUserAction("edit")
-            props.onClose()
+            props.onEditClose()
         })
         .catch(console.error)
     }
@@ -105,18 +157,14 @@ const EditModal = (props) => {
                         <FormControl>
                             <FormLabel>Category</FormLabel>
                             <Select name="input-category" onChange={storeCategory} placeholder="Select category">
-                                <option value="option1">Option 1</option>
-                                <option value="option2">Option 2</option>
-                                <option value="option3">Option 3</option>
+                                {categoryOptions}
                             </Select>
                         </FormControl>
 
                         <FormControl>
                             <FormLabel>Subcategory</FormLabel>
                             <Select name="input-subcategory" onChange={storeSubcategory} placeholder="Select category">
-                                <option value="option1">Option 1</option>
-                                <option value="option2">Option 2</option>
-                                <option value="option3">Option 3</option>
+                                {subcategoryOptions}
                             </Select>
                         </FormControl>
 

@@ -10,7 +10,7 @@ import axios from 'axios';
 const TableComponent = () => {
 
     const userId = "614e1fb9d09999616f819944";
-    const { userAction, setUserAction, transactionsList, setTransactionsList, setTransactionId } = useContext(DataContext);
+    const { userAction, setUserAction, transactionsList, setTransactionsList, setTransactionId, matchingTransactionData, setMatchingTransactionData } = useContext(DataContext);
 
     const { isOpen: isEditOpen , onOpen: onEditOpen, onClose: onEditClose } = useDisclosure()
     const { isOpen: isDeleteOpen , onOpen: onDeleteOpen, onClose: onDeleteClose } = useDisclosure()
@@ -52,6 +52,13 @@ const TableComponent = () => {
     const handleEdit = (e) => {
         selectedTransaction(e)
         console.log("Clicked Edit");
+        console.log("transactionsList is", transactionsList)
+        let matchingTransaction = transactionsList.filter((item) => {
+            return item._id === transactionId
+        })
+
+        setMatchingTransactionData(matchingTransaction[0])
+
         onEditOpen()
     }
 
