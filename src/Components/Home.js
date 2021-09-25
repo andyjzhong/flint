@@ -30,7 +30,7 @@ const Home = () => {
             >
                 <Stack spacing={{ base: 10, md: 20 }}>
                     <Heading lineHeight={2.1} color={'white'} fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '7xl' }}>
-                        <Text as={'span'} className="text-focus-in" bgGradient="linear(to-r, red.600,yellow.500)" bgClip="text">Flint Personal Finance</Text>{' '}
+                        <Text as={'span'} className="text-focus-in" bgGradient="linear(to-r, green.100,green.400)" bgClip="text">Flint Personal Finance</Text>{' '}
                     </Heading>
                 </Stack>
                 <Stack mt={8} maxW={'2xl'} align={'flex-start'} spacing={6}>
