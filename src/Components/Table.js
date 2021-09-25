@@ -9,8 +9,8 @@ import axios from 'axios';
 
 const TableComponent = () => {
 
-    const userId = "614e1fb9d09999616f819944";
-    const { userAction, setUserAction, transactionsList, setTransactionsList, setTransactionId, matchingTransactionData, setMatchingTransactionData } = useContext(DataContext);
+    const userId = "614dd60e29fe32ab9541683b";
+    const { userAction, setUserAction, transactionsList, setTransactionsList, transactionId, setTransactionId, matchingTransactionData, setMatchingTransactionData } = useContext(DataContext);
 
     const { isOpen: isEditOpen , onOpen: onEditOpen, onClose: onEditClose } = useDisclosure()
     const { isOpen: isDeleteOpen , onOpen: onDeleteOpen, onClose: onDeleteClose } = useDisclosure()

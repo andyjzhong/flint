@@ -1,3 +1,5 @@
+import { Link as RouterLink } from 'react-router-dom';
+
 import {
   Box,
   Flex,
@@ -68,26 +70,31 @@ export default function WithSubnavigation() {
           justify={'flex-end'}
           direction={'row'}
           spacing={6}>
+
           <Button
             as={'a'}
             fontSize={'sm'}
             fontWeight={400}
             variant={'link'}
             href={'#'}>
+            <RouterLink to="/login">
             Sign In
+            </RouterLink>
           </Button>
-          <Button
-            display={{ base: 'none', md: 'inline-flex' }}
-            fontSize={'sm'}
-            fontWeight={600}
-            color={'white'}
-            bg={'#635AFF'}
-            href={'#'}
-            _hover={{
-              bg: '#748DE9',
-            }}>
-            Sign Up
-          </Button>
+
+          <RouterLink to="/signup">
+              <Button
+                  fontFamily={'heading'}
+                  w={'full'}
+                  bgGradient="linear(to-r, purple.400,red.400)"
+                  color={'white'}
+                  _hover={{
+                      bgGradient: 'linear(to-r, purple.400,red.400)',
+                      boxShadow: 'xl',
+              }}>
+                Sign Up
+              </Button>
+          </RouterLink>
         </Stack>
       </Flex>
 
@@ -153,12 +160,12 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
       display={'block'}
       p={2}
       rounded={'md'}
-      _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}>
+      _hover={{ bg: useColorModeValue('green.50', 'gray.900') }}>
       <Stack direction={'row'} align={'center'}>
         <Box>
           <Text
             transition={'all .3s ease'}
-            _groupHover={{ color: 'pink.400' }}
+            _groupHover={{ color: 'green.400' }}
             fontWeight={500}>
             {label}
           </Text>
@@ -172,7 +179,7 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
           justify={'flex-end'}
           align={'center'}
           flex={1}>
-          <Icon color={'pink.400'} w={5} h={5} as={ChevronRightIcon} />
+          <Icon color={'green.400'} w={5} h={5} as={ChevronRightIcon} />
         </Flex>
       </Stack>
     </Link>
@@ -251,53 +258,30 @@ interface NavItem {
 
 const NAV_ITEMS: Array<NavItem> = [
   {
-    label: 'Home',
-    children: [
-      {
-        label: 'Explore Design Work',
-        subLabel: 'Trending Design to inspire you',
-        href: 'home',
-      },
-      {
-        label: 'New & Noteworthy',
-        subLabel: 'Up-and-coming Designers',
-        href: 'home',
-      },
-    ],
+      label: 'Home',
+      href: '/',
   },
   {
     label: 'Dashboard',
     href: 'dashboard',
   },
   {
-    label: 'Transactions',
+    label: 'Actions',
     children: [
       {
-        label: 'Transactions 1',
-        subLabel: 'Find your dream design job',
+        label: 'Transactions',
+        subLabel: 'Enter and view transaction data',
         href: 'transactions',
       },
       {
-        label: 'Transactions 2',
-        subLabel: 'An exclusive list for contract work',
-        href: 'transactions',
+        label: 'Budgets',
+        subLabel: 'Track your expenses by category',
+        href: 'budgets',
       },
     ],
   },
   {
-    label: 'Budgets',
-    href: 'budgets',
-  },
-  {
     label: 'About',
     href: 'about',
-  },
-  {
-    label: 'Signup',
-    href: 'signup',
-  },
-  {
-    label: 'Login',
-    href: 'login',
-  },
+  }
 ];
