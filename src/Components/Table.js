@@ -27,7 +27,14 @@ const TableComponent = () => {
 
             const response = await axios(url)
             console.log("Response data: ", response.data.transactions);
-            setTransactionsList(response.data.transactions)
+
+            let transactionsArray = response.data.transactions.sort(function(a, b){
+                return moment(a.date).format("YYYYMMDD") - moment(b.date).format("YYYYMMDD")
+            })
+
+            console.log("BANANASASASAS", transactionsArray);
+
+            setTransactionsList(response.data.transactions.sort((a, b) => b.date - a.date))
             setUserAction("")
         } catch (error) {
             console.warn("Error when retrieving all transactions.")
