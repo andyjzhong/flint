@@ -13,7 +13,14 @@ const Transactions = () => {
     const [startSearchDate, setStartSearchDate] = useState(new Date("January 1, 2021"));
     const [endSearchDate, setEndSearchDate] = useState(new Date());
     const { isOpen, onOpen, onClose } = useDisclosure()
-    const { transactionsList, setFilteredTransactionsList, searchValue, setSearchValue } = useContext(DataContext);
+    const {
+        transactionsList,
+        setFilteredTransactionsList,
+        searchValue,
+        setSearchValue,
+        searchCategory,
+        setSearchCategory
+    } = useContext(DataContext);
 
     useEffect(() => {
         getUser()
@@ -27,9 +34,17 @@ const Transactions = () => {
         setSearchValue(e.target.value)
     }
 
+    const handleSearchCategory = (e) => {
+        setSearchCategory(e.target.value)
+    }
+
     const filterTransactions = () => {
         let filtered = transactionsList.filter((item) => {
-            return item.description.toLowerCase().includes(searchValue.toLowerCase())
+            if (searchCategory) {
+                return ((item.category === searchCategory) && (item.description.toLowerCase().includes(searchValue.toLowerCase())))
+            } else {
+                return item.description.toLowerCase().includes(searchValue.toLowerCase())
+            }
         })
 
         console.log("filtered transactions", filtered)
@@ -44,18 +59,18 @@ const Transactions = () => {
                     <GridItem colSpan={3}>
                         <Input w="100%" h="10" variant="outline" placeholder="Search by keyword" onChange={handleSearchChange}/>
                     </GridItem>
+                    <GridItem colSpan={2}>
+                        <Select name="input-category" onChange={handleSearchCategory}>
+                            <option value="">All Categories</option>
+                            <option value="Education">Education</option>
+                            <option value="Food">Food</option>
+                            <option value="Travel">Travel</option>
+                            <option value="Utilities">Utilities</option>
+                        </Select>
+                    </GridItem>
                     <GridItem colSpan={1}>
                         <Button w="100%" h="10" colorScheme="blue" onClick={filterTransactions}>Search</Button>
                     </GridItem>
-                    <GridItem colSpan={2}>
-                        <Select name="input-category" placeholder="Category">
-                            <option value={"Education"}>Education</option>
-                            <option value={"Food"}>Food</option>
-                            <option value={"Travel"}>Travel</option>
-                            <option value={"Utilities"}>Utilities</option>
-                        </Select>
-                    </GridItem>
-
                     <GridItem colSpan={2}>
                         <FormControl>
                         Begin:

@@ -10,7 +10,7 @@ import axios from 'axios';
 const TableComponent = () => {
 
     const userId = "614dd60e29fe32ab9541683b";
-    const { userAction, setUserAction, transactionsList, setTransactionsList, transactionId, setTransactionId, matchingTransactionData, setMatchingTransactionData, filteredTransactionsList, setFilteredTransactionsList, searchValue } = useContext(DataContext);
+    const { userAction, setUserAction, transactionsList, setTransactionsList, transactionId, setTransactionId, matchingTransactionData, setMatchingTransactionData, filteredTransactionsList, setFilteredTransactionsList, searchValue, searchCategory } = useContext(DataContext);
 
     const { isOpen: isEditOpen , onOpen: onEditOpen, onClose: onEditClose } = useDisclosure()
     const { isOpen: isDeleteOpen , onOpen: onDeleteOpen, onClose: onDeleteClose } = useDisclosure()
@@ -123,7 +123,7 @@ const TableComponent = () => {
 
         console.log("filteredTransactionRow", filteredTransactionRows);
 
-        if (searchValue) {
+        if (searchValue || searchCategory) {
             displayedRows = filteredTransactionRows;
         } else {
             displayedRows = transactionRows;
@@ -134,7 +134,8 @@ const TableComponent = () => {
     useEffect(() => {
         console.log("filteredTransactionsList changed");
         console.log("searchValue is", searchValue);
-}, [filteredTransactionsList])
+        console.log("searchCategory is", searchCategory);
+}, [filteredTransactionsList, searchCategory])
 
     return (
         <div className="table">
