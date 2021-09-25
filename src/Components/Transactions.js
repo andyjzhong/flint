@@ -6,6 +6,7 @@ import TableComponent from './Table.js'
 import CreateModal from './CreateModal.js'
 import EditModal from './CreateModal.js'
 import { useDisclosure } from "@chakra-ui/react"
+import moment from 'moment';
 import './Transactions.css';
 
 const Transactions = () => {
@@ -32,23 +33,22 @@ const Transactions = () => {
         console.log("Inside getUser");
     }
 
-    const handleSearchChange = (e) => {
-        setSearchValue(e.target.value)
-    }
-
-    const handleSearchCategory = (e) => {
-        setSearchCategory(e.target.value)
-    }
+    const handleSearchChange = e => setSearchValue(e.target.value)
+    const handleSearchCategory = e => setSearchCategory(e.target.value)
 
     const filterTransactions = () => {
         let filtered = transactionsList.filter((item) => {
             if (searchCategory) {
                 return (
                     (item.category === searchCategory)
+                    && (moment(item.date).isBetween(searchStartDate, searchEndDate))
                     && (item.description.toLowerCase().includes(searchValue.toLowerCase()))
                 )
             } else {
-                return item.description.toLowerCase().includes(searchValue.toLowerCase())
+                return (
+                    item.description.toLowerCase().includes(searchValue.toLowerCase())
+                    && (moment(item.date).isBetween(searchStartDate, searchEndDate))
+                )
             }
         })
 
@@ -73,9 +73,6 @@ const Transactions = () => {
                             <option value="Utilities">Utilities</option>
                         </Select>
                     </GridItem>
-                    <GridItem colSpan={1}>
-                        <Button w="100%" h="10" colorScheme="blue" onClick={filterTransactions}>Search</Button>
-                    </GridItem>
                     <GridItem colSpan={2}>
                         <FormControl>
                         Begin:
@@ -87,6 +84,9 @@ const Transactions = () => {
                         End:
                         <DatePicker name="input-date" className="begin-date-picker" selected={searchEndDate} onChange={(date) => setSearchEndDate(date)} />
                         </FormControl>
+                    </GridItem>
+                    <GridItem colSpan={1}>
+                        <Button w="100%" h="10" colorScheme="blue" onClick={filterTransactions}>Search</Button>
                     </GridItem>
                 </Grid>
                 <Button

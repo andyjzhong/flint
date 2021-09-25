@@ -11,7 +11,7 @@ import axios from 'axios';
 const TableComponent = () => {
 
     const userId = "614dd60e29fe32ab9541683b";
-    const { userAction, setUserAction, transactionsList, setTransactionsList, transactionId, setTransactionId, matchingTransactionData, setMatchingTransactionData, filteredTransactionsList, setFilteredTransactionsList, searchValue, searchCategory } = useContext(DataContext);
+    const { userAction, setUserAction, transactionsList, setTransactionsList, transactionId, setTransactionId, matchingTransactionData, setMatchingTransactionData, filteredTransactionsList, setFilteredTransactionsList, searchValue, searchCategory, searchStartDate, searchEndDate } = useContext(DataContext);
 
     const { isOpen: isEditOpen , onOpen: onEditOpen, onClose: onEditClose } = useDisclosure()
     const { isOpen: isDeleteOpen , onOpen: onDeleteOpen, onClose: onDeleteClose } = useDisclosure()
@@ -32,9 +32,7 @@ const TableComponent = () => {
                 return moment(a.date).format("YYYYMMDD") - moment(b.date).format("YYYYMMDD")
             })
 
-            console.log("BANANASASASAS", transactionsArray);
-
-            setTransactionsList(response.data.transactions.sort((a, b) => b.date - a.date))
+            setTransactionsList(transactionsArray)
             setUserAction("")
         } catch (error) {
             console.warn("Error when retrieving all transactions.")
@@ -145,19 +143,13 @@ const TableComponent = () => {
 
         console.log("filteredTransactionRow", filteredTransactionRows);
 
-        if (searchValue || searchCategory) {
+        // if (searchValue === "" && searchCategory === "") {
+        //     displayedRows = filteredTransactionRows;
+        //     setFilteredTransactionsList("")
+        // } else {
             displayedRows = filteredTransactionRows;
-        } else {
-            displayedRows = transactionRows;
-            setFilteredTransactionsList("")
-        }
+        // }
     }
-
-    useEffect(() => {
-        console.log("filteredTransactionsList changed");
-        console.log("searchValue is", searchValue);
-        console.log("searchCategory is", searchCategory);
-}, [filteredTransactionsList, searchCategory])
 
     return (
         <div className="table">
