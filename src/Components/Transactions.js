@@ -10,8 +10,6 @@ import './Transactions.css';
 
 const Transactions = () => {
 
-    const [startSearchDate, setStartSearchDate] = useState(new Date("January 1, 2021"));
-    const [endSearchDate, setEndSearchDate] = useState(new Date());
     const { isOpen, onOpen, onClose } = useDisclosure()
     const {
         transactionsList,
@@ -19,7 +17,11 @@ const Transactions = () => {
         searchValue,
         setSearchValue,
         searchCategory,
-        setSearchCategory
+        setSearchCategory,
+        searchStartDate,
+        setSearchStartDate,
+        searchEndDate,
+        setSearchEndDate
     } = useContext(DataContext);
 
     useEffect(() => {
@@ -41,7 +43,10 @@ const Transactions = () => {
     const filterTransactions = () => {
         let filtered = transactionsList.filter((item) => {
             if (searchCategory) {
-                return ((item.category === searchCategory) && (item.description.toLowerCase().includes(searchValue.toLowerCase())))
+                return (
+                    (item.category === searchCategory)
+                    && (item.description.toLowerCase().includes(searchValue.toLowerCase()))
+                )
             } else {
                 return item.description.toLowerCase().includes(searchValue.toLowerCase())
             }
@@ -74,13 +79,13 @@ const Transactions = () => {
                     <GridItem colSpan={2}>
                         <FormControl>
                         Begin:
-                        <DatePicker name="input-date" className="begin-date-picker" selected={startSearchDate} onChange={(date) => setStartSearchDate(date)} />
+                        <DatePicker name="input-date" className="begin-date-picker" selected={searchStartDate} onChange={(date) => setSearchStartDate(date)} />
                         </FormControl>
                     </GridItem>
                     <GridItem colSpan={2}>
                         <FormControl>
                         End:
-                        <DatePicker name="input-date" className="begin-date-picker" selected={endSearchDate} onChange={(date) => setEndSearchDate(date)} />
+                        <DatePicker name="input-date" className="begin-date-picker" selected={searchEndDate} onChange={(date) => setSearchEndDate(date)} />
                         </FormControl>
                     </GridItem>
                 </Grid>

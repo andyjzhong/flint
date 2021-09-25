@@ -20,13 +20,13 @@ function App() {
     const [transactionsList, setTransactionsList] = useState([]);
     const [budgetId, setBudgetId] = useState();
     const [budgetsList, setBudgetsList] = useState([]);
-    const [currentUserId, setCurrentUserId] = useState();
+    const [currentUserId, setCurrentUserId] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [filteredTransactionsList, setFilteredTransactionsList] = useState(false);
     const [searchValue, setSearchValue] = useState("");
     const [searchCategory, setSearchCategory] = useState("");
-    const [searchStartDate, setSearchStartDate] = useState("");
-    const [searchEndDate, setSearchEndDate] = useState("");
+    const [searchStartDate, setSearchStartDate] = useState(new Date("January 1, 2021"));
+    const [searchEndDate, setSearchEndDate] = useState(new Date());
 
     return (
         <ChakraProvider theme={theme}>
