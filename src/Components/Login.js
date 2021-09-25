@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { DataContext } from './DataContext';
+import { useHistory } from 'react-router';
 import axios from 'axios';
 
 import {
@@ -23,15 +24,13 @@ export default function Login() {
     const { currentUserId, setCurrentUserId } = useContext(DataContext);
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
+    let history = useHistory()
 
     const login = () => {
         console.log("Just tried to log in.");
         getAccountDetail()
-        setIsLoggedIn(true)
     }
 
-    // TODO: Hardcoded for now
-    let mongoId = "614d22f830865d8b0b13b326"
 
     const getAccountDetail = async () => {
         console.log("Attempting to retrieve one user...")
@@ -52,6 +51,19 @@ export default function Login() {
             console.warn("Error when retrieving one user.")
         }
     }
+
+    // Effective usage of useEffect
+    useEffect(() => {
+        if(currentUserId === null){
+            return
+        } else {
+            if(currentUserId == 'Not Allowed'){
+                console.log(currentUserId)
+            } else {
+                history.push('/dashboard')
+            }
+        }
+    }, [currentUserId])
 
 
     return (
