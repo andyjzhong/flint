@@ -10,7 +10,7 @@ import axios from 'axios';
 const TableComponent = () => {
 
     const userId = "614dd60e29fe32ab9541683b";
-    const { userAction, setUserAction, transactionsList, setTransactionsList, transactionId, setTransactionId, matchingTransactionData, setMatchingTransactionData } = useContext(DataContext);
+    const { userAction, setUserAction, transactionsList, setTransactionsList, transactionId, setTransactionId, matchingTransactionData, setMatchingTransactionData, filteredTransactionsList, setFilteredTransactionsList, searchValue } = useContext(DataContext);
 
     const { isOpen: isEditOpen , onOpen: onEditOpen, onClose: onEditClose } = useDisclosure()
     const { isOpen: isDeleteOpen , onOpen: onDeleteOpen, onClose: onDeleteClose } = useDisclosure()
@@ -62,7 +62,7 @@ const TableComponent = () => {
         onEditOpen()
     }
 
-    let transactionRow = transactionsList.map((item, index) => {
+    let transactionRows = transactionsList.map((item, index) => {
         return (
             <Tr key={item._id}>
                 <Td>{item.description}</Td>
@@ -90,6 +90,52 @@ const TableComponent = () => {
         )
     })
 
+    let displayedRows = transactionRows;
+
+    if (filteredTransactionsList) {
+        let filteredTransactionRows = filteredTransactionsList.map((item, index) => {
+            return (
+                <Tr key={item._id}>
+                    <Td>{item.description}</Td>
+                    <Td>{item.date}</Td>
+                    <Td>{item.type}</Td>
+                    <Td>{item.category}</Td>
+                    <Td>{item.subcategory}</Td>
+                    <Td isNumeric>{item.amount}</Td>
+                    <Td>
+                        <Button
+                            name={item._id}
+                            className="btn-edit-transaction"
+                            colorScheme="orange"
+                            onClick={handleEdit}
+                        >Edit</Button>
+                    </Td>
+                    <Td>
+                        <Button
+                            name={item._id}
+                            className="btn-edit-transaction"
+                            onClick={handleDelete}
+                            colorScheme="red">Delete</Button>
+                    </Td>
+                </Tr>
+            )
+        })
+
+        console.log("filteredTransactionRow", filteredTransactionRows);
+
+        if (searchValue) {
+            displayedRows = filteredTransactionRows;
+        } else {
+            displayedRows = transactionRows;
+            setFilteredTransactionsList("")
+        }
+    }
+
+    useEffect(() => {
+        console.log("filteredTransactionsList changed");
+        console.log("searchValue is", searchValue);
+}, [filteredTransactionsList])
+
     return (
         <div className="table">
             <Table size="sm">
@@ -106,7 +152,7 @@ const TableComponent = () => {
                     </Tr>
                 </Thead>
                 <Tbody>
-                    {transactionRow}
+                    {displayedRows}
                 </Tbody>
             </Table>
 

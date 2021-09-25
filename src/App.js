@@ -22,6 +22,8 @@ function App() {
     const [budgetsList, setBudgetsList] = useState([]);
     const [currentUserId, setCurrentUserId] = useState();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [filteredTransactionsList, setFilteredTransactionsList] = useState(false);
+    const [searchValue, setSearchValue] = useState();
 
     return (
         <ChakraProvider theme={theme}>
@@ -44,7 +46,11 @@ function App() {
                     budgetId,
                     setBudgetId,
                     matchingTransactionData,
-                    setMatchingTransactionData
+                    setMatchingTransactionData,
+                    filteredTransactionsList,
+                    setFilteredTransactionsList,
+                    searchValue,
+                    setSearchValue
                 }}
             >
                 <WithSubnavigation />

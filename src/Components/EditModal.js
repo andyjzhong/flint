@@ -56,7 +56,7 @@ const EditModal = (props) => {
     const [subcategory, setSubcategory] = useState("")
     const [amount, setAmount] = useState("")
 
-    console.log("matchingTransactionData is", matchingTransactionData);
+    // console.log("matchingTransactionData is", matchingTransactionData);
 
     let categoryOptions = categoryOptionsRaw.map((item, index) => {
         return (
