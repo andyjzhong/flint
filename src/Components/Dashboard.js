@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Doughnut from './Doughnut';
 import SummaryTable from './SummaryTable';
 import { Grid, GridItem } from '@chakra-ui/react';
@@ -7,11 +7,18 @@ import axios from 'axios';
 
 const Dashboard = () => {
 
+    const userId = "614dd60e29fe32ab9541683b";
+    const [userData, setUserData] = useState();
+    const [userTransactions, setUserTransactions] = useState();
+    const [userBudgets, setUserBudgets] = useState();
+
     useEffect(() => {
         getUserData()
     }, [])
 
-    const userId = "614dd60e29fe32ab9541683b";
+    useEffect(() => {
+        joinData()
+    }, [userData])
 
     const getUserData = async () => {
         console.log("Attempting to retrieve user data...")
@@ -24,9 +31,24 @@ const Dashboard = () => {
 
             const response = await axios(url)
             console.log("Response data: ", response.data);
-
+            setUserData(response.data)
+            setUserTransactions(response.data.transactions)
+            setUserBudgets(response.data.budgets)
         } catch (error) {
             console.warn("Error when retrieving user data.")
+        }
+    }
+
+    const joinData = () => {
+        let dataMap = {}
+
+        if (userTransactions) {
+            for (let transaction of userTransactions) {
+                !dataMap[transaction.category]
+                    ? dataMap[transaction.category] = transaction.amount
+                    : dataMap[transaction.category] += transaction.amount
+            }
+            console.log("dataMap", dataMap);
         }
     }
 
