@@ -4,11 +4,8 @@ import { DataContext } from './DataContext';
 
 const SummaryTable = (props) => {
 
-    const { budgetsList, summaryData } = useContext(DataContext);
+    const { summaryData } = useContext(DataContext);
     let summaryTableRow = []
-
-    console.log(budgetsList);
-    console.log("The Summary Data: ", summaryData);
 
     if (summaryData) {
         summaryTableRow = summaryData.map((item, index) => {

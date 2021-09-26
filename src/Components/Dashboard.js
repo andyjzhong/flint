@@ -9,6 +9,7 @@ import SummaryTable from './SummaryTable';
 import { Grid, GridItem } from '@chakra-ui/react';
 import "./Dashboard.css"
 import axios from 'axios';
+import moment from 'moment';
 
 const Dashboard = () => {
 
@@ -23,6 +24,68 @@ const Dashboard = () => {
         setAccessToken,
     } = useContext(DataContext);
     let summaryMap = {}
+    let summaryDateMap = {
+        Jan: {
+            income: 0,
+            expenses: 0,
+            total: 0
+        },
+        Feb: {
+            income: 0,
+            expenses: 0,
+            total: 0
+        },
+        Mar: {
+            income: 0,
+            expenses: 0,
+            total: 0
+        },
+        Apr: {
+            income: 0,
+            expenses: 0,
+            total: 0
+        },
+        May: {
+            income: 0,
+            expenses: 0,
+            total: 0
+        },
+        Jun: {
+            income: 0,
+            expenses: 0,
+            total: 0
+        },
+        Jul: {
+            income: 0,
+            expenses: 0,
+            total: 0
+        },
+        Aug: {
+            income: 0,
+            expenses: 0,
+            total: 0
+        },
+        Sep: {
+            income: 0,
+            expenses: 0,
+            total: 0
+        },
+        Oct: {
+            income: 0,
+            expenses: 0,
+            total: 0
+        },
+        Nov: {
+            income: 0,
+            expenses: 0,
+            total: 0
+        },
+        Dec: {
+            income: 0,
+            expenses: 0,
+            total: 0
+        }
+    }
 
     const refreshToken = async () => {
         try{
@@ -90,6 +153,87 @@ const Dashboard = () => {
                     : summaryMap[budget.category].totalBudget = budget.amount
             }
 
+            // For Income v Expenses
+            for (let transaction of userData.transactions) {
+                switch(moment(transaction.date).format("MMM")) {
+                    case "Jan":
+                        summaryDateMap.Jan.total += transaction.amount
+                        transaction.type === "Income"
+                            ? summaryDateMap.Jan.income += transaction.amount
+                            : summaryDateMap.Jan.expenses += transaction.amount
+                        break;
+                    case "Feb":
+                        summaryDateMap.Feb.total += transaction.amount
+                        transaction.type === "Income"
+                            ? summaryDateMap.Feb.income += transaction.amount
+                            : summaryDateMap.Feb.expenses += transaction.amount
+                        break;
+                    case "Mar":
+                        summaryDateMap.Mar.total += transaction.amount
+                        transaction.type === "Income"
+                            ? summaryDateMap.Mar.income += transaction.amount
+                            : summaryDateMap.Mar.expenses += transaction.amount
+                        break;
+                    case "Apr":
+                        summaryDateMap.Apr.total += transaction.amount
+                        transaction.type === "Income"
+                            ? summaryDateMap.Apr.income += transaction.amount
+                            : summaryDateMap.Apr.expenses += transaction.amount
+                        break;
+                    case "May":
+                        summaryDateMap.May.total += transaction.amount
+                        transaction.type === "Income"
+                            ? summaryDateMap.May.income += transaction.amount
+                            : summaryDateMap.May.expenses += transaction.amount
+                        break;
+                    case "Jun":
+                        summaryDateMap.Jun.total += transaction.amount
+                        transaction.type === "Income"
+                            ? summaryDateMap.Jun.income += transaction.amount
+                            : summaryDateMap.Jun.expenses += transaction.amount
+                        break;
+                    case "Jul":
+                        summaryDateMap.Jul.total += transaction.amount
+                        transaction.type === "Income"
+                            ? summaryDateMap.Jul.income += transaction.amount
+                            : summaryDateMap.Jul.expenses += transaction.amount
+                        break;
+                    case "Aug":
+                        summaryDateMap.Aug.total += transaction.amount
+                        transaction.type === "Income"
+                            ? summaryDateMap.Aug.income += transaction.amount
+                            : summaryDateMap.Aug.expenses += transaction.amount
+                        break;
+                    case "Sep":
+                        summaryDateMap.Sep.total += transaction.amount
+                        transaction.type === "Income"
+                            ? summaryDateMap.Sep.income += transaction.amount
+                            : summaryDateMap.Sep.expenses += transaction.amount
+                        break;
+                    case "Oct":
+                        summaryDateMap.Oct.total += transaction.amount
+                        transaction.type === "Income"
+                            ? summaryDateMap.Oct.income += transaction.amount
+                            : summaryDateMap.Oct.expenses += transaction.amount
+                        break;
+                    case "Nov":
+                        summaryDateMap.Nov.total += transaction.amount
+                        transaction.type === "Income"
+                            ? summaryDateMap.Nov.income += transaction.amount
+                            : summaryDateMap.Nov.expenses += transaction.amount
+                        break;
+                    case "Dec":
+                        summaryDateMap.Dec.total += transaction.amount
+                        transaction.type === "Income"
+                            ? summaryDateMap.Dec.income += transaction.amount
+                            : summaryDateMap.Dec.expenses += transaction.amount
+                        break;
+                    default:
+                        console.log("Something weird happened when mapping Dashboard Data.")
+                }
+            }
+
+            console.log("summaryDateMap", summaryDateMap);
             console.log("summaryMap", summaryMap);
             setSummaryData(Object.entries(summaryMap))
         }

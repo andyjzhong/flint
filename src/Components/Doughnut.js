@@ -17,8 +17,6 @@ function Doughnut() {
         doughnutBudgetValues = summaryData.map((item) => {
             return item[1].totalSpend || 0
         });
-
-        console.log("Total spend by category: ", doughnutBudgetValues);
     }
 
     const data = {
