@@ -6,22 +6,22 @@ function Doughnut() {
 
     const { summaryData } = useContext(DataContext);
 
-    const categories = summaryData.map((item) => {
-        return item[0]
-    });
+    // const categories = summaryData.map((item) => {
+    //     return item[0]
+    // });
 
-    const doughnutBudgetValues = summaryData.map((item) => {
-        return item[1].totalSpend
-    });
+    // const doughnutBudgetValues = summaryData.map((item) => {
+    //     return item[1].totalSpend
+    // });
 
-    console.log("Total spend by category: ", doughnutBudgetValues);
+    // console.log("Total spend by category: ", doughnutBudgetValues);
 
     const data = {
-        labels: categories,
+        // labels: categories,
         datasets: [
             {
                 label: '# of Votes',
-                data: doughnutBudgetValues,
+                // data: doughnutBudgetValues,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',

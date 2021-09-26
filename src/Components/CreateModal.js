@@ -22,28 +22,7 @@ import {
     Stack
 } from "@chakra-ui/react"
 
-const categoryOptionsRaw = [
-    {
-        id: 1,
-        major: "Food",
-        minor: ["Groceries", "Fast Food"]
-    },
-    {
-        id: 2,
-        major: "Education",
-        minor: ["Books", "Supplies"]
-    },
-    {
-        id: 3,
-        major: "Travel",
-        minor: ["Tolls", "Hotel"]
-    },
-    {
-        id: 4,
-        major: "Utilities",
-        minor: ["Phone", "Gas", "Sewage"]
-    }
-]
+import categoryOptionsRaw from "../categories"
 
 const CreateModal = (props) => {
 
@@ -63,7 +42,7 @@ const CreateModal = (props) => {
     })
 
     // TODO: Currently hardcoded.
-    let selectedCategory = "Utilities"
+    let selectedCategory = "Entertainment"
 
     const matchingCategory = categoryOptionsRaw.filter((item, index) => {
         return item.major === selectedCategory;
