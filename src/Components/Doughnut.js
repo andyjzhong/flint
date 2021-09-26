@@ -2,19 +2,26 @@ import React, { useContext } from 'react';
 import { DataContext } from './DataContext';
 import { Doughnut as DoughnutChart } from 'react-chartjs-2';
 
-function Doughnut(props) {
+function Doughnut() {
 
     const { summaryData } = useContext(DataContext);
 
-    // const categories = Object.keys(summaryData);
-    // console.log("Available categories", categories);
+    const categories = summaryData.map((item) => {
+        return item[0]
+    });
+
+    const doughnutBudgetValues = summaryData.map((item) => {
+        return item[1].totalSpend
+    });
+
+    console.log("Total spend by category: ", doughnutBudgetValues);
 
     const data = {
-        labels: ['Andy', 'Zak', 'Nita', 'Alex', 'Naeem'],
+        labels: categories,
         datasets: [
             {
                 label: '# of Votes',
-                data: [10, 20, 30, 40, 50],
+                data: doughnutBudgetValues,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -37,7 +44,7 @@ function Doughnut(props) {
     return (
         <div className="App">
             <div className="chart-container">
-                <h1 className='title'>Monthly Expenses</h1>
+                <h1 className='title'>Total Spend</h1>
                 <DoughnutChart data={data} />
             </div>
         </div>

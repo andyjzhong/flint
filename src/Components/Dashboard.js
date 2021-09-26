@@ -8,8 +8,7 @@ import axios from 'axios';
 
 const Dashboard = () => {
 
-    const userId = "614dd60e29fe32ab9541683b";
-    // const userId = localStorage.getItem('fuid');
+    const userId = localStorage.getItem('fuid');
     const [userData, setUserData] = useState();
     const {
         summaryData,
