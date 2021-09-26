@@ -9,8 +9,6 @@ const Dashboard = () => {
 
     const userId = "614dd60e29fe32ab9541683b";
     const [userData, setUserData] = useState();
-    const [userTransactions, setUserTransactions] = useState();
-    const [userBudgets, setUserBudgets] = useState();
 
     useEffect(() => {
         getUserData()
@@ -32,23 +30,31 @@ const Dashboard = () => {
             const response = await axios(url)
             console.log("Response data: ", response.data);
             setUserData(response.data)
-            setUserTransactions(response.data.transactions)
-            setUserBudgets(response.data.budgets)
         } catch (error) {
             console.warn("Error when retrieving user data.")
         }
     }
 
     const joinData = () => {
-        let dataMap = {}
+        console.log("firing?");
+        let summaryMap = {}
 
-        if (userTransactions) {
-            for (let transaction of userTransactions) {
-                !dataMap[transaction.category]
-                    ? dataMap[transaction.category] = transaction.amount
-                    : dataMap[transaction.category] += transaction.amount
+        if (userData) {
+            for (let transaction of userData.transactions) {
+                if(!summaryMap[transaction.category]) {
+                    summaryMap[transaction.category] = {totalSpend: transaction.amount}
+                } else {
+                    summaryMap[transaction.category].totalSpend += transaction.amount
+                }
             }
-            console.log("dataMap", dataMap);
+
+            for (let budget of userData.budgets) {
+                !summaryMap[budget.category]
+                    ? summaryMap[budget.category] = {totalBudget: budget.amount}
+                    : summaryMap[budget.category].totalBudget = budget.amount
+            }
+
+            console.log("summaryMap", summaryMap);
         }
     }
 
