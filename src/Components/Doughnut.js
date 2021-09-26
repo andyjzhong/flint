@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { DataContext } from './DataContext';
 import { Doughnut as DoughnutChart } from 'react-chartjs-2';
 
-function Doughnut() {
+function Doughnut(props) {
+
+    const { summaryData } = useContext(DataContext);
+
+    // const categories = Object.keys(summaryData);
+    // console.log("Available categories", categories);
+
     const data = {
         labels: ['Andy', 'Zak', 'Nita', 'Alex', 'Naeem'],
         datasets: [
@@ -26,7 +33,7 @@ function Doughnut() {
             },
         ],
     };
-    
+
     return (
         <div className="App">
             <div className="chart-container">

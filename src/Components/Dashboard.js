@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { DataContext } from './DataContext';
 import Doughnut from './Doughnut';
 import SummaryTable from './SummaryTable';
 import { Grid, GridItem } from '@chakra-ui/react';
@@ -7,8 +8,13 @@ import axios from 'axios';
 
 const Dashboard = () => {
 
-    const userId = localStorage.getItem('fuid');
+    const userId = "614dd60e29fe32ab9541683b";
+    // const userId = localStorage.getItem('fuid');
     const [userData, setUserData] = useState();
+    const {
+        summaryData,
+        setSummaryData
+    } = useContext(DataContext);
     let summaryMap = {}
 
     useEffect(() => {
@@ -53,6 +59,7 @@ const Dashboard = () => {
             }
 
             console.log("summaryMap", summaryMap);
+            setSummaryData(Object.entries(summaryMap))
         }
     }
 
@@ -66,7 +73,7 @@ const Dashboard = () => {
                     </div>
                 </GridItem>
                 <GridItem colSpan={1}>
-                    <SummaryTable summaryMap={summaryMap}/>
+                    <SummaryTable/>
                 </GridItem>
             </Grid>
         </div>

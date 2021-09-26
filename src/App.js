@@ -27,6 +27,7 @@ function App() {
     const [searchCategory, setSearchCategory] = useState("");
     const [searchStartDate, setSearchStartDate] = useState(new Date("January 1, 2021"));
     const [searchEndDate, setSearchEndDate] = useState(new Date());
+    const [summaryData, setSummaryData] = useState();
     const [refreshToken, setRefreshToken] = useState(null)
     const [accessToken, setAccessToken] = useState(null)
 
@@ -62,6 +63,8 @@ function App() {
                     setSearchStartDate,
                     searchEndDate,
                     setSearchEndDate,
+                    summaryData,
+                    setSummaryData,
                     refreshToken,
                     setRefreshToken,
                     accessToken,

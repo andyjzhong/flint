@@ -4,15 +4,14 @@ import { DataContext } from './DataContext';
 
 const SummaryTable = (props) => {
 
-    const { budgetsList } = useContext(DataContext);
+    const { budgetsList, summaryData } = useContext(DataContext);
 
     console.log(budgetsList);
-    console.log("The Summary Map: ", props.summaryMap);
-    console.log("The Summary Map as an Array: ", Object.entries(props.summaryMap));
+    console.log("The Summary Data: ", summaryData);
 
-    let summaryTableRow = Object.entries(props.summaryMap).map((item) => {
+    let summaryTableRow = summaryData.map((item, index) => {
         return (
-            <Tr>
+            <Tr key={index}>
                 <Td>{item[0]}</Td>
                 <Td isNumeric>${item[1].totalBudget || 0}</Td>
                 <Td isNumeric>${item[1].totalSpend}</Td>
