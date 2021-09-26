@@ -1,16 +1,20 @@
 import React, { useState, useEffect, useContext } from 'react';
+import jwt_decode from 'jwt-decode';
+import { useHistory } from 'react-router';
+import axios from 'axios';
 import DatePicker from "react-datepicker";
 import { DataContext } from './DataContext';
-import { Button, Input, Grid, GridItem, FormControl, FormLabel, Select } from "@chakra-ui/react"
-import TableComponent from './Table.js'
-import CreateModal from './CreateModal.js'
-import EditModal from './CreateModal.js'
-import { useDisclosure } from "@chakra-ui/react"
+import { Button, Input, Grid, GridItem, FormControl, FormLabel, Select } from "@chakra-ui/react";
+import TableComponent from './Table.js';
+import CreateModal from './CreateModal.js';
+import EditModal from './CreateModal.js';
+import { useDisclosure } from "@chakra-ui/react";
 import moment from 'moment';
 import './Transactions.css';
 
 const Transactions = () => {
 
+    const [isTokenValid, setIsTokenValid] = useState(false)
     const { isOpen, onOpen, onClose } = useDisclosure()
     const {
         transactionsList,
@@ -22,16 +26,34 @@ const Transactions = () => {
         searchStartDate,
         setSearchStartDate,
         searchEndDate,
-        setSearchEndDate
+        setSearchEndDate,
+        setAccessToken
     } = useContext(DataContext);
 
-    useEffect(() => {
-        getUser()
-}, [])
+    const history = useHistory()
+    const refreshToken = async () => {
+        try{
+            const decoded = jwt_decode(localStorage.getItem('refreshToken'))
 
-    const getUser = () => {
-        console.log("Inside getUser");
+            const res = await axios.post('http://localhost:8000/users/refreshtoken', {
+                email: decoded.email,
+                token: localStorage.getItem('refreshToken')
+            }).catch((err) => {
+                console.log(err)
+            })
+
+            localStorage.setItem('refreshToken', res.data.refreshToken)
+            setIsTokenValid(true)
+            setAccessToken(res.data.accessToken)
+        } catch {
+            history.push('/login')
+        }
     }
+
+    useEffect(() => {
+        refreshToken()
+    }, [])
+
 
     const handleSearchChange = e => setSearchValue(e.target.value)
     const handleSearchCategory = e => setSearchCategory(e.target.value)

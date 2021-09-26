@@ -47,8 +47,6 @@ export default function Login() {
             localStorage.setItem('refreshToken', response.data.refreshToken)
             localStorage.setItem('fuid', response.data.userobj._id)
             setCurrentUserId(response.data)
-            console.log("Response data: ", response);
-            console.log("Current User is:", currentUserId);
         } catch (error) {
             console.warn("Error when retrieving one user.")
         }

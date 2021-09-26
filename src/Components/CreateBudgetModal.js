@@ -96,7 +96,7 @@ const CreateBudgetModal = (props) => {
             },
             {headers: {
                 authorization: `Bearer ${accessToken}`
-            }},
+            }}
         )
         setBudgetsList(res.data.budgets)
         props.onClose()

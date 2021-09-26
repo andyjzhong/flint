@@ -47,9 +47,9 @@ const categoryOptionsRaw = [
 
 const EditModal = (props) => {
 
-    const userId = "614dd60e29fe32ab9541683b";
+    const userId = localStorage.getItem('fuid');
 
-    const { transactionDate, transactionId, setUserAction, matchingTransactionData } = useContext(DataContext);
+    const { transactionDate, transactionId, setUserAction, matchingTransactionData, accessToken } = useContext(DataContext);
     const [description, setDescription] = useState("")
     const [type, setType] = useState("")
     const [category, setCategory] = useState("")
@@ -102,6 +102,8 @@ const EditModal = (props) => {
             "category": category,
             "subcategory": subcategory,
             "amount": amount
+        },{
+            headers: {"authorization": `Bearer ${accessToken}`}
         })
         .then((res) => {
             console.log("Success!")

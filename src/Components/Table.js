@@ -10,8 +10,8 @@ import axios from 'axios';
 
 const TableComponent = () => {
 
-    const userId = "614dd60e29fe32ab9541683b";
-    const { userAction, setUserAction, transactionsList, setTransactionsList, transactionId, setTransactionId, matchingTransactionData, setMatchingTransactionData, filteredTransactionsList, setFilteredTransactionsList, searchValue, searchCategory, searchStartDate, searchEndDate } = useContext(DataContext);
+    const userId = localStorage.getItem('fuid');
+    const { userAction, setUserAction, transactionsList, setTransactionsList, transactionId, setTransactionId, matchingTransactionData, setMatchingTransactionData, filteredTransactionsList, setFilteredTransactionsList, searchValue, searchCategory, searchStartDate, searchEndDate, accessToken } = useContext(DataContext);
 
     const { isOpen: isEditOpen , onOpen: onEditOpen, onClose: onEditClose } = useDisclosure()
     const { isOpen: isDeleteOpen , onOpen: onDeleteOpen, onClose: onDeleteClose } = useDisclosure()
@@ -25,7 +25,9 @@ const TableComponent = () => {
                     ? `http://flint-server.herokuapp.com/users/${userId}`
                     : `http://localhost:8000/users/${userId}`
 
-            const response = await axios(url)
+            const response = await axios(url,{
+                headers: {'authorization': `Bearer ${accessToken}`}
+            })
             console.log("Response data: ", response.data.transactions);
 
             let transactionsArray = response.data.transactions.sort(function(a, b){
@@ -40,8 +42,12 @@ const TableComponent = () => {
     }
 
     useEffect(() => {
-        getAllTransactions()
-    }, [userAction])
+        if(!accessToken){
+            return
+        } else {
+            getAllTransactions()
+        }
+    }, [userAction, accessToken])
 
     const selectedTransaction = (e) => {
         let key = e.currentTarget.name;

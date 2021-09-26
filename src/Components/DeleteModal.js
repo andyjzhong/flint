@@ -3,10 +3,10 @@ import { DataContext } from './DataContext';
 import { Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter } from '@chakra-ui/react';
 import axios from 'axios';
 
-const userId = "614dd60e29fe32ab9541683b";
+const userId = localStorage.getItem('fuid');
 
 const DeleteModal = (props) => {
-    const { transactionId, setUserAction } = useContext(DataContext);
+    const { transactionId, setUserAction, accessToken } = useContext(DataContext);
 
     const handleDelete = async (props) => {
         console.log("Attempting to delete one transaction...")
@@ -17,7 +17,9 @@ const DeleteModal = (props) => {
                     ? `http://porto-app-server.herokuapp.com/users/${userId}`
                     : `http://localhost:8000/users/${userId}/deletetransaction/${transactionId}`
 
-            axios.put(url);
+            axios.put(url,{},{
+                headers: {"authorization": `Bearer ${accessToken}`}
+            });
             console.log("Delete successful!");
             setUserAction("delete")
         } catch (error) {
