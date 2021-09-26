@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Route } from 'react-router-dom';
 import { ChakraProvider, theme } from '@chakra-ui/react';
-import WithSubnavigation from './Components/Navbar.js';
+import Navbar from './Components/Navbar.js';
 import { DataContext } from './Components/DataContext.js'
 import Home from './Components/Home.js';
 import Dashboard from './Components/Dashboard.js';
@@ -71,7 +71,7 @@ function App() {
                     setAccessToken
                 }}
             >
-                <WithSubnavigation />
+                <Navbar />
                 <Route exact path="/" component={Home} />
                 <Route exact path="/dashboard" component={Dashboard} />
                 <Route exact path="/transactions" component={Transactions} />
