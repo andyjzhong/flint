@@ -26,7 +26,7 @@ const EditBudgetModal = (props) => {
 
     const userId = localStorage.getItem('fuid');
 
-    const { budgetDate, budgetId, setUserAction } = useContext(DataContext);
+    const { budgetDate, budgetId, setUserAction, accessToken, setBudgetsList } = useContext(DataContext);
     const [category, setCategory] = useState("")
     const [subcategory, setSubcategory] = useState("")
     const [amount, setAmount] = useState("")
@@ -44,13 +44,15 @@ const EditBudgetModal = (props) => {
             "category": category,
             "subcategory": subcategory,
             "amount": amount
+        },{
+            headers: {"authorization": `Bearer ${accessToken}`}
         })
-        .then((res) => {
+        .then((res)=>{
+            setBudgetsList(res.data.budgets)
             console.log("Success!")
             setUserAction("edit")
             props.onClose()
         })
-        .catch(console.error)
     }
 
     const storeCategory = ((e) => {
