@@ -28,6 +28,7 @@ function App() {
     const [searchStartDate, setSearchStartDate] = useState(new Date("January 1, 2021"));
     const [searchEndDate, setSearchEndDate] = useState(new Date());
     const [summaryData, setSummaryData] = useState();
+    const [summaryDateData, setSummaryDateData] = useState();
     const [refreshToken, setRefreshToken] = useState(null)
     const [accessToken, setAccessToken] = useState(null)
 
@@ -68,7 +69,9 @@ function App() {
                     refreshToken,
                     setRefreshToken,
                     accessToken,
-                    setAccessToken
+                    setAccessToken,
+                    summaryDateData,
+                    setSummaryDateData
                 }}
             >
                 <Navbar />

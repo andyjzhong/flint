@@ -4,26 +4,13 @@ import { Bar } from 'react-chartjs-2';
 
 function IncomeChart() {
 
-    const { summaryData } = useContext(DataContext);
+    const { summaryDateData } = useContext(DataContext);
 
-    let categories = []
-    let compBudgetValues = []
-    let compSpendValues = []
+    let netValues = []
 
-    if (summaryData) {
-
-        console.log("SUMMARY DATA", summaryData);
-
-        categories = summaryData.map((item) => {
-            return item[0]
-        });
-
-        compBudgetValues = summaryData.map((item) => {
-            return item[1].totalBudget || 0
-        });
-
-        compSpendValues = summaryData.map((item) => {
-            return item[1].totalSpend || 0
+    if (summaryDateData) {
+        netValues = summaryDateData.map((item) => {
+            return item[1].total || 0
         });
     }
 
@@ -45,7 +32,7 @@ function IncomeChart() {
         datasets: [
             {
                 label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3, 12, 19, 3, 5, 2, 3, 12, 19],
+                data: netValues,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -86,7 +73,7 @@ function IncomeChart() {
                     'rgba(153, 102, 255, 1)',
                     'rgba(255, 159, 64, 1)',
                 ],
-                borderWidth: 1,
+                borderWidth: 0.5,
             },
         ],
     };
