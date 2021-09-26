@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { DataContext } from './DataContext';
 import axios from 'axios';
 import {
@@ -47,8 +47,8 @@ const categoryOptionsRaw = [
 const CreateBudgetModal = (props) => {
 
     const userId = localStorage.getItem('fuid');
-
-    const { budgetDate, setUserAction } = useContext(DataContext);
+    
+    const { budgetDate, setUserAction, accessToken, setBudgetsList } = useContext(DataContext);
     const [category, setCategory] = useState("")
     const [subcategory, setSubcategory] = useState("")
     const [amount, setAmount] = useState("")
@@ -88,17 +88,20 @@ const CreateBudgetModal = (props) => {
                 ? `http://flint-server.herokuapp.com/users/${userId}/addbudget`
                 : `http://localhost:8000/users/${userId}/addbudget`
 
-        axios.put(url, {
-            "category": category,
-            "subcategory": subcategory,
-            "amount": amount
-        })
-        .then((res) => {
-            console.log("Success!")
-            props.onClose()
-            setUserAction("create")
-        })
-        .catch(console.error)
+        const res = await axios.put(url, {
+            
+                "category": category,
+                "subcategory": subcategory,
+                "amount": amount
+            },
+            {headers: {
+                authorization: `Bearer ${accessToken}`
+            }},
+        )
+        setBudgetsList(res.data.budgets)
+        props.onClose()
+        setUserAction("create")
+        console.log(res)
     }
 
     const storeCategory = ((e) => {

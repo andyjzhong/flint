@@ -7,7 +7,7 @@ import axios from 'axios';
 
 const Dashboard = () => {
 
-    const userId = "614dd60e29fe32ab9541683b";
+    const userId = localStorage.getItem('fuid');
     const [userData, setUserData] = useState();
 
     useEffect(() => {
@@ -27,7 +27,7 @@ const Dashboard = () => {
                     ? `http://flint-server.herokuapp.com/users/${userId}`
                     : `http://localhost:8000/users/${userId}`
 
-            const response = await axios(url)
+            const response = await axios.get(url)
             console.log("Response data: ", response.data);
             setUserData(response.data)
         } catch (error) {

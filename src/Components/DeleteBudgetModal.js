@@ -6,7 +6,7 @@ import axios from 'axios';
 const userId = localStorage.getItem('fuid');
 
 const DeleteModal = (props) => {
-    const { budgetId, setUserAction } = useContext(DataContext);
+    const { budgetId, setUserAction, accessToken, setBudgetsList } = useContext(DataContext);
 
     const handleDelete = async (props) => {
         console.log("Attempting to delete one budget...")
@@ -17,8 +17,11 @@ const DeleteModal = (props) => {
                     ? `http://porto-app-server.herokuapp.com/users/${userId}/deletebudget/${budgetId}`
                     : `http://localhost:8000/users/${userId}/deletebudget/${budgetId}`
 
-            axios.put(url);
+            const res = await axios.put(url, {},{
+                headers: {"authorization": `Bearer ${accessToken}`}
+            });
             console.log("Delete successful!");
+            setBudgetsList(res.data.budgets)
             setUserAction("delete")
         } catch (error) {
             console.warn("Error when deleting one budget.")
