@@ -27,6 +27,8 @@ function App() {
     const [searchCategory, setSearchCategory] = useState("");
     const [searchStartDate, setSearchStartDate] = useState(new Date("January 1, 2021"));
     const [searchEndDate, setSearchEndDate] = useState(new Date());
+    const [refreshToken, setRefreshToken] = useState(null)
+    const [accessToken, setAccessToken] = useState(null)
 
     return (
         <ChakraProvider theme={theme}>
@@ -59,7 +61,11 @@ function App() {
                     searchStartDate,
                     setSearchStartDate,
                     searchEndDate,
-                    setSearchEndDate
+                    setSearchEndDate,
+                    refreshToken,
+                    setRefreshToken,
+                    accessToken,
+                    setAccessToken
                 }}
             >
                 <WithSubnavigation />

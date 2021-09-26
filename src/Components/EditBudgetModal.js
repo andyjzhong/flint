@@ -24,7 +24,7 @@ import {
 
 const EditBudgetModal = (props) => {
 
-    const userId = "614e1fb9d09999616f819944";
+    const userId = localStorage.getItem('fuid');
 
     const { budgetDate, budgetId, setUserAction } = useContext(DataContext);
     const [category, setCategory] = useState("")

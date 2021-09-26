@@ -3,7 +3,7 @@ import { DataContext } from './DataContext';
 import { Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter } from '@chakra-ui/react';
 import axios from 'axios';
 
-const userId = "614e1fb9d09999616f819944";
+const userId = localStorage.getItem('fuid');
 
 const DeleteModal = (props) => {
     const { budgetId, setUserAction } = useContext(DataContext);
