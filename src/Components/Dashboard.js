@@ -3,6 +3,8 @@ import { DataContext } from './DataContext';
 import jwt_decode from 'jwt-decode';
 import { useHistory } from 'react-router';
 import Doughnut from './Doughnut';
+import ComparisonChart from './ComparisonChart';
+import IncomeChart from './IncomeChart';
 import SummaryTable from './SummaryTable';
 import { Grid, GridItem } from '@chakra-ui/react';
 import "./Dashboard.css"
@@ -96,6 +98,16 @@ const Dashboard = () => {
     return (
         <div className="dashboard">
             <h1>Dashboard Page</h1>
+            <Grid templateColumns="repeat(2, 1fr)" gap={6}>
+                <GridItem colSpan={1}>
+                    <div className="chart-container">
+                        <ComparisonChart/>
+                    </div>
+                </GridItem>
+                <GridItem colSpan={1}>
+                    <IncomeChart/>
+                </GridItem>
+            </Grid>
             <Grid templateColumns="repeat(2, 1fr)" gap={6}>
                 <GridItem colSpan={1}>
                     <div className="chart-container">

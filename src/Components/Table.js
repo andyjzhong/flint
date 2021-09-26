@@ -4,7 +4,6 @@ import DeleteModal from './DeleteModal';
 import EditModal from './EditModal';
 import { Table, Thead, Tr, Th, Td, Tbody, Button } from '@chakra-ui/react';
 import { useDisclosure } from "@chakra-ui/react"
-import './Table.css';
 import moment from 'moment';
 import axios from 'axios';
 
