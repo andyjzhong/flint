@@ -20,7 +20,6 @@ const DeleteModal = (props) => {
             const res = await axios.put(url, {},{
                 headers: {"authorization": `Bearer ${accessToken}`}
             });
-            console.log("Delete successful!");
             setBudgetsList(res.data.budgets)
             setUserAction("delete")
         } catch (error) {

@@ -49,7 +49,7 @@ const CreateModal = (props) => {
 
     const userId = localStorage.getItem('fuid');
 
-    const { transactionDate, setUserAction } = useContext(DataContext);
+    const { transactionDate, setUserAction, accessToken } = useContext(DataContext);
     const [description, setDescription] = useState("")
     const [type, setType] = useState("")
     const [category, setCategory] = useState("")
@@ -98,7 +98,9 @@ const CreateModal = (props) => {
             "category": category,
             "subcategory": subcategory,
             "amount": amount
-        })
+        },{headers: {
+            authorization: `Bearer ${accessToken}`
+        }})
         .then((res) => {
             console.log("Success!")
             props.onClose()

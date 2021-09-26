@@ -51,7 +51,7 @@ const EditBudgetModal = (props) => {
             setBudgetsList(res.data.budgets)
             console.log("Success!")
             setUserAction("edit")
-            props.onClose()
+            props.onEditClose()
         })
     }
 
