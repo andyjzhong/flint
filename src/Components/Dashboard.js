@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { DataContext } from './DataContext';
+import jwt_decode from 'jwt-decode';
+import { useHistory } from 'react-router';
 import Doughnut from './Doughnut';
 import SummaryTable from './SummaryTable';
 import { Grid, GridItem } from '@chakra-ui/react';
@@ -10,15 +12,42 @@ const Dashboard = () => {
 
     const userId = localStorage.getItem('fuid');
     const [userData, setUserData] = useState();
+    const [isTokenValid, setIsTokenValid] = useState(false)
+    const history = useHistory()
     const {
         summaryData,
-        setSummaryData
+        setSummaryData,
+        accessToken,
+        setAccessToken,
     } = useContext(DataContext);
     let summaryMap = {}
 
+    const refreshToken = async () => {
+        try{
+            const decoded = jwt_decode(localStorage.getItem('refreshToken'))
+
+            const res = await axios.post('http://localhost:8000/users/refreshtoken', {
+                email: decoded.email,
+                token: localStorage.getItem('refreshToken')
+            }).catch((err) => {
+                console.log(err)
+            })
+
+            localStorage.setItem('refreshToken', res.data.refreshToken)
+            setIsTokenValid(true)
+            setAccessToken(res.data.accessToken)
+        } catch {
+            history.push('/login')
+        }
+    }
+
     useEffect(() => {
-        getUserData()
-    }, [])
+        if (!accessToken) {
+            refreshToken()
+        } else {
+            getUserData()
+        }
+    }, [accessToken])
 
     useEffect(() => {
         joinData()
@@ -33,7 +62,9 @@ const Dashboard = () => {
                     ? `http://flint-server.herokuapp.com/users/${userId}`
                     : `http://localhost:8000/users/${userId}`
 
-            const response = await axios.get(url)
+            const response = await axios.get(url,{
+                headers: {"authorization": `Bearer ${accessToken}`}
+            })
             console.log("Response data: ", response.data);
             setUserData(response.data)
         } catch (error) {
