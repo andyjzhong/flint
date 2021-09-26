@@ -7,38 +7,36 @@ function ComparisonChart() {
     const { summaryData } = useContext(DataContext);
 
     let categories = []
-    let doughnutBudgetValues = []
+    let compBudgetValues = []
+    let compSpendValues = []
 
     if (summaryData) {
         categories = summaryData.map((item) => {
             return item[0]
         });
 
-        doughnutBudgetValues = summaryData.map((item) => {
-            return item[1].totalSpend || 0
+        compBudgetValues = summaryData.map((item) => {
+            return item[1].totalBudget || 0
         });
 
-        console.log("Total spend by category: ", doughnutBudgetValues);
+        compSpendValues = summaryData.map((item) => {
+            return item[1].totalSpend || 0
+        });
     }
 
     const data = {
-        labels: ['1', '2', '3', '4', '5', '6'],
+        labels: categories,
         datasets: [
             {
-              label: '# of Red Votes',
-              data: [12, 19, 3, 5, 2, 3],
-              backgroundColor: 'rgb(255, 99, 132)',
+              label: "Budget",
+              data: compBudgetValues,
+              backgroundColor: 'rgb(2,205,169)',
             },
             {
-              label: '# of Blue Votes',
-              data: [2, 3, 20, 5, 1, 4],
-              backgroundColor: 'rgb(54, 162, 235)',
-            },
-            {
-              label: '# of Green Votes',
-              data: [3, 10, 13, 15, 22, 30],
-              backgroundColor: 'rgb(75, 192, 192)',
-            },
+              label: "Spend",
+              data: compSpendValues,
+              backgroundColor: 'rgb(99,91,255)',
+            }
         ],
     };
 
