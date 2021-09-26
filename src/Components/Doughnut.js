@@ -53,7 +53,7 @@ function Doughnut() {
                 <DoughnutChart data={data} />
             </div>
         </div>
-    );
+    )
 }
 
 export default Doughnut;

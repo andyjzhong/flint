@@ -43,7 +43,7 @@ const options = {
 const IncomeChart = () => (
     <>
         <div className="chart-container">
-            <h1 className='title'>Vertical Bar Chart</h1>
+            <h1 className='title'>Income vs. Expenses</h1>
             <Bar data={data} options={options} />
         </div>
     </>
