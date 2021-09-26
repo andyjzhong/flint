@@ -9,23 +9,22 @@ import axios from 'axios';
 
 const BudgetTableComponent = () => {
 
-    const { userAction, setUserAction, budgetsList, setBudgetsList, setBudgetId, currentUserId } = useContext(DataContext);
+    const { userAction, setUserAction, budgetsList, setBudgetsList, setBudgetId, currentUserId, accessToken } = useContext(DataContext);
     const userId = localStorage.getItem('fuid');
 
     const { isOpen: isEditOpen , onOpen: onEditOpen, onClose: onEditClose } = useDisclosure()
     const { isOpen: isDeleteOpen , onOpen: onDeleteOpen, onClose: onDeleteClose } = useDisclosure()
 
     const getAllBudgets = async () => {
-        console.log("Attempting to retrieve all budgets...")
-
         try {
             const url =
                 process.env.NODE_ENV === 'production'
                     ? `http://flint-server.herokuapp.com/users/${userId}`
                     : `http://localhost:8000/users/${userId}`
 
-            const response = await axios(url)
-            console.log("Response data: ", response.data.budgets);
+            const response = await axios.get(url,{
+                headers: {"authorization": `Bearer ${accessToken}`}
+            })
             setBudgetsList(response.data.budgets)
             setUserAction("")
         } catch (error) {
@@ -34,8 +33,12 @@ const BudgetTableComponent = () => {
     }
 
     useEffect(() => {
-        getAllBudgets()
-    }, [userAction])
+        if(!accessToken){
+            return
+        } else {
+            getAllBudgets()
+        }
+    }, [accessToken])
 
     const selectedBudget = (e) => {
         let key = e.currentTarget.name;
