@@ -80,16 +80,6 @@ export default function Navbar() {
                         variant={'link'}
                         href={'#'}
                     >
-                        <RouterLink to="/">Sign Out</RouterLink>
-                    </Button>
-
-                    <Button
-                        as={'a'}
-                        fontSize={'sm'}
-                        fontWeight={400}
-                        variant={'link'}
-                        href={'#'}
-                    >
                         <RouterLink to="/login">Sign In</RouterLink>
                     </Button>
 
@@ -105,6 +95,21 @@ export default function Navbar() {
                             }}
                         >
                             Sign Up
+                        </Button>
+                    </RouterLink>
+
+                    <RouterLink to="/">
+                        <Button
+                            fontFamily={'heading'}
+                            w={'full'}
+                            bgGradient="linear(to-r, blue.400,green.400)"
+                            color={'white'}
+                            _hover={{
+                                bgGradient: 'linear(to-r, blue.400,green.400)',
+                                boxShadow: 'xl',
+                            }}
+                        >
+                            Sign Out
                         </Button>
                     </RouterLink>
                 </Stack>
