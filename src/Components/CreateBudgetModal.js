@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { DataContext } from './DataContext';
+import categoryOptionsRaw from "../categories"
 import axios from 'axios';
 import {
     Modal,
@@ -21,33 +22,11 @@ import {
     Stack
 } from "@chakra-ui/react"
 
-const categoryOptionsRaw = [
-    {
-        id: 1,
-        major: "Food",
-        minor: ["Groceries", "Fast Food"]
-    },
-    {
-        id: 2,
-        major: "Education",
-        minor: ["Books", "Supplies"]
-    },
-    {
-        id: 3,
-        major: "Travel",
-        minor: ["Tolls", "Hotel"]
-    },
-    {
-        id: 4,
-        major: "Utilities",
-        minor: ["Phone", "Gas", "Sewage"]
-    }
-]
 
 const CreateBudgetModal = (props) => {
 
     const userId = localStorage.getItem('fuid');
-    
+
     const { budgetDate, setUserAction, accessToken, setBudgetsList } = useContext(DataContext);
     const [category, setCategory] = useState("")
     const [subcategory, setSubcategory] = useState("")
@@ -60,7 +39,7 @@ const CreateBudgetModal = (props) => {
     })
 
     // TODO: Currently hardcoded.
-    let selectedCategory = "Utilities"
+    let selectedCategory = "Entertainment"
 
     const matchingCategory = categoryOptionsRaw.filter((item, index) => {
         return item.major === selectedCategory;
@@ -89,7 +68,7 @@ const CreateBudgetModal = (props) => {
                 : `http://localhost:8000/users/${userId}/addbudget`
 
         const res = await axios.put(url, {
-            
+
                 "category": category,
                 "subcategory": subcategory,
                 "amount": amount

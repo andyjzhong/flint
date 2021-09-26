@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { DataContext } from './DataContext';
 import DatePickerComponent from './DatePicker.js'
+import categoryOptionsRaw from "../categories"
 import axios from 'axios';
 import {
     Modal,
@@ -21,8 +22,6 @@ import {
     Radio,
     Stack
 } from "@chakra-ui/react"
-
-import categoryOptionsRaw from "../categories"
 
 const CreateModal = (props) => {
 

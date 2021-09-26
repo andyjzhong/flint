@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { DataContext } from './DataContext';
-import DatePickerComponent from './DatePicker.js'
+import categoryOptionsRaw from "../categories"
 import axios from 'axios';
 import {
     Modal,
@@ -16,20 +16,44 @@ import {
     InputGroup,
     InputLeftElement,
     Select,
-    Button,
-    RadioGroup,
-    Radio,
-    Stack
+    Button
 } from "@chakra-ui/react"
 
 const EditBudgetModal = (props) => {
 
     const userId = localStorage.getItem('fuid');
 
-    const { budgetDate, budgetId, setUserAction, accessToken, setBudgetsList } = useContext(DataContext);
+    const { budgetId, setUserAction, accessToken, setBudgetsList } = useContext(DataContext);
     const [category, setCategory] = useState("")
     const [subcategory, setSubcategory] = useState("")
     const [amount, setAmount] = useState("")
+
+    let categoryOptions = categoryOptionsRaw.map((item, index) => {
+        return (
+            <option key={item.id} value={item.major}>{item.major}</option>
+        )
+    })
+
+    // TODO: Currently hardcoded.
+    let selectedCategory = "Entertainment"
+
+    const matchingCategory = categoryOptionsRaw.filter((item, index) => {
+        return item.major === selectedCategory;
+    })
+
+    let subcategoryOptions = matchingCategory[0].minor.map((item, index) => {
+
+        if (selectedCategory.length > 0) {
+            return (
+                <option key={item} value={item}>{item}</option>
+            )
+        } else {
+            return (
+                <option>No Category Selected</option>
+            )
+        }
+
+    })
 
     const editBudget = async () => {
         console.log(`Attempting to edit a transaction with id of ${budgetId}...`)
@@ -79,18 +103,14 @@ const EditBudgetModal = (props) => {
                         <FormControl>
                             <FormLabel>Category</FormLabel>
                             <Select name="input-category" onChange={storeCategory} placeholder="Select category">
-                                <option value="option1">Option 1</option>
-                                <option value="option2">Option 2</option>
-                                <option value="option3">Option 3</option>
+                                {categoryOptions}
                             </Select>
                         </FormControl>
 
                         <FormControl>
                             <FormLabel>Subcategory</FormLabel>
                             <Select name="input-subcategory" onChange={storeSubcategory} placeholder="Select category">
-                                <option value="option1">Option 1</option>
-                                <option value="option2">Option 2</option>
-                                <option value="option3">Option 3</option>
+                                {subcategoryOptions}
                             </Select>
                         </FormControl>
 
