@@ -115,7 +115,10 @@ const Dashboard = () => {
                     </div>
                 </GridItem>
                 <GridItem colSpan={1}>
-                    <SummaryTable/>
+                    <div className="chart-container">
+                        <h1>Financial Snapshot</h1>
+                        <SummaryTable/>
+                    </div>
                 </GridItem>
             </Grid>
         </div>
