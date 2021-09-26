@@ -2,11 +2,29 @@ import React, { useContext, useEffect } from 'react';
 import { Table, Thead, Tr, Th, Td, Tbody } from '@chakra-ui/react';
 import { DataContext } from './DataContext';
 
-const SummaryTable = () => {
+const SummaryTable = (props) => {
 
     const { budgetsList } = useContext(DataContext);
 
     console.log(budgetsList);
+    console.log("The Summary Map: ", props.summaryMap);
+    console.log("The Summary Map as an Array: ", Object.entries(props.summaryMap));
+
+    let summaryTableRow = Object.entries(props.summaryMap).map((item) => {
+        return (
+            <Tr>
+                <Td>{item[0]}</Td>
+                <Td isNumeric>${item[1].totalBudget || 0}</Td>
+                <Td isNumeric>${item[1].totalSpend}</Td>
+                <Td isNumeric>${(item[1].totalBudget || 0) - item[1].totalSpend}</Td>
+                <Td isNumeric>
+                {
+                    (Math.sign((item[1].totalBudget || 0) - item[1].totalSpend) > 0) ? "Under" : "Over"
+                }
+                </Td>
+            </Tr>
+        )
+    })
 
     return (
         <div className="table">
@@ -21,27 +39,7 @@ const SummaryTable = () => {
                     </Tr>
                 </Thead>
                 <Tbody>
-                    <Tr>
-                        <Td>Food</Td>
-                        <Td isNumeric>100</Td>
-                        <Td isNumeric>80</Td>
-                        <Td isNumeric>20</Td>
-                        <Td isNumeric>^</Td>
-                    </Tr>
-                    <Tr>
-                        <Td>Travel</Td>
-                        <Td isNumeric>200</Td>
-                        <Td isNumeric>80</Td>
-                        <Td isNumeric>20</Td>
-                        <Td isNumeric>^</Td>
-                    </Tr>
-                    <Tr>
-                        <Td>Utilities</Td>
-                        <Td isNumeric>300</Td>
-                        <Td isNumeric>80</Td>
-                        <Td isNumeric>20</Td>
-                        <Td isNumeric>^</Td>
-                    </Tr>
+                    {summaryTableRow}
                 </Tbody>
             </Table>
         </div>

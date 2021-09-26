@@ -9,6 +9,7 @@ const Dashboard = () => {
 
     const userId = localStorage.getItem('fuid');
     const [userData, setUserData] = useState();
+    let summaryMap = {}
 
     useEffect(() => {
         getUserData()
@@ -36,9 +37,6 @@ const Dashboard = () => {
     }
 
     const joinData = () => {
-        console.log("firing?");
-        let summaryMap = {}
-
         if (userData) {
             for (let transaction of userData.transactions) {
                 if(!summaryMap[transaction.category]) {
@@ -68,7 +66,7 @@ const Dashboard = () => {
                     </div>
                 </GridItem>
                 <GridItem colSpan={1}>
-                    <SummaryTable />
+                    <SummaryTable summaryMap={summaryMap}/>
                 </GridItem>
             </Grid>
         </div>
