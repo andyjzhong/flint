@@ -141,17 +141,23 @@ const Dashboard = () => {
     const joinData = () => {
         if (userData) {
             for (let transaction of userData.transactions) {
-                if(!summaryMap[transaction.category]) {
-                    summaryMap[transaction.category] = {totalSpend: transaction.amount}
-                } else {
-                    summaryMap[transaction.category].totalSpend += transaction.amount
+                if (transaction.type !== "Income") {
+                    if (!summaryMap[transaction.category]) {
+                        summaryMap[transaction.category] = {totalSpend: transaction.amount}
+                    } else {
+                        summaryMap[transaction.category].totalSpend += transaction.amount
+                    }
                 }
             }
 
             for (let budget of userData.budgets) {
-                !summaryMap[budget.category]
-                    ? summaryMap[budget.category] = {totalBudget: budget.amount}
-                    : summaryMap[budget.category].totalBudget = budget.amount
+                if (budget.type !== "Income") {
+                    if (!summaryMap[budget.category]) {
+                        summaryMap[budget.category] = {totalBudget: budget.amount}
+                    } else {
+                        summaryMap[budget.category].totalBudget = budget.amount
+                    }
+                }
             }
 
             for (let transaction of userData.transactions) {
