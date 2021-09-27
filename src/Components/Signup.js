@@ -54,10 +54,10 @@ export default function Signup() {
 
         const url =
             process.env.NODE_ENV === 'production'
-                ? `http://flint-server.herokuapp.com/transactions`
+                ? `http://localhost:8000/users`
                 : `http://localhost:8000/users`
 
-        axios.post(url, {
+        axios.put(url, {
             "username": newAccount.username,
             "email": newAccount.email,
             "firstName": newAccount.firstName,
