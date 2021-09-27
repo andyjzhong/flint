@@ -53,14 +53,16 @@ export default function Navbar() {
 
                 <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
                     <FaMountain className="logo-icon" style={{margin: "5px"}}/>
-                    <Text
-                        textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
-                        fontFamily={'heading'}
-                        fontSize={'lg'}
-                        color={useColorModeValue('gray.800', 'white')}
-                    >
-                        Flint
-                    </Text>
+                    <RouterLink to="/">
+                        <Text
+                            textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
+                            fontFamily={'heading'}
+                            fontSize={'lg'}
+                            color={useColorModeValue('gray.800', 'white')}
+                        >
+                            Flint
+                        </Text>
+                    </RouterLink>
 
                     <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
                         <DesktopNav />

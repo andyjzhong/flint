@@ -6,7 +6,7 @@ import Doughnut from './Doughnut';
 import ComparisonChart from './ComparisonChart';
 import IncomeChart from './IncomeChart';
 import SummaryTable from './SummaryTable';
-import { Heading, Grid, GridItem, Text, Stack } from '@chakra-ui/react';
+import { Box, Heading, Grid, GridItem, Text, Stack, useColorModeValue } from '@chakra-ui/react';
 import "./Dashboard.css"
 import axios from 'axios';
 import moment from 'moment';
@@ -245,47 +245,49 @@ const Dashboard = () => {
 
     return (
         <div className="dashboard">
-            <div className="screen-header">
-                <Stack spacing={{ base: 10, md: 20 }}>
-                    <Heading lineHeight={1.1} fontSize={{ base: '2xl', sm: '3xl', md: '4xl', lg: '5xl' }}>
-                        <Text as={'span'} bgGradient="linear(to-r, green.400,green.300)" bgClip="text">Dashboard</Text>{' '}
-                    </Heading>
-                </Stack>
-            </div>
-            <Grid templateColumns="repeat(2, 1fr)" gap={6}>
-                <GridItem colSpan={1}>
-                    <div className="chart-container">
-                        <Heading lineHeight={1.1} fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}>
-                            <h1 style={{paddingBottom: "3rem"}}>Spending vs. Budget</h1>
+            <Box minH={'93vh'} p={4} bg={useColorModeValue('gray.50', 'gray.800')}>
+                <div className="screen-header">
+                    <Stack spacing={{ base: 10, md: 20 }}>
+                        <Heading lineHeight={1.1} fontSize={{ base: '2xl', sm: '3xl', md: '4xl', lg: '5xl' }}>
+                            <Text as={'span'} bgGradient="linear(to-r, green.400,green.300)" bgClip="text">Dashboard</Text>{' '}
                         </Heading>
-                        <ComparisonChart/>
-                    </div>
-                </GridItem>
-                <GridItem colSpan={1}>
-                    <Heading lineHeight={1.1} fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}>
-                        <h1 style={{paddingBottom: "3rem"}}>Income vs. Expenses</h1>
-                    </Heading>
-                    <IncomeChart/>
-                </GridItem>
-            </Grid>
-            <Grid templateColumns="repeat(2, 1fr)" gap={6}>
-                <GridItem colSpan={1}>
-                    <div className="chart-container">
+                    </Stack>
+                </div>
+                <Grid templateColumns="repeat(2, 1fr)" gap={6}>
+                    <GridItem colSpan={1}>
+                        <div className="chart-container">
+                            <Heading lineHeight={1.1} fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}>
+                                <h1 style={{paddingBottom: "3rem"}}>Spending vs. Budget</h1>
+                            </Heading>
+                            <ComparisonChart/>
+                        </div>
+                    </GridItem>
+                    <GridItem colSpan={1}>
                         <Heading lineHeight={1.1} fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}>
-                            <h1 style={{paddingBottom: "3rem"}}>Spending by Category</h1>
+                            <h1 style={{paddingBottom: "3rem"}}>Income vs. Expenses</h1>
                         </Heading>
-                        <Doughnut/>
-                    </div>
-                </GridItem>
-                <GridItem colSpan={1}>
-                    <div className="chart-container">
-                        <Heading lineHeight={1.1} fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}>
-                            <h1 style={{paddingBottom: "3rem"}}>Financial Snapshot</h1>
-                        </Heading>
-                        <SummaryTable/>
-                    </div>
-                </GridItem>
-            </Grid>
+                        <IncomeChart/>
+                    </GridItem>
+                </Grid>
+                <Grid templateColumns="repeat(2, 1fr)" gap={6}>
+                    <GridItem colSpan={1}>
+                        <div className="chart-container">
+                            <Heading lineHeight={1.1} fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}>
+                                <h1 style={{paddingBottom: "3rem"}}>Spending by Category</h1>
+                            </Heading>
+                            <Doughnut/>
+                        </div>
+                    </GridItem>
+                    <GridItem colSpan={1}>
+                        <div className="chart-container">
+                            <Heading lineHeight={1.1} fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}>
+                                <h1 style={{paddingBottom: "3rem"}}>Financial Snapshot</h1>
+                            </Heading>
+                            <SummaryTable/>
+                        </div>
+                    </GridItem>
+                </Grid>
+            </Box>
         </div>
     )
 }

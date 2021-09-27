@@ -15,6 +15,8 @@ import {
     Button,
     Heading,
     Text,
+    InputRightElement,
+    InputGroup,
     useColorModeValue,
 } from '@chakra-ui/react';
 
@@ -24,6 +26,8 @@ export default function Login() {
     const { currentUserId, setCurrentUserId } = useContext(DataContext);
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
+    const [show, setShow] = React.useState(false)
+    const handleClick = () => setShow(!show)
     let history = useHistory()
 
     const login = () => {
@@ -39,7 +43,7 @@ export default function Login() {
                 process.env.NODE_ENV === 'production'
                     ? `http://flint-server.herokuapp.com/users/login`
                     : `http://localhost:8000/users/login`
-            
+
             const response = await axios.post(url, {
                 "email": `${email.toLowerCase()}`,
                 "password": `${password}`
@@ -89,19 +93,26 @@ export default function Login() {
                     <Stack spacing={4}>
                         <FormControl id="email">
                             <FormLabel>Email address</FormLabel>
-                            <Input 
-                            type="email" 
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            <Input
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                             />
                         </FormControl>
                         <FormControl id="password">
                             <FormLabel>Password</FormLabel>
-                            <Input 
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            />
+                            <InputGroup>
+                                <Input
+                                type={show ? "text" : "password"}
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                />
+                                <InputRightElement width="4.5rem">
+                                    <Button h="1.75rem" size="sm" onClick={handleClick}>
+                                        {show ? "Hide" : "Show"}
+                                    </Button>
+                                </InputRightElement>
+                            </InputGroup>
                         </FormControl>
 
                         <Stack spacing={10}>

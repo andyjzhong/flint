@@ -4,7 +4,7 @@ import { useHistory } from 'react-router';
 import axios from 'axios';
 import DatePicker from "react-datepicker";
 import { DataContext } from './DataContext';
-import { Button, Input, Grid, GridItem, FormControl, FormLabel, Select } from "@chakra-ui/react";
+import { Button, Input, Grid, GridItem, FormControl, Box, Select, useColorModeValue } from "@chakra-ui/react";
 import TableComponent from './Table.js';
 import CreateModal from './CreateModal.js';
 import EditModal from './CreateModal.js';
@@ -80,6 +80,7 @@ const Transactions = () => {
 
     return (
         <div className="transactions">
+            <Box minH={'93vh'} p={4} bg={useColorModeValue('gray.50', 'gray.800')}>
             <h1>Transactions Page</h1>
             <div className="transactions-table-container">
                 <Grid templateColumns="repeat(10, 1fr)" gap={6}>
@@ -124,6 +125,7 @@ const Transactions = () => {
                 <CreateModal isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>
                 <EditModal isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>
             </div>
+            </Box>
         </div>
     )
 }
