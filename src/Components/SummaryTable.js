@@ -15,7 +15,7 @@ const SummaryTable = (props) => {
                     <Td isNumeric>${item[1].totalBudget || 0}</Td>
                     <Td isNumeric>${item[1].totalSpend || 0}</Td>
                     <Td isNumeric>${((item[1].totalBudget || 0) - (item[1].totalSpend || 0))}</Td>
-                    <Td isNumeric>
+                    <Td style={{ color: "black", textAlign: "center" }}>
                         {
                             (Math.sign((item[1].totalBudget || 0) - item[1].totalSpend) >= 0)
                                 ? "Under"
@@ -28,15 +28,15 @@ const SummaryTable = (props) => {
     }
 
     return (
-        <div className="table">
+        <div className="table" width={["100%", "50%", "25%", "15%"]}>
             <Table size="sm">
                 <Thead>
                     <Tr>
-                        <Th>Budget Category</Th>
-                        <Th isNumeric>Total Budget</Th>
-                        <Th isNumeric>Total Spend</Th>
-                        <Th isNumeric>Variance</Th>
-                        <Th>Icon (+ / -)</Th>
+                        <Th style={{ color: "black" }}>Budget Category</Th>
+                        <Th style={{ color: "black" }} isNumeric>Total Budget</Th>
+                        <Th style={{ color: "black" }} isNumeric>Total Spend</Th>
+                        <Th style={{ color: "black" }} isNumeric>Variance</Th>
+                        <Th style={{ color: "black", textAlign: "center" }}>+ / -</Th>
                     </Tr>
                 </Thead>
                 <Tbody>

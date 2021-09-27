@@ -84,10 +84,10 @@ const TableComponent = () => {
                 <Td>{item.category}</Td>
                 <Td>{item.subcategory}</Td>
                 <Td isNumeric>${item.amount}</Td>
-                <Td>
+                <Td style={{textAlign: "center"}}>
                     <ButtonGroup variant="solid" size="sm" spacing={2}>
                         <IconButton
-                            colorScheme="green"
+                            colorScheme="orange"
                             icon={<AiFillEdit />}
                             size="sm"
                             name={item._id}
@@ -127,40 +127,38 @@ const TableComponent = () => {
                     <Td>{item.category}</Td>
                     <Td>{item.subcategory}</Td>
                     <Td isNumeric>${item.amount}</Td>
-                    <Td>
-                        <Button
-                            size="sm"
-                            name={item._id}
-                            className="btn-edit-transaction"
-                            color={'white'}
-                            bgGradient="linear(to-r, orange.400,orange.400)"
-                            _hover={{bgGradient: 'linear(to-r, orange.400,orange.400)', boxShadow: 'xl'}}
-                            onClick={handleEdit}
-                        >Edit</Button>
-                    </Td>
-                    <Td>
-                        <Button
-                            size="sm"
-                            name={item._id}
-                            className="btn-edit-transaction"
-                            color={'white'}
-                            bgGradient="linear(to-r, red.500,red.500)"
-                            _hover={{bgGradient: 'linear(to-r, red.500,red.500)', boxShadow: 'xl'}}
-                            onClick={handleDelete}
-                            >Delete</Button>
+                    <Td style={{textAlign: "center"}}>
+                        <ButtonGroup variant="solid" size="sm" spacing={2}>
+                            <IconButton
+                                colorScheme="orange"
+                                icon={<AiFillEdit />}
+                                size="sm"
+                                name={item._id}
+                                className="btn-edit-transaction"
+                                color={'white'}
+                                bgGradient="linear(to-r, orange.400,orange.400)"
+                                _hover={{bgGradient: 'linear(to-r, orange.400,orange.400)', boxShadow: 'xl'}}
+                                onClick={handleEdit}
+                            />
+                            <IconButton
+                                colorScheme="red"
+                                variant="outline"
+                                icon={<BsFillTrashFill />}
+                                size="sm"
+                                name={item._id}
+                                className="btn-edit-transaction"
+                                color={'white'}
+                                bgGradient="linear(to-r, red.500,red.500)"
+                                _hover={{bgGradient: 'linear(to-r, red.500,red.500)', boxShadow: 'xl'}}
+                                onClick={handleDelete}
+                            />
+                        </ButtonGroup>
                     </Td>
                 </Tr>
             )
         })
 
-        console.log("filteredTransactionRow", filteredTransactionRows);
-
-        // if (searchValue === "" && searchCategory === "") {
-        //     displayedRows = filteredTransactionRows;
-        //     setFilteredTransactionsList("")
-        // } else {
-            displayedRows = filteredTransactionRows;
-        // }
+        displayedRows = filteredTransactionRows;
     }
 
     return (
@@ -168,13 +166,13 @@ const TableComponent = () => {
             <Table size="sm">
                 <Thead>
                     <Tr>
-                        <Th>Description</Th>
-                        <Th>Date</Th>
-                        <Th>Type</Th>
-                        <Th>Category</Th>
-                        <Th>Subcategory</Th>
-                        <Th isNumeric>Amount</Th>
-                        <Th style={{textAlign: "center"}}>Actions</Th>
+                        <Th style={{ color: "black" }}>Description</Th>
+                        <Th style={{ color: "black" }}>Date</Th>
+                        <Th style={{ color: "black" }}>Type</Th>
+                        <Th style={{ color: "black" }}>Category</Th>
+                        <Th style={{ color: "black" }}>Subcategory</Th>
+                        <Th style={{ color: "black" }} isNumeric>Amount</Th>
+                        <Th style={{ textAlign: "center", color: "black" }}>Actions</Th>
                     </Tr>
                 </Thead>
                 <Tbody>

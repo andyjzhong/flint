@@ -3,10 +3,25 @@ import { DataContext } from './DataContext';
 import jwt_decode from 'jwt-decode';
 import { useHistory } from 'react-router';
 import Doughnut from './Doughnut';
+import { FaPiggyBank, FaMoneyBillWave } from 'react-icons/fa';
+import { RiBankFill } from 'react-icons/ri';
+import { BiDollarCircle } from 'react-icons/bi';
+import { BsGraphUp, BsGraphDown } from 'react-icons/bs';
 import ComparisonChart from './ComparisonChart';
 import IncomeChart from './IncomeChart';
 import SummaryTable from './SummaryTable';
-import { Box, Heading, Grid, GridItem, Text, Stack, useColorModeValue } from '@chakra-ui/react';
+import { Box,
+    Heading,
+    Text,
+    Stack,
+    StatGroup,
+    StatLabel,
+    StatNumber,
+    StatHelpText,
+    StatArrow,
+    Stat,
+    useColorModeValue
+} from '@chakra-ui/react';
 import "./Dashboard.css"
 import axios from 'axios';
 import moment from 'moment';
@@ -22,6 +37,7 @@ const Dashboard = () => {
         setSummaryData,
         accessToken,
         setAccessToken,
+        summaryDateData,
         setSummaryDateData
     } = useContext(DataContext);
     let summaryMap = {}
@@ -118,6 +134,38 @@ const Dashboard = () => {
     useEffect(() => {
         joinData()
     }, [userData])
+
+    useEffect(() => {
+        console.log("Hi", summaryDateData)
+        tallyIncome()
+        tallySpend()
+    }, [summaryDateData])
+
+    const [totalIncome, setTotalIncome] = useState(0);
+    let incomeTally = 0;
+
+    const tallyIncome = () => {
+        if (summaryDateData) {
+            for (let month of summaryDateData) {
+                incomeTally = incomeTally + month[1].income;
+            }
+        }
+        console.log("Total Income is: ", incomeTally);
+        setTotalIncome(incomeTally)
+    }
+
+    const [totalSpend, setTotalSpend] = useState(0);
+    let expenseTally = 0;
+
+    const tallySpend = () => {
+        if (summaryDateData) {
+            for (let month of summaryDateData) {
+                expenseTally = expenseTally + month[1].expenses;
+            }
+        }
+        console.log("Total Spend is: ", expenseTally);
+        setTotalSpend(expenseTally)
+    }
 
     const getUserData = async () => {
         console.log("Attempting to retrieve user data...")
@@ -253,40 +301,96 @@ const Dashboard = () => {
                         </Heading>
                     </Stack>
                 </div>
-                <Grid templateColumns="repeat(2, 1fr)" gap={6}>
-                    <GridItem colSpan={1}>
+
+                <StatGroup style={{margin: "4rem auto", padding: "2rem", backgroundColor: "rgb(237,242,246)", borderRadius: "10px", textAlign: "center"}} spacing="24px" maxW={'85vw'}>
+                    <Stat>
+                        <RiBankFill style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
+                        <StatLabel>Total Income</StatLabel>
+                        <StatNumber>${totalIncome || 0}</StatNumber>
+                        <StatHelpText>
+                        <StatArrow type="increase" />
+                        23.36%
+                        </StatHelpText>
+                    </Stat>
+                    <Stat>
+                        <FaMoneyBillWave style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
+                        <StatLabel>Total Spend</StatLabel>
+                        <StatNumber>${totalSpend || 0}</StatNumber>
+                        <StatHelpText>
+                        <StatArrow type="increase" />
+                        23.36%
+                        </StatHelpText>
+                    </Stat>
+                    <Stat>
+                        <FaPiggyBank style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
+                        <StatLabel>Net Income</StatLabel>
+                        <StatNumber>${totalIncome - totalSpend || 0}</StatNumber>
+                        <StatHelpText>
+                        <StatArrow type={(Math.sign((totalIncome - totalSpend || 0)) >= 0) ? "increase" : "decrease"}  />
+                        9.05%
+                        </StatHelpText>
+                    </Stat>
+                    <Stat>
+                        <BsGraphUp style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
+                        <StatLabel>Avg Mo. Income</StatLabel>
+                        <StatNumber>${Math.round(totalIncome / 12) || 0}</StatNumber>
+                        <StatHelpText>
+                        <StatArrow type="decrease" />
+                        9.05%
+                        </StatHelpText>
+                    </Stat>
+                    <Stat>
+                        <BsGraphDown style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
+                        <StatLabel>Avg Mo. Spend</StatLabel>
+                        <StatNumber>${Math.round(totalSpend / 12) || 0}</StatNumber>
+                        <StatHelpText>
+                        <StatArrow type="increase" />
+                        23.36%
+                        </StatHelpText>
+                    </Stat>
+                    <Stat>
+                        <BiDollarCircle style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
+                        <StatLabel>Avg Net Income</StatLabel>
+                        <StatNumber>${(Math.round(totalIncome / 12) - Math.round(totalSpend / 12)) || 0}</StatNumber>
+                        <StatHelpText>
+                        <StatArrow type="decrease" />
+                        9.05%
+                        </StatHelpText>
+                    </Stat>
+                </StatGroup>
+
+                <Box p={4} display={{ md: "flex" }}>
+                    <Box flexShrink={0}>
                         <div className="chart-container">
                             <Heading lineHeight={1.1} fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}>
                                 <h1 style={{paddingBottom: "3rem"}}>Spending vs. Budget</h1>
                             </Heading>
-                            <ComparisonChart/>
+                            <ComparisonChart w={{ base: '100%', sm: '75%', md: '50%', lg: '25%' }}/>
                         </div>
-                    </GridItem>
-                    <GridItem colSpan={1}>
+                    </Box>
+                    <Box mt={{ base: 4, md: 0 }}>
+                        <div className="chart-container">
+                            <Heading lineHeight={1.1} fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}>
+                                <h1 style={{paddingBottom: "3rem"}}>Income vs. Expenses</h1>
+                            </Heading>
+                            <IncomeChart/>
+                        </div>
+                    </Box>
+                </Box>
+                <Box p={4} display={{ md: "flex" }}>
+                    <Box flexShrink={0}>
                         <Heading lineHeight={1.1} fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}>
-                            <h1 style={{paddingBottom: "3rem"}}>Income vs. Expenses</h1>
+                            <h1 style={{paddingBottom: "3rem"}}>Spending by Category</h1>
                         </Heading>
-                        <IncomeChart/>
-                    </GridItem>
-                </Grid>
-                <Grid templateColumns="repeat(2, 1fr)" gap={6}>
-                    <GridItem colSpan={1}>
-                        <div className="chart-container">
-                            <Heading lineHeight={1.1} fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}>
-                                <h1 style={{paddingBottom: "3rem"}}>Spending by Category</h1>
-                            </Heading>
-                            <Doughnut/>
-                        </div>
-                    </GridItem>
-                    <GridItem colSpan={1}>
-                        <div className="chart-container">
-                            <Heading lineHeight={1.1} fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}>
-                                <h1 style={{paddingBottom: "3rem"}}>Financial Snapshot</h1>
-                            </Heading>
-                            <SummaryTable/>
-                        </div>
-                    </GridItem>
-                </Grid>
+                        <Doughnut/>
+                    </Box>
+                    <Box mt={{ base: 4, md: 0 }}>
+                        <Heading lineHeight={1.1} fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}>
+                            <h1 style={{paddingBottom: "3rem"}}>Financial Snapshot</h1>
+                        </Heading>
+                        <SummaryTable/>
+                    </Box>
+                </Box>
             </Box>
         </div>
     )
