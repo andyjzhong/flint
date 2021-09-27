@@ -308,10 +308,6 @@ const NAV_ITEMS: Array<NavItem> = [
         href: 'about',
     },
     {
-        label: 'Send Code',
-        href: 'authenticate',
-    },
-    {
         label: 'Verify',
         href: 'verify',
     },

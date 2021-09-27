@@ -11,7 +11,6 @@ import About from './Components/About.js';
 import Signup from './Components/Signup.js';
 import Login from './Components/Login.js';
 import Verify from './Components/Verify.js';
-import SendCode from './Components/SendCode.js';
 
 function App() {
 
@@ -85,7 +84,6 @@ function App() {
                 <Route exact path="/signup" component={Signup} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/verify" component={Verify} />
-                <Route exact path="/authenticate" component={SendCode} />
             </DataContext.Provider>
         </ChakraProvider>
     );
