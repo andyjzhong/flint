@@ -26,20 +26,19 @@ function Doughnut() {
                 label: '# of Votes',
                 data: doughnutBudgetValues,
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
+                    "rgb(0,217,36)",
+                    "rgb(26,89,230)",
+                    "rgb(249,65,73)",
+                    "rgb(31,180,226)",
+                    "rgb(250,176,1)",
+                    "rgb(142,71,253)",
+                    "rgb(242,56,136)",
+                    "rgb(0,44,89)",
                 ],
                 borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
+                    "rgb(255,255,255)"
                 ],
-                borderWidth: 1,
+                borderWidth: 3.5,
             },
         ],
     };
@@ -47,8 +46,9 @@ function Doughnut() {
     return (
         <div className="App">
             <div className="chart-container">
-                <h1 className='title'>Total Spend</h1>
-                <DoughnutChart data={data} />
+                <div className="pie">
+                    <DoughnutChart data={data} />
+                </div>
             </div>
         </div>
     )

@@ -30,12 +30,12 @@ function ComparisonChart() {
             {
               label: "Budget",
               data: compBudgetValues,
-              backgroundColor: 'rgb(2,205,169)',
+              backgroundColor: "rgb(142,71,253)",
             },
             {
               label: "Spend",
               data: compSpendValues,
-              backgroundColor: 'rgb(99,91,255)',
+              backgroundColor: "rgb(242,56,136)",
             }
         ],
     };
@@ -53,12 +53,7 @@ function ComparisonChart() {
     };
 
     return (
-        <>
-            <div className='header'>
-                <h1 className='title'>Spend vs. Budget</h1>
-            </div>
-            <Bar data={data} options={options} />
-        </>
+        <Bar data={data} options={options} />
     )
 }
 

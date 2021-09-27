@@ -14,10 +14,10 @@ const SummaryTable = (props) => {
                     <Td>{item[0]}</Td>
                     <Td isNumeric>${item[1].totalBudget || 0}</Td>
                     <Td isNumeric>${item[1].totalSpend || 0}</Td>
-                    <Td isNumeric>${((item[1].totalBudget || 0) - item[1].totalSpend) || 0}</Td>
+                    <Td isNumeric>${((item[1].totalBudget || 0) - (item[1].totalSpend || 0))}</Td>
                     <Td isNumeric>
                         {
-                            (Math.sign((item[1].totalBudget || 0) - item[1].totalSpend) > 0)
+                            (Math.sign((item[1].totalBudget || 0) - item[1].totalSpend) >= 0)
                                 ? "Under"
                                 : "Over"
                         }
@@ -26,8 +26,6 @@ const SummaryTable = (props) => {
             )
         })
     }
-
-
 
     return (
         <div className="table">
