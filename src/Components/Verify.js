@@ -73,26 +73,36 @@ const Verify = () => {
                         <Heading lineHeight={1.1} fontSize={{ base: '2xl', md: '3xl' }}>
                             Two Factor Authentication
                         </Heading>
+
+
                         <FormControl id="phone-number" isRequired>
                             <FormLabel>Phone Number</FormLabel>
                             <Input
                                 placeholder="555-555-5555"
+                                id="phoneInput"
                             />
                         </FormControl>
+
+
                         <Stack spacing={6}>
-                            
+
                                 <Button
                                     bg={'blue.400'}
                                     color={'white'}
                                     _hover={{
                                         bg: 'blue.500',
                                     }}
-                                    onClick={() => setIsNumSubmitted(true)}
+                                    onClick={() => {
+                                        console.log("Before", document.querySelector("#phoneInput").value)
+                                        setIsNumSubmitted(true)
+                                        document.querySelector("#phoneInput").value = ""
+                                        console.log("After", document.querySelector("#phoneInput").value)
+                                    }}
                                     // still needs to submit the number to TextMagic
                                     >
                                     Send Code
                                 </Button>
-                            
+
                         </Stack>
                     </Stack>
                 </Flex>
@@ -125,7 +135,7 @@ const Verify = () => {
                             <FormLabel>Confirmation Code</FormLabel>
                             <Input type="password" />
                         </FormControl>
-    
+
                         <Stack spacing={6}>
                             <Button
                                 bg={'blue.400'}

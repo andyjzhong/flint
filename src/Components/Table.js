@@ -2,7 +2,9 @@ import React, { useContext, useEffect } from 'react';
 import { DataContext } from './DataContext';
 import DeleteModal from './DeleteModal';
 import EditModal from './EditModal';
-import { Table, Thead, Tr, Th, Td, Tbody, Button } from '@chakra-ui/react';
+import { Table, Thead, Tr, Th, Td, Tbody, Button, IconButton, ButtonGroup } from '@chakra-ui/react';
+import { AiFillEdit } from 'react-icons/ai';
+import { BsFillTrashFill } from 'react-icons/bs';
 import { useDisclosure } from "@chakra-ui/react"
 import moment from 'moment';
 import axios from 'axios';
@@ -83,26 +85,31 @@ const TableComponent = () => {
                 <Td>{item.subcategory}</Td>
                 <Td isNumeric>${item.amount}</Td>
                 <Td>
-                    <Button
-                        size="sm"
-                        name={item._id}
-                        className="btn-edit-transaction"
-                        color={'white'}
-                        bgGradient="linear(to-r, orange.400,orange.400)"
-                        _hover={{bgGradient: 'linear(to-r, orange.400,orange.400)', boxShadow: 'xl'}}
-                        onClick={handleEdit}
-                    >Edit</Button>
-                </Td>
-                <Td>
-                    <Button
-                        size="sm"
-                        name={item._id}
-                        className="btn-edit-transaction"
-                        color={'white'}
-                        bgGradient="linear(to-r, red.500,red.500)"
-                        _hover={{bgGradient: 'linear(to-r, red.500,red.500)', boxShadow: 'xl'}}
-                        onClick={handleDelete}
-                    >Delete</Button>
+                    <ButtonGroup variant="solid" size="sm" spacing={2}>
+                        <IconButton
+                            colorScheme="green"
+                            icon={<AiFillEdit />}
+                            size="sm"
+                            name={item._id}
+                            className="btn-edit-transaction"
+                            color={'white'}
+                            bgGradient="linear(to-r, orange.400,orange.400)"
+                            _hover={{bgGradient: 'linear(to-r, orange.400,orange.400)', boxShadow: 'xl'}}
+                            onClick={handleEdit}
+                        />
+                        <IconButton
+                            colorScheme="red"
+                            variant="outline"
+                            icon={<BsFillTrashFill />}
+                            size="sm"
+                            name={item._id}
+                            className="btn-edit-transaction"
+                            color={'white'}
+                            bgGradient="linear(to-r, red.500,red.500)"
+                            _hover={{bgGradient: 'linear(to-r, red.500,red.500)', boxShadow: 'xl'}}
+                            onClick={handleDelete}
+                        />
+                    </ButtonGroup>
                 </Td>
             </Tr>
         )
@@ -167,8 +174,7 @@ const TableComponent = () => {
                         <Th>Category</Th>
                         <Th>Subcategory</Th>
                         <Th isNumeric>Amount</Th>
-                        <Th>Edit</Th>
-                        <Th>Delete</Th>
+                        <Th style={{textAlign: "center"}}>Actions</Th>
                     </Tr>
                 </Thead>
                 <Tbody>
