@@ -88,8 +88,9 @@ const Verify = () => {
             onSuccessOpen()
 
             // add phone number to database
-
-            history.push('/dashboard')
+            setTimeout(() => {
+                history.push('/dashboard')
+            }, 3000)
         } else if(res.data.status === 400){
             setIsCodeSubmitted(false)
             onFailedOpen()
