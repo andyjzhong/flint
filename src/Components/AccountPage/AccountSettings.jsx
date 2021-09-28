@@ -23,10 +23,12 @@ import { HeadingGroup } from './HeadingGroup'
 export const AccountSettings = (props) => {
 
   const history = useHistory()
+  const userId = localStorage.getItem('fuid')
 
   // states
   const [isTokenValid, setIsTokenValid] = useState(false)
   const [accessToken, setAccessToken] = useState(null)
+  const [userInfo, setUserInfo] = useState(null)
 
   const refreshToken = async () => {
     try{
@@ -47,8 +49,23 @@ export const AccountSettings = (props) => {
     }
   }
 
-  function getUserData(){
-    return
+  async function getUserData(){
+    try {
+      const url =
+          process.env.NODE_ENV === 'production'
+              ? `http://flint-server.herokuapp.com/users/${userId}`
+              : `http://localhost:8000/users/${userId}`
+
+      const response = await axios.get(url,{
+          headers: {'authorization': `Bearer ${accessToken}`}
+      })
+      setUserInfo(response.data)
+      
+
+
+    } catch (error) {
+      console.warn("Error when retrieving users.")
+    }
   }
 
   function openChangeNameModal(){
@@ -59,8 +76,16 @@ export const AccountSettings = (props) => {
 
 
   useEffect(()=>{
-    refreshToken()
-  },[])
+    if(!accessToken){
+      refreshToken()
+    } else {
+      getUserData()
+    }
+  },[accessToken])
+
+  useEffect(()=>{
+    console.log(userInfo)
+  },[userInfo])
   
   if(isTokenValid){
 
