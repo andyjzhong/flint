@@ -397,3 +397,23 @@ const Dashboard = () => {
 }
 
 export default Dashboard;
+
+
+
+// import { Box, Flex, GridItem, Stack, useColorModeValue } from '@chakra-ui/react'
+// import * as React from 'react'
+// import { AspectRatioGrid } from './AspectRatioGrid'
+// import { GridItemAspectRatioSelect } from './GridItemAspectRatioSelect'
+// import { GridItemNumberInput } from './GridItemNumberInput'
+// import { GridItemWidthSelect } from './GridItemWidthSelect'
+//
+// export const App = () => {
+//   const [items, setItems] = React.useState(2)
+//   const [minWidth, setMinWidth] = React.useState(320)
+//   const [aspectRatio, setAspectRatio] = React.useState(16 / 9)
+//
+//   const bgColor = useColorModeValue('orange.500', 'orange.300')
+//   return (
+//
+//   )
+// }

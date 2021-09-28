@@ -59,14 +59,14 @@ const badgeEnum = {
 }
 export const columns = [
   {
-    Header: 'Member',
+    Header: 'Description',
     accessor: 'user',
     Cell: function MemberCell(data) {
       return <User data={data} />
     },
   },
   {
-    Header: 'Role',
+    Header: 'Date',
     accessor: 'role',
   },
   {

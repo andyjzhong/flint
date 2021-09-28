@@ -4,13 +4,17 @@ import { useHistory } from 'react-router';
 import axios from 'axios';
 import DatePicker from "react-datepicker";
 import { DataContext } from './DataContext';
-import { Button, Input, Grid, GridItem, FormControl, Box, Select, useColorModeValue } from "@chakra-ui/react";
+import { Center, InputLeftElement, FormLabel, HStack, InputGroup, Heading, Button, ButtonGroup, Input, Grid, GridItem, FormControl, Box, Select, Stack, useColorModeValue } from "@chakra-ui/react";
 import TableComponent from './Table.js';
+import { TableActions } from './TableUI/TableActions'
 import CreateModal from './CreateModal.js';
 import EditModal from './CreateModal.js';
 import { useDisclosure } from "@chakra-ui/react";
 import moment from 'moment';
+import { BsSearch } from 'react-icons/bs'
+import { RiAddFill, RiArrowRightUpLine } from 'react-icons/ri'
 import './Transactions.css';
+import categoryOptionsRaw from "../categories"
 
 const Transactions = () => {
 
@@ -54,6 +58,32 @@ const Transactions = () => {
         refreshToken()
     }, [])
 
+    let categoryOptions = categoryOptionsRaw.map((item, index) => {
+        return (
+            <option key={item.id} value={item.major}>{item.major}</option>
+        )
+    })
+
+    // TODO: Currently hardcoded.
+    let selectedCategory = "Entertainment"
+
+    const matchingCategory = categoryOptionsRaw.filter((item, index) => {
+        return item.major === selectedCategory;
+    })
+
+    let subcategoryOptions = matchingCategory[0].minor.map((item, index) => {
+
+        if (selectedCategory.length > 0) {
+            return (
+                <option key={item} value={item}>{item}</option>
+            )
+        } else {
+            return (
+                <option>No Category Selected</option>
+            )
+        }
+
+    })
 
     const handleSearchChange = e => setSearchValue(e.target.value)
     const handleSearchCategory = e => setSearchCategory(e.target.value)
@@ -81,51 +111,66 @@ const Transactions = () => {
     return (
         <div className="transactions">
             <Box minH={'93vh'} p={4} bg={useColorModeValue('gray.50', 'gray.800')}>
-            <h1>Transactions Page</h1>
+            <Center>
+            <Heading size="lg" mb="6">
+                Transactions
+            </Heading>
+            </Center>
+
             <div className="transactions-table-container">
-                <Grid templateColumns="repeat(10, 1fr)" gap={6}>
-                    <GridItem colSpan={3}>
-                        <Input w="100%" h="10" variant="outline" placeholder="Search by keyword" onChange={handleSearchChange}/>
-                    </GridItem>
-                    <GridItem colSpan={2}>
-                        <Select name="input-category" onChange={handleSearchCategory}>
-                            <option value="">All Categories</option>
-                            <option value="Education">Education</option>
-                            <option value="Food">Food</option>
-                            <option value="Travel">Travel</option>
-                            <option value="Utilities">Utilities</option>
-                        </Select>
-                    </GridItem>
-                    <GridItem colSpan={2}>
-                        <FormControl>
-                        Begin:
-                        <DatePicker name="input-date" className="begin-date-picker" selected={searchStartDate} onChange={(date) => setSearchStartDate(date)} />
-                        </FormControl>
-                    </GridItem>
-                    <GridItem colSpan={2}>
-                        <FormControl>
-                        End:
-                        <DatePicker name="input-date" className="begin-date-picker" selected={searchEndDate} onChange={(date) => setSearchEndDate(date)} />
-                        </FormControl>
-                    </GridItem>
-                    <GridItem colSpan={1}>
-                        <Button w="100%" h="10" colorScheme="blue" onClick={filterTransactions}>Search</Button>
-                    </GridItem>
-                </Grid>
-                <Button
-                    className="btn-add-transaction"
-                    size="sm"
-                    color={'white'}
-                    bgGradient="linear(to-r, green.400,green.400)"
-                    _hover={{bgGradient: 'linear(to-r, green.400,green.400)', boxShadow: 'xl'}}
-                    onClick={onOpen}>
-                    Add Transaction
-                </Button>
+
+                <Stack
+                  spacing="4"
+                  direction={{
+                    base: 'column',
+                    md: 'row',
+                  }}
+                  justify="space-between"
+                >
+
+                  <HStack>
+                    <FormControl
+                      minW={{
+                        md: '320px',
+                      }}
+                      id="search"
+                    >
+                      <InputGroup size="sm">
+                        <FormLabel srOnly>Filter by name or email</FormLabel>
+                        <InputLeftElement pointerEvents="none" color="gray.400">
+                          <BsSearch />
+                        </InputLeftElement>
+                        <Input w="100%" h="10" variant="outline" rounded="base" type="search" placeholder="Search by keyword" onChange={handleSearchChange}/>
+                      </InputGroup>
+                    </FormControl>
+                    <Select
+                        h="10" variant="outline"
+                        name="input-category"
+                        onChange={handleSearchCategory}
+                      w="200%"
+                      rounded="base"
+                      size="sm"
+                      placeholder="All Categories"
+                    >
+                      {categoryOptions}
+                    </Select>
+                    Begin:
+                    <DatePicker name="input-date" className="begin-date-picker" selected={searchStartDate} onChange={(date) => setSearchStartDate(date)} />
+                    End:
+                    <DatePicker name="input-date" className="begin-date-picker" selected={searchEndDate} onChange={(date) => setSearchEndDate(date)} />
+                    <Button w="100%" h="10" colorScheme="blue" onClick={filterTransactions}>Search</Button>
+                  </HStack>
+
+                </Stack>
+
                 <TableComponent />
-                <CreateModal isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>
-                <EditModal isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>
+
+
             </div>
+
+
             </Box>
+
         </div>
     )
 }

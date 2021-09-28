@@ -2,18 +2,23 @@ import React, { useContext, useEffect } from 'react';
 import { DataContext } from './DataContext';
 import DeleteModal from './DeleteModal';
 import EditModal from './EditModal';
-import { Table, Thead, Tr, Th, Td, Tbody, Button, IconButton, ButtonGroup } from '@chakra-ui/react';
+import CreateModal from './CreateModal';
+import { Table, Thead, Tr, Th, Td, Tbody, Button, IconButton, ButtonGroup, useColorModeValue as mode } from '@chakra-ui/react';
+import { Box, Heading } from '@chakra-ui/react'
+import { TablePagination } from './TableUI/TablePagination'
 import { AiFillEdit } from 'react-icons/ai';
 import { BsFillTrashFill } from 'react-icons/bs';
 import { useDisclosure } from "@chakra-ui/react"
 import moment from 'moment';
 import axios from 'axios';
+import { RiAddFill, RiArrowRightUpLine } from 'react-icons/ri'
 
 const TableComponent = () => {
 
     const userId = localStorage.getItem('fuid');
     const { userAction, setUserAction, transactionsList, setTransactionsList, transactionId, setTransactionId, matchingTransactionData, setMatchingTransactionData, filteredTransactionsList, setFilteredTransactionsList, searchValue, searchCategory, searchStartDate, searchEndDate, accessToken } = useContext(DataContext);
 
+    const { isOpen, onOpen, onClose } = useDisclosure()
     const { isOpen: isEditOpen , onOpen: onEditOpen, onClose: onEditClose } = useDisclosure()
     const { isOpen: isDeleteOpen , onOpen: onDeleteOpen, onClose: onDeleteClose } = useDisclosure()
 
@@ -162,27 +167,54 @@ const TableComponent = () => {
     }
 
     return (
-        <div className="table">
-            <Table size="sm">
-                <Thead>
-                    <Tr>
-                        <Th style={{ color: "black" }}>Description</Th>
-                        <Th style={{ color: "black" }}>Date</Th>
-                        <Th style={{ color: "black" }}>Type</Th>
-                        <Th style={{ color: "black" }}>Category</Th>
-                        <Th style={{ color: "black" }}>Subcategory</Th>
-                        <Th style={{ color: "black" }} isNumeric>Amount</Th>
-                        <Th style={{ textAlign: "center", color: "black" }}>Actions</Th>
-                    </Tr>
-                </Thead>
-                <Tbody>
-                    {displayedRows}
-                </Tbody>
-            </Table>
+        <>
+            <Box as="section" py="12">
+                <Box
+                    maxW={{
+                        base: 'xl',
+                        md: '7xl',
+                    }}
+                    mx="auto"
+                    px={{
+                        base: '6',
+                        md: '8',
+                    }}
+                >
+                <Box overflowX="auto">
+                    <ButtonGroup size="sm" variant="outline">
+                      <Button
+                          iconSpacing="1"
+                          onClick={onOpen}
+                          leftIcon={<RiAddFill fontSize="1.25em" />}
+                      >
+                        New Transaction
+                      </Button>
+                    </ButtonGroup>
+                        <Table my="8" borderWidth="1px" fontSize="sm">
+                          <Thead bg={mode('gray.50', 'gray.800')}>
+                            <Tr>
+                                <Th whiteSpace="nowrap" scope="col">Description</Th>
+                                <Th whiteSpace="nowrap" scope="col">Date</Th>
+                                <Th whiteSpace="nowrap" scope="col">Type</Th>
+                                <Th whiteSpace="nowrap" scope="col">Category</Th>
+                                <Th whiteSpace="nowrap" scope="col">Subcategory</Th>
+                                <Th whiteSpace="nowrap" scope="col" textAlign="center">Amount</Th>
+                                <Th whiteSpace="nowrap" scope="col" textAlign="center">Actions</Th>
+                            </Tr>
+                          </Thead>
+                          <Tbody>
+                            {displayedRows}
+                          </Tbody>
+                        </Table>
+                    </Box>
+                    <TablePagination />
+                </Box>
+            </Box>
 
+            <CreateModal isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>
             <EditModal isEditOpen={isEditOpen} onEditOpen={onEditOpen} onEditClose={onEditClose}/>
             <DeleteModal isOpen={isDeleteOpen} onOpen={onDeleteOpen} onClose={onDeleteClose}/>
-        </div>
+        </>
     )
 }
 
