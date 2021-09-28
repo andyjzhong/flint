@@ -4,7 +4,7 @@ import { AccountSettings } from './AccountSettings'
 import { DangerZone } from './DangerZone'
 import { SocialAccountSettings } from './SocialAccountSettings'
 
-export const App = () => (
+const AccountPage = () => (
   <Box
     bg={useColorModeValue('gray.50', 'gray.800')}
     px={{
@@ -22,3 +22,5 @@ export const App = () => (
     </Box>
   </Box>
 )
+
+export default AccountPage;
