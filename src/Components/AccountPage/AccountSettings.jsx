@@ -13,82 +13,46 @@ import {
   StackDivider,
 } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router';
-import jwt_decode from 'jwt-decode';
-import axios from 'axios';
 import { Card } from './Card'
 import { FieldGroup } from './FieldGroup'
 import { HeadingGroup } from './HeadingGroup'
+import axios from 'axios';
+import moment from 'moment';
 
 export const AccountSettings = (props) => {
 
-  const history = useHistory()
   const userId = localStorage.getItem('fuid')
 
-  // states
-  const [isTokenValid, setIsTokenValid] = useState(false)
-  const [accessToken, setAccessToken] = useState(null)
-  const [userInfo, setUserInfo] = useState(null)
+  const [userLoaded, setUserLoaded] = useState(false)
 
-  const refreshToken = async () => {
-    try{
-        const decoded = jwt_decode(localStorage.getItem('refreshToken'))
+  function uploadImage(files){
+    const formData = new FormData()
+    formData.append('file', files[0])
+    formData.append('upload_preset', 'ovvjjprn')
 
-        const res = await axios.post('http://localhost:8000/users/refreshtoken', {
-            email: decoded.email,
-            token: localStorage.getItem('refreshToken')
-        }).catch((err) => {
-            console.log(err)
+    axios.post('https://api.cloudinary.com/v1_1/dah6quajd/image/upload', formData)
+      .then((res) => {
+        console.log(res.data.secure_url)
+        axios.put(`http://localhost:8000/users/uploadimage/${userId}`,{
+          image: res.data.secure_url
+        },{
+          headers: {'authorization': `Bearer ${props.accessToken}`}
         })
-
-        localStorage.setItem('refreshToken', res.data.refreshToken)
-        setIsTokenValid(true)
-        setAccessToken(res.data.accessToken)
-    } catch {
-        history.push('/login')
-    }
-  }
-
-  async function getUserData(){
-    try {
-      const url =
-          process.env.NODE_ENV === 'production'
-              ? `http://flint-server.herokuapp.com/users/${userId}`
-              : `http://localhost:8000/users/${userId}`
-
-      const response = await axios.get(url,{
-          headers: {'authorization': `Bearer ${accessToken}`}
+          .then((response) => {
+            props.setUserInfo(response.data)
+          })
       })
-      setUserInfo(response.data)
-      
-
-
-    } catch (error) {
-      console.warn("Error when retrieving users.")
-    }
   }
 
-  function openChangeNameModal(){
-
-    // open modal that holds the users current first and last name (pulled from state)
-
-  }
-
+  // ovvjjprn
 
   useEffect(()=>{
-    if(!accessToken){
-      refreshToken()
-    } else {
-      getUserData()
+    if(props.userInfo){
+      setUserLoaded(true)
     }
-  },[accessToken])
+  },[props.userInfo])
 
-  useEffect(()=>{
-    console.log(userInfo)
-  },[userInfo])
-  
-  if(isTokenValid){
-
+  if(userLoaded){
     return (
   
     <Stack as="section" spacing="6" {...props}>
@@ -101,21 +65,30 @@ export const AccountSettings = (props) => {
           <FieldGroup title="Name &amp; Avatar" description="Change your name and profile picture">
             <HStack spacing="4">
               <Avatar
-                src="https://images.unsplash.com/photo-1470506028280-a011fb34b6f7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1349&q=80"
-                name="Lisa Turner"
+                src={props.userInfo.profilePicURL
+                      ? props.userInfo.profilePicURL
+                      : ""
+                }
+                name={`${props.userInfo.firstName} ${props.userInfo.lastName}`}
               />
               <Box>
-                <Text>Lisa Turner</Text>
+                <Text>{`${props.userInfo.firstName} ${props.userInfo.lastName}`}</Text>
                 <Text color="gray.500" fontSize="sm">
-                  Joined March, 2010
+                  Joined {moment(props.userInfo.createdAt).format('LL')}
                 </Text>
               </Box>
             </HStack>
             <HStack mt="5">
-              <Button size="sm" fontWeight="normal">
+              <Button size="sm" fontWeight="normal" onClick={() => props.onNameChangeOpen()}>
                 Change name
               </Button>
-              <input id="getImage" type="file"style={{display: 'none'}}/>
+              <input 
+                id="getImage" 
+                type="file" 
+                style={{display: 'none'}} 
+                onChange={(e) => {
+                  uploadImage(e.target.files)
+                }}/>
               <Button size="sm" fontWeight="normal" onClick={()=> document.getElementById('getImage').click()}>
                 Change Avatar
               </Button>
@@ -123,9 +96,9 @@ export const AccountSettings = (props) => {
           </FieldGroup>
   
           <FieldGroup title="Login details" description="Change your email and password">
-            <Text fontSize="sm">lisat09@example.com</Text>
+            <Text fontSize="sm">{props.userInfo.email}</Text>
             <HStack mt="5">
-              <Button size="sm" fontWeight="normal">
+              <Button size="sm" fontWeight="normal" onClick={() => props.onEmailChangeOpen()}>
                 Change email
               </Button>
               <Button size="sm" fontWeight="normal">
@@ -192,8 +165,9 @@ export const AccountSettings = (props) => {
   } else {
     return (
       <div>
-
+        
       </div>
     )
   }
+
 }

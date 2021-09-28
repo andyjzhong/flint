@@ -89,7 +89,7 @@ const Verify = () => {
 
             // add phone number to database
             setTimeout(() => {
-                history.push('/dashboard')
+                history.push('/account')
             }, 3000)
         } else if(res.data.status === 400){
             setIsCodeSubmitted(false)
