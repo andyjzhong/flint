@@ -64,7 +64,7 @@ const BudgetTableComponent = () => {
             <Tr key={item._id} >
                 <Td>{item.category}</Td>
                 <Td>{item.subcategory}</Td>
-                <Td isNumeric >{item.amount}</Td>
+                <Td isNumeric >{item.amount.toFixed(2)}</Td>
                 <Td whiteSpace="nowrap" >
                     <HStack>
                         <IconButton
