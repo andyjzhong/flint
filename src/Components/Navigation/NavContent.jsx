@@ -1,14 +1,17 @@
 import {
-  Box,
-  Button,
-  Flex,
-  HStack,
-  Text,
-  useDisclosure,
-  useBreakpointValue,
-  useColorModeValue,
-  useColorModeValue as mode,
+    Box,
+    Button,
+    Flex,
+    HStack,
+    Menu,
+    MenuButton,
+    MenuList,
+    Avatar,
+    MenuItem,
+    useDisclosure,
+    useColorModeValue as mode,
 } from '@chakra-ui/react'
+import { SettingsIcon } from '@chakra-ui/icons'
 import * as React from 'react'
 import { Logo } from './Logo'
 import { NavLink } from './NavLink'
@@ -85,11 +88,15 @@ const DesktopNavContent = (props) => {
         <Button as="a" href="signup" colorScheme="blue" fontWeight="bold">
           Sign up
         </Button>
-        <UserProfile
-          name="Christian Schröter"
-          avatarUrl="https://ca.slack-edge.com/T024F7F15-UJVQ359SP-81fc55875723-512"
-          email="mail@chidori-ui.com"
-        />
+        <Menu>
+            <MenuButton as={Avatar} size={"sm"}>
+            </MenuButton>
+            <MenuList>
+                <MenuItem textAlign="right">Sign In</MenuItem>
+                <MenuItem>Account Settings</MenuItem>
+                <MenuItem>Sign Out</MenuItem>
+            </MenuList>
+        </Menu>
       </HStack>
     </Flex>
   )

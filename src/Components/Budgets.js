@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-import { Button, Box, Grid, GridItem } from "@chakra-ui/react"
+import { Button, Box, Grid, GridItem, Center, Heading } from "@chakra-ui/react"
 import axios from 'axios';
 import jwt_decode from 'jwt-decode'
 import BudgetTableComponent from './BudgetTable.js'
@@ -42,8 +42,10 @@ const Budgets = () => {
 
     if(isTokenValid){
         return (
-            <div className="transactions">
-                <h1>Budgets Page</h1>
+                <Box minH={'100vh'} p={4} pt={24} bg={"rgb(247,250,252)"}>
+                <Center>
+                    <Heading size="lg" mb="6">Budgets</Heading>
+                </Center>
                 <Grid
                     gap="6"
                     templateColumns={{
@@ -87,11 +89,11 @@ const Budgets = () => {
                 </Grid>
                 <CreateBudgetModal isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>
                 <EditBudgetModal isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>
-            </div>
+                </Box>
         )
     } else {
         return (
-            <div className="budgets">
+            <div className="budgets" pt={24}>
                 <h1>Budgets Page</h1>
             </div>
         )

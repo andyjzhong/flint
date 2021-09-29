@@ -1,4 +1,4 @@
-import { Flex, HStack, Avatar, Text } from '@chakra-ui/react'
+import { Flex, HStack, Avatar, Text, Button, MenuButton } from '@chakra-ui/react'
 import * as React from 'react'
 
 export const UserProfile = (props) => {

@@ -296,7 +296,7 @@ const Dashboard = () => {
 
     return (
         <div className="dashboard">
-            <Box h={'100vh'} p={4} bg={useColorModeValue('gray.50', 'gray.800')}>
+            <Box h={'100vh'} p={4} pt={24} bg={useColorModeValue('gray.50', 'gray.800')}>
                 <div className="screen-header">
                     <Stack spacing={{ base: 10, md: 20 }}>
                         <Heading lineHeight={1.1} fontSize={{ base: '4xl', sm: '4xl', md: '5xl', lg: '5xl' }}>

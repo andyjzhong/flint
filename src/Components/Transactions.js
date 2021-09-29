@@ -110,11 +110,9 @@ const Transactions = () => {
 
     return (
         <div className="transactions">
-            <Box minH={'93vh'} p={4} bg={useColorModeValue('gray.50', 'gray.800')}>
+            <Box minH={'100vh'} p={4} pt={24} bg={useColorModeValue('gray.50', 'gray.800')}>
             <Center>
-            <Heading size="lg" mb="6">
-                Transactions
-            </Heading>
+                <Heading size="lg" mb="6">Transactions</Heading>
             </Center>
 
             <div className="transactions-table-container">
