@@ -5,7 +5,7 @@ import * as React from 'react'
 
 export const Logo = (props) => {
     return (
-        <HStack>
+        <HStack mr={10}>
             <FaMountain className="logo-icon" style={{margin: "5px"}}/>
             <Text
                 fontWeight={800}

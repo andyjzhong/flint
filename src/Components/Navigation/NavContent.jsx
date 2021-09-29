@@ -76,8 +76,11 @@ const DesktopNavContent = (props) => {
         ))}
       </HStack>
       <HStack spacing="8" minW="240px" style={{position: "absolute", right: "0"}}>
+        <Box as="a" href="/" color={mode('blue.600', 'blue.300')} fontWeight="bold">
+          Sign out
+        </Box>
         <Box as="a" href="login" color={mode('blue.600', 'blue.300')} fontWeight="bold">
-          Sign In
+          Sign in
         </Box>
         <Button as="a" href="signup" colorScheme="blue" fontWeight="bold">
           Sign up

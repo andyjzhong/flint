@@ -4,7 +4,7 @@ import { NavContent } from './NavContent'
 
 export const Navigation = () => {
   return (
-      <Box as="header" bg={mode('white', 'gray.800')} position="relative" zIndex="10">
+      <Box as="header" bg={mode('white', 'gray.800')} w="100vw" position="fixed" zIndex="100">
         <Box
           as="nav"
           aria-label="Main navigation"
