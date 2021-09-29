@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { Table, Thead, Tr, Th, Td, Tbody } from '@chakra-ui/react';
+import { Box, Table, Thead, Tr, Th, Td, Tbody } from '@chakra-ui/react';
 import { DataContext } from './DataContext';
 
 const SummaryTable = (props) => {
@@ -28,7 +28,7 @@ const SummaryTable = (props) => {
     }
 
     return (
-        <div className="table" width={["100%", "50%", "25%", "15%"]}>
+        <Box className="table" overflowX="auto">
             <Table size="sm">
                 <Thead>
                     <Tr>
@@ -43,7 +43,7 @@ const SummaryTable = (props) => {
                     {summaryTableRow}
                 </Tbody>
             </Table>
-        </div>
+        </Box>
     )
 }
 

@@ -52,13 +52,7 @@ function Doughnut() {
     };
 
     return (
-        <div className="App">
-            <div className="chart-container">
-                <div className="pie">
-                    <DoughnutChart data={data} options={options}/>
-                </div>
-            </div>
-        </div>
+        <DoughnutChart data={data} options={options}/>
     )
 }
 
