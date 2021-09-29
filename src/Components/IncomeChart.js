@@ -54,9 +54,7 @@ function IncomeChart() {
 
     return (
         <>
-            <div className="chart-container">
-                <Bar data={data} options={options} />
-            </div>
+            <Bar data={data} options={options} />
         </>
     )
 };

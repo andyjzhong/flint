@@ -379,12 +379,10 @@ const Dashboard = () => {
                         border='1px solid lightgray'
                         borderRadius='1rem'
                     >
-                        <div className="chart-container">
-                            <Heading lineHeight={1.1} fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}>
-                                <h1 style={{paddingBottom: "3rem"}}>Spending vs. Budget</h1>
-                            </Heading>
-                            <ComparisonChart w={{ base: '100%', sm: '75%', md: '50%', lg: '25%' }}/>
-                        </div>
+                        <Heading lineHeight={1.1} fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}>
+                            <h1 style={{paddingBottom: "3rem"}}>Spending vs. Budget</h1>
+                        </Heading>
+                        <ComparisonChart />
                     </GridItem>
                     <GridItem
                         m="0 auto"
@@ -400,12 +398,10 @@ const Dashboard = () => {
                             m="0"
                             p="0"
                         >
-                            <div className="chart-container">
-                                <Heading lineHeight={1.1} fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}>
-                                    <h1 style={{paddingBottom: "3rem"}}>Income vs. Expenses</h1>
-                                </Heading>
-                                <IncomeChart/>
-                            </div>
+                            <Heading lineHeight={1.1} fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}>
+                                <h1 style={{paddingBottom: "3rem"}}>Income vs. Expenses</h1>
+                            </Heading>
+                            <IncomeChart/>
                         </Box>
                     </GridItem>
                 </Grid>
