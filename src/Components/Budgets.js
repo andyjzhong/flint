@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-import { Button } from "@chakra-ui/react"
+import { Button, Box, Grid, GridItem } from "@chakra-ui/react"
 import axios from 'axios';
 import jwt_decode from 'jwt-decode'
 import BudgetTableComponent from './BudgetTable.js'
@@ -13,7 +13,7 @@ import './Transactions.css';
 
 const Budgets = () => {
     let history = useHistory()
-    const { accessToken, setAccessToken } = useContext(DataContext);
+    const { setAccessToken } = useContext(DataContext);
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [isTokenValid, setIsTokenValid] = useState(false)
 
@@ -44,26 +44,55 @@ const Budgets = () => {
         return (
             <div className="transactions">
                 <h1>Budgets Page</h1>
-                <div class="page-container" style={{display: 'flex'}}>
-                    <div class="chart-container" style={{margin: '1rem', border: '1px solid lightgray', padding: '1rem', borderRadius: '1rem'}}>
+                <Grid
+                    gap="6"
+                    templateColumns={{
+                        base: "repeat(1, 1fr)",
+                        sm: "repeat(1, 1fr)",
+                        md: "repeat(1, 1fr)",
+                        lg: "repeat(2, 1fr)"
+                    }}
+                >
+                    <GridItem
+                        m="0 auto"
+                        w={{ base: "90vw", sm: "90vw", md: "90vw", lg: "45vw"}}
+                        class="chart-container"
+                        p="1rem"
+                        border='1px solid lightgray'
+                        borderRadius='1rem'
+                    >
                         <BudgetChart />
-                    </div>
-                    <div className="transactions-table-container">
-                        <Button className="btn-add-transaction" colorScheme="green" onClick={onOpen}>
-                            Add Budgets
-                        </Button>
-                        <BudgetTableComponent />
-                        <CreateBudgetModal isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>
-                        <EditBudgetModal isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>
-                    </div>
-                </div>
+                    </GridItem>
+                    <GridItem
+                        m="0 auto"
+                        w={{ base: "90vw", sm: "90vw", md: "90vw", lg: "45vw"}}
+                        class="chart-container"
+                    >
+                        <Box
+                            className="transactions-table-container"
+                            w="100%"
+                            m="0"
+                            p="0"
+                        >
+                            <Button
+                                className="btn-add-transaction"
+                                colorScheme="green"
+                                onClick={onOpen}
+                            >
+                                Add Budgets
+                            </Button>
+                            <BudgetTableComponent/>
+                        </Box>
+                    </GridItem>
+                </Grid>
+                <CreateBudgetModal isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>
+                <EditBudgetModal isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>
             </div>
         )
     } else {
         return (
-            <div className="transactions">
+            <div className="budgets">
                 <h1>Budgets Page</h1>
-                
             </div>
         )
     }

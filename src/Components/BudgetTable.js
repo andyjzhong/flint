@@ -2,13 +2,15 @@ import React, { useContext, useEffect } from 'react';
 import { DataContext } from './DataContext';
 import DeleteBudgetModal from './DeleteBudgetModal';
 import EditBudgetModal from './EditBudgetModal';
-import { Table, Thead, Tr, Th, Td, Tbody, Button } from '@chakra-ui/react';
+import { Table, Thead, Tr, Th, Td, Tbody, IconButton, Box, HStack, useColorModeValue as mode } from '@chakra-ui/react';
+import { AiFillEdit } from 'react-icons/ai';
+import { BsFillTrashFill } from 'react-icons/bs';
 import { useDisclosure } from "@chakra-ui/react"
 import axios from 'axios';
 
 const BudgetTableComponent = () => {
 
-    const { userAction, setUserAction, budgetsList, setBudgetsList, setBudgetId, currentUserId, accessToken } = useContext(DataContext);
+    const { setUserAction, budgetsList, setBudgetsList, setBudgetId, accessToken } = useContext(DataContext);
     const userId = localStorage.getItem('fuid');
 
     const { isOpen: isEditOpen , onOpen: onEditOpen, onClose: onEditClose } = useDisclosure()
@@ -59,49 +61,61 @@ const BudgetTableComponent = () => {
 
     let budgetRow = budgetsList.map((item, index) => {
         return (
-            <Tr key={item._id}>
+            <Tr key={item._id} >
                 <Td>{item.category}</Td>
                 <Td>{item.subcategory}</Td>
-                <Td isNumeric>{item.amount}</Td>
-                <Td>
-                    <Button
-                        name={item._id}
-                        className="btn-edit-transaction"
-                        colorScheme="orange"
-                        onClick={handleEdit}
-                    >Edit</Button>
-                </Td>
-                <Td>
-                    <Button
-                        name={item._id}
-                        className="btn-edit-transaction"
-                        onClick={handleDelete}
-                        colorScheme="red">Delete</Button>
+                <Td isNumeric >{item.amount}</Td>
+                <Td whiteSpace="nowrap" >
+                    <HStack>
+                        <IconButton
+                            _hover={{bgGradient: 'linear(to-r, orange.400,orange.400)', boxShadow: 'xl'}}
+                            bgGradient="linear(to-r, orange.400,orange.400)"
+                            className="btn-edit-budget"
+                            color={'white'}
+                            colorScheme="orange"
+                            icon={<AiFillEdit />}
+                            name={item._id}
+                            onClick={handleEdit}
+                            size="sm"
+                        />
+                        <IconButton
+                            _hover={{bgGradient: 'linear(to-r, red.500,red.500)', boxShadow: 'xl'}}
+                            bgGradient="linear(to-r, red.500,red.500)"
+                            className="btn-delete-budget"
+                            color={'white'}
+                            colorScheme="red"
+                            icon={<BsFillTrashFill />}
+                            name={item._id}
+                            onClick={handleDelete}
+                            size="sm"
+                            variant="outline"
+                        />
+                    </HStack>
                 </Td>
             </Tr>
         )
     })
 
     return (
-        <div className="table">
-            <Table size="sm">
-                <Thead>
+        <Box
+            className="table"
+            overflowX="auto"
+            w={{ base: "90vw", sm: "90vw", md: "90vw", lg: "45vw"}}
+        >
+            <Table borderWidth="1px">
+                <Thead bg={mode('gray.50', 'gray.800')} >
                     <Tr>
-                        <Th>Category</Th>
-                        <Th>Subcategory</Th>
-                        <Th isNumeric>Amount</Th>
-                        <Th>Edit</Th>
-                        <Th>Delete</Th>
+                    <Th whiteSpace="nowrap" scope="col">Category</Th>
+                    <Th whiteSpace="nowrap" scope="col">Subcategory</Th>
+                    <Th whiteSpace="nowrap" scope="col" textAlign="center">Amount</Th>
+                    <Th whiteSpace="nowrap" scope="col" textAlign="center">Actions</Th>
                     </Tr>
                 </Thead>
-                <Tbody>
-                    {budgetRow}
-                </Tbody>
+                <Tbody >{budgetRow}</Tbody>
             </Table>
-
             <EditBudgetModal isEditOpen={isEditOpen} onEditOpen={onEditOpen} onEditClose={onEditClose}/>
             <DeleteBudgetModal isOpen={isDeleteOpen} onOpen={onDeleteOpen} onClose={onDeleteClose}/>
-        </div>
+        </Box>
     )
 }
 
