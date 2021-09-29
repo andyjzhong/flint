@@ -299,67 +299,89 @@ const Dashboard = () => {
             <Box minH={'93vh'} p={4} bg={useColorModeValue('gray.50', 'gray.800')}>
                 <div className="screen-header">
                     <Stack spacing={{ base: 10, md: 20 }}>
-                        <Heading lineHeight={1.1} fontSize={{ base: '2xl', sm: '3xl', md: '4xl', lg: '5xl' }}>
+                        <Heading lineHeight={1.1} fontSize={{ base: '4xl', sm: '4xl', md: '5xl', lg: '5xl' }}>
                             <Text as={'span'} bgGradient="linear(to-r, green.400,green.300)" bgClip="text">Dashboard</Text>{' '}
                         </Heading>
                     </Stack>
                 </div>
 
                 <StatGroup style={{margin: "4rem auto", padding: "2rem", backgroundColor: "rgb(237,242,246)", borderRadius: "10px", textAlign: "center"}} spacing="24px" maxW={'85vw'}>
-                    <Stat>
-                        <RiBankFill style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
-                        <StatLabel>Total Income</StatLabel>
-                        <StatNumber>${totalIncome || 0}</StatNumber>
-                        <StatHelpText>
-                        <StatArrow type="increase" />
-                        23.36%
-                        </StatHelpText>
-                    </Stat>
-                    <Stat>
-                        <FaMoneyBillWave style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
-                        <StatLabel>Total Spend</StatLabel>
-                        <StatNumber>${totalSpend || 0}</StatNumber>
-                        <StatHelpText>
-                        <StatArrow type="increase" />
-                        23.36%
-                        </StatHelpText>
-                    </Stat>
-                    <Stat>
-                        <FaPiggyBank style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
-                        <StatLabel>Net Income</StatLabel>
-                        <StatNumber>${totalIncome - totalSpend || 0}</StatNumber>
-                        <StatHelpText>
-                        <StatArrow type={(Math.sign((totalIncome - totalSpend || 0)) >= 0) ? "increase" : "decrease"}  />
-                        9.05%
-                        </StatHelpText>
-                    </Stat>
-                    <Stat>
-                        <BsGraphUp style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
-                        <StatLabel>Avg Mo. Income</StatLabel>
-                        <StatNumber>${Math.round(totalIncome / 12) || 0}</StatNumber>
-                        <StatHelpText>
-                        <StatArrow type="decrease" />
-                        9.05%
-                        </StatHelpText>
-                    </Stat>
-                    <Stat>
-                        <BsGraphDown style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
-                        <StatLabel>Avg Mo. Spend</StatLabel>
-                        <StatNumber>${Math.round(totalSpend / 12) || 0}</StatNumber>
-                        <StatHelpText>
-                        <StatArrow type="increase" />
-                        23.36%
-                        </StatHelpText>
-                    </Stat>
-                    <Stat>
-                        <BiDollarCircle style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
-                        <StatLabel>Avg Net Income</StatLabel>
-                        <StatNumber>${(Math.round(totalIncome / 12) - Math.round(totalSpend / 12)) || 0}</StatNumber>
-                        <StatHelpText>
-                        <StatArrow type="decrease" />
-                        9.05%
-                        </StatHelpText>
-                    </Stat>
+                    <Grid
+                        gap={{ base: '1rem', sm: '2rem', md: '2rem', lg: '4rem', xl: '6rem' }}
+                        templateColumns={{
+                            base: "repeat(3, 1fr)",
+                            sm: "repeat(3, 1fr)",
+                            md: "repeat(3, 1fr)",
+                            lg: "repeat(6, 1fr)"
+                        }}
+                    >
+                        <GridItem>
+                            <Stat>
+                                <RiBankFill style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
+                                <StatLabel>Total Income</StatLabel>
+                                <StatNumber>${totalIncome || 0}</StatNumber>
+                                <StatHelpText>
+                                <StatArrow type="increase" />
+                                23.36%
+                                </StatHelpText>
+                            </Stat>
+                        </GridItem>
+                        <GridItem>
+                            <Stat>
+                                <FaMoneyBillWave style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
+                                <StatLabel>Total Spend</StatLabel>
+                                <StatNumber>${totalSpend || 0}</StatNumber>
+                                <StatHelpText>
+                                <StatArrow type="increase" />
+                                23.36%
+                                </StatHelpText>
+                            </Stat>
+                        </GridItem>
+                        <GridItem>
+                            <Stat>
+                                <FaPiggyBank style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
+                                <StatLabel>Net Income</StatLabel>
+                                <StatNumber>${totalIncome - totalSpend || 0}</StatNumber>
+                                <StatHelpText>
+                                <StatArrow type={(Math.sign((totalIncome - totalSpend || 0)) >= 0) ? "increase" : "decrease"}  />
+                                9.05%
+                                </StatHelpText>
+                            </Stat>
+                        </GridItem>
+                        <GridItem>
+                            <Stat>
+                                <BsGraphUp style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
+                                <StatLabel>Avg Mo. Income</StatLabel>
+                                <StatNumber>${Math.round(totalIncome / 12) || 0}</StatNumber>
+                                <StatHelpText>
+                                <StatArrow type="decrease" />
+                                9.05%
+                                </StatHelpText>
+                            </Stat>
+                        </GridItem>
+                        <GridItem>
+                            <Stat>
+                                <BsGraphDown style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
+                                <StatLabel>Avg Mo. Spend</StatLabel>
+                                <StatNumber>${Math.round(totalSpend / 12) || 0}</StatNumber>
+                                <StatHelpText>
+                                <StatArrow type="increase" />
+                                23.36%
+                                </StatHelpText>
+                            </Stat>
+                        </GridItem>
+                        <GridItem>
+                            <Stat>
+                                <BiDollarCircle style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
+                                <StatLabel>Avg Net Income</StatLabel>
+                                <StatNumber>${(Math.round(totalIncome / 12) - Math.round(totalSpend / 12)) || 0}</StatNumber>
+                                <StatHelpText>
+                                <StatArrow type="decrease" />
+                                9.05%
+                                </StatHelpText>
+                            </Stat>
+                        </GridItem>
+                    </Grid>
                 </StatGroup>
 
                 <Grid
@@ -379,7 +401,7 @@ const Dashboard = () => {
                         border='1px solid lightgray'
                         borderRadius='1rem'
                     >
-                        <Heading lineHeight={1.1} fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}>
+                        <Heading lineHeight={1.1}>
                             <h1 style={{paddingBottom: "3rem"}}>Spending vs. Budget</h1>
                         </Heading>
                         <ComparisonChart />
@@ -392,17 +414,10 @@ const Dashboard = () => {
                         border='1px solid lightgray'
                         borderRadius='1rem'
                     >
-                        <Box
-                            className="transactions-table-container"
-                            w="100%"
-                            m="0"
-                            p="0"
-                        >
-                            <Heading lineHeight={1.1} fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}>
-                                <h1 style={{paddingBottom: "3rem"}}>Income vs. Expenses</h1>
-                            </Heading>
-                            <IncomeChart/>
-                        </Box>
+                        <Heading lineHeight={1.1}>
+                            <h1 style={{paddingBottom: "3rem"}}>Income vs. Expenses</h1>
+                        </Heading>
+                        <IncomeChart/>
                     </GridItem>
                 </Grid>
                 <Grid
@@ -423,7 +438,7 @@ const Dashboard = () => {
                         border='1px solid lightgray'
                         borderRadius='1rem'
                     >
-                        <Heading lineHeight={1.1} fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}>
+                        <Heading lineHeight={1.1}>
                             <h1 style={{paddingBottom: "3rem"}}>Spending by Category</h1>
                         </Heading>
                         <Doughnut/>
@@ -440,7 +455,7 @@ const Dashboard = () => {
                             m="0"
                             p="0"
                         >
-                            <Heading lineHeight={1.1} fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}>
+                            <Heading lineHeight={1.1}>
                                 <h1 style={{paddingBottom: "3rem"}}>Financial Snapshot</h1>
                             </Heading>
                             <SummaryTable/>
