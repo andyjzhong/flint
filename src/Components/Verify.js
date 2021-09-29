@@ -8,12 +8,12 @@ import axios from 'axios';
 
 import { useDisclosure } from "@chakra-ui/react";
 import {
-    Modal, 
-    ModalOverlay, 
-    ModalContent, 
-    ModalHeader, 
-    ModalCloseButton, 
-    ModalBody, 
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalCloseButton,
+    ModalBody,
     ModalFooter,
     Text,
     Box,
@@ -110,16 +110,9 @@ const Verify = () => {
 
     if(!isNumSubmitted){
         return (
-            <div className="verify">
-                
-
-                
-                
-
-
-
+            <div className="verify" h={'93vh'}>
                 <Flex
-                    minH={'100vh'}
+                    minH={'93vh'}
                     align={'center'}
                     justify={'center'}
                     bg={gray50gray800}
@@ -176,7 +169,7 @@ const Verify = () => {
     } else{
 
         return (
-            <div className="verify">
+            <div className="verify" h={'93vh'}>
 
                 <Modal motionPreset="scale" onClose={onSuccessClose} isOpen={isSuccessOpen}>
                     <ModalContent shadow={false} bg={gray50gray800}>
@@ -254,7 +247,7 @@ const Verify = () => {
                 </Modal>
 
                 <Flex
-                    minH={'100vh'}
+                    minH={'93vh'}
                     align={'center'}
                     justify={'center'}
                     bg={gray50gray800}
@@ -274,8 +267,8 @@ const Verify = () => {
                         </Heading>
                         <FormControl id="password" isRequired>
                             <FormLabel>Confirmation Code</FormLabel>
-                            <Input 
-                                id="textCode" 
+                            <Input
+                                id="textCode"
                                 value={textCode}
                                 onChange={(e) => setTextCode(e.target.value)}
                                 />
