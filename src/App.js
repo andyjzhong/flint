@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Route } from 'react-router-dom';
 import { ChakraProvider, theme } from '@chakra-ui/react';
+import Navigation from './Components/Navigation/Navigation.jsx';
 import Navbar from './Components/Navbar.js';
 import { DataContext } from './Components/DataContext.js'
 import Home from './Components/Home.js';
@@ -79,7 +80,7 @@ function App() {
                     setSummaryDateData
                 }}
             >
-                <Navbar />
+                <Navigation />
                 <Route exact path="/" component={Home} />
                 <Route exact path="/dashboard" component={Dashboard} />
                 <Route exact path="/transactions" component={Transactions} />
