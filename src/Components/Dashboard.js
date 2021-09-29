@@ -10,7 +10,10 @@ import { BsGraphUp, BsGraphDown } from 'react-icons/bs';
 import ComparisonChart from './ComparisonChart';
 import IncomeChart from './IncomeChart';
 import SummaryTable from './SummaryTable';
-import { Box,
+import {
+    Box,
+    Grid,
+    GridItem,
     Heading,
     Text,
     Stack,
@@ -359,38 +362,95 @@ const Dashboard = () => {
                     </Stat>
                 </StatGroup>
 
-                <Box p={4} display={{ md: "flex" }}>
-                    <Box flexShrink={0}>
+                <Grid
+                    gap="6"
+                    templateColumns={{
+                        base: "repeat(1, 1fr)",
+                        sm: "repeat(1, 1fr)",
+                        md: "repeat(1, 1fr)",
+                        lg: "repeat(2, 1fr)"
+                    }}
+                >
+                    <GridItem
+                        m="0 auto"
+                        w={{ base: "90vw", sm: "90vw", md: "90vw", lg: "45vw"}}
+                        class="chart-container"
+                        p="1rem"
+                        border='1px solid lightgray'
+                        borderRadius='1rem'
+                    >
                         <div className="chart-container">
                             <Heading lineHeight={1.1} fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}>
                                 <h1 style={{paddingBottom: "3rem"}}>Spending vs. Budget</h1>
                             </Heading>
                             <ComparisonChart w={{ base: '100%', sm: '75%', md: '50%', lg: '25%' }}/>
                         </div>
-                    </Box>
-                    <Box mt={{ base: 4, md: 0 }}>
-                        <div className="chart-container">
-                            <Heading lineHeight={1.1} fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}>
-                                <h1 style={{paddingBottom: "3rem"}}>Income vs. Expenses</h1>
-                            </Heading>
-                            <IncomeChart/>
-                        </div>
-                    </Box>
-                </Box>
-                <Box p={4} display={{ md: "flex" }}>
-                    <Box flexShrink={0}>
+                    </GridItem>
+                    <GridItem
+                        m="0 auto"
+                        w={{ base: "90vw", sm: "90vw", md: "90vw", lg: "45vw"}}
+                        class="chart-container"
+                        p="1rem"
+                        border='1px solid lightgray'
+                        borderRadius='1rem'
+                    >
+                        <Box
+                            className="transactions-table-container"
+                            w="100%"
+                            m="0"
+                            p="0"
+                        >
+                            <div className="chart-container">
+                                <Heading lineHeight={1.1} fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}>
+                                    <h1 style={{paddingBottom: "3rem"}}>Income vs. Expenses</h1>
+                                </Heading>
+                                <IncomeChart/>
+                            </div>
+                        </Box>
+                    </GridItem>
+                </Grid>
+                <Grid
+                    pt="1rem"
+                    gap="6"
+                    templateColumns={{
+                        base: "repeat(1, 1fr)",
+                        sm: "repeat(1, 1fr)",
+                        md: "repeat(1, 1fr)",
+                        lg: "repeat(2, 1fr)"
+                    }}
+                >
+                    <GridItem
+                        m="0 auto"
+                        w={{ base: "90vw", sm: "90vw", md: "90vw", lg: "45vw"}}
+                        class="chart-container"
+                        p="1rem"
+                        border='1px solid lightgray'
+                        borderRadius='1rem'
+                    >
                         <Heading lineHeight={1.1} fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}>
                             <h1 style={{paddingBottom: "3rem"}}>Spending by Category</h1>
                         </Heading>
                         <Doughnut/>
-                    </Box>
-                    <Box mt={{ base: 4, md: 0 }}>
-                        <Heading lineHeight={1.1} fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}>
-                            <h1 style={{paddingBottom: "3rem"}}>Financial Snapshot</h1>
-                        </Heading>
-                        <SummaryTable/>
-                    </Box>
-                </Box>
+                    </GridItem>
+                    <GridItem
+                        m="0 auto"
+                        w={{ base: "90vw", sm: "90vw", md: "90vw", lg: "45vw"}}
+                        class="chart-container"
+                        p="1rem"
+                    >
+                        <Box
+                            className="transactions-table-container"
+                            w="100%"
+                            m="0"
+                            p="0"
+                        >
+                            <Heading lineHeight={1.1} fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}>
+                                <h1 style={{paddingBottom: "3rem"}}>Financial Snapshot</h1>
+                            </Heading>
+                            <SummaryTable/>
+                        </Box>
+                    </GridItem>
+                </Grid>
             </Box>
         </div>
     )
