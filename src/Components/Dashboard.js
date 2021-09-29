@@ -319,7 +319,7 @@ const Dashboard = () => {
                             <Stat>
                                 <RiBankFill style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
                                 <StatLabel>Total Income</StatLabel>
-                                <StatNumber>${totalIncome || 0}</StatNumber>
+                                <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${totalIncome || 0}</StatNumber>
                                 <StatHelpText>
                                 <StatArrow type="increase" />
                                 23.36%
@@ -330,7 +330,7 @@ const Dashboard = () => {
                             <Stat>
                                 <FaMoneyBillWave style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
                                 <StatLabel>Total Spend</StatLabel>
-                                <StatNumber>${totalSpend || 0}</StatNumber>
+                                <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${totalSpend || 0}</StatNumber>
                                 <StatHelpText>
                                 <StatArrow type="increase" />
                                 23.36%
@@ -341,7 +341,7 @@ const Dashboard = () => {
                             <Stat>
                                 <FaPiggyBank style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
                                 <StatLabel>Net Income</StatLabel>
-                                <StatNumber>${totalIncome - totalSpend || 0}</StatNumber>
+                                <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${totalIncome - totalSpend || 0}</StatNumber>
                                 <StatHelpText>
                                 <StatArrow type={(Math.sign((totalIncome - totalSpend || 0)) >= 0) ? "increase" : "decrease"}  />
                                 9.05%
@@ -352,7 +352,7 @@ const Dashboard = () => {
                             <Stat>
                                 <BsGraphUp style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
                                 <StatLabel>Avg Mo. Income</StatLabel>
-                                <StatNumber>${Math.round(totalIncome / 12) || 0}</StatNumber>
+                                <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${Math.round(totalIncome / 12) || 0}</StatNumber>
                                 <StatHelpText>
                                 <StatArrow type="decrease" />
                                 9.05%
@@ -363,7 +363,7 @@ const Dashboard = () => {
                             <Stat>
                                 <BsGraphDown style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
                                 <StatLabel>Avg Mo. Spend</StatLabel>
-                                <StatNumber>${Math.round(totalSpend / 12) || 0}</StatNumber>
+                                <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${Math.round(totalSpend / 12) || 0}</StatNumber>
                                 <StatHelpText>
                                 <StatArrow type="increase" />
                                 23.36%
@@ -374,7 +374,7 @@ const Dashboard = () => {
                             <Stat>
                                 <BiDollarCircle style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
                                 <StatLabel>Avg Net Income</StatLabel>
-                                <StatNumber>${(Math.round(totalIncome / 12) - Math.round(totalSpend / 12)) || 0}</StatNumber>
+                                <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${(Math.round(totalIncome / 12) - Math.round(totalSpend / 12)) || 0}</StatNumber>
                                 <StatHelpText>
                                 <StatArrow type="decrease" />
                                 9.05%
@@ -398,11 +398,11 @@ const Dashboard = () => {
                         w={{ base: "90vw", sm: "90vw", md: "90vw", lg: "45vw"}}
                         class="chart-container"
                         p="1rem"
-                        border='1px solid lightgray'
+                        border={{ base: '1px solid lightgray', sm: 'none' }}
                         borderRadius='1rem'
                     >
                         <Heading lineHeight={1.1}>
-                            <h1 style={{paddingBottom: "3rem"}}>Spending vs. Budget</h1>
+                            <Text textAlign="center" pt="1rem" pb="3rem" fontSize={{ base: '20px', sm: '24px', md: '30px', lg: "32px", xl: '36px' }}>Spending vs. Budget</Text>
                         </Heading>
                         <ComparisonChart />
                     </GridItem>
@@ -411,11 +411,11 @@ const Dashboard = () => {
                         w={{ base: "90vw", sm: "90vw", md: "90vw", lg: "45vw"}}
                         class="chart-container"
                         p="1rem"
-                        border='1px solid lightgray'
+                        border={{ base: '1px solid lightgray', sm: 'none' }}
                         borderRadius='1rem'
                     >
                         <Heading lineHeight={1.1}>
-                            <h1 style={{paddingBottom: "3rem"}}>Income vs. Expenses</h1>
+                            <Text textAlign="center" pt="1rem" pb="3rem" fontSize={{ base: '20px', sm: '24px', md: '30px', lg: "32px", xl: '36px' }}>Income vs. Expenses</Text>
                         </Heading>
                         <IncomeChart/>
                     </GridItem>
@@ -435,11 +435,11 @@ const Dashboard = () => {
                         w={{ base: "90vw", sm: "90vw", md: "90vw", lg: "45vw"}}
                         class="chart-container"
                         p="1rem"
-                        border='1px solid lightgray'
+                        border={{ base: '1px solid lightgray', sm: 'none' }}
                         borderRadius='1rem'
                     >
                         <Heading lineHeight={1.1}>
-                            <h1 style={{paddingBottom: "3rem"}}>Spending by Category</h1>
+                            <Text textAlign="center" pt="1rem" pb="3rem" fontSize={{ base: '20px', sm: '24px', md: '30px', lg: "32px", xl: '36px' }}>Spending by Category</Text>
                         </Heading>
                         <Doughnut/>
                     </GridItem>
@@ -456,7 +456,7 @@ const Dashboard = () => {
                             p="0"
                         >
                             <Heading lineHeight={1.1}>
-                                <h1 style={{paddingBottom: "3rem"}}>Financial Snapshot</h1>
+                                <Text textAlign="center" pt="1rem" pb="3rem" fontSize={{ base: '20px', sm: '24px', md: '30px', lg: "32px", xl: '36px' }}>Financial Snapshot</Text>
                             </Heading>
                             <SummaryTable/>
                         </Box>
