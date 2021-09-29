@@ -1,8 +1,26 @@
 import { Badge, Box, Button, Stack, useColorModeValue as mode } from '@chakra-ui/react'
-import * as React from 'react'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 export const Description = (props) => {
-  const { title, children, icon, isRecommended, onClickEnable } = props
+  const { title, children, icon, isRecommended, onAuthOpen, isAuthOpen } = props
+
+  const [authColorScheme, setAuthColorScheme] = useState(props.userInfo.isAuthEnabled ? 'red' : 'blue')
+  const [smsColorScheme, setSmsColorScheme] = useState(props.userInfo.isSmsVerified ? 'red' : 'blue')
+  const userId = localStorage.getItem('fuid')
+
+  useEffect(()=>{
+    setAuthColorScheme(props.userInfo.isAuthEnabled ? 'red' : 'blue')
+    setSmsColorScheme(props.userInfo.isSmsVerified ? 'red' : 'blue')
+  }, [props.userInfo])
+
+  async function getTempSecret(){
+    const res = await axios.put(`http://localhost:8000/users/gettempsecret/${userId}`,{}, {
+      headers: { 'authorization': `Bearer ${props.accessToken}`}
+    })
+    props.setTempSecret(res.data)
+  }
+
   return (
     <Stack
       direction={{
@@ -41,8 +59,22 @@ export const Description = (props) => {
           </Box>
         </Box>
       </Stack>
-      <Button colorScheme="blue" onClick={onClickEnable}>
-        Enable
+      <Button colorScheme={title == "Authenticator" ? authColorScheme : smsColorScheme}  onClick={() => {
+        if(title == "Authenticator" && props.userInfo.isAuthEnabled == false){
+          getTempSecret()
+          onAuthOpen()
+        } else if(title == "Authenticator" && props.userInfo.isAuthEnabled == true){
+          props.onRemoveAuthOpen()
+        } else if(title == "Phone verification" && props.userInfo.isSmsVerified == false){
+          props.onAddPhoneOpen()
+        } else if(title == "Phone verification" && props.userInfo.isSmsVerified == true){
+          props.onRemovePhoneOpen()
+        }
+      }}>
+        {title == "Authenticator"
+          ? (props.userInfo.isAuthEnabled ? 'Disable' : 'Enable')
+          : (props.userInfo.isSmsVerified ? 'Disable' : 'Enable')
+        }
       </Button>
     </Stack>
   )
