@@ -3,44 +3,32 @@ import { BiDollarCircle } from 'react-icons/bi';
 
 export const links = [
   {
-    label: 'For Designers',
-    href: '#',
+    label: 'Home',
+    href: '/',
   },
   {
-    label: 'For Teams',
-    href: '#',
+    label: 'Dashboard',
+    href: '/dashboard',
   },
   {
-    label: 'Resources',
+    label: 'Actions',
     children: [
       {
-        label: 'Get Help',
-        description: 'Read our documentation and FAQs, or get in touch.',
-        href: '#',
+        label: 'Transactions',
+        description: 'Enter and view transaction data',
+        href: 'transactions',
         icon: <BiDollarCircle />,
       },
       {
-        label: 'Events & Meetups',
-        description: 'Discover and join your local Sketch community.',
-        href: '#',
-        icon: <BiDollarCircle />,
-      },
-      {
-        label: 'Extensions',
-        description: 'Do even more with Assistants, plugins and integrations.',
-        href: '#',
-        icon: <BiDollarCircle />,
-      },
-      {
-        label: 'Blog',
-        description: 'Get updates, articles and insights from the team.',
-        href: '#',
+        label: 'Budgets',
+        description: 'Track your expenses by category',
+        href: 'budgets',
         icon: <BiDollarCircle />,
       },
     ],
   },
   {
-    label: 'Pricing',
-    href: '#',
+    label: 'About',
+    href: '/about',
   },
 ]

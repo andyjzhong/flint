@@ -1,27 +1,10 @@
-import { BellIcon } from '@chakra-ui/icons'
-import { Flex, IconButton, HStack, Avatar, Text } from '@chakra-ui/react'
+import { Flex, HStack, Avatar, Text } from '@chakra-ui/react'
 import * as React from 'react'
 
 export const UserProfile = (props) => {
   const { name, email, avatarUrl } = props
   return (
     <>
-      <Flex
-        order={{
-          base: 2,
-          md: 1,
-        }}
-      >
-        <IconButton
-          isRound
-          size="sm"
-          fontSize="xl"
-          aria-label="Show notification"
-          variant="ghost"
-          color="current"
-          icon={<BellIcon />}
-        />
-      </Flex>
       <HStack
         spacing={3}
         order={{

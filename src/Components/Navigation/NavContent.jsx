@@ -3,8 +3,10 @@ import {
   Button,
   Flex,
   HStack,
+  Text,
   useDisclosure,
-  VisuallyHidden,
+  useBreakpointValue,
+  useColorModeValue,
   useColorModeValue as mode,
 } from '@chakra-ui/react'
 import * as React from 'react'
@@ -33,8 +35,8 @@ const MobileNavContext = (props) => {
             sm: 'visible',
           }}
         >
-          <Button as="a" colorScheme="blue">
-            Get Started
+          <Button as="a" href="login" colorScheme="blue">
+            Sign In
           </Button>
         </Box>
       </Flex>
@@ -48,8 +50,8 @@ const MobileNavContext = (props) => {
             </NavLink.Mobile>
           ),
         )}
-        <Button colorScheme="blue" w="full" size="lg" mt="5">
-          Try for free
+        <Button colorScheme="blue" w="full" size="lg" mt="5" as="a" href="signup">
+          Sign Up
         </Button>
       </NavMenu>
     </>
@@ -58,10 +60,9 @@ const MobileNavContext = (props) => {
 
 const DesktopNavContent = (props) => {
   return (
-    <Flex className="nav-content__desktop" align="center" justify="space-between" {...props}>
-      <Box as="a" href="#" rel="home">
-        <VisuallyHidden>Envelope</VisuallyHidden>
-        <Logo h="6" iconColor="blue.500" />
+    <Flex className="nav-content__desktop" align="center" {...props} style={{position: "relative"}}>
+      <Box as="a" href="/" rel="home">
+        <Logo h="8" iconColor="blue.500" />
       </Box>
       <HStack as="ul" id="nav__primary-menu" aria-label="Main Menu" listStyleType="none">
         {links.map((link, idx) => (
@@ -74,11 +75,11 @@ const DesktopNavContent = (props) => {
           </Box>
         ))}
       </HStack>
-      <HStack spacing="8" minW="240px" justify="space-between">
-        <Box as="a" href="#" color={mode('blue.600', 'blue.300')} fontWeight="bold">
+      <HStack spacing="8" minW="240px" style={{position: "absolute", right: "0"}}>
+        <Box as="a" href="login" color={mode('blue.600', 'blue.300')} fontWeight="bold">
           Sign In
         </Box>
-        <Button as="a" href="#" colorScheme="blue" fontWeight="bold">
+        <Button as="a" href="signup" colorScheme="blue" fontWeight="bold">
           Sign up
         </Button>
         <UserProfile
