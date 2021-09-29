@@ -4,8 +4,12 @@ import { AccountSettings } from './AccountSettings';
 import { DangerZone } from './DangerZone';
 import { SocialAccountSettings } from './SocialAccountSettings';
 import VerificationComponent from '../Verification/VerificationComponent';
+import AddPhoneModal from './AddPhoneModal.jsx'
+import RemovePhoneModal from './RemovePhoneModal.jsx'
+import RemoveAuthModal from './RemoveAuthModal'
 import ChangeNameModal from './ChangeNameModal.jsx';
 import ChangeEmailModal from './ChangeEmailModal.jsx';
+import AuthModal from './AuthModal.jsx'
 import { useDisclosure } from "@chakra-ui/react";
 import { useHistory } from 'react-router';
 import jwt_decode from 'jwt-decode';
@@ -18,11 +22,16 @@ const AccountPage = () => {
 
   const { isOpen: isNameChangeOpen, onOpen: onNameChangeOpen, onClose: onNameChangeClose } = useDisclosure()
   const { isOpen: isEmailChangeOpen, onOpen: onEmailChangeOpen, onClose: onEmailChangeClose } = useDisclosure()
+  const { isOpen: isAuthOpen, onOpen: onAuthOpen, onClose: onAuthClose} = useDisclosure()
+  const { isOpen: isRemoveAuthOpen, onOpen: onRemoveAuthOpen, onClose: onRemoveAuthClose} = useDisclosure()
+  const { isOpen: isAddPhoneOpen, onOpen: onAddPhoneOpen, onClose: onAddPhoneClose} = useDisclosure()
+  const { isOpen: isRemovePhoneOpen, onOpen: onRemovePhoneOpen, onClose: onRemovePhoneClose} = useDisclosure()
 
   const [isTokenValid, setIsTokenValid] = useState(false)
   const [accessToken, setAccessToken] = useState(null)
   const [userInfo, setUserInfo] = useState(null)
   const [userLoaded, setUserLoaded] = useState(false)
+  const [tempSecret, setTempSecret] = useState(null)
 
 
   const refreshToken = async () => {
@@ -72,7 +81,7 @@ const AccountPage = () => {
 
   // remove before deploy
   useEffect(()=>{
-    console.log(userInfo)
+    // console.log(userInfo)
   },[userInfo])
 
   if(userLoaded){
@@ -97,9 +106,23 @@ const AccountPage = () => {
               onEmailChangeOpen={onEmailChangeOpen}
               userInfo={userInfo}
             />
-  
-            <VerificationComponent />
-            <SocialAccountSettings />
+
+            <VerificationComponent 
+              userInfo={userInfo}
+              setUserInfo={setUserInfo}
+              onAuthOpen={onAuthOpen}
+              onRemoveAuthOpen={onRemoveAuthOpen}
+              isAuthOpen={isAuthOpen}
+              onAddPhoneOpen={onAddPhoneOpen}
+              onAddPhoneClose={onAddPhoneClose}
+              isAddPhoneOpen={isAddPhoneOpen}
+              onRemovePhoneOpen={onRemovePhoneOpen}
+              onRemovePhoneClose={onRemovePhoneClose}
+              isRemovePhoneOpen={isRemovePhoneOpen}
+              setTempSecret={setTempSecret}
+              accessToken={accessToken}
+            />
+            {/* <SocialAccountSettings /> */}
             <DangerZone />
             
             <ChangeNameModal 
@@ -119,7 +142,41 @@ const AccountPage = () => {
               setUserInfo={setUserInfo}
               accessToken={accessToken}
             />
-  
+
+            <AuthModal
+              tempSecret={tempSecret}
+              isAuthOpen={isAuthOpen}
+              onAuthOpen={onAuthOpen}
+              onAuthClose={onAuthClose}
+              accessToken={accessToken}
+              setUserInfo={setUserInfo}
+            />
+
+            <RemoveAuthModal
+              tempSecret={tempSecret}
+              isRemoveAuthOpen={isRemoveAuthOpen}
+              onRemoveAuthOpen={onRemoveAuthOpen}
+              onRemoveAuthClose={onRemoveAuthClose}
+              accessToken={accessToken}
+              setUserInfo={setUserInfo}
+            />    
+
+            <AddPhoneModal
+              isAddPhoneOpen={isAddPhoneOpen}
+              onAddPhoneOpen={onAddPhoneOpen}
+              onAddPhoneClose={onAddPhoneClose}
+              accessToken={accessToken}
+              setUserInfo={setUserInfo}
+            />
+
+            <RemovePhoneModal
+              isRemovePhoneOpen={isRemovePhoneOpen}
+              onRemovePhoneOpen={onRemovePhoneOpen}
+              onRemovePhoneClose={onRemovePhoneClose}
+              accessToken={accessToken}
+              setUserInfo={setUserInfo}
+              userInfo={userInfo}
+            />
           </Stack>
         </Box>
       </Box>

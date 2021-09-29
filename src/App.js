@@ -10,7 +10,6 @@ import Budgets from './Components/Budgets.js';
 import About from './Components/About.js';
 import Signup from './Components/Signup.js';
 import Login from './Components/Login.js';
-import Verify from './Components/Verify.js';
 import AccountPage from './Components/AccountPage/AccountPage.jsx'
 
 // for testing purposes only
@@ -87,7 +86,6 @@ function App() {
                 <Route exact path="/about" component={About} />
                 <Route exact path="/signup" component={Signup} />
                 <Route exact path="/login" component={Login} />
-                <Route exact path="/verify" component={Verify} />
                 <Route exact path="/account" component={AccountPage} />
 
                 <Route exact path="/table" component={TableComponent} />

@@ -44,7 +44,6 @@ export const AccountSettings = (props) => {
       })
   }
 
-  // ovvjjprn
 
   useEffect(()=>{
     if(props.userInfo){
