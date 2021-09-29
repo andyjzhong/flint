@@ -12,9 +12,9 @@ const SummaryTable = (props) => {
             return (
                 <Tr key={index}>
                     <Td>{item[0]}</Td>
-                    <Td isNumeric>${item[1].totalBudget || 0}</Td>
-                    <Td isNumeric>${item[1].totalSpend || 0}</Td>
-                    <Td isNumeric>${((item[1].totalBudget || 0) - (item[1].totalSpend || 0))}</Td>
+                    <Td isNumeric>${(item[1].totalBudget || 0).toFixed(0)}</Td>
+                    <Td isNumeric>${(item[1].totalSpend || 0).toFixed(0)}</Td>
+                    <Td isNumeric>${((item[1].totalBudget || 0) - (item[1].totalSpend || 0)).toFixed(0)}</Td>
                     <Td style={{ color: "black", textAlign: "center" }}>
                         {
                             (Math.sign((item[1].totalBudget || 0) - item[1].totalSpend) >= 0)

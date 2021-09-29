@@ -88,7 +88,7 @@ const TableComponent = () => {
                 <Td>{item.type}</Td>
                 <Td>{item.category}</Td>
                 <Td>{item.subcategory}</Td>
-                <Td isNumeric>${item.amount}</Td>
+                <Td isNumeric>${item.amount.toFixed(2)}</Td>
                 <Td style={{textAlign: "center"}}>
                     <ButtonGroup variant="solid" size="sm" spacing={2}>
                         <IconButton
