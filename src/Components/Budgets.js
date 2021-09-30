@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-import { Button, Box, Grid, GridItem, Center, Heading } from "@chakra-ui/react"
+import { Button, Box, Grid, GridItem, Center, Heading, Text, VStack } from "@chakra-ui/react"
 import axios from 'axios';
 import jwt_decode from 'jwt-decode'
 import BudgetTableComponent from './BudgetTable.js'
@@ -42,10 +42,14 @@ const Budgets = () => {
 
     if(isTokenValid){
         return (
-                <Box minH={'100vh'} p={4} pt={24} bg={"rgb(247,250,252)"}>
+            <Box minH={'100vh'} p={4} pt={24} bg={"rgb(247,250,252)"}>
                 <Center>
-                    <Heading size="lg" mb="6">Budgets</Heading>
+                    <VStack mt={10} mb={20}>
+                    <Heading mb={10} size="xl">Budgets</Heading>
+                    <Text fontSize={20}>Add and manage your budgets</Text>
+                    </VStack>
                 </Center>
+
                 <Grid
                     gap="6"
                     templateColumns={{
@@ -60,8 +64,7 @@ const Budgets = () => {
                         w={{ base: "90vw", sm: "90vw", md: "90vw", lg: "45vw"}}
                         class="chart-container"
                         p="1rem"
-                        border='1px solid lightgray'
-                        borderRadius='1rem'
+                        boxShadow="lg" rounded="md" bg="white"
                     >
                         <BudgetChart />
                     </GridItem>
