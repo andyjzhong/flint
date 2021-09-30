@@ -27,7 +27,7 @@ const CreateModal = (props) => {
 
     const userId = localStorage.getItem('fuid');
 
-    const { transactionDate, setUserAction, accessToken } = useContext(DataContext);
+    const { txDate, setUserAction, accessToken } = useContext(DataContext);
     const [description, setDescription] = useState("")
     const [type, setType] = useState("")
     const [category, setCategory] = useState("")
@@ -71,7 +71,7 @@ const CreateModal = (props) => {
 
         axios.put(url, {
             "description": description,
-            "date": transactionDate,
+            "date": txDate,
             "type": type,
             "category": category,
             "subcategory": subcategory,

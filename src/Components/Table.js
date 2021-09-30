@@ -31,11 +31,13 @@ const TableComponent = () => {
         setEditTxAmt,
 
         txDescription,
+        txDate,
         txType,
         txCategory,
         txSubcategory,
         txAmount,
         setTxDescription,
+        setTxDate,
         setTxType,
         setTxCategory,
         setTxSubcategory,
@@ -101,7 +103,7 @@ const TableComponent = () => {
 
 
             setTxDescription(selectedTx[0].description)
-            // setEditTxDate(selectedTx[0].date)
+            setTxDate(selectedTx[0].date)
             setTxType(selectedTx[0].type)
             setTxCategory(selectedTx[0].category)
             setTxSubcategory(selectedTx[0].subcategory)

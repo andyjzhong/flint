@@ -19,7 +19,6 @@ function App() {
 
     const [userAction, setUserAction] = useState();
     const [matchingTransactionData, setMatchingTransactionData] = useState();
-    const [transactionDate, setTransactionDate] = useState();
     const [transactionId, setTransactionId] = useState();
     const [transactionsList, setTransactionsList] = useState([]);
     const [budgetId, setBudgetId] = useState();
@@ -44,14 +43,14 @@ function App() {
 
 
     const [editTxDesc, setEditTxDesc] = useState("")
-    const [editTxDate, setEditTxDate] = useState(new Date());
+    const [editTxDate, setEditTxDate] = useState("");
     const [editTxType, setEditTxType] = useState("")
     const [editTxCat, setEditTxCat] = useState("")
     const [editTxSubcat, setEditTxSubcat] = useState("")
     const [editTxAmt, setEditTxAmt] = useState(0)
 
     const [txDescription, setTxDescription] = useState("")
-    const [txDate, setTxDate] = useState(new Date());
+    const [txDate, setTxDate] = useState("");
     const [txType, setTxType] = useState("")
     const [txCategory, setTxCategory] = useState("")
     const [txSubcategory, setTxSubcategory] = useState("")
@@ -61,10 +60,10 @@ function App() {
         <ChakraProvider theme={theme}>
             <DataContext.Provider
                 value = {{
-
                     txDate,
-                    setTxDate,
+                    editTxDate,
 
+                    setTxDate,
                     txDescription,
                     txType,
                     txCategory,
@@ -75,8 +74,6 @@ function App() {
                     editTxCat,
                     editTxSubcat,
                     editTxAmt,
-                    editTxDate,
-
                     setTxDescription,
                     setTxType,
                     setTxCategory,
@@ -88,7 +85,6 @@ function App() {
                     setEditTxCat,
                     setEditTxSubcat,
                     setEditTxAmt,
-
                     category,
                     subcategory,
                     amount,
@@ -97,8 +93,8 @@ function App() {
                     editModalAmount,
                     userAction,
                     setUserAction,
-                    transactionDate,
-                    setTransactionDate,
+                    txDate,
+                    setTxDate,
                     isLoggedIn,
                     setIsLoggedIn,
                     currentUserId,

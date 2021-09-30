@@ -27,7 +27,7 @@ const EditModal = (props) => {
 
     const userId = localStorage.getItem('fuid');
 
-    const { transactionDate, transactionId, setUserAction, matchingTransactionData, accessToken,
+    const { txDate, transactionId, setUserAction, matchingTransactionData, accessToken,
         editTxDesc,
         editTxDate,
         editTxType,
@@ -52,7 +52,6 @@ const EditModal = (props) => {
         setTxSubcategory,
         setTxAmount,
 
-        txDate,
         setTxDate
     } = useContext(DataContext);
 
@@ -95,7 +94,7 @@ const EditModal = (props) => {
 
         axios.put(url, {
             "description": txDescription,
-            "date": transactionDate,
+            "date": txDate,
             "type": txType,
             "category": txCategory,
             "subcategory": txSubcategory,
