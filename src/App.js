@@ -51,6 +51,7 @@ function App() {
     const [editTxAmt, setEditTxAmt] = useState(0)
 
     const [txDescription, setTxDescription] = useState("")
+    const [txDate, setTxDate] = useState(new Date());
     const [txType, setTxType] = useState("")
     const [txCategory, setTxCategory] = useState("")
     const [txSubcategory, setTxSubcategory] = useState("")
@@ -60,6 +61,9 @@ function App() {
         <ChakraProvider theme={theme}>
             <DataContext.Provider
                 value = {{
+
+                    txDate,
+                    setTxDate,
 
                     txDescription,
                     txType,

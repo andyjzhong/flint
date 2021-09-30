@@ -51,6 +51,9 @@ const EditModal = (props) => {
         setTxCategory,
         setTxSubcategory,
         setTxAmount,
+
+        txDate,
+        setTxDate
     } = useContext(DataContext);
 
     // console.log("matchingTransactionData is", matchingTransactionData);
@@ -133,6 +136,11 @@ const EditModal = (props) => {
         setEditTxAmt(e.target.value)
     })
 
+    const storeTxDate = ((e) => {
+        setTxDate(e.target.value)
+        setEditTxDate(e.target.value)
+    })
+
     return (
         <>
             <Modal isOpen={props.isEditOpen} onClose={props.onEditClose}>
@@ -172,7 +180,11 @@ const EditModal = (props) => {
 
                         <FormControl>
                             <FormLabel>Date</FormLabel>
-                            <DatePickerComponent value={editTxDate} name="input-date" className="transaction-date-picker"/>
+                            <DatePickerComponent
+                                onChange={storeTxDate}
+                                value={editTxDate}
+                                name="input-date"
+                                className="transaction-date-picker"/>
                         </FormControl>
 
                         <FormControl mt={4}>
