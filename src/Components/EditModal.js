@@ -139,7 +139,7 @@ const EditModal = (props) => {
 
                         <FormControl>
                             <FormLabel>Type</FormLabel>
-                            <RadioGroup defaultValue="2">
+                            <RadioGroup value={editTxType} defaultValue="2">
                                 <Stack spacing={5} direction="row">
                                     <Radio name="input-type" onChange={storeType} colorScheme="green" value="Income">Income</Radio>
                                     <Radio name="input-type" onChange={storeType} colorScheme="red" value="Expense">Expense</Radio>
@@ -149,21 +149,21 @@ const EditModal = (props) => {
 
                         <FormControl>
                             <FormLabel>Category</FormLabel>
-                            <Select name="input-category" onChange={storeCategory} placeholder="Select category">
+                            <Select value={editTxCat} name="input-category" onChange={storeCategory} placeholder="Select category">
                                 {categoryOptions}
                             </Select>
                         </FormControl>
 
                         <FormControl>
                             <FormLabel>Subcategory</FormLabel>
-                            <Select name="input-subcategory" onChange={storeSubcategory} placeholder="Select category">
+                            <Select value={editTxSubcat} name="input-subcategory" onChange={storeSubcategory} placeholder="Select category">
                                 {subcategoryOptions}
                             </Select>
                         </FormControl>
 
                         <FormControl>
                             <FormLabel>Date</FormLabel>
-                            <DatePickerComponent name="input-date" className="transaction-date-picker"/>
+                            <DatePickerComponent value={editTxDate} name="input-date" className="transaction-date-picker"/>
                         </FormControl>
 
                         <FormControl mt={4}>
@@ -175,7 +175,7 @@ const EditModal = (props) => {
                                     fontSize="1.2em"
                                     children="$"
                                 />
-                                <Input name="input-amount" onChange={storeAmount} placeholder="Enter amount" />
+                                <Input value={editTxAmt} name="input-amount" onChange={storeAmount} placeholder="Enter amount" />
                             </InputGroup>
                         </FormControl>
                     </ModalBody>
