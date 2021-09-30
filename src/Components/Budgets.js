@@ -43,17 +43,17 @@ const Budgets = () => {
     if(isTokenValid){
         return (
             <Center w={"100%"} bg={"rgb(247,250,252)"}>
-                <Box w={"100vw"}minH={'100vh'} p={4} pt={24} bg={"pink"}>
+                <Box w={"100vw"} minH={'100vh'} p={4} pt={24} bg={"pink"}>
                     <Center>
-                        <VStack mt={10} mb={20}>
-                        <Heading mb={6} size="xl">Budgets</Heading>
-                        <Text p={2} fontSize={20}>Track and manage your expenses by category</Text>
+                        <VStack mt={{ base: "6", sm: "6", md: "10", lg: "10"}} mb={{ base: "10", sm: "10", md: "20", lg: "20"}}>
+                            <Heading mb={6} size="xl">Budgets</Heading>
+                            <Text p={2} fontSize={20}>Track and manage your expenses by category</Text>
                         </VStack>
                     </Center>
                     <Center>
                     <Grid
                         bg={"red"}
-                        w={"90vw"}
+                        w={"93vw"}
                         gap="6"
                         templateColumns={{
                             base: "repeat(1, 1fr)",
@@ -62,12 +62,18 @@ const Budgets = () => {
                             lg: "repeat(2, 1fr)"
                         }}>
                         <GridItem
-                            w={{ base: "90%", sm: "90%", md: "90%", lg: "90%"}}
-                            class="chart-container"
+                            mx={{ base: "0", sm: "auto", md: "auto", lg: "auto"}}
+                            w={{ base: "70%", sm: "80%", md: "90%", lg: "100%"}}
                             p="1rem"
-                            m={"1rem auto"}
-                            boxShadow="lg" rounded="md" bg="white">
+                            boxShadow="lg"
+                            rounded="md"
+                            bg="white">
                             <BudgetChart />
+                        </GridItem>
+                        <GridItem
+                            mx={{ base: "0", sm: "auto", md: "auto", lg: "auto"}}
+                            w={{ base: "70%", sm: "80%", md: "90%", lg: "100%"}}>
+                            <BudgetTableComponent/>
                         </GridItem>
 
                     </Grid>
@@ -86,17 +92,3 @@ const Budgets = () => {
 }
 
 export default Budgets;
-
-
-// <GridItem
-//     m="0 auto"
-//     w={{ base: "55%", sm: "60%", md: "70%", lg: "85%"}}
-//     class="chart-container">
-//     <Box
-//         className="transactions-table-container"
-//         w="100%"
-//         m="0"
-//         p="0">
-//         <BudgetTableComponent/>
-//     </Box>
-// </GridItem>
