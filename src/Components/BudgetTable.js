@@ -1,18 +1,21 @@
 import React, { useContext, useEffect } from 'react';
 import { DataContext } from './DataContext';
 import DeleteBudgetModal from './DeleteBudgetModal';
+import CreateBudgetModal from './CreateBudgetModal';
 import EditBudgetModal from './EditBudgetModal';
-import { Table, Thead, Tr, Th, Td, Tbody, IconButton, Box, HStack, useColorModeValue as mode } from '@chakra-ui/react';
+import { Table, Thead, Tr, Th, Td, Tbody, IconButton, Box, HStack, ButtonGroup, Button, useColorModeValue as mode } from '@chakra-ui/react';
 import { AiFillEdit } from 'react-icons/ai';
 import { BsFillTrashFill } from 'react-icons/bs';
 import { useDisclosure } from "@chakra-ui/react"
 import axios from 'axios';
+import { RiAddFill } from 'react-icons/ri'
 
 const BudgetTableComponent = () => {
 
     const { setUserAction, budgetsList, setBudgetsList, setBudgetId, accessToken } = useContext(DataContext);
     const userId = localStorage.getItem('fuid');
 
+    const { isOpen, onOpen, onClose } = useDisclosure()
     const { isOpen: isEditOpen , onOpen: onEditOpen, onClose: onEditClose } = useDisclosure()
     const { isOpen: isDeleteOpen , onOpen: onDeleteOpen, onClose: onDeleteClose } = useDisclosure()
 
@@ -97,11 +100,28 @@ const BudgetTableComponent = () => {
     })
 
     return (
+        <>
+        <HStack mb={14} style={{position: "relative"}}>
+            <ButtonGroup size="sm" style={{position: "absolute", right: "0", top: "0"}} >
+            <Button
+                m={1}
+                variant="outline"
+                onClick={onOpen}
+                iconSpacing="1"
+                leftIcon={<RiAddFill fontSize="1.25em" />}
+                colorScheme="green"
+                w="full">
+                New Budget
+            </Button>
+            </ButtonGroup>
+        </HStack>
+
         <Box
             className="table"
             overflowX="auto"
-            w={{ base: "90%", sm: "90%", md: "90%", lg: "75%"}}
+            w={"100%"}
         >
+
             <Table borderWidth="1px">
                 <Thead bg={mode('gray.50', 'gray.800')} >
                     <Tr>
@@ -113,9 +133,11 @@ const BudgetTableComponent = () => {
                 </Thead>
                 <Tbody >{budgetRow}</Tbody>
             </Table>
+            <CreateBudgetModal isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>
             <EditBudgetModal isEditOpen={isEditOpen} onEditOpen={onEditOpen} onEditClose={onEditClose}/>
             <DeleteBudgetModal isOpen={isDeleteOpen} onOpen={onDeleteOpen} onClose={onDeleteClose}/>
         </Box>
+        </>
     )
 }
 

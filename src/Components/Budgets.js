@@ -43,14 +43,17 @@ const Budgets = () => {
     if(isTokenValid){
         return (
             <Center bg={"rgb(247,250,252)"}>
-                <Box w={"80vw"} minH={'100vh'} p={4} pt={24}>
+                <Box w={"90%"} minH={'100vh'} p={4} pt={24} bg={"pink"}>
                     <Center>
                         <VStack mt={10} mb={20}>
-                        <Heading mb={10} size="xl">Budgets</Heading>
-                        <Text fontSize={20}>Add and manage your budgets</Text>
+                        <Heading mb={6} size="xl">Budgets</Heading>
+                        <Text fontSize={20}>Track and manage your expenses by category</Text>
                         </VStack>
                     </Center>
+                    <Center>
                     <Grid
+                        bg={"red"}
+                        w={"90vw"}
                         gap="6"
                         templateColumns={{
                             base: "repeat(1, 1fr)",
@@ -59,33 +62,30 @@ const Budgets = () => {
                             lg: "repeat(2, 1fr)"
                         }}>
                         <GridItem
-                            m="0 auto"
-                            w={{ base: "90%", sm: "90%", md: "90%", lg: "75%"}}
+                            w={{ base: "55%", sm: "60%", md: "70%", lg: "85%"}}
                             class="chart-container"
                             p="1rem"
+                            m={"1rem auto"}
                             boxShadow="lg" rounded="md" bg="white">
                             <BudgetChart />
                         </GridItem>
                         <GridItem
                             m="0 auto"
-                            w={{ base: "90%", sm: "90%", md: "90%", lg: "90%"}}
+                            w={{ base: "90%", sm: "90%", md: "90%", lg: "85%"}}
                             class="chart-container">
                             <Box
                                 className="transactions-table-container"
                                 w="100%"
                                 m="0"
                                 p="0">
-                                <Button
-                                    className="btn-add-transaction"
-                                    colorScheme="green"
-                                    onClick={onOpen}>
-                                    Add Budgets
-                                </Button>
                                 <BudgetTableComponent/>
                             </Box>
                         </GridItem>
                     </Grid>
-                    <CreateBudgetModal isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>
+                    </Center>
+
+
+
                     <EditBudgetModal isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>
                 </Box>
             </Center>

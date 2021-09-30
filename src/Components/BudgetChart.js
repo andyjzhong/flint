@@ -27,7 +27,7 @@ function BudgetChart(props) {
                     label: 'Budget',
                     data: budgetAmountList,
                     backgroundColor: [
-                        "rgb(142,71,253, 0.9)"
+                        "rgb(28,150,135)"
                     ],
                     borderColor: [
                         "rgb(255,255,255)"
