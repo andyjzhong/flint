@@ -43,7 +43,7 @@ const Budgets = () => {
     if(isTokenValid){
         return (
             <Center w={"100%"} bg={"rgb(247,250,252)"}>
-                <Box w={"100vw"} minH={'100vh'} p={4} pt={24} bg={"pink"}>
+                <Box w={"100vw"} minH={'100vh'} p={4} pt={24}>
                     <Center>
                         <VStack mt={{ base: "6", sm: "6", md: "10", lg: "10"}} mb={{ base: "10", sm: "10", md: "20", lg: "20"}}>
                             <Heading mb={6} size="xl">Budgets</Heading>
@@ -52,7 +52,6 @@ const Budgets = () => {
                     </Center>
                     <Center>
                     <Grid
-                        bg={"red"}
                         w={"93vw"}
                         gap="6"
                         templateColumns={{
@@ -63,16 +62,16 @@ const Budgets = () => {
                         }}>
                         <GridItem
                             mx={{ base: "0", sm: "auto", md: "auto", lg: "auto"}}
-                            w={{ base: "70%", sm: "80%", md: "90%", lg: "100%"}}
+                            w={{ base: "70%", sm: "80%", md: "85%", lg: "85%"}}
                             p="1rem"
                             boxShadow="lg"
                             rounded="md"
                             bg="white">
-                            <BudgetChart />
+                            <BudgetChart/>
                         </GridItem>
                         <GridItem
                             mx={{ base: "0", sm: "auto", md: "auto", lg: "auto"}}
-                            w={{ base: "70%", sm: "80%", md: "90%", lg: "100%"}}>
+                            w={{ base: "70%", sm: "80%", md: "85%", lg: "85%"}}>
                             <BudgetTableComponent/>
                         </GridItem>
 
