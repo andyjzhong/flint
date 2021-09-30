@@ -27,7 +27,20 @@ const EditModal = (props) => {
 
     const userId = localStorage.getItem('fuid');
 
-    const { transactionDate, transactionId, setUserAction, matchingTransactionData, accessToken } = useContext(DataContext);
+    const { transactionDate, transactionId, setUserAction, matchingTransactionData, accessToken,
+        editTxDesc,
+        editTxDate,
+        editTxType,
+        editTxCat,
+        editTxSubcat,
+        editTxAmt,
+        setEditTxDesc,
+        setEditTxDate,
+        setEditTxType,
+        setEditTxCat,
+        setEditTxSubcat,
+        setEditTxAmt
+    } = useContext(DataContext);
     const [description, setDescription] = useState("")
     const [type, setType] = useState("")
     const [category, setCategory] = useState("")

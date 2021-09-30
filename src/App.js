@@ -42,10 +42,31 @@ function App() {
     const [subcategory, setSubcategory] = useState("")
     const [amount, setAmount] = useState("")
 
+
+    const [editTxDesc, setEditTxDesc] = useState("")
+    const [editTxDate, setEditTxDate] = useState(new Date());
+    const [editTxType, setEditTxType] = useState("")
+    const [editTxCat, setEditTxCat] = useState("")
+    const [editTxSubcat, setEditTxSubcat] = useState("")
+    const [editTxAmt, setEditTxAmt] = useState(0)
+
     return (
         <ChakraProvider theme={theme}>
             <DataContext.Provider
                 value = {{
+                    editTxDesc,
+                    editTxDate,
+                    editTxType,
+                    editTxCat,
+                    editTxSubcat,
+                    editTxAmt,
+                    setEditTxDesc,
+                    setEditTxDate,
+                    setEditTxType,
+                    setEditTxCat,
+                    setEditTxSubcat,
+                    setEditTxAmt,
+
                     category,
                     subcategory,
                     amount,
