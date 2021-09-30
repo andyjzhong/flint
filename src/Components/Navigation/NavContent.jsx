@@ -6,6 +6,7 @@ import {
     Menu,
     MenuButton,
     MenuList,
+    Link,
     Avatar,
     MenuItem,
     useDisclosure,
@@ -92,9 +93,9 @@ const DesktopNavContent = (props) => {
             <MenuButton as={Avatar} size={"sm"}>
             </MenuButton>
             <MenuList>
-                <MenuItem textAlign="right">Sign In</MenuItem>
-                <MenuItem>Account Settings</MenuItem>
-                <MenuItem>Sign Out</MenuItem>
+                <MenuItem as={Link} href="/login">Sign In</MenuItem>
+                <MenuItem as={Link} href="/account">Account Settings</MenuItem>
+                <MenuItem as={Link} href="/">Sign Out</MenuItem>
             </MenuList>
         </Menu>
       </HStack>
