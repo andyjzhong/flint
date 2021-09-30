@@ -23,7 +23,7 @@ const EditBudgetModal = (props) => {
 
     const userId = localStorage.getItem('fuid');
 
-    const { budgetId, setUserAction, accessToken, setBudgetsList } = useContext(DataContext);
+    const { budgetId, setUserAction, accessToken, setBudgetsList, editModalCategory, editModalSubcategory, editModalAmount } = useContext(DataContext);
     const [category, setCategory] = useState("")
     const [subcategory, setSubcategory] = useState("")
     const [amount, setAmount] = useState("")
@@ -102,14 +102,14 @@ const EditBudgetModal = (props) => {
 
                         <FormControl>
                             <FormLabel>Category</FormLabel>
-                            <Select name="input-category" onChange={storeCategory} placeholder="Select category">
+                            <Select value={editModalCategory} name="input-category" onChange={storeCategory} placeholder="Select category">
                                 {categoryOptions}
                             </Select>
                         </FormControl>
 
                         <FormControl>
                             <FormLabel>Subcategory</FormLabel>
-                            <Select name="input-subcategory" onChange={storeSubcategory} placeholder="Select category">
+                            <Select value={editModalSubcategory} name="input-subcategory" onChange={storeSubcategory} placeholder="Select subcategory">
                                 {subcategoryOptions}
                             </Select>
                         </FormControl>
@@ -123,7 +123,7 @@ const EditBudgetModal = (props) => {
                                     fontSize="1.2em"
                                     children="$"
                                 />
-                                <Input name="input-amount" onChange={storeAmount} placeholder="Enter amount" />
+                                <Input value={editModalAmount} name="input-amount" onChange={storeAmount} placeholder="Enter amount" />
                             </InputGroup>
                         </FormControl>
                     </ModalBody>

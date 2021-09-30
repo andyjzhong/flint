@@ -35,6 +35,9 @@ function App() {
     const [summaryDateData, setSummaryDateData] = useState();
     const [refreshToken, setRefreshToken] = useState(null)
     const [accessToken, setAccessToken] = useState(null)
+    const [editModalCategory, setEditModalCategory] = useState("")
+    const [editModalSubcategory, setEditModalSubcategory] = useState("")
+    const [editModalAmount, setEditModalAmount] = useState(0)
 
     return (
         <ChakraProvider theme={theme}>
@@ -75,7 +78,13 @@ function App() {
                     accessToken,
                     setAccessToken,
                     summaryDateData,
-                    setSummaryDateData
+                    setSummaryDateData,
+                    editModalCategory,
+                    setEditModalCategory,
+                    editModalSubcategory,
+                    setEditModalSubcategory,
+                    editModalAmount,
+                    setEditModalAmount
                 }}
             >
                 <Navigation />
