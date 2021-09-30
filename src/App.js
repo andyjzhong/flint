@@ -46,6 +46,12 @@ function App() {
         <ChakraProvider theme={theme}>
             <DataContext.Provider
                 value = {{
+                    category,
+                    subcategory,
+                    amount,
+                    editModalCategory,
+                    editModalSubcategory,
+                    editModalAmount,
                     userAction,
                     setUserAction,
                     transactionDate,
@@ -82,17 +88,11 @@ function App() {
                     setAccessToken,
                     summaryDateData,
                     setSummaryDateData,
-                    editModalCategory,
                     setEditModalCategory,
-                    editModalSubcategory,
                     setEditModalSubcategory,
-                    editModalAmount,
                     setEditModalAmount,
-                    category,
                     setCategory,
-                    subcategory,
                     setSubcategory,
-                    amount,
                     setAmount
                 }}
             >

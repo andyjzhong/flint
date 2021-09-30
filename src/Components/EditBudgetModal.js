@@ -23,10 +23,7 @@ const EditBudgetModal = (props) => {
 
     const userId = localStorage.getItem('fuid');
 
-    const { budgetId, setUserAction, accessToken, setBudgetsList, editModalCategory, editModalSubcategory, editModalAmount, setEditModalSubcategory, setEditModalAmount, setEditModalCategory } = useContext(DataContext);
-    const [category, setCategory] = useState("")
-    const [subcategory, setSubcategory] = useState("")
-    const [amount, setAmount] = useState("")
+    const { budgetId, setUserAction, accessToken, setBudgetsList, editModalCategory, editModalSubcategory, editModalAmount, setEditModalSubcategory, setEditModalAmount, setEditModalCategory, category, subcategory, amount, setCategory, setSubcategory, setAmount } = useContext(DataContext);
 
     let categoryOptions = categoryOptionsRaw.map((item, index) => {
         return (
