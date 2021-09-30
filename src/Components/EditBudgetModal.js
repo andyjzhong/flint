@@ -23,7 +23,7 @@ const EditBudgetModal = (props) => {
 
     const userId = localStorage.getItem('fuid');
 
-    const { budgetId, setUserAction, accessToken, setBudgetsList, editModalCategory, editModalSubcategory, editModalAmount } = useContext(DataContext);
+    const { budgetId, setUserAction, accessToken, setBudgetsList, editModalCategory, editModalSubcategory, editModalAmount, setEditModalSubcategory, setEditModalAmount, setEditModalCategory } = useContext(DataContext);
     const [category, setCategory] = useState("")
     const [subcategory, setSubcategory] = useState("")
     const [amount, setAmount] = useState("")
@@ -81,14 +81,17 @@ const EditBudgetModal = (props) => {
 
     const storeCategory = ((e) => {
         setCategory(e.target.value)
+        setEditModalCategory(e.target.value)
     })
 
     const storeSubcategory = ((e) => {
         setSubcategory(e.target.value)
+        setEditModalSubcategory(e.target.value)
     })
 
     const storeAmount = ((e) => {
         setAmount(e.target.value)
+        setEditModalAmount(e.target.value)
     })
 
     return (
@@ -123,7 +126,11 @@ const EditBudgetModal = (props) => {
                                     fontSize="1.2em"
                                     children="$"
                                 />
-                                <Input value={editModalAmount} name="input-amount" onChange={storeAmount} placeholder="Enter amount" />
+                                <Input
+                                    value={editModalAmount}
+                                    name="input-amount"
+                                    onChange={storeAmount}
+                                    placeholder="Enter amount" />
                             </InputGroup>
                         </FormControl>
                     </ModalBody>
