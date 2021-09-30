@@ -30,7 +30,6 @@ const BudgetTableComponent = () => {
             })
             setBudgetsList(response.data.budgets)
             setUserAction("")
-            console.log("A", budgetsList)
         } catch (error) {
             console.warn("Error when retrieving all budgets.")
         }

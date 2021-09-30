@@ -134,7 +134,7 @@ const EditModal = (props) => {
                     <ModalBody pb={6}>
                         <FormControl>
                             <FormLabel>Description</FormLabel>
-                            <Input name="input-description" onChange={storeDescription} placeholder="i.e. Starbucks" />
+                            <Input value={editTxDesc} name="input-description" onChange={storeDescription} placeholder="i.e. Starbucks" />
                         </FormControl>
 
                         <FormControl>

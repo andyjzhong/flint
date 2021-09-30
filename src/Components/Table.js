@@ -3,20 +3,34 @@ import { DataContext } from './DataContext';
 import DeleteModal from './DeleteModal';
 import EditModal from './EditModal';
 import CreateModal from './CreateModal';
-import { Table, Thead, Tr, Th, Td, Tbody, Button, IconButton, ButtonGroup, useColorModeValue as mode } from '@chakra-ui/react';
-import { Box, Heading } from '@chakra-ui/react'
+import { Box, Table, Thead, Tr, Th, Td, Tbody, Button, IconButton, ButtonGroup, useColorModeValue as mode } from '@chakra-ui/react';
 import { TablePagination } from './TableUI/TablePagination'
 import { AiFillEdit } from 'react-icons/ai';
 import { BsFillTrashFill } from 'react-icons/bs';
 import { useDisclosure } from "@chakra-ui/react"
 import moment from 'moment';
 import axios from 'axios';
-import { RiAddFill, RiArrowRightUpLine } from 'react-icons/ri'
+import { RiAddFill } from 'react-icons/ri'
 
 const TableComponent = () => {
 
     const userId = localStorage.getItem('fuid');
-    const { userAction, setUserAction, transactionsList, setTransactionsList, transactionId, setTransactionId, matchingTransactionData, setMatchingTransactionData, filteredTransactionsList, setFilteredTransactionsList, searchValue, searchCategory, searchStartDate, searchEndDate, accessToken } = useContext(DataContext);
+    const { userAction, setUserAction, transactionsList, setTransactionsList, transactionId, setTransactionId, matchingTransactionData, setMatchingTransactionData, filteredTransactionsList, setFilteredTransactionsList, searchValue, searchCategory, searchStartDate, searchEndDate, accessToken,
+
+        editTxDesc,
+        editTxDate,
+        editTxType,
+        editTxCat,
+        editTxSubcat,
+        editTxAmt,
+        setEditTxDesc,
+        setEditTxDate,
+        setEditTxType,
+        setEditTxCat,
+        setEditTxSubcat,
+        setEditTxAmt
+
+    } = useContext(DataContext);
 
     const { isOpen, onOpen, onClose } = useDisclosure()
     const { isOpen: isEditOpen , onOpen: onEditOpen, onClose: onEditClose } = useDisclosure()
@@ -59,6 +73,26 @@ const TableComponent = () => {
         let key = e.currentTarget.name;
         setTransactionId(key);
         console.log("The selected transaction's id is:", key);
+        console.log("Full List", transactionsList);
+
+        if (transactionsList) {
+            let selectedTx = transactionsList.filter((item) => {
+                return item._id === key
+            })
+
+            console.log("SELECTED TX", selectedTx)
+            setEditTxDesc(selectedTx[0].description)
+            setEditTxDate(selectedTx[0].date)
+            setEditTxType(selectedTx[0].type)
+            setEditTxCat(selectedTx[0].category)
+            setEditTxSubcat(selectedTx[0].subcategory)
+            setEditTxAmt(selectedTx[0].amount)
+
+
+            // setCategory(selectedBudget[0].category)
+            // setSubcategory(selectedBudget[0].subcategory)
+            // setAmount(selectedBudget[0].amount)
+        }
     }
 
     const handleDelete = (e) => {
