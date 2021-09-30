@@ -45,7 +45,7 @@ const Budgets = () => {
             <Center w={"100%"} bg={"rgb(247,250,252)"}>
                 <Box w={"100vw"} minH={'100vh'} p={4} pt={24}>
                     <Center>
-                        <VStack mt={{ base: "6", sm: "6", md: "10", lg: "10"}} mb={{ base: "10", sm: "10", md: "20", lg: "20"}}>
+                        <VStack mt={{ base: "6", sm: "6", md: "8", lg: "8"}} mb={{ base: "10", sm: "10", md: "20", lg: "14"}}>
                             <Heading mb={6} size="xl">Budgets</Heading>
                             <Text p={2} fontSize={20}>Track and manage your expenses by category</Text>
                         </VStack>
