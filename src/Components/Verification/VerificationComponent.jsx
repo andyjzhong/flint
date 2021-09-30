@@ -30,13 +30,15 @@ import { HeadingGroup } from '../AccountPage/HeadingGroup'
                 : `http://localhost:8000/users/changepreferedauth/${userId}`
 
         const response = await axios.put(url,{
-          preferedAuth: parseInt(preferedAuth)
+          preferedAuth: preferedAuth
         },{
             headers: {'authorization': `Bearer ${props.accessToken}`}
         })
         if(response.data.status == 200){
           setStatusColor('green')
           setStatusMessage(response.data.message)
+          console.log(response.data.user)
+          props.setUserInfo(response.data.user)
         } else if(response.data.status == 400){
           setStatusColor('red')
           setStatusMessage(response.data.message)
@@ -139,10 +141,23 @@ import { HeadingGroup } from '../AccountPage/HeadingGroup'
                         >
                         <span>Select which method of authentication you would like to use when you login.</span>
                         </Box>
-                        <RadioGroup onChange={(e) => setPreferedAuth(e)} value={preferedAuth}>
+                        <RadioGroup onChange={(e) => setPreferedAuth(e)} value={props.userInfo.preferedAuth}>
                           <Stack direction="row">
-                            <Radio value="1">Authenticator</Radio>
-                            <Radio value="2">SMS Text</Radio>
+
+                            <Radio 
+                              isDisabled={!props.userInfo.isAuthEnabled} 
+                              value={1}
+                            >
+                              Authenticator
+                            </Radio>
+
+                            <Radio 
+                              isDisabled={!props.userInfo.isSmsVerified} 
+                              value={2}
+                            >
+                              SMS Text
+                            </Radio>
+
                           </Stack>
                         </RadioGroup>
                         <Text

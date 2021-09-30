@@ -43,8 +43,11 @@ export default function Login() {
     const [loginErrorText, setLoginErrorText] = useState('')
     const [loginErrorDisplay, setLoginErrorDisplay] = useState('none')
     const [authToken, setAuthToken] = useState('')
-    const [isAuthTokenSubmitted, setIsAuthTokenSubmitted] = useState(false)
     const [authInputDisplay, setAuthInputDisplay] = useState('none')
+    const [smsCode, setSmsCode] = useState('')
+    const [smsInputDisplay, setSmsInputDisplay] = useState('none')
+    const [phoneLast4, setPhoneLast4] = useState('')
+    const [verifyId, setVerifyId] = useState(null)
     const handleClick = () => setShow(!show)
     let history = useHistory()
 
@@ -71,6 +74,13 @@ export default function Login() {
                 setLoginMethod('auth')
                 setAuthInputDisplay('block')
                 setSignInButtonText('Submit code')
+                setIsButtonLocked(false)
+            } else if(response.data.message === 'SMS required'){
+                setVerifyId(response.data.smsData.verifyId)
+                setLoginMethod('sms')
+                setSignInButtonText('Submit code')
+                setSmsInputDisplay('block')
+                setPhoneLast4(response.data.endingIn)
                 setIsButtonLocked(false)
             } else if(response.data.message === 'OK'){
                 localStorage.setItem('refreshToken', response.data.refreshToken)
@@ -100,7 +110,6 @@ export default function Login() {
             token: authToken
         })
         if(response.data.message === 'Token is valid'){
-            console.log(response.data.user)
             localStorage.setItem('refreshToken', response.data.refreshToken)
             localStorage.setItem('fuid', response.data.userobj._id)
             setCurrentUserId(response.data)
@@ -109,6 +118,33 @@ export default function Login() {
             setLoginErrorText(response.data.message)
             setIsButtonLocked(false)
         } else if(response.data.message === 'Token not valid'){
+            setLoginErrorDisplay('block')
+            setLoginErrorText(response.data.message)
+            setIsButtonLocked(false)
+        }
+    }
+
+    async function smsLogin(){
+        const url =
+        process.env.NODE_ENV === 'production'
+            ? `http://flint-server.herokuapp.com/users/verifysmslogin`
+            : `http://localhost:8000/users/verifysmslogin`
+
+        const response = await axios.post(url, {
+            email: email,
+            password: password,
+            code: smsCode,
+            verifyId: verifyId
+        })
+        if(response.data.message === 'Code is valid'){
+            localStorage.setItem('refreshToken', response.data.refreshToken)
+            localStorage.setItem('fuid', response.data.userobj._id)
+            setCurrentUserId(response.data)
+        } else if(response.data.message === 'Passwords do not match'){
+            setLoginErrorDisplay('block')
+            setLoginErrorText(response.data.message)
+            setIsButtonLocked(false)
+        } else if(response.data.message === 'Code is not valid'){
             setLoginErrorDisplay('block')
             setLoginErrorText(response.data.message)
             setIsButtonLocked(false)
@@ -124,6 +160,10 @@ export default function Login() {
             setLoginErrorDisplay('none')
             setIsButtonLocked(true)
             authenticatorLogin()
+        } else if(loginMethod === 'sms'){
+            setLoginErrorDisplay('none')
+            setIsButtonLocked(true)
+            smsLogin()
         }
     }
 
@@ -192,6 +232,15 @@ export default function Login() {
                                     type="text"
                                     value={authToken}
                                     onChange={(e) => setAuthToken(e.target.value)}
+                                />
+                            </FormControl>
+                            <FormControl id="sms" display={smsInputDisplay}>
+                                <FormLabel>Texted code number ending in {phoneLast4}</FormLabel>
+                                <Input
+                                    type="text"
+                                    placeholder="6-digit code"
+                                    value={smsCode}
+                                    onChange={(e) => setSmsCode(e.target.value)}
                                 />
                             </FormControl>
                             <Stack spacing={10}>
