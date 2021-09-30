@@ -61,7 +61,7 @@ const BudgetTableComponent = () => {
 
     let budgetRow = budgetsList.map((item, index) => {
         return (
-            <Tr key={item._id} >
+            <Tr bg={"white"} key={item._id} >
                 <Td>{item.category}</Td>
                 <Td>{item.subcategory}</Td>
                 <Td isNumeric >{item.amount.toFixed(2)}</Td>
@@ -100,7 +100,7 @@ const BudgetTableComponent = () => {
         <Box
             className="table"
             overflowX="auto"
-            w={{ base: "90vw", sm: "90vw", md: "90vw", lg: "45vw"}}
+            w={{ base: "90%", sm: "90%", md: "90%", lg: "75%"}}
         >
             <Table borderWidth="1px">
                 <Thead bg={mode('gray.50', 'gray.800')} >
