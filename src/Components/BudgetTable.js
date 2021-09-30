@@ -11,7 +11,7 @@ import axios from 'axios';
 import { RiAddFill } from 'react-icons/ri'
 
 const BudgetTableComponent = () => {
-    const { setUserAction, budgetsList, setBudgetsList, setBudgetId, accessToken, setEditModalSubcategory, setEditModalCategory, setEditModalAmount } = useContext(DataContext);
+    const { setUserAction, budgetsList, setBudgetsList, setBudgetId, accessToken, setEditModalSubcategory, setEditModalCategory, setEditModalAmount, setCategory, setSubcategory, setAmount } = useContext(DataContext);
     const userId = localStorage.getItem('fuid');
 
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -57,6 +57,9 @@ const BudgetTableComponent = () => {
             setEditModalCategory(selectedBudget[0].category)
             setEditModalSubcategory(selectedBudget[0].subcategory)
             setEditModalAmount(selectedBudget[0].amount)
+            setCategory(selectedBudget[0].category)
+            setSubcategory(selectedBudget[0].subcategory)
+            setAmount(selectedBudget[0].amount)
         }
     }
 

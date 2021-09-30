@@ -38,6 +38,9 @@ function App() {
     const [editModalCategory, setEditModalCategory] = useState("")
     const [editModalSubcategory, setEditModalSubcategory] = useState("")
     const [editModalAmount, setEditModalAmount] = useState(0)
+    const [category, setCategory] = useState("")
+    const [subcategory, setSubcategory] = useState("")
+    const [amount, setAmount] = useState("")
 
     return (
         <ChakraProvider theme={theme}>
@@ -84,7 +87,13 @@ function App() {
                     editModalSubcategory,
                     setEditModalSubcategory,
                     editModalAmount,
-                    setEditModalAmount
+                    setEditModalAmount,
+                    category,
+                    setCategory,
+                    subcategory,
+                    setSubcategory,
+                    amount,
+                    setAmount
                 }}
             >
                 <Navigation />
