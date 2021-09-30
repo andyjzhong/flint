@@ -93,8 +93,6 @@ function App() {
                     editModalAmount,
                     userAction,
                     setUserAction,
-                    txDate,
-                    setTxDate,
                     isLoggedIn,
                     setIsLoggedIn,
                     currentUserId,
