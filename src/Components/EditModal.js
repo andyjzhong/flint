@@ -39,13 +39,19 @@ const EditModal = (props) => {
         setEditTxType,
         setEditTxCat,
         setEditTxSubcat,
-        setEditTxAmt
+        setEditTxAmt,
+
+        txDescription,
+        txType,
+        txCategory,
+        txSubcategory,
+        txAmount,
+        setTxDescription,
+        setTxType,
+        setTxCategory,
+        setTxSubcategory,
+        setTxAmount,
     } = useContext(DataContext);
-    const [description, setDescription] = useState("")
-    const [type, setType] = useState("")
-    const [category, setCategory] = useState("")
-    const [subcategory, setSubcategory] = useState("")
-    const [amount, setAmount] = useState("")
 
     // console.log("matchingTransactionData is", matchingTransactionData);
 
@@ -84,15 +90,13 @@ const EditModal = (props) => {
                 ? `http://flint-server.herokuapp.com/users/${userId}/edittransaction/${transactionId}`
                 : `http://localhost:8000/users/${userId}/edittransaction/${transactionId}`
 
-
-        console.log("url @@@@@", url);
         axios.put(url, {
-            "description": description,
+            "description": txDescription,
             "date": transactionDate,
-            "type": type,
-            "category": category,
-            "subcategory": subcategory,
-            "amount": amount
+            "type": txType,
+            "category": txCategory,
+            "subcategory": txSubcategory,
+            "amount": txAmount
         },{
             headers: {"authorization": `Bearer ${accessToken}`}
         })
@@ -105,23 +109,28 @@ const EditModal = (props) => {
     }
 
     const storeDescription = ((e) => {
-        setDescription(e.target.value)
+        setTxDescription(e.target.value)
+        setEditTxDesc(e.target.value)
     })
 
     const storeType = ((e) => {
-        setType(e.target.value)
+        setTxType(e.target.value)
+        setEditTxType(e.target.value)
     })
 
     const storeCategory = ((e) => {
-        setCategory(e.target.value)
+        setTxCategory(e.target.value)
+        setEditTxCat(e.target.value)
     })
 
     const storeSubcategory = ((e) => {
-        setSubcategory(e.target.value)
+        setTxSubcategory(e.target.value)
+        setEditTxSubcat(e.target.value)
     })
 
-    const storeAmount = ((e) => {
-        setAmount(e.target.value)
+    const storeTxAmount = ((e) => {
+        setTxAmount(e.target.value)
+        setEditTxAmt(e.target.value)
     })
 
     return (
@@ -175,7 +184,7 @@ const EditModal = (props) => {
                                     fontSize="1.2em"
                                     children="$"
                                 />
-                                <Input value={editTxAmt} name="input-amount" onChange={storeAmount} placeholder="Enter amount" />
+                                <Input value={editTxAmt} name="input-amount" onChange={storeTxAmount} placeholder="Enter amount" />
                             </InputGroup>
                         </FormControl>
                     </ModalBody>

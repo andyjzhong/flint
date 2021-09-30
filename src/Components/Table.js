@@ -28,7 +28,18 @@ const TableComponent = () => {
         setEditTxType,
         setEditTxCat,
         setEditTxSubcat,
-        setEditTxAmt
+        setEditTxAmt,
+
+        txDescription,
+        txType,
+        txCategory,
+        txSubcategory,
+        txAmount,
+        setTxDescription,
+        setTxType,
+        setTxCategory,
+        setTxSubcategory,
+        setTxAmount,
 
     } = useContext(DataContext);
 
@@ -89,9 +100,12 @@ const TableComponent = () => {
             setEditTxAmt(selectedTx[0].amount)
 
 
-            // setCategory(selectedBudget[0].category)
-            // setSubcategory(selectedBudget[0].subcategory)
-            // setAmount(selectedBudget[0].amount)
+            setTxDescription(selectedTx[0].description)
+            // setEditTxDate(selectedTx[0].date)
+            setTxType(selectedTx[0].type)
+            setTxCategory(selectedTx[0].category)
+            setTxSubcategory(selectedTx[0].subcategory)
+            setTxAmount(selectedTx[0].amount)
         }
     }
 
