@@ -18,9 +18,7 @@ import { HeadingGroup } from '../AccountPage/HeadingGroup'
 
   const VerificationComponent = (props) => {
     const userId = localStorage.getItem('fuid')
-    const [preferedAuth, setPreferedAuth] = useState(props.userInfo.preferedAuth) // Radio Group Value
-    // const [preferedAuth, setPreferedAuth] = useState(null) // Radio Group Value
-    const [preferenceChanged, setPreferenceChanged] = useState(false) // Flag
+    const [preferedAuth, setPreferedAuth] = useState(props.userInfo.preferedAuth)
     const [statusColor, setStatusColor] = useState('red')
     const [statusMessage, setStatusMessage] = useState('')
 
