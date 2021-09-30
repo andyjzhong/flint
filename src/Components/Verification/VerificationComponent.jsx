@@ -1,19 +1,52 @@
 import {
     Box,
+    Button,
     Divider,
     Stack,
     StackDivider,
     Text,
+    RadioGroup,
+    Radio,
     useColorModeValue as mode,
   } from '@chakra-ui/react'
-import React from 'react'
-import { FaMobileAlt, FaShieldAlt } from 'react-icons/fa'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios';
+import { FaMobileAlt, FaShieldAlt, FaLock } from 'react-icons/fa'
 import { Description } from './Description'
 import { HeadingGroup } from '../AccountPage/HeadingGroup'
 
 
   const VerificationComponent = (props) => {
+    const userId = localStorage.getItem('fuid')
+    const [preferedAuth, setPreferedAuth] = useState(props.userInfo.preferedAuth)
+    const [preferenceChanged, setPreferenceChanged] = useState(false)
+    const [statusColor, setStatusColor] = useState('red')
+    const [statusMessage, setStatusMessage] = useState('')
 
+    async function savePreferedAuth(){
+
+        const url =
+            process.env.NODE_ENV === 'production'
+                ? `http://flint-server.herokuapp.com/users/changepreferedauth/${userId}`
+                : `http://localhost:8000/users/changepreferedauth/${userId}`
+  
+        const response = await axios.put(url,{
+          preferedAuth: parseInt(preferedAuth)
+        },{
+            headers: {'authorization': `Bearer ${props.accessToken}`}
+        })
+        if(response.data.status == 200){
+          setStatusColor('green')
+          setStatusMessage(response.data.message)
+        } else if(response.data.status == 400){
+          setStatusColor('red')
+          setStatusMessage(response.data.message)
+        }
+    }
+
+    useEffect(() => {
+        savePreferedAuth()
+    },[preferedAuth])
 
     return (
 
@@ -65,6 +98,59 @@ import { HeadingGroup } from '../AccountPage/HeadingGroup'
                   >
                     Receive a text to your mobile phone to confirm it’s you on login.
                   </Description>
+
+                  <Stack
+                    direction={{
+                      base: 'column',
+                      sm: 'row',
+                    }}
+                    spacing="5"
+                    justify="space-between"
+                    pos="relative"
+                  >
+                    <Stack
+                      direction={{
+                        base: 'column',
+                        sm: 'row',
+                      }}
+                      spacing="4"
+                      align="flex-start"
+                      flex="1"
+                    >
+                      <Box aria-hidden fontSize="2xl" pt="1" color="gray.500">
+                        <FaLock/>
+                      </Box>
+                        <Box flex="1">
+                          <Box as="h4" fontWeight="bold" maxW="xl">
+                            <span>Prefered Login</span>
+                          </Box>
+                        <Box
+                          maxW={{
+                            base: 'xs',
+                            md: 'unset',
+                          }}
+                          pb='2'
+                          color={mode('gray.600', 'gray.400')}
+                          fontSize="sm"
+                        >
+                        <span>Select which method of authentication you would like to use when you login.</span>
+                        </Box>
+                        <RadioGroup onChange={(e) => setPreferedAuth(e)} value={preferedAuth}>
+                          <Stack direction="row">
+                            <Radio value="1">Authenticator</Radio>
+                            <Radio value="2">SMS Text</Radio>
+                          </Stack>
+                        </RadioGroup>
+                        <Text 
+                          color={statusColor}
+                          pt="1"
+                          pl='2'
+                        >
+                          {statusMessage}
+                        </Text>
+                        </Box>
+                    </Stack>
+                  </Stack>
                 </Stack>
               </Box>
           </div>
