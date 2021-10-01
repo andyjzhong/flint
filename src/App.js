@@ -34,13 +34,13 @@ function App() {
     const [summaryDateData, setSummaryDateData] = useState();
     const [refreshToken, setRefreshToken] = useState(null)
     const [accessToken, setAccessToken] = useState(null)
+    const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
     const [editModalCategory, setEditModalCategory] = useState("")
     const [editModalSubcategory, setEditModalSubcategory] = useState("")
     const [editModalAmount, setEditModalAmount] = useState(0)
     const [category, setCategory] = useState("")
     const [subcategory, setSubcategory] = useState("")
     const [amount, setAmount] = useState("")
-
 
     const [editTxDesc, setEditTxDesc] = useState("")
     const [editTxDate, setEditTxDate] = useState("");
@@ -125,6 +125,8 @@ function App() {
                     setAccessToken,
                     summaryDateData,
                     setSummaryDateData,
+                    isUserLoggedIn,
+                    setIsUserLoggedIn
                     setEditModalCategory,
                     setEditModalSubcategory,
                     setEditModalAmount,

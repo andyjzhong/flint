@@ -1,13 +1,15 @@
 import { Box, Center, chakra, HStack, Text, useColorModeValue as mode } from '@chakra-ui/react'
 import * as React from 'react'
 import { FaChevronRight } from 'react-icons/fa'
+import { useHistory } from 'react-router';
 
 export const SubmenuItem = (props) => {
+  const history = useHistory()
   const { title, icon, children, href, ...rest } = props
   return (
     <chakra.a
       className="group"
-      href={href}
+      onClick={() => history.push(href)}
       m="-3"
       p="3"
       display="flex"

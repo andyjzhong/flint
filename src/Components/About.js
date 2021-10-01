@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
   Button,
   Flex,
@@ -18,8 +18,38 @@ import {
   Avatar,
   Center,
 } from '@chakra-ui/react';
-
+import { DataContext } from './DataContext';
+import jwt_decode from 'jwt-decode';
+import axios from 'axios';
 const About = () => {
+
+  const { 
+    setIsUserLoggedIn,
+    setAccessToken,
+} = useContext(DataContext);
+
+  const refreshToken = async () => {
+    try{
+      setIsUserLoggedIn(true)
+        const decoded = jwt_decode(localStorage.getItem('refreshToken'))
+
+        const res = await axios.post('http://localhost:8000/users/refreshtoken', {
+            email: decoded.email,
+            token: localStorage.getItem('refreshToken')
+        }).catch((err) => {
+            console.log(err)
+        })
+
+        localStorage.setItem('refreshToken', res.data.refreshToken)
+        setAccessToken(res.data.accessToken)
+    } catch {
+        setIsUserLoggedIn(false)
+    }
+  }
+
+  useEffect(()=>{
+    refreshToken()
+  },[])
 
     const features = Array.apply(null, Array(8)).map(function (x, i) {
       return {

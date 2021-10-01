@@ -1,5 +1,5 @@
 import { Box, Stack, useColorModeValue } from '@chakra-ui/react';
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { AccountSettings } from './AccountSettings';
 import { DangerZone } from './DangerZone';
 import { SocialAccountSettings } from './SocialAccountSettings';
@@ -14,11 +14,14 @@ import { useDisclosure } from "@chakra-ui/react";
 import { useHistory } from 'react-router';
 import jwt_decode from 'jwt-decode';
 import axios from 'axios'
+import { DataContext } from '../DataContext';
 
 const AccountPage = () => {
 
   const history = useHistory()
   const userId = localStorage.getItem('fuid')
+
+  const { isUserLoggedIn, setIsUserLoggedIn } = useContext(DataContext);
 
   const { isOpen: isNameChangeOpen, onOpen: onNameChangeOpen, onClose: onNameChangeClose } = useDisclosure()
   const { isOpen: isEmailChangeOpen, onOpen: onEmailChangeOpen, onClose: onEmailChangeClose } = useDisclosure()
@@ -26,6 +29,7 @@ const AccountPage = () => {
   const { isOpen: isRemoveAuthOpen, onOpen: onRemoveAuthOpen, onClose: onRemoveAuthClose} = useDisclosure()
   const { isOpen: isAddPhoneOpen, onOpen: onAddPhoneOpen, onClose: onAddPhoneClose} = useDisclosure()
   const { isOpen: isRemovePhoneOpen, onOpen: onRemovePhoneOpen, onClose: onRemovePhoneClose} = useDisclosure()
+  const { isOpen: isDeleteAccountOpen, onOpen: onDeleteAccountOpen, onClose: onDeleteAccountClose} = useDisclosure()
 
   const [isTokenValid, setIsTokenValid] = useState(false)
   const [accessToken, setAccessToken] = useState(null)
@@ -36,6 +40,7 @@ const AccountPage = () => {
 
   const refreshToken = async () => {
     try{
+        setIsUserLoggedIn(true)
         const decoded = jwt_decode(localStorage.getItem('refreshToken'))
 
         const res = await axios.post('http://localhost:8000/users/refreshtoken', {
@@ -49,6 +54,7 @@ const AccountPage = () => {
         setIsTokenValid(true)
         setAccessToken(res.data.accessToken)
     } catch {
+      setIsUserLoggedIn(false)
         history.push('/login')
     }
   }
@@ -105,6 +111,7 @@ const AccountPage = () => {
               isEmailChangeOpen={isEmailChangeOpen}
               onEmailChangeOpen={onEmailChangeOpen}
               userInfo={userInfo}
+              mt='2'
             />
 
             <VerificationComponent 
@@ -123,7 +130,12 @@ const AccountPage = () => {
               accessToken={accessToken}
             />
             {/* <SocialAccountSettings /> */}
-            <DangerZone />
+            <DangerZone 
+              accessToken={accessToken}
+              onDeleteAccountOpen={onDeleteAccountOpen}
+              isDeleteAccountOpen={isDeleteAccountOpen}
+              onDeleteAccountClose={onDeleteAccountClose}
+            />
             
             <ChangeNameModal 
               isNameChangeOpen={isNameChangeOpen}
