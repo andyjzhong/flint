@@ -1,8 +1,9 @@
 import React, { useState, useContext } from 'react';
 import { DataContext } from './DataContext';
-import DatePickerComponent from './DatePicker.js'
+import DatePicker from "react-datepicker";
 import categoryOptionsRaw from "../categories"
 import axios from 'axios';
+import moment from 'moment';
 import {
     Modal,
     ModalOverlay,
@@ -27,6 +28,8 @@ const EditModal = (props) => {
 
     const userId = localStorage.getItem('fuid');
 
+
+
     const { txDate, transactionId, setUserAction, matchingTransactionData, accessToken,
         editTxDesc,
         editTxDate,
@@ -50,9 +53,10 @@ const EditModal = (props) => {
         setTxCategory,
         setTxSubcategory,
         setTxAmount,
-
         setTxDate
     } = useContext(DataContext);
+
+    const [startDate, setStartDate] = useState(new Date());
 
     // console.log("matchingTransactionData is", matchingTransactionData);
 
@@ -134,10 +138,11 @@ const EditModal = (props) => {
         setEditTxAmt(e.target.value)
     })
 
-    const storeTxDate = ((e) => {
-        setTxDate(e.target.value)
-        setEditTxDate(e.target.value)
-    })
+    const handleDateChange = (date) => {
+        console.log("Handle Date Change", date)
+        setEditTxDate(date)
+        setTxDate(date)
+    }
 
     return (
         <>
@@ -178,10 +183,10 @@ const EditModal = (props) => {
 
                         <FormControl>
                             <FormLabel>Date</FormLabel>
-                            <DatePickerComponent
-                                onChange={storeTxDate}
-                                value={editTxDate}
-                                name="input-date"
+                            <DatePicker
+                                startDate={moment(editTxDate).format("MM/DD/YYYY")}
+                                value={moment(editTxDate).format("MM/DD/YYYY")}
+                                onChange={handleDateChange}
                                 className="transaction-date-picker"/>
                         </FormControl>
 
