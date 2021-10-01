@@ -62,7 +62,6 @@ function App() {
                 value = {{
                     txDate,
                     editTxDate,
-
                     setTxDate,
                     txDescription,
                     txType,
@@ -126,7 +125,7 @@ function App() {
                     summaryDateData,
                     setSummaryDateData,
                     isUserLoggedIn,
-                    setIsUserLoggedIn
+                    setIsUserLoggedIn,
                     setEditModalCategory,
                     setEditModalSubcategory,
                     setEditModalAmount,
