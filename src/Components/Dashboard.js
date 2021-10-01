@@ -179,7 +179,7 @@ const Dashboard = () => {
         try {
             const url =
                 process.env.NODE_ENV === 'production'
-                    ? `http://flint-server.herokuapp.com/users/${userId}`
+                    ? `https://flint-server.herokuapp.com/users/${userId}`
                     : `http://localhost:8000/users/${userId}`
 
             const response = await axios.get(url,{
