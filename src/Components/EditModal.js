@@ -27,12 +27,33 @@ const EditModal = (props) => {
 
     const userId = localStorage.getItem('fuid');
 
-    const { transactionDate, transactionId, setUserAction, matchingTransactionData, accessToken } = useContext(DataContext);
-    const [description, setDescription] = useState("")
-    const [type, setType] = useState("")
-    const [category, setCategory] = useState("")
-    const [subcategory, setSubcategory] = useState("")
-    const [amount, setAmount] = useState("")
+    const { txDate, transactionId, setUserAction, matchingTransactionData, accessToken,
+        editTxDesc,
+        editTxDate,
+        editTxType,
+        editTxCat,
+        editTxSubcat,
+        editTxAmt,
+        setEditTxDesc,
+        setEditTxDate,
+        setEditTxType,
+        setEditTxCat,
+        setEditTxSubcat,
+        setEditTxAmt,
+
+        txDescription,
+        txType,
+        txCategory,
+        txSubcategory,
+        txAmount,
+        setTxDescription,
+        setTxType,
+        setTxCategory,
+        setTxSubcategory,
+        setTxAmount,
+
+        setTxDate
+    } = useContext(DataContext);
 
     // console.log("matchingTransactionData is", matchingTransactionData);
 
@@ -71,15 +92,13 @@ const EditModal = (props) => {
                 ? `http://flint-server.herokuapp.com/users/${userId}/edittransaction/${transactionId}`
                 : `http://localhost:8000/users/${userId}/edittransaction/${transactionId}`
 
-
-        console.log("url @@@@@", url);
         axios.put(url, {
-            "description": description,
-            "date": transactionDate,
-            "type": type,
-            "category": category,
-            "subcategory": subcategory,
-            "amount": amount
+            "description": txDescription,
+            "date": txDate,
+            "type": txType,
+            "category": txCategory,
+            "subcategory": txSubcategory,
+            "amount": txAmount
         },{
             headers: {"authorization": `Bearer ${accessToken}`}
         })
@@ -92,23 +111,33 @@ const EditModal = (props) => {
     }
 
     const storeDescription = ((e) => {
-        setDescription(e.target.value)
+        setTxDescription(e.target.value)
+        setEditTxDesc(e.target.value)
     })
 
     const storeType = ((e) => {
-        setType(e.target.value)
+        setTxType(e.target.value)
+        setEditTxType(e.target.value)
     })
 
     const storeCategory = ((e) => {
-        setCategory(e.target.value)
+        setTxCategory(e.target.value)
+        setEditTxCat(e.target.value)
     })
 
     const storeSubcategory = ((e) => {
-        setSubcategory(e.target.value)
+        setTxSubcategory(e.target.value)
+        setEditTxSubcat(e.target.value)
     })
 
-    const storeAmount = ((e) => {
-        setAmount(e.target.value)
+    const storeTxAmount = ((e) => {
+        setTxAmount(e.target.value)
+        setEditTxAmt(e.target.value)
+    })
+
+    const storeTxDate = ((e) => {
+        setTxDate(e.target.value)
+        setEditTxDate(e.target.value)
     })
 
     return (
@@ -121,12 +150,12 @@ const EditModal = (props) => {
                     <ModalBody pb={6}>
                         <FormControl>
                             <FormLabel>Description</FormLabel>
-                            <Input name="input-description" onChange={storeDescription} placeholder="i.e. Starbucks" />
+                            <Input value={editTxDesc} name="input-description" onChange={storeDescription} placeholder="i.e. Starbucks" />
                         </FormControl>
 
                         <FormControl>
                             <FormLabel>Type</FormLabel>
-                            <RadioGroup defaultValue="2">
+                            <RadioGroup value={editTxType} defaultValue="2">
                                 <Stack spacing={5} direction="row">
                                     <Radio name="input-type" onChange={storeType} colorScheme="green" value="Income">Income</Radio>
                                     <Radio name="input-type" onChange={storeType} colorScheme="red" value="Expense">Expense</Radio>
@@ -136,21 +165,25 @@ const EditModal = (props) => {
 
                         <FormControl>
                             <FormLabel>Category</FormLabel>
-                            <Select name="input-category" onChange={storeCategory} placeholder="Select category">
+                            <Select value={editTxCat} name="input-category" onChange={storeCategory} placeholder="Select category">
                                 {categoryOptions}
                             </Select>
                         </FormControl>
 
                         <FormControl>
                             <FormLabel>Subcategory</FormLabel>
-                            <Select name="input-subcategory" onChange={storeSubcategory} placeholder="Select category">
+                            <Select value={editTxSubcat} name="input-subcategory" onChange={storeSubcategory} placeholder="Select category">
                                 {subcategoryOptions}
                             </Select>
                         </FormControl>
 
                         <FormControl>
                             <FormLabel>Date</FormLabel>
-                            <DatePickerComponent name="input-date" className="transaction-date-picker"/>
+                            <DatePickerComponent
+                                onChange={storeTxDate}
+                                value={editTxDate}
+                                name="input-date"
+                                className="transaction-date-picker"/>
                         </FormControl>
 
                         <FormControl mt={4}>
@@ -162,7 +195,7 @@ const EditModal = (props) => {
                                     fontSize="1.2em"
                                     children="$"
                                 />
-                                <Input name="input-amount" onChange={storeAmount} placeholder="Enter amount" />
+                                <Input value={editTxAmt} name="input-amount" onChange={storeTxAmount} placeholder="Enter amount" />
                             </InputGroup>
                         </FormControl>
                     </ModalBody>

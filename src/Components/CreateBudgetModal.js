@@ -27,10 +27,7 @@ const CreateBudgetModal = (props) => {
 
     const userId = localStorage.getItem('fuid');
 
-    const { budgetDate, setUserAction, accessToken, setBudgetsList } = useContext(DataContext);
-    const [category, setCategory] = useState("")
-    const [subcategory, setSubcategory] = useState("")
-    const [amount, setAmount] = useState("")
+    const { budgetDate, setUserAction, accessToken, setBudgetsList, category, setCategory, subcategory, setSubcategory, amount, setAmount } = useContext(DataContext);
 
     let categoryOptions = categoryOptionsRaw.map((item, index) => {
         return (

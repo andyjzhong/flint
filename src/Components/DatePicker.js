@@ -5,11 +5,11 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const DatePickerComponent = () => {
-    const { setTransactionDate } = useContext(DataContext);
+    const { setTxDate } = useContext(DataContext);
     const [startDate, setStartDate] = useState(new Date());
 
     const handleChange = date => {
-        setTransactionDate(date)
+        setTxDate(date)
         setStartDate(date)
     }
 

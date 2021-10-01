@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-import { Button, Box, Grid, GridItem, Center, Heading, Text, VStack } from "@chakra-ui/react"
+import { Box, Grid, GridItem, Center, Heading, Text, VStack } from "@chakra-ui/react"
 import axios from 'axios';
 import jwt_decode from 'jwt-decode'
 import BudgetTableComponent from './BudgetTable.js'
-import CreateBudgetModal from './CreateBudgetModal.js'
 import EditBudgetModal from './EditBudgetModal.js'
 import { useDisclosure } from "@chakra-ui/react"
 import BudgetChart from './BudgetChart.js';
@@ -47,7 +46,7 @@ const Budgets = () => {
             <Center w={"100%"} bg={"rgb(247,250,252)"}>
                 <Box w={"100vw"} minH={'100vh'} p={4} pt={24}>
                     <Center>
-                        <VStack mt={{ base: "6", sm: "6", md: "10", lg: "10"}} mb={{ base: "10", sm: "10", md: "20", lg: "20"}}>
+                        <VStack mt={{ base: "6", sm: "6", md: "8", lg: "8"}} mb={{ base: "10", sm: "10", md: "20", lg: "14"}}>
                             <Heading mb={6} size="xl">Budgets</Heading>
                             <Text p={2} fontSize={20}>Track and manage your expenses by category</Text>
                         </VStack>

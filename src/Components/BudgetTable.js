@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { DataContext } from './DataContext';
 import DeleteBudgetModal from './DeleteBudgetModal';
 import CreateBudgetModal from './CreateBudgetModal';
@@ -11,8 +11,7 @@ import axios from 'axios';
 import { RiAddFill } from 'react-icons/ri'
 
 const BudgetTableComponent = () => {
-
-    const { setUserAction, budgetsList, setBudgetsList, setBudgetId, accessToken } = useContext(DataContext);
+    const { setUserAction, budgetsList, setBudgetsList, setBudgetId, accessToken, setEditModalSubcategory, setEditModalCategory, setEditModalAmount, setCategory, setSubcategory, setAmount } = useContext(DataContext);
     const userId = localStorage.getItem('fuid');
 
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -48,6 +47,19 @@ const BudgetTableComponent = () => {
         let key = e.currentTarget.name;
         setBudgetId(key);
         console.log("The selected transaction's id is:", key);
+        console.log("Full List", budgetsList);
+
+        if (budgetsList) {
+            let selectedBudget = budgetsList.filter((item) => {
+                return item._id === key
+            })
+            setEditModalCategory(selectedBudget[0].category)
+            setEditModalSubcategory(selectedBudget[0].subcategory)
+            setEditModalAmount(selectedBudget[0].amount)
+            setCategory(selectedBudget[0].category)
+            setSubcategory(selectedBudget[0].subcategory)
+            setAmount(selectedBudget[0].amount)
+        }
     }
 
     const handleDelete = (e) => {
@@ -67,7 +79,7 @@ const BudgetTableComponent = () => {
             <Tr bg={"white"} key={item._id} >
                 <Td>{item.category}</Td>
                 <Td>{item.subcategory}</Td>
-                <Td isNumeric >{item.amount.toFixed(2)}</Td>
+                <Td isNumeric >{item.amount}</Td>
                 <Td whiteSpace="nowrap" >
                     <HStack>
                         <IconButton

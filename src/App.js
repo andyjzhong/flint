@@ -19,7 +19,6 @@ function App() {
 
     const [userAction, setUserAction] = useState();
     const [matchingTransactionData, setMatchingTransactionData] = useState();
-    const [transactionDate, setTransactionDate] = useState();
     const [transactionId, setTransactionId] = useState();
     const [transactionsList, setTransactionsList] = useState([]);
     const [budgetId, setBudgetId] = useState();
@@ -36,15 +35,64 @@ function App() {
     const [refreshToken, setRefreshToken] = useState(null)
     const [accessToken, setAccessToken] = useState(null)
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
+    const [editModalCategory, setEditModalCategory] = useState("")
+    const [editModalSubcategory, setEditModalSubcategory] = useState("")
+    const [editModalAmount, setEditModalAmount] = useState(0)
+    const [category, setCategory] = useState("")
+    const [subcategory, setSubcategory] = useState("")
+    const [amount, setAmount] = useState("")
+
+    const [editTxDesc, setEditTxDesc] = useState("")
+    const [editTxDate, setEditTxDate] = useState("");
+    const [editTxType, setEditTxType] = useState("")
+    const [editTxCat, setEditTxCat] = useState("")
+    const [editTxSubcat, setEditTxSubcat] = useState("")
+    const [editTxAmt, setEditTxAmt] = useState(0)
+
+    const [txDescription, setTxDescription] = useState("")
+    const [txDate, setTxDate] = useState("");
+    const [txType, setTxType] = useState("")
+    const [txCategory, setTxCategory] = useState("")
+    const [txSubcategory, setTxSubcategory] = useState("")
+    const [txAmount, setTxAmount] = useState(0)
 
     return (
         <ChakraProvider theme={theme}>
             <DataContext.Provider
                 value = {{
+                    txDate,
+                    editTxDate,
+
+                    setTxDate,
+                    txDescription,
+                    txType,
+                    txCategory,
+                    txSubcategory,
+                    txAmount,
+                    editTxDesc,
+                    editTxType,
+                    editTxCat,
+                    editTxSubcat,
+                    editTxAmt,
+                    setTxDescription,
+                    setTxType,
+                    setTxCategory,
+                    setTxSubcategory,
+                    setTxAmount,
+                    setEditTxDesc,
+                    setEditTxDate,
+                    setEditTxType,
+                    setEditTxCat,
+                    setEditTxSubcat,
+                    setEditTxAmt,
+                    category,
+                    subcategory,
+                    amount,
+                    editModalCategory,
+                    editModalSubcategory,
+                    editModalAmount,
                     userAction,
                     setUserAction,
-                    transactionDate,
-                    setTransactionDate,
                     isLoggedIn,
                     setIsLoggedIn,
                     currentUserId,
@@ -79,6 +127,12 @@ function App() {
                     setSummaryDateData,
                     isUserLoggedIn,
                     setIsUserLoggedIn
+                    setEditModalCategory,
+                    setEditModalSubcategory,
+                    setEditModalAmount,
+                    setCategory,
+                    setSubcategory,
+                    setAmount
                 }}
             >
                 <Navigation />
