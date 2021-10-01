@@ -1,7 +1,5 @@
 import {
     Box,
-    Button,
-    Divider,
     Stack,
     StackDivider,
     Text,

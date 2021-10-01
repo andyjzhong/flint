@@ -7,7 +7,6 @@ import Home from './Components/Home.js';
 import Dashboard from './Components/Dashboard.js';
 import Transactions from './Components/Transactions.js';
 import Budgets from './Components/Budgets.js';
-import About from './Components/About.js';
 import Signup from './Components/Signup.js';
 import Login from './Components/Login.js';
 import AccountPage from './Components/AccountPage/AccountPage.jsx';

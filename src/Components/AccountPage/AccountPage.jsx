@@ -1,8 +1,7 @@
-import { Box, Stack, useColorModeValue } from '@chakra-ui/react';
+import { Box, Stack } from '@chakra-ui/react';
 import React, { useState, useEffect, useContext } from 'react'
 import { AccountSettings } from './AccountSettings';
 import { DangerZone } from './DangerZone';
-import { SocialAccountSettings } from './SocialAccountSettings';
 import VerificationComponent from '../Verification/VerificationComponent';
 import AddPhoneModal from './AddPhoneModal.jsx'
 import RemovePhoneModal from './RemovePhoneModal.jsx'
