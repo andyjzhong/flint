@@ -3,7 +3,7 @@ import { DataContext } from './DataContext';
 import DeleteModal from './DeleteModal';
 import EditModal from './EditModal';
 import CreateModal from './CreateModal';
-import { Box, Table, Thead, Tr, Th, Td, Tbody, Button, IconButton, ButtonGroup, useColorModeValue as mode } from '@chakra-ui/react';
+import { Box, Table, Thead, Tr, Th, Td, Tbody, Button, IconButton, ButtonGroup, HStack, Flex, Text, useColorModeValue as mode } from '@chakra-ui/react';
 import { TablePagination } from './TableUI/TablePagination'
 import { AiFillEdit } from 'react-icons/ai';
 import { BsFillTrashFill } from 'react-icons/bs';
@@ -132,7 +132,7 @@ const TableComponent = () => {
 
     let transactionRows = transactionsList.map((item, index) => {
         return (
-            <Tr key={item._id}>
+            <Tr bg="white" key={item._id}>
                 <Td>{item.description}</Td>
                 <Td>{moment(item.date).format('MMM D, YYYY')}</Td>
                 <Td>{item.type}</Td>
@@ -175,7 +175,7 @@ const TableComponent = () => {
     if (filteredTransactionsList) {
         let filteredTransactionRows = filteredTransactionsList.map((item, index) => {
             return (
-                <Tr key={item._id}>
+                <Tr bg="white" key={item._id}>
                     <Td>{item.description}</Td>
                     <Td>{moment(item.date).format('MMM D, YYYY')}</Td>
                     <Td>{item.type}</Td>
@@ -231,15 +231,20 @@ const TableComponent = () => {
                     }}
                 >
                 <Box overflowX="auto">
-                    <ButtonGroup size="sm" variant="outline">
-                      <Button
-                          iconSpacing="1"
-                          onClick={onOpen}
-                          leftIcon={<RiAddFill fontSize="1.25em" />}
-                      >
-                        New Transaction
-                      </Button>
-                    </ButtonGroup>
+                    <HStack mb={14} style={{position: "relative"}}>
+                        <ButtonGroup size="sm" style={{position: "absolute", right: "0", top: "0"}} >
+                        <Button
+                            m={1}
+                            variant="outline"
+                            onClick={onOpen}
+                            iconSpacing="1"
+                            leftIcon={<RiAddFill fontSize="1.25em" />}
+                            colorScheme="green"
+                            w="full">
+                            New Transaction
+                        </Button>
+                        </ButtonGroup>
+                    </HStack>
                         <Table my="8" borderWidth="1px" fontSize="sm">
                           <Thead bg={mode('gray.50', 'gray.800')}>
                             <Tr>
@@ -257,7 +262,11 @@ const TableComponent = () => {
                           </Tbody>
                         </Table>
                     </Box>
-                    <TablePagination />
+                    <Flex align="center" justify="space-between">
+                        <Text color={mode('gray.600', 'gray.400')} fontSize="sm">
+                            {transactionsList.length} transactions
+                        </Text>
+                    </Flex>
                 </Box>
             </Box>
 

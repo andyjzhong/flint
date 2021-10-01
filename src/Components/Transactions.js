@@ -4,16 +4,11 @@ import { useHistory } from 'react-router';
 import axios from 'axios';
 import DatePicker from "react-datepicker";
 import { DataContext } from './DataContext';
-import { Center, InputLeftElement, FormLabel, HStack, InputGroup, Heading, Button, VStack, Input, FormControl, Box, Select, Text, Stack, useColorModeValue } from "@chakra-ui/react";
+import { Center, InputLeftElement, HStack, InputGroup, Heading, Button, VStack, Input, FormControl, Box, Select, Text, Grid, GridItem } from "@chakra-ui/react";
 import TableComponent from './Table.js';
-import { TableActions } from './TableUI/TableActions'
-import CreateModal from './CreateModal.js';
-import EditModal from './CreateModal.js';
 import { useDisclosure } from "@chakra-ui/react";
 import moment from 'moment';
 import { BsSearch } from 'react-icons/bs'
-import { RiAddFill, RiArrowRightUpLine } from 'react-icons/ri'
-import './Transactions.css';
 import categoryOptionsRaw from "../categories"
 
 const Transactions = () => {
@@ -85,7 +80,6 @@ const Transactions = () => {
                 <option>No Category Selected</option>
             )
         }
-
     })
 
     const handleSearchChange = e => setSearchValue(e.target.value)
@@ -112,76 +106,91 @@ const Transactions = () => {
     }
 
     return (
-        <Center>
-            <Box minH={'100vh'} p={4} pt={24} bg={useColorModeValue('gray.50', 'gray.800')}>
+        <Center w={"100%"} bg={"rgb(247,250,252)"}>
+            <Box w={"90vw"} minH={'100vh'} p={4} pt={24}>
                 <Center>
                     <VStack mt={{ base: "6", sm: "6", md: "8", lg: "8"}} mb={{ base: "10", sm: "10", md: "20", lg: "14"}}>
                         <Heading mb={6} size="xl">Transactions</Heading>
                         <Text p={2} fontSize={20}>Add and review transactional data</Text>
                     </VStack>
                 </Center>
-
-                <Box className="transactions-table-container">
-                    <Stack
-                        spacing="4"
-                        direction={{ base: 'column', md: 'row' }}
-                        justify="space-between">
+                <Grid
+                    m={"0 auto"}
+                    w={"95%"}
+                    gap={4}
+                    templateColumns={{
+                        base: "repeat(20, 1fr)",
+                        sm: "repeat(20, 1fr)",
+                        md: "repeat(20, 1fr)",
+                        lg: "repeat(20, 1fr)"
+                    }}>
+                    <GridItem id="vBar" colSpan={7}>
+                        <FormControl id="search">
+                            <InputGroup>
+                                <InputLeftElement pointerEvents="none" color="gray.400">
+                                    <BsSearch />
+                                </InputLeftElement>
+                                <Input
+                                    bg="white"
+                                    w="100%"
+                                    variant="outline"
+                                    rounded="base"
+                                    type="search"
+                                    placeholder="Search by keyword"
+                                    onChange={handleSearchChange}/>
+                            </InputGroup>
+                        </FormControl>
+                    </GridItem>
+                    <GridItem id="vSelect" colSpan={3}>
+                        <Select
+                            bg="white"
+                            variant="outline"
+                            name="input-category"
+                            onChange={handleSearchCategory}
+                            rounded="base"
+                            placeholder="All Categories">
+                            {categoryOptions}
+                        </Select>
+                    </GridItem>
+                    <GridItem id="vDateStart" colSpan={4}>
                         <HStack>
-                            <FormControl minW={{ md: '320px' }} id="search">
-                                <InputGroup size="sm">
-                                    <FormLabel srOnly>Filter by name or email</FormLabel>
-                                    <InputLeftElement pointerEvents="none" color="gray.400">
-                                        <BsSearch />
-                                    </InputLeftElement>
-                                    <Input
-                                        w="100%"
-                                        h="10"
-                                        variant="outline"
-                                        rounded="base"
-                                        type="search"
-                                        placeholder="Search by keyword"
-                                        onChange={handleSearchChange}/>
-                                </InputGroup>
-                            </FormControl>
-                            <Select
-                                h="10"
-                                variant="outline"
-                                name="input-category"
-                                onChange={handleSearchCategory}
-                                w="200%"
-                                rounded="base"
-                                size="sm"
-                                placeholder="All Categories">
-                                {categoryOptions}
-                            </Select>
-                            <HStack>
-                                Begin:
-                                <DatePicker
-                                    name="input-date"
-                                    className="begin-date-picker"
-                                    selected={searchStartDate}
-                                    onChange={(date) => setSearchStartDate(date)} />
-                                End:
-                                <DatePicker
-                                    name="input-date"
-                                    className="begin-date-picker"
-                                    selected={searchEndDate}
-                                    onChange={(date) => setSearchEndDate(date)} />
-                            </HStack>
-                            <Button
-                                w="100%"
-                                h="10"
-                                colorScheme="blue"
-                                onClick={filterTransactions}>
-                                Search
-                            </Button>
+                        <Text w="40%" textAlign="right" pr={2}>Begin: </Text>
+                        <DatePicker
+                            wrapperClassName="datePicker"
+                            name="input-date"
+                            className="begin-date-picker"
+                            selected={searchStartDate}
+                            onChange={(date) => setSearchStartDate(date)} />
                         </HStack>
-                    </Stack>
-                    <TableComponent />
-                </Box>
+                    </GridItem>
+                    <GridItem id="vDateEnd" colSpan={4}>
+                        <HStack>
+                        <Text w="40%" textAlign="right" pr={2}>End: </Text>
+                        <DatePicker
+                            wrapperClassName="datePicker"
+                            style={{ backgroundColor: "purple" }}
+                            name="input-date"
+                            className="begin-date-picker"
+                            selected={searchEndDate}
+                            onChange={(date) => setSearchEndDate(date)} />
+                        </HStack>
+                    </GridItem>
+                    <GridItem id="vButton" colSpan={2}>
+                        <Button
+                            w="100%"
+                            colorScheme="blue"
+                            variant="outline"
+                            onClick={filterTransactions}>
+                            Search
+                        </Button>
+                    </GridItem>
+                </Grid>
+                <TableComponent />
             </Box>
         </Center>
     )
 }
 
 export default Transactions;
+
+// 35 || 15 || 40 || 10 = 100

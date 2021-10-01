@@ -8,7 +8,6 @@ import EditBudgetModal from './EditBudgetModal.js'
 import { useDisclosure } from "@chakra-ui/react"
 import BudgetChart from './BudgetChart.js';
 import { DataContext } from './DataContext';
-import './Transactions.css';
 
 const Budgets = () => {
     let history = useHistory()
