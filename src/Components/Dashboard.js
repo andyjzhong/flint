@@ -41,7 +41,8 @@ const Dashboard = () => {
         accessToken,
         setAccessToken,
         summaryDateData,
-        setSummaryDateData
+        setSummaryDateData,
+        setIsUserLoggedIn
     } = useContext(DataContext);
     let summaryMap = {}
     let summaryDateMap = {
@@ -109,6 +110,7 @@ const Dashboard = () => {
 
     const refreshToken = async () => {
         try{
+            setIsUserLoggedIn(true)
             const decoded = jwt_decode(localStorage.getItem('refreshToken'))
 
             const res = await axios.post('http://localhost:8000/users/refreshtoken', {
@@ -122,6 +124,7 @@ const Dashboard = () => {
             setIsTokenValid(true)
             setAccessToken(res.data.accessToken)
         } catch {
+            setIsUserLoggedIn(false)
             history.push('/login')
         }
     }

@@ -31,7 +31,7 @@ import {
 
 export default function Login() {
 
-    const { isLoggedIn, setIsLoggedIn } = useContext(DataContext);
+    const { isUserLoggedIn, setIsUserLoggedIn } = useContext(DataContext);
     const { currentUserId, setCurrentUserId } = useContext(DataContext);
     const { isOpen: isAuthOpen, onOpen: onAuthOpen, onClose: onAuthClose} = useDisclosure()
     const [email, setEmail] = useState('')
@@ -85,7 +85,9 @@ export default function Login() {
             } else if(response.data.message === 'OK'){
                 localStorage.setItem('refreshToken', response.data.refreshToken)
                 localStorage.setItem('fuid', response.data.userobj._id)
-                setCurrentUserId(response.data)
+                localStorage.setItem('profilePicURL', response.data.userobj.profilePicURL)
+                setIsUserLoggedIn(true)
+                setCurrentUserId(response.data.userobj)
             } else {
                 setLoginErrorDisplay('block')
                 setLoginErrorText('Invalid credentials')
@@ -112,7 +114,9 @@ export default function Login() {
         if(response.data.message === 'Token is valid'){
             localStorage.setItem('refreshToken', response.data.refreshToken)
             localStorage.setItem('fuid', response.data.userobj._id)
-            setCurrentUserId(response.data)
+            localStorage.setItem('profilePicURL', response.data.userobj.profilePicURL)
+            setIsUserLoggedIn(true)
+            setCurrentUserId(response.data.userobj)
         } else if(response.data.message === 'Passwords do not match'){
             setLoginErrorDisplay('block')
             setLoginErrorText(response.data.message)
@@ -139,7 +143,9 @@ export default function Login() {
         if(response.data.message === 'Code is valid'){
             localStorage.setItem('refreshToken', response.data.refreshToken)
             localStorage.setItem('fuid', response.data.userobj._id)
-            setCurrentUserId(response.data)
+            localStorage.setItem('profilePicURL', response.data.userobj.profilePicURL)
+            setIsUserLoggedIn(true)
+            setCurrentUserId(response.data.userobj)
         } else if(response.data.message === 'Passwords do not match'){
             setLoginErrorDisplay('block')
             setLoginErrorText(response.data.message)
@@ -235,7 +241,7 @@ export default function Login() {
                                 />
                             </FormControl>
                             <FormControl id="sms" display={smsInputDisplay}>
-                                <FormLabel>Texted code number ending in {phoneLast4}</FormLabel>
+                                <FormLabel>Texted code to number ending in {phoneLast4}</FormLabel>
                                 <Input
                                     type="text"
                                     placeholder="6-digit code"

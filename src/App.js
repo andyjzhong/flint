@@ -35,6 +35,7 @@ function App() {
     const [summaryDateData, setSummaryDateData] = useState();
     const [refreshToken, setRefreshToken] = useState(null)
     const [accessToken, setAccessToken] = useState(null)
+    const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
 
     return (
         <ChakraProvider theme={theme}>
@@ -75,7 +76,9 @@ function App() {
                     accessToken,
                     setAccessToken,
                     summaryDateData,
-                    setSummaryDateData
+                    setSummaryDateData,
+                    isUserLoggedIn,
+                    setIsUserLoggedIn
                 }}
             >
                 <Navigation />

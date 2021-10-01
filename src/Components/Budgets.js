@@ -13,12 +13,13 @@ import './Transactions.css';
 
 const Budgets = () => {
     let history = useHistory()
-    const { setAccessToken } = useContext(DataContext);
+    const { setAccessToken, setIsUserLoggedIn } = useContext(DataContext);
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [isTokenValid, setIsTokenValid] = useState(false)
 
     const refreshToken = async () => {
         try{
+            setIsUserLoggedIn(true)
             const decoded = jwt_decode(localStorage.getItem('refreshToken'))
 
             const res = await axios.post('http://localhost:8000/users/refreshtoken', {
@@ -32,6 +33,7 @@ const Budgets = () => {
             setIsTokenValid(true)
             setAccessToken(res.data.accessToken)
         } catch {
+            setIsUserLoggedIn(false)
             history.push('/login')
         }
     }

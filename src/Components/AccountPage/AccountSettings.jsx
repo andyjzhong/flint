@@ -40,6 +40,8 @@ export const AccountSettings = (props) => {
         })
           .then((response) => {
             props.setUserInfo(response.data)
+            localStorage.setItem('profilePicURL', response.data.profilePicURL)
+            window.location.reload(false);
           })
       })
   }

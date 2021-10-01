@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useEffect, useContext} from 'react';
+import axios from 'axios';
+import jwt_decode from 'jwt-decode';
 import { Link as RouterLink } from 'react-router-dom';
+import { DataContext } from './DataContext';
 import {
     Stack,
     Flex,
@@ -12,6 +15,34 @@ import {
 import './Home.css'
 
 const Home = () => {
+
+    const { 
+        setIsUserLoggedIn,
+        setAccessToken,
+    } = useContext(DataContext);
+    
+      const refreshToken = async () => {
+        try{
+            setIsUserLoggedIn(true)
+            const decoded = jwt_decode(localStorage.getItem('refreshToken'))
+    
+            const res = await axios.post('http://localhost:8000/users/refreshtoken', {
+                email: decoded.email,
+                token: localStorage.getItem('refreshToken')
+            }).catch((err) => {
+                console.log(err)
+            })
+    
+            localStorage.setItem('refreshToken', res.data.refreshToken)
+            setAccessToken(res.data.accessToken)
+        } catch {
+            setIsUserLoggedIn(false)
+        }
+      }
+    
+      useEffect(()=>{
+        refreshToken()
+      },[])
     return (
         <Flex
             w={'full'}
