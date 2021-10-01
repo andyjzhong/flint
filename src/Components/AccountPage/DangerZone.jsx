@@ -25,7 +25,6 @@ export const DangerZone = (props) => {
   const [password, setPassword] = useState('')
 
   const [errorMessage, setErrorMessage] = useState('')
-  const [errorMessageDisplay, setErrorMessageDisplay] = useState('block')
   const [isButtonLoading, setIsButtonLoading] = useState(false)
 
   async function deleteAccount(){
@@ -43,11 +42,9 @@ export const DangerZone = (props) => {
       history.push('/')
     } else if(res.data.message === 'Incorrect Password'){
       setErrorMessage(res.data.message)
-      setErrorMessageDisplay('block')
       setIsButtonLoading(false)
     } else if(res.data.message === 'You are not allowed to delete this user'){
       setErrorMessage(res.data.message)
-      setErrorMessageDisplay('block')
       setIsButtonLoading(false)
     }
   }

@@ -17,8 +17,6 @@ import axios from 'axios';
 
 function RemovePhoneModal(props) {
 
-
-  const [phoneNumber, setPhoneNumber] = useState('');
   const [isPhoneNumberSubmitted, setIsCodeSubmitted] = useState(false);
   const [isSMSCodeSubmitted, setIsSMSCodeSubmitted] = useState(false);
   const [smsCode, setSmsCode] = useState('')

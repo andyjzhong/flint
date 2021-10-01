@@ -33,10 +33,8 @@ const Dashboard = () => {
 
     const userId = localStorage.getItem('fuid');
     const [userData, setUserData] = useState();
-    const [isTokenValid, setIsTokenValid] = useState(false)
     const history = useHistory()
     const {
-        summaryData,
         setSummaryData,
         accessToken,
         setAccessToken,
@@ -121,7 +119,6 @@ const Dashboard = () => {
             })
 
             localStorage.setItem('refreshToken', res.data.refreshToken)
-            setIsTokenValid(true)
             setAccessToken(res.data.accessToken)
         } catch {
             setIsUserLoggedIn(false)

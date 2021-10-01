@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-    Badge,
     Modal,
     ModalOverlay,
     ModalContent,
@@ -28,7 +27,7 @@ function AuthModal(props) {
       headers: {'authorization': `Bearer ${props.accessToken}`}
     })
     console.log(res)
-    if(res.data.message == 'Authenticator Removed'){
+    if(res.data.message === 'Authenticator Removed'){
       props.onRemoveAuthClose()
       props.setUserInfo(res.data.user)
     } else {

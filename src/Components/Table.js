@@ -4,7 +4,6 @@ import DeleteModal from './DeleteModal';
 import EditModal from './EditModal';
 import CreateModal from './CreateModal';
 import { Box, Table, Thead, Tr, Th, Td, Tbody, Button, IconButton, ButtonGroup, HStack, Flex, Text, useColorModeValue as mode } from '@chakra-ui/react';
-import { TablePagination } from './TableUI/TablePagination'
 import { AiFillEdit } from 'react-icons/ai';
 import { BsFillTrashFill } from 'react-icons/bs';
 import { useDisclosure } from "@chakra-ui/react"
@@ -15,32 +14,27 @@ import { RiAddFill } from 'react-icons/ri'
 const TableComponent = () => {
 
     const userId = localStorage.getItem('fuid');
-    const { userAction, setUserAction, transactionsList, setTransactionsList, transactionId, setTransactionId, matchingTransactionData, setMatchingTransactionData, filteredTransactionsList, setFilteredTransactionsList, searchValue, searchCategory, searchStartDate, searchEndDate, accessToken,
-        editTxDesc,
-        editTxDate,
-        editTxType,
-        editTxCat,
-        editTxSubcat,
-        editTxAmt,
+    const { userAction, 
+        setUserAction, 
+        transactionsList, 
+        setTransactionsList, 
+        transactionId, 
+        setTransactionId, 
+        setMatchingTransactionData, 
+        filteredTransactionsList, 
+        accessToken,
         setEditTxDesc,
         setEditTxDate,
         setEditTxType,
         setEditTxCat,
         setEditTxSubcat,
         setEditTxAmt,
-        txDescription,
-        txDate,
-        txType,
-        txCategory,
-        txSubcategory,
-        txAmount,
         setTxDescription,
         setTxDate,
         setTxType,
         setTxCategory,
         setTxSubcategory,
         setTxAmount,
-
     } = useContext(DataContext);
 
     const { isOpen, onOpen, onClose } = useDisclosure()

@@ -20,7 +20,7 @@ const AccountPage = () => {
   const history = useHistory()
   const userId = localStorage.getItem('fuid')
 
-  const { isUserLoggedIn, setIsUserLoggedIn } = useContext(DataContext);
+  const { setIsUserLoggedIn } = useContext(DataContext);
 
   const { isOpen: isNameChangeOpen, onOpen: onNameChangeOpen, onClose: onNameChangeClose } = useDisclosure()
   const { isOpen: isEmailChangeOpen, onOpen: onEmailChangeOpen, onClose: onEmailChangeClose } = useDisclosure()
@@ -30,7 +30,6 @@ const AccountPage = () => {
   const { isOpen: isRemovePhoneOpen, onOpen: onRemovePhoneOpen, onClose: onRemovePhoneClose} = useDisclosure()
   const { isOpen: isDeleteAccountOpen, onOpen: onDeleteAccountOpen, onClose: onDeleteAccountClose} = useDisclosure()
 
-  const [isTokenValid, setIsTokenValid] = useState(false)
   const [accessToken, setAccessToken] = useState(null)
   const [userInfo, setUserInfo] = useState(null)
   const [userLoaded, setUserLoaded] = useState(false)
@@ -50,7 +49,6 @@ const AccountPage = () => {
         })
 
         localStorage.setItem('refreshToken', res.data.refreshToken)
-        setIsTokenValid(true)
         setAccessToken(res.data.accessToken)
     } catch {
       setIsUserLoggedIn(false)
@@ -128,7 +126,7 @@ const AccountPage = () => {
               setTempSecret={setTempSecret}
               accessToken={accessToken}
             />
-            {/* <SocialAccountSettings /> */}
+
             <DangerZone
               accessToken={accessToken}
               onDeleteAccountOpen={onDeleteAccountOpen}

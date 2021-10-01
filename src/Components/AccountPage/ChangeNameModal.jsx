@@ -27,7 +27,7 @@ function ChangeNameModal(props) {
             process.env.REACT_APP_NODE_ENV === 'production'
                 ? `https://flint-server.herokuapp.com/users/changename/${userId}`
                 : `https://flint-server.herokuapp.com/users/changename/${userId}`
-    const res = axios.put(url, {
+    axios.put(url, {
       firstName: firstName,
       lastName: lastName
     },{
@@ -37,6 +37,7 @@ function ChangeNameModal(props) {
         console.log('updated user:', user)
         props.setUserInfo(user.data)
       })
+
   }
 
 

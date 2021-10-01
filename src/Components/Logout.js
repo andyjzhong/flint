@@ -9,30 +9,30 @@ function Logout(props) {
     const history = useHistory()
 
     const {
-        setIsUserLoggedIn,
-        setAccessToken,
+        setIsUserLoggedIn
     } = useContext(DataContext);
 
-    const logout = async () => {
-        try{
-          setIsUserLoggedIn(true)
-            const decoded = jwt_decode(localStorage.getItem('refreshToken'))
 
-            const res = await axios.post('https://flint-server.herokuapp.com/users/logout', {
-                email: decoded.email,
-                token: localStorage.getItem('refreshToken')
-            }).catch((err) => {
-                console.log(err)
-            })
-            history.push('/')
-
-        } catch {
-            setIsUserLoggedIn(false)
-            history.push('/')
-        }
-      }
 
       useEffect(()=>{
+        const logout = async () => {
+            try{
+              setIsUserLoggedIn(true)
+                const decoded = jwt_decode(localStorage.getItem('refreshToken'))
+    
+                const res = await axios.post('https://flint-server.herokuapp.com/users/logout', {
+                    email: decoded.email,
+                    token: localStorage.getItem('refreshToken')
+                }).catch((err) => {
+                    console.log(err, res)
+                })
+                history.push('/')
+    
+            } catch {
+                setIsUserLoggedIn(false)
+                history.push('/')
+            }
+          }
         logout()
       },[])
 

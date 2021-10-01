@@ -28,7 +28,7 @@ function AuthModal(props) {
       headers: {'authorization': `Bearer ${props.accessToken}`}
     })
     console.log(res)
-    if(res.data.message == 'Token is valid'){
+    if(res.data.message === 'Token is valid'){
       props.onAuthClose()
       props.setUserInfo(res.data.user)
       setCode('')
