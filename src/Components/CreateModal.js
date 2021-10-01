@@ -91,8 +91,16 @@ const CreateModal = (props) => {
         setDescription(e.target.value)
     })
 
+    let [isIncome, setIsIncome] = useState();
+
     const storeType = ((e) => {
         setType(e.target.value)
+
+        if (isIncome === true) {
+            setIsIncome(false)
+        } else {
+            setIsIncome(true)
+        }
     })
 
     const storeCategory = ((e) => {
@@ -132,7 +140,7 @@ const CreateModal = (props) => {
 
                         <FormControl>
                             <FormLabel>Category</FormLabel>
-                            <Select name="input-category" onChange={storeCategory} placeholder="Select category">
+                            <Select isDisabled={isIncome ? true : false} value={isIncome ? "Income" : "Select category"} name="input-category" onChange={storeCategory} placeholder="Select category">
                                 {categoryOptions}
                             </Select>
                         </FormControl>

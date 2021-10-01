@@ -125,10 +125,8 @@ const EditModal = (props) => {
         setEditTxType(e.target.value)
 
         if (isIncome === true) {
-            console.log("toggle to false")
             setIsIncome(false)
         } else {
-            console.log("toggle to true")
             setIsIncome(true)
         }
     })
