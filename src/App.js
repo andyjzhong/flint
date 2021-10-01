@@ -10,7 +10,8 @@ import Budgets from './Components/Budgets.js';
 import About from './Components/About.js';
 import Signup from './Components/Signup.js';
 import Login from './Components/Login.js';
-import AccountPage from './Components/AccountPage/AccountPage.jsx'
+import AccountPage from './Components/AccountPage/AccountPage.jsx';
+import Logout from './Components/Logout.js';
 
 // for testing purposes only
 import TableComponent from './Components/TableUI/TableComponent.jsx';
@@ -126,7 +127,7 @@ function App() {
                     summaryDateData,
                     setSummaryDateData,
                     isUserLoggedIn,
-                    setIsUserLoggedIn
+                    setIsUserLoggedIn,
                     setEditModalCategory,
                     setEditModalSubcategory,
                     setEditModalAmount,
@@ -144,6 +145,7 @@ function App() {
                 <Route exact path="/signup" component={Signup} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/account" component={AccountPage} />
+                <Route exact path="/logout" component={Logout} />
 
                 <Route exact path="/table" component={TableComponent} />
             </DataContext.Provider>
