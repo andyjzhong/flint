@@ -14,7 +14,7 @@ const DeleteModal = (props) => {
         try {
             const url =
                 process.env.REACT_APP_NODE_ENV === 'production'
-                    ? `https://flint-server.herokuapp.com/users/${userId}`
+                    ? `https://flint-server.herokuapp.com/users/${userId}/deletetransaction/${transactionId}`
                     : `https://flint-server.herokuapp.com/users/${userId}/deletetransaction/${transactionId}`
 
             axios.put(url,{},{
