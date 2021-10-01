@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Box, Table, Thead, Tr, Th, Td, Tbody } from '@chakra-ui/react';
 import { DataContext } from './DataContext';
 

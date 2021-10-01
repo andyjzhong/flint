@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export const Description = (props) => {
-  const { title, children, icon, isRecommended, onAuthOpen, isAuthOpen } = props
+  const { title, children, icon, isRecommended, onAuthOpen } = props
 
   const [authColorScheme, setAuthColorScheme] = useState(props.userInfo.isAuthEnabled ? 'red' : 'blue')
   const [smsColorScheme, setSmsColorScheme] = useState(props.userInfo.isSmsVerified ? 'red' : 'blue')
@@ -59,19 +59,19 @@ export const Description = (props) => {
           </Box>
         </Box>
       </Stack>
-      <Button colorScheme={title == "Authenticator" ? authColorScheme : smsColorScheme}  onClick={() => {
-        if(title == "Authenticator" && props.userInfo.isAuthEnabled == false){
+      <Button colorScheme={title === "Authenticator" ? authColorScheme : smsColorScheme}  onClick={() => {
+        if(title === "Authenticator" && props.userInfo.isAuthEnabled === false){
           getTempSecret()
           onAuthOpen()
-        } else if(title == "Authenticator" && props.userInfo.isAuthEnabled == true){
+        } else if(title === "Authenticator" && props.userInfo.isAuthEnabled === true){
           props.onRemoveAuthOpen()
-        } else if(title == "Phone verification" && props.userInfo.isSmsVerified == false){
+        } else if(title === "Phone verification" && props.userInfo.isSmsVerified === false){
           props.onAddPhoneOpen()
-        } else if(title == "Phone verification" && props.userInfo.isSmsVerified == true){
+        } else if(title === "Phone verification" && props.userInfo.isSmsVerified === true){
           props.onRemovePhoneOpen()
         }
       }}>
-        {title == "Authenticator"
+        {title === "Authenticator"
           ? (props.userInfo.isAuthEnabled ? 'Disable' : 'Enable')
           : (props.userInfo.isSmsVerified ? 'Disable' : 'Enable')
         }

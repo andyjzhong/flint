@@ -26,7 +26,7 @@ import { DataContext } from '../DataContext';
 const MobileNavContext = (props) => {
   const history = useHistory()
   const { isOpen, onToggle } = useDisclosure()
-  const { isUserLoggedIn, setIsUserLoggedIn } = useContext(DataContext);
+  const { isUserLoggedIn } = useContext(DataContext);
   return (
     <>
       <Flex align="center" justify="space-between" className="nav-content__mobile" {...props}>
@@ -90,7 +90,6 @@ const MobileNavContext = (props) => {
               bgGradient: 'linear(to-r, purple.400,red.400)',
               boxShadow: 'xl',
           }}
-          w="full" 
           size="lg" 
           mt="5" 
           as="a" 
@@ -105,7 +104,7 @@ const MobileNavContext = (props) => {
 
 const DesktopNavContent = (props) => {
   const history = useHistory()
-  const { isUserLoggedIn, setIsUserLoggedIn } = useContext(DataContext);
+  const { isUserLoggedIn } = useContext(DataContext);
 
   return (
     <Flex className="nav-content__desktop" align="center" {...props} style={{position: "relative"}}>

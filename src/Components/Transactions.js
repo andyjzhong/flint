@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import jwt_decode from 'jwt-decode';
 import { useHistory } from 'react-router';
 import axios from 'axios';
@@ -6,15 +6,12 @@ import DatePicker from "react-datepicker";
 import { DataContext } from './DataContext';
 import { Center, InputLeftElement, HStack, InputGroup, Heading, Button, VStack, Input, FormControl, Box, Select, Text, Grid, GridItem } from "@chakra-ui/react";
 import TableComponent from './Table.js';
-import { useDisclosure } from "@chakra-ui/react";
 import moment from 'moment';
 import { BsSearch } from 'react-icons/bs'
 import categoryOptionsRaw from "../categories"
 
 const Transactions = () => {
 
-    const [isTokenValid, setIsTokenValid] = useState(false)
-    const { isOpen, onOpen, onClose } = useDisclosure()
     const {
         transactionsList,
         setFilteredTransactionsList,
@@ -44,7 +41,6 @@ const Transactions = () => {
             })
 
             localStorage.setItem('refreshToken', res.data.refreshToken)
-            setIsTokenValid(true)
             setAccessToken(res.data.accessToken)
         } catch {
             setIsUserLoggedIn(false)

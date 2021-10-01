@@ -2,17 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { DataContext } from './DataContext';
 import { useHistory } from 'react-router';
 import axios from 'axios';
-import { useDisclosure } from "@chakra-ui/react";
 
 import {
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalCloseButton,
-    ModalBody,
-    Badge,
-    ModalFooter,
     Flex,
     Box,
     FormControl,
@@ -31,9 +22,8 @@ import {
 
 export default function Login() {
 
-    const { isUserLoggedIn, setIsUserLoggedIn } = useContext(DataContext);
+    const { setIsUserLoggedIn } = useContext(DataContext);
     const { currentUserId, setCurrentUserId } = useContext(DataContext);
-    const { isOpen: isAuthOpen, onOpen: onAuthOpen, onClose: onAuthClose} = useDisclosure()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [show, setShow] = useState(false)
@@ -50,12 +40,6 @@ export default function Login() {
     const [verifyId, setVerifyId] = useState(null)
     const handleClick = () => setShow(!show)
     let history = useHistory()
-
-    const login = () => {
-        console.log("Just tried to log in.");
-        getAccountDetail()
-    }
-
 
     const getAccountDetail = async () => {
         console.log("Attempting to retrieve one user...")
@@ -178,7 +162,7 @@ export default function Login() {
         if(currentUserId === null){
             return
         } else {
-            if(currentUserId == 'Not Allowed'){
+            if(currentUserId === 'Not Allowed'){
                 return
             } else {
                 history.push('/dashboard')

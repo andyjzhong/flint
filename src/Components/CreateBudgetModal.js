@@ -17,9 +17,6 @@ import {
     InputLeftElement,
     Select,
     Button,
-    RadioGroup,
-    Radio,
-    Stack
 } from "@chakra-ui/react"
 
 
@@ -27,7 +24,7 @@ const CreateBudgetModal = (props) => {
 
     const userId = localStorage.getItem('fuid');
 
-    const { budgetDate, setUserAction, accessToken, setBudgetsList, category, setCategory, subcategory, setSubcategory, amount, setAmount } = useContext(DataContext);
+    const { setUserAction, accessToken, setBudgetsList, category, setCategory, subcategory, setSubcategory, amount, setAmount } = useContext(DataContext);
 
     let categoryOptions = categoryOptionsRaw.map((item, index) => {
         return (

@@ -32,12 +32,12 @@ import { HeadingGroup } from '../AccountPage/HeadingGroup'
         },{
             headers: {'authorization': `Bearer ${props.accessToken}`}
         })
-        if(response.data.status == 200){
+        if(response.data.status === 200){
           setStatusColor('green')
           setStatusMessage(response.data.message)
           console.log(response.data.user)
           props.setUserInfo(response.data.user)
-        } else if(response.data.status == 400){
+        } else if(response.data.status === 400){
           setStatusColor('red')
           setStatusMessage(response.data.message)
         }
