@@ -48,15 +48,24 @@ function Doughnut() {
     };
 
     const options = {
+        layout: {
+            padding: 40,
+        },
         plugins: {
             legend: {
+                padding: 20,
                 position: 'bottom',
+                labels: {
+                    font: {
+                        size: 16
+                    }
+                }
             }
         },
     };
 
     return (
-        <DoughnutChart data={data} options={options}/>
+        <DoughnutChart data={data} options={options} height={800} width={800}/>
     )
 }
 

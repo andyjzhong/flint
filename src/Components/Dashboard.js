@@ -299,7 +299,7 @@ const Dashboard = () => {
 
     return (
         <div className="dashboard">
-            <Box h={'100vh'} p={4} pt={24} bg={useColorModeValue('gray.50', 'gray.800')}>
+            <Box p={4} pt={24} bg={useColorModeValue('gray.50', 'gray.800')}>
                 <div className="screen-header">
                     <Stack spacing={{ base: 10, md: 20 }}>
                         <Heading lineHeight={1.1} fontSize={{ base: '4xl', sm: '4xl', md: '5xl', lg: '5xl' }}>
@@ -308,7 +308,7 @@ const Dashboard = () => {
                     </Stack>
                 </div>
 
-                <StatGroup style={{margin: "4rem auto", padding: "2rem", backgroundColor: "rgb(237,242,246)", borderRadius: "10px", textAlign: "center"}} spacing="24px" maxW={'85vw'}>
+                <StatGroup style={{margin: "4rem auto", padding: "2rem", backgroundColor: "rgb(237,242,246)", borderRadius: "10px", textAlign: "center"}} spacing="24px" maxW={'85vw'} boxShadow="lg">
                     <Grid
                         gap={{ base: '1rem', sm: '2rem', md: '2rem', lg: '4rem', xl: '6rem' }}
                         templateColumns={{
@@ -322,7 +322,7 @@ const Dashboard = () => {
                             <Stat>
                                 <RiBankFill style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
                                 <StatLabel>Total Income</StatLabel>
-                                <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${totalIncome || 0}</StatNumber>
+                                <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${totalIncome.toFixed(0) || 0}</StatNumber>
                                 <StatHelpText>
                                 <StatArrow type="increase" />
                                 23.36%
@@ -333,7 +333,7 @@ const Dashboard = () => {
                             <Stat>
                                 <FaMoneyBillWave style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
                                 <StatLabel>Total Spend</StatLabel>
-                                <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${totalSpend || 0}</StatNumber>
+                                <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${totalSpend.toFixed(0) || 0}</StatNumber>
                                 <StatHelpText>
                                 <StatArrow type="increase" />
                                 23.36%
@@ -344,7 +344,7 @@ const Dashboard = () => {
                             <Stat>
                                 <FaPiggyBank style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
                                 <StatLabel>Net Income</StatLabel>
-                                <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${totalIncome - totalSpend || 0}</StatNumber>
+                                <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${(totalIncome - totalSpend).toFixed(0) || 0}</StatNumber>
                                 <StatHelpText>
                                 <StatArrow type={(Math.sign((totalIncome - totalSpend || 0)) >= 0) ? "increase" : "decrease"}  />
                                 9.05%
@@ -355,7 +355,7 @@ const Dashboard = () => {
                             <Stat>
                                 <BsGraphUp style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
                                 <StatLabel>Avg Mo. Income</StatLabel>
-                                <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${Math.round(totalIncome / 12) || 0}</StatNumber>
+                                <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${Math.round(totalIncome / 12).toFixed(0) || 0}</StatNumber>
                                 <StatHelpText>
                                 <StatArrow type="decrease" />
                                 9.05%
@@ -366,7 +366,7 @@ const Dashboard = () => {
                             <Stat>
                                 <BsGraphDown style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
                                 <StatLabel>Avg Mo. Spend</StatLabel>
-                                <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${Math.round(totalSpend / 12) || 0}</StatNumber>
+                                <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${Math.round(totalSpend / 12).toFixed(0) || 0}</StatNumber>
                                 <StatHelpText>
                                 <StatArrow type="increase" />
                                 23.36%
@@ -377,7 +377,7 @@ const Dashboard = () => {
                             <Stat>
                                 <BiDollarCircle style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
                                 <StatLabel>Avg Net Income</StatLabel>
-                                <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${(Math.round(totalIncome / 12) - Math.round(totalSpend / 12)) || 0}</StatNumber>
+                                <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${((Math.round(totalIncome / 12) - Math.round(totalSpend / 12))).toFixed(0) || 0}</StatNumber>
                                 <StatHelpText>
                                 <StatArrow type="decrease" />
                                 9.05%
@@ -397,12 +397,12 @@ const Dashboard = () => {
                     }}
                 >
                     <GridItem
+                        boxShadow="lg"
                         m="0 auto"
                         w={{ base: "90vw", sm: "90vw", md: "90vw", lg: "45vw"}}
                         class="chart-container"
                         p="1rem"
                         border={{ base: '1px solid lightgray', sm: 'none' }}
-                        borderRadius='1rem'
                     >
                         <Heading lineHeight={1.1}>
                             <Text textAlign="center" pt="1rem" pb="3rem" fontSize={{ base: '20px', sm: '24px', md: '30px', lg: "32px", xl: '36px' }}>Spending vs. Budget</Text>
@@ -415,7 +415,7 @@ const Dashboard = () => {
                         class="chart-container"
                         p="1rem"
                         border={{ base: '1px solid lightgray', sm: 'none' }}
-                        borderRadius='1rem'
+                        boxShadow="lg"
                     >
                         <Heading lineHeight={1.1}>
                             <Text textAlign="center" pt="1rem" pb="3rem" fontSize={{ base: '20px', sm: '24px', md: '30px', lg: "32px", xl: '36px' }}>Income vs. Expenses</Text>
@@ -439,7 +439,7 @@ const Dashboard = () => {
                         class="chart-container"
                         p="1rem"
                         border={{ base: '1px solid lightgray', sm: 'none' }}
-                        borderRadius='1rem'
+                        boxShadow="lg"
                     >
                         <Heading lineHeight={1.1}>
                             <Text textAlign="center" pt="1rem" pb="3rem" fontSize={{ base: '20px', sm: '24px', md: '30px', lg: "32px", xl: '36px' }}>Spending by Category</Text>
@@ -451,6 +451,7 @@ const Dashboard = () => {
                         w={{ base: "90vw", sm: "90vw", md: "90vw", lg: "45vw"}}
                         class="chart-container"
                         p="1rem"
+                        boxShadow="lg"
                     >
                         <Box
                             className="transactions-table-container"

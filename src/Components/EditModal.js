@@ -40,7 +40,6 @@ const EditModal = (props) => {
         setEditTxCat,
         setEditTxSubcat,
         setEditTxAmt,
-
         txDescription,
         txType,
         txCategory,

@@ -16,7 +16,6 @@ const TableComponent = () => {
 
     const userId = localStorage.getItem('fuid');
     const { userAction, setUserAction, transactionsList, setTransactionsList, transactionId, setTransactionId, matchingTransactionData, setMatchingTransactionData, filteredTransactionsList, setFilteredTransactionsList, searchValue, searchCategory, searchStartDate, searchEndDate, accessToken,
-
         editTxDesc,
         editTxDate,
         editTxType,
@@ -29,7 +28,6 @@ const TableComponent = () => {
         setEditTxCat,
         setEditTxSubcat,
         setEditTxAmt,
-
         txDescription,
         txDate,
         txType,
