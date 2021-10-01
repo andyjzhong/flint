@@ -118,9 +118,19 @@ const EditModal = (props) => {
         setEditTxDesc(e.target.value)
     })
 
+    let [isIncome, setIsIncome] = useState();
+
     const storeType = ((e) => {
         setTxType(e.target.value)
         setEditTxType(e.target.value)
+
+        if (isIncome === true) {
+            console.log("toggle to false")
+            setIsIncome(false)
+        } else {
+            console.log("toggle to true")
+            setIsIncome(true)
+        }
     })
 
     const storeCategory = ((e) => {
@@ -169,7 +179,7 @@ const EditModal = (props) => {
 
                         <FormControl>
                             <FormLabel>Category</FormLabel>
-                            <Select value={editTxCat} name="input-category" onChange={storeCategory} placeholder="Select category">
+                            <Select isDisabled={isIncome ? true : false} value={isIncome ? "Income" : editTxCat} name="input-category" onChange={storeCategory} placeholder="Select category">
                                 {categoryOptions}
                             </Select>
                         </FormControl>
