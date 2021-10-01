@@ -22,7 +22,7 @@ function AuthModal(props) {
   const [isCodeSubmitted, setIsCodeSubmitted] = useState(null)
 
   async function removeAuth(){
-    const res = await axios.put(`http://localhost:8000/users/removeauth/${userId}`, {
+    const res = await axios.put(`https://flint-server.herokuapp.com/users/removeauth/${userId}`, {
       token: `${code}`
     },{
       headers: {'authorization': `Bearer ${props.accessToken}`}

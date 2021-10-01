@@ -22,7 +22,7 @@ function AuthModal(props) {
   const [isCodeSubmitted, setIsCodeSubmitted] = useState(null)
 
   async function verifyTempSecret(){
-    const res = await axios.put(`http://localhost:8000/users/verifytempsecret/${userId}`, {
+    const res = await axios.put(`https://flint-server.herokuapp.com/users/verifytempsecret/${userId}`, {
       token: `${code}`
     },{
       headers: {'authorization': `Bearer ${props.accessToken}`}
@@ -41,9 +41,9 @@ function AuthModal(props) {
 
   return (
     <>
-      <Modal 
-        isOpen={props.isAuthOpen} 
-        onClose={props.onAuthClose} 
+      <Modal
+        isOpen={props.isAuthOpen}
+        onClose={props.onAuthClose}
         motionPreset='scale'
         isCentered
       >

@@ -67,7 +67,7 @@ const CreateModal = (props) => {
         const url =
             process.env.REACT_APP_NODE_ENV === 'production'
                 ? `https://flint-server.herokuapp.com/users/${userId}/addtransaction`
-                : `http://localhost:8000/users/${userId}/addtransaction`
+                : `https://flint-server.herokuapp.com/users/${userId}/addtransaction`
 
         axios.put(url, {
             "description": description,

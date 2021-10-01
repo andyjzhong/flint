@@ -27,7 +27,7 @@ import { HeadingGroup } from '../AccountPage/HeadingGroup'
         const url =
             process.env.REACT_APP_NODE_ENV === 'production'
                 ? `https://flint-server.herokuapp.com/users/changepreferedauth/${userId}`
-                : `http://localhost:8000/users/changepreferedauth/${userId}`
+                : `https://flint-server.herokuapp.com/users/changepreferedauth/${userId}`
 
         const response = await axios.put(url,{
           preferedAuth: preferedAuth

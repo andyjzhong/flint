@@ -62,7 +62,7 @@ const CreateBudgetModal = (props) => {
         const url =
             process.env.REACT_APP_NODE_ENV === 'production'
                 ? `https://flint-server.herokuapp.com/users/${userId}/addbudget`
-                : `http://localhost:8000/users/${userId}/addbudget`
+                : `https://flint-server.herokuapp.com/users/${userId}/addbudget`
 
         const res = await axios.put(url, {
 

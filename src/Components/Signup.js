@@ -54,8 +54,8 @@ export default function Signup() {
 
         const url =
             process.env.REACT_APP_NODE_ENV === 'production'
-                ? `http://localhost:8000/users`
-                : `http://localhost:8000/users`
+                ? `https://flint-server.herokuapp.com/users`
+                : `https://flint-server.herokuapp.com/users`
 
         axios.put(url, {
             "username": newAccount.username,

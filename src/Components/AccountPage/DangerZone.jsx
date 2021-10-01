@@ -29,7 +29,7 @@ export const DangerZone = (props) => {
   const [isButtonLoading, setIsButtonLoading] = useState(false)
 
   async function deleteAccount(){
-    const res = await axios.delete(`http://localhost:8000/users/${userId}`,{
+    const res = await axios.delete(`https://flint-server.herokuapp.com/users/${userId}`,{
       headers: {
         'authorization': `Bearer ${props.accessToken}`
       },

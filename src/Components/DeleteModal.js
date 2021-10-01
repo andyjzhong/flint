@@ -15,7 +15,7 @@ const DeleteModal = (props) => {
             const url =
                 process.env.REACT_APP_NODE_ENV === 'production'
                     ? `http://porto-app-server.herokuapp.com/users/${userId}`
-                    : `http://localhost:8000/users/${userId}/deletetransaction/${transactionId}`
+                    : `https://flint-server.herokuapp.com/users/${userId}/deletetransaction/${transactionId}`
 
             axios.put(url,{},{
                 headers: {"authorization": `Bearer ${accessToken}`}

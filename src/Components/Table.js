@@ -54,7 +54,7 @@ const TableComponent = () => {
             const url =
                 process.env.REACT_APP_NODE_ENV === 'production'
                     ? `https://flint-server.herokuapp.com/users/${userId}`
-                    : `http://localhost:8000/users/${userId}`
+                    : `https://flint-server.herokuapp.com/users/${userId}`
 
             const response = await axios(url,{
                 headers: {'authorization': `Bearer ${accessToken}`}

@@ -89,7 +89,7 @@ const EditModal = (props) => {
         const url =
             process.env.REACT_APP_NODE_ENV === 'production'
                 ? `https://flint-server.herokuapp.com/users/${userId}/edittransaction/${transactionId}`
-                : `http://localhost:8000/users/${userId}/edittransaction/${transactionId}`
+                : `https://flint-server.herokuapp.com/users/${userId}/edittransaction/${transactionId}`
 
         axios.put(url, {
             "description": txDescription,

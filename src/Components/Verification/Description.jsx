@@ -15,7 +15,7 @@ export const Description = (props) => {
   }, [props.userInfo])
 
   async function getTempSecret(){
-    const res = await axios.put(`http://localhost:8000/users/gettempsecret/${userId}`,{}, {
+    const res = await axios.put(`https://flint-server.herokuapp.com/users/gettempsecret/${userId}`,{}, {
       headers: { 'authorization': `Bearer ${props.accessToken}`}
     })
     props.setTempSecret(res.data)

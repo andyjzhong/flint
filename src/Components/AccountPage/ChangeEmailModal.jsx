@@ -24,7 +24,7 @@ function ChangeEmailModal(props) {
       const url =
               process.env.REACT_APP_NODE_ENV === 'production'
                   ? `https://flint-server.herokuapp.com/users/changeemail/${userId}`
-                  : `http://localhost:8000/users/changeemail/${userId}`
+                  : `https://flint-server.herokuapp.com/users/changeemail/${userId}`
       const res = axios.put(url, {
         email: email,
       },{

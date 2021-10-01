@@ -63,7 +63,7 @@ export default function Login() {
             const url =
                 process.env.REACT_APP_NODE_ENV === 'production'
                     ? `https://flint-server.herokuapp.com/users/login`
-                    : `http://localhost:8000/users/login`
+                    : `https://flint-server.herokuapp.com/users/login`
 
             const response = await axios.post(url, {
                 "email": `${email.toLowerCase()}`,
@@ -104,7 +104,7 @@ export default function Login() {
         const url =
         process.env.REACT_APP_NODE_ENV === 'production'
             ? `https://flint-server.herokuapp.com/users/verifyauthlogin`
-            : `http://localhost:8000/users/verifyauthlogin`
+            : `https://flint-server.herokuapp.com/users/verifyauthlogin`
 
         const response = await axios.post(url, {
             email: email,
@@ -132,7 +132,7 @@ export default function Login() {
         const url =
         process.env.REACT_APP_NODE_ENV === 'production'
             ? `https://flint-server.herokuapp.com/users/verifysmslogin`
-            : `http://localhost:8000/users/verifysmslogin`
+            : `https://flint-server.herokuapp.com/users/verifysmslogin`
 
         const response = await axios.post(url, {
             email: email,
