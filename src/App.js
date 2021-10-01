@@ -12,6 +12,7 @@ import Signup from './Components/Signup.js';
 import Login from './Components/Login.js';
 import AccountPage from './Components/AccountPage/AccountPage.jsx';
 import Logout from './Components/Logout.js';
+import AboutPage from './Components/AboutPage/AboutPage.jsx';
 
 // for testing purposes only
 import TableComponent from './Components/TableUI/TableComponent.jsx';
@@ -140,7 +141,7 @@ function App() {
                 <Route exact path="/dashboard" component={Dashboard} />
                 <Route exact path="/transactions" component={Transactions} />
                 <Route exact path="/budgets" component={Budgets} />
-                <Route exact path="/about" component={About} />
+                <Route exact path="/about" component={AboutPage} />
                 <Route exact path="/signup" component={Signup} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/account" component={AccountPage} />
