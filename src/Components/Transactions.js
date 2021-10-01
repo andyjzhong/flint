@@ -4,7 +4,7 @@ import { useHistory } from 'react-router';
 import axios from 'axios';
 import DatePicker from "react-datepicker";
 import { DataContext } from './DataContext';
-import { Center, InputLeftElement, FormLabel, HStack, InputGroup, Heading, Button, ButtonGroup, Input, Grid, GridItem, FormControl, Box, Select, Stack, useColorModeValue } from "@chakra-ui/react";
+import { Center, InputLeftElement, FormLabel, HStack, InputGroup, Heading, Button, VStack, Input, FormControl, Box, Select, Text, Stack, useColorModeValue } from "@chakra-ui/react";
 import TableComponent from './Table.js';
 import { TableActions } from './TableUI/TableActions'
 import CreateModal from './CreateModal.js';
@@ -112,67 +112,75 @@ const Transactions = () => {
     }
 
     return (
-        <div className="transactions">
+        <Center>
             <Box minH={'100vh'} p={4} pt={24} bg={useColorModeValue('gray.50', 'gray.800')}>
-            <Center>
-                <Heading size="lg" mb="6">Transactions</Heading>
-            </Center>
+                <Center>
+                    <VStack mt={{ base: "6", sm: "6", md: "8", lg: "8"}} mb={{ base: "10", sm: "10", md: "20", lg: "14"}}>
+                        <Heading mb={6} size="xl">Transactions</Heading>
+                        <Text p={2} fontSize={20}>Add and review transactional data</Text>
+                    </VStack>
+                </Center>
 
-            <div className="transactions-table-container">
-
-                <Stack
-                  spacing="4"
-                  direction={{
-                    base: 'column',
-                    md: 'row',
-                  }}
-                  justify="space-between"
-                >
-
-                  <HStack>
-                    <FormControl
-                      minW={{
-                        md: '320px',
-                      }}
-                      id="search"
-                    >
-                      <InputGroup size="sm">
-                        <FormLabel srOnly>Filter by name or email</FormLabel>
-                        <InputLeftElement pointerEvents="none" color="gray.400">
-                          <BsSearch />
-                        </InputLeftElement>
-                        <Input w="100%" h="10" variant="outline" rounded="base" type="search" placeholder="Search by keyword" onChange={handleSearchChange}/>
-                      </InputGroup>
-                    </FormControl>
-                    <Select
-                        h="10" variant="outline"
-                        name="input-category"
-                        onChange={handleSearchCategory}
-                      w="200%"
-                      rounded="base"
-                      size="sm"
-                      placeholder="All Categories"
-                    >
-                      {categoryOptions}
-                    </Select>
-                    Begin:
-                    <DatePicker name="input-date" className="begin-date-picker" selected={searchStartDate} onChange={(date) => setSearchStartDate(date)} />
-                    End:
-                    <DatePicker name="input-date" className="begin-date-picker" selected={searchEndDate} onChange={(date) => setSearchEndDate(date)} />
-                    <Button w="100%" h="10" colorScheme="blue" onClick={filterTransactions}>Search</Button>
-                  </HStack>
-
-                </Stack>
-
-                <TableComponent />
-
-
-            </div>
-
-
+                <Box className="transactions-table-container">
+                    <Stack
+                        spacing="4"
+                        direction={{ base: 'column', md: 'row' }}
+                        justify="space-between">
+                        <HStack>
+                            <FormControl minW={{ md: '320px' }} id="search">
+                                <InputGroup size="sm">
+                                    <FormLabel srOnly>Filter by name or email</FormLabel>
+                                    <InputLeftElement pointerEvents="none" color="gray.400">
+                                        <BsSearch />
+                                    </InputLeftElement>
+                                    <Input
+                                        w="100%"
+                                        h="10"
+                                        variant="outline"
+                                        rounded="base"
+                                        type="search"
+                                        placeholder="Search by keyword"
+                                        onChange={handleSearchChange}/>
+                                </InputGroup>
+                            </FormControl>
+                            <Select
+                                h="10"
+                                variant="outline"
+                                name="input-category"
+                                onChange={handleSearchCategory}
+                                w="200%"
+                                rounded="base"
+                                size="sm"
+                                placeholder="All Categories">
+                                {categoryOptions}
+                            </Select>
+                            <HStack>
+                                Begin:
+                                <DatePicker
+                                    name="input-date"
+                                    className="begin-date-picker"
+                                    selected={searchStartDate}
+                                    onChange={(date) => setSearchStartDate(date)} />
+                                End:
+                                <DatePicker
+                                    name="input-date"
+                                    className="begin-date-picker"
+                                    selected={searchEndDate}
+                                    onChange={(date) => setSearchEndDate(date)} />
+                            </HStack>
+                            <Button
+                                w="100%"
+                                h="10"
+                                colorScheme="blue"
+                                onClick={filterTransactions}>
+                                Search
+                            </Button>
+                        </HStack>
+                    </Stack>
+                    <TableComponent />
+                </Box>
             </Box>
-
-        </div>
+        </Center>
     )
 }
 
