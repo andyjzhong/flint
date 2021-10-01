@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { DataContext } from './DataContext';
 import categoryOptionsRaw from "../categories"
 import axios from 'axios';

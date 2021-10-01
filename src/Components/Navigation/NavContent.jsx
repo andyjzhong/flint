@@ -6,22 +6,19 @@ import {
     Menu,
     MenuButton,
     MenuList,
-    Link,
     Avatar,
     MenuItem,
     useDisclosure,
     useColorModeValue as mode,
 } from '@chakra-ui/react'
-import { SettingsIcon } from '@chakra-ui/icons'
 import { Logo } from './Logo'
 import { NavLink } from './NavLink'
 import { NavMenu } from './NavMenu'
 import { Submenu } from './Submenu.jsx'
-import { UserProfile } from './UserProfile.jsx'
 import { ToggleButton } from './ToggleButton'
 import { links } from './_data'
 import { useHistory } from 'react-router';
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import { DataContext } from '../DataContext';
 
 
