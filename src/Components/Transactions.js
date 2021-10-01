@@ -36,7 +36,7 @@ const Transactions = () => {
             setIsUserLoggedIn(true)
             const decoded = jwt_decode(localStorage.getItem('refreshToken'))
 
-            const res = await axios.post('http://localhost:8000/users/refreshtoken', {
+            const res = await axios.post('https://flint-server.herokuapp.com/users/refreshtoken', {
                 email: decoded.email,
                 token: localStorage.getItem('refreshToken')
             }).catch((err) => {

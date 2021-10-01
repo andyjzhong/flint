@@ -87,8 +87,8 @@ const EditModal = (props) => {
         console.log(`Attempting to edit a transaction with id of ${transactionId}...`)
 
         const url =
-            process.env.NODE_ENV === 'production'
-                ? `http://flint-server.herokuapp.com/users/${userId}/edittransaction/${transactionId}`
+            process.env.REACT_APP_NODE_ENV === 'production'
+                ? `https://flint-server.herokuapp.com/users/${userId}/edittransaction/${transactionId}`
                 : `http://localhost:8000/users/${userId}/edittransaction/${transactionId}`
 
         axios.put(url, {

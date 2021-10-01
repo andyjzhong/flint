@@ -21,8 +21,8 @@ const BudgetTableComponent = () => {
     const getAllBudgets = async () => {
         try {
             const url =
-                process.env.NODE_ENV === 'production'
-                    ? `http://flint-server.herokuapp.com/users/${userId}`
+                process.env.REACT_APP_NODE_ENV === 'production'
+                    ? `https://flint-server.herokuapp.com/users/${userId}`
                     : `http://localhost:8000/users/${userId}`
 
             const response = await axios.get(url,{

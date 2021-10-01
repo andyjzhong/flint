@@ -61,7 +61,7 @@ export default function Login() {
         console.log("Attempting to retrieve one user...")
         try {
             const url =
-                process.env.NODE_ENV === 'production'
+                process.env.REACT_APP_NODE_ENV === 'production'
                     ? `https://flint-server.herokuapp.com/users/login`
                     : `http://localhost:8000/users/login`
 
@@ -102,7 +102,7 @@ export default function Login() {
 
     async function authenticatorLogin(){
         const url =
-        process.env.NODE_ENV === 'production'
+        process.env.REACT_APP_NODE_ENV === 'production'
             ? `https://flint-server.herokuapp.com/users/verifyauthlogin`
             : `http://localhost:8000/users/verifyauthlogin`
 
@@ -130,7 +130,7 @@ export default function Login() {
 
     async function smsLogin(){
         const url =
-        process.env.NODE_ENV === 'production'
+        process.env.REACT_APP_NODE_ENV === 'production'
             ? `https://flint-server.herokuapp.com/users/verifysmslogin`
             : `http://localhost:8000/users/verifysmslogin`
 

@@ -53,7 +53,7 @@ export default function Signup() {
         console.log("Attempting to create a new account...")
 
         const url =
-            process.env.NODE_ENV === 'production'
+            process.env.REACT_APP_NODE_ENV === 'production'
                 ? `http://localhost:8000/users`
                 : `http://localhost:8000/users`
 

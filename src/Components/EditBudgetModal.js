@@ -56,8 +56,8 @@ const EditBudgetModal = (props) => {
         console.log(`Attempting to edit a transaction with id of ${budgetId}...`)
 
         const url =
-            process.env.NODE_ENV === 'production'
-                ? `http://flint-server.herokuapp.com/users/${userId}/editbudget/${budgetId}`
+            process.env.REACT_APP_NODE_ENV === 'production'
+                ? `https://flint-server.herokuapp.com/users/${userId}/editbudget/${budgetId}`
                 : `http://localhost:8000/users/${userId}/editbudget/${budgetId}`
 
 

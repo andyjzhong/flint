@@ -43,7 +43,7 @@ const AccountPage = () => {
         setIsUserLoggedIn(true)
         const decoded = jwt_decode(localStorage.getItem('refreshToken'))
 
-        const res = await axios.post('http://localhost:8000/users/refreshtoken', {
+        const res = await axios.post('https://flint-server.herokuapp.com/users/refreshtoken', {
             email: decoded.email,
             token: localStorage.getItem('refreshToken')
         }).catch((err) => {
@@ -62,8 +62,8 @@ const AccountPage = () => {
   async function getUserData(){
     try {
       const url =
-          process.env.NODE_ENV === 'production'
-              ? `http://flint-server.herokuapp.com/users/${userId}`
+          process.env.REACT_APP_NODE_ENV === 'production'
+              ? `https://flint-server.herokuapp.com/users/${userId}`
               : `http://localhost:8000/users/${userId}`
 
       const response = await axios.get(url,{
@@ -71,7 +71,7 @@ const AccountPage = () => {
       })
       setUserInfo(response.data)
       setUserLoaded(true)
-      
+
     } catch (error) {
       console.warn("Error when retrieving users.")
     }
@@ -102,8 +102,8 @@ const AccountPage = () => {
       >
         <Box maxW="xl" mx="auto">
           <Stack spacing="12">
-  
-            <AccountSettings 
+
+            <AccountSettings
               setUserInfo={setUserInfo}
               accessToken={accessToken}
               isNameChangeOpen={isNameChangeOpen}
@@ -114,7 +114,7 @@ const AccountPage = () => {
               mt='2'
             />
 
-            <VerificationComponent 
+            <VerificationComponent
               userInfo={userInfo}
               setUserInfo={setUserInfo}
               onAuthOpen={onAuthOpen}
@@ -130,14 +130,14 @@ const AccountPage = () => {
               accessToken={accessToken}
             />
             {/* <SocialAccountSettings /> */}
-            <DangerZone 
+            <DangerZone
               accessToken={accessToken}
               onDeleteAccountOpen={onDeleteAccountOpen}
               isDeleteAccountOpen={isDeleteAccountOpen}
               onDeleteAccountClose={onDeleteAccountClose}
             />
-            
-            <ChangeNameModal 
+
+            <ChangeNameModal
               isNameChangeOpen={isNameChangeOpen}
               onNameChangeOpen={onNameChangeOpen}
               onNameChangeClose={onNameChangeClose}
@@ -146,7 +146,7 @@ const AccountPage = () => {
               accessToken={accessToken}
             />
 
-            <ChangeEmailModal 
+            <ChangeEmailModal
               isEmailChangeOpen={isEmailChangeOpen}
               onEmailChangeOpen={onEmailChangeOpen}
               onEmailChangeClose={onEmailChangeClose}
@@ -171,7 +171,7 @@ const AccountPage = () => {
               onRemoveAuthClose={onRemoveAuthClose}
               accessToken={accessToken}
               setUserInfo={setUserInfo}
-            />    
+            />
 
             <AddPhoneModal
               isAddPhoneOpen={isAddPhoneOpen}

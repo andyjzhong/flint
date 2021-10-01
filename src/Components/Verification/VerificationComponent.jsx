@@ -25,8 +25,8 @@ import { HeadingGroup } from '../AccountPage/HeadingGroup'
     async function savePreferedAuth(){
 
         const url =
-            process.env.NODE_ENV === 'production'
-                ? `http://flint-server.herokuapp.com/users/changepreferedauth/${userId}`
+            process.env.REACT_APP_NODE_ENV === 'production'
+                ? `https://flint-server.herokuapp.com/users/changepreferedauth/${userId}`
                 : `http://localhost:8000/users/changepreferedauth/${userId}`
 
         const response = await axios.put(url,{
@@ -144,15 +144,15 @@ import { HeadingGroup } from '../AccountPage/HeadingGroup'
                         <RadioGroup onChange={(e) => setPreferedAuth(e)} value={props.userInfo.preferedAuth}>
                           <Stack direction="row">
 
-                            <Radio 
-                              isDisabled={!props.userInfo.isAuthEnabled} 
+                            <Radio
+                              isDisabled={!props.userInfo.isAuthEnabled}
                               value={1}
                             >
                               Authenticator
                             </Radio>
 
-                            <Radio 
-                              isDisabled={!props.userInfo.isSmsVerified} 
+                            <Radio
+                              isDisabled={!props.userInfo.isSmsVerified}
                               value={2}
                             >
                               SMS Text

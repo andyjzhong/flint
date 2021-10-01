@@ -33,7 +33,7 @@ export const AccountSettings = (props) => {
     axios.post('https://api.cloudinary.com/v1_1/dah6quajd/image/upload', formData)
       .then((res) => {
         console.log(res.data.secure_url)
-        axios.put(`http://localhost:8000/users/uploadimage/${userId}`,{
+        axios.put(`https://flint-server.herokuapp.com/users/uploadimage/${userId}`,{
           image: res.data.secure_url
         },{
           headers: {'authorization': `Bearer ${props.accessToken}`}
@@ -55,7 +55,7 @@ export const AccountSettings = (props) => {
 
   if(userLoaded){
     return (
-  
+
     <Stack as="section" spacing="6" {...props}>
       <HeadingGroup
         title="Account Settings"
@@ -83,10 +83,10 @@ export const AccountSettings = (props) => {
               <Button size="sm" fontWeight="normal" onClick={() => props.onNameChangeOpen()}>
                 Change name
               </Button>
-              <input 
-                id="getImage" 
-                type="file" 
-                style={{display: 'none'}} 
+              <input
+                id="getImage"
+                type="file"
+                style={{display: 'none'}}
                 onChange={(e) => {
                   uploadImage(e.target.files)
                 }}/>
@@ -95,7 +95,7 @@ export const AccountSettings = (props) => {
               </Button>
             </HStack>
           </FieldGroup>
-  
+
           <FieldGroup title="Login details" description="Change your email and password">
             <Text fontSize="sm">{props.userInfo.email}</Text>
             <HStack mt="5">
@@ -107,7 +107,7 @@ export const AccountSettings = (props) => {
               </Button>
             </HStack>
           </FieldGroup>
-  
+
           <FieldGroup title="Language" description="Change your preferred language and currency">
             <Stack
               direction={{
@@ -125,7 +125,7 @@ export const AccountSettings = (props) => {
                   <option>Arabic</option>
                 </Select>
               </FormControl>
-  
+
               <FormControl id="currency">
                 <FormLabel fontSize="sm">Currency</FormLabel>
                 <Select size="sm" maxW="2xs">
@@ -139,7 +139,7 @@ export const AccountSettings = (props) => {
               Save Changes
             </Button>
           </FieldGroup>
-  
+
           <FieldGroup title="Communications" description="Manage your email preference">
             <Stack spacing="3">
               <FormControl display="flex" alignItems="center">
@@ -166,7 +166,7 @@ export const AccountSettings = (props) => {
   } else {
     return (
       <div>
-        
+
       </div>
     )
   }

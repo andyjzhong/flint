@@ -18,12 +18,12 @@ function ChangeEmailModal(props) {
     const userId = localStorage.getItem('fuid')
 
     const [email, setEmail] = useState(props.userInfo.email)
-  
+
     async function submitEmailChange(){
-      
+
       const url =
-              process.env.NODE_ENV === 'production'
-                  ? `http://flint-server.herokuapp.com/users/changeemail/${userId}`
+              process.env.REACT_APP_NODE_ENV === 'production'
+                  ? `https://flint-server.herokuapp.com/users/changeemail/${userId}`
                   : `http://localhost:8000/users/changeemail/${userId}`
       const res = axios.put(url, {
         email: email,
@@ -35,8 +35,8 @@ function ChangeEmailModal(props) {
           props.setUserInfo(user.data)
         })
     }
-  
-  
+
+
       return (
           <>
             <Modal
@@ -50,14 +50,14 @@ function ChangeEmailModal(props) {
                 <ModalBody pb={6}>
                   <FormControl>
                     <FormLabel>Email</FormLabel>
-                    <Input 
-                      placeholder="First name" 
+                    <Input
+                      placeholder="First name"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                     />
                   </FormControl>
                 </ModalBody>
-      
+
                 <ModalFooter>
                   <Button colorScheme="blue" mr={3} onClick={() => {
                     submitEmailChange()

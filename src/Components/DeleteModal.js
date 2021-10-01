@@ -13,7 +13,7 @@ const DeleteModal = (props) => {
 
         try {
             const url =
-                process.env.NODE_ENV === 'production'
+                process.env.REACT_APP_NODE_ENV === 'production'
                     ? `http://porto-app-server.herokuapp.com/users/${userId}`
                     : `http://localhost:8000/users/${userId}/deletetransaction/${transactionId}`
 

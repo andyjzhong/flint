@@ -26,14 +26,14 @@ function AddPhoneModal(props) {
   const userId = localStorage.getItem('fuid')
 
   async function sendCode() {
-    const res = await axios.post('http://localhost:8000/users/sendsmscode', {
+    const res = await axios.post('https://flint-server.herokuapp.com/users/sendsmscode', {
       phone: `1${phoneNumber}`,
     });
     setVerifyId(res.data.verifyId);
   }
 
   async function verifyCode(){
-    const res = await axios.put(`http://localhost:8000/users/checksmscode/${userId}`, {
+    const res = await axios.put(`https://flint-server.herokuapp.com/users/checksmscode/${userId}`, {
         "code": smsCode,
         "verifyId": verifyId,
         "phone": parseInt(phoneNumber)
@@ -42,7 +42,7 @@ function AddPhoneModal(props) {
         // open alert here
         props.setUserInfo(res.data.user)
         props.onAddPhoneClose()
-        
+
     } else if(res.data.status === 400){
         setIsCodeSubmitted(false)
         // open fail alert here

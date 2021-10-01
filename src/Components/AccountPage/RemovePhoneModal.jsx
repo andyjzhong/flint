@@ -27,7 +27,7 @@ function RemovePhoneModal(props) {
   const userId = localStorage.getItem('fuid')
 
   async function sendCode() {
-    const res = await axios.post('http://localhost:8000/users/sendsmscode', {
+    const res = await axios.post('https://flint-server.herokuapp.com/users/sendsmscode', {
       phone: `1${props.userInfo.phone}`,
     });
     setVerifyId(res.data.verifyId);
@@ -35,7 +35,7 @@ function RemovePhoneModal(props) {
   }
 
   async function verifyRemoveCode(){
-    const res = await axios.put(`http://localhost:8000/users/removephone/${userId}`, {
+    const res = await axios.put(`https://flint-server.herokuapp.com/users/removephone/${userId}`, {
         "code": smsCode,
         "verifyId": verifyId,
     })
@@ -43,7 +43,7 @@ function RemovePhoneModal(props) {
         // open alert here
         props.setUserInfo(res.data.user)
         props.onRemovePhoneClose()
-        
+
     } else if(res.data.status === 400){
         setIsCodeSubmitted(false)
         // open fail alert here
@@ -70,7 +70,7 @@ function RemovePhoneModal(props) {
             <ModalCloseButton />
             <ModalBody pb={6}>
               <FormControl>
-                
+
                 <Text>Are you sure you want to remove SMS authentication?</Text>
               </FormControl>
             </ModalBody>

@@ -113,7 +113,7 @@ const Dashboard = () => {
             setIsUserLoggedIn(true)
             const decoded = jwt_decode(localStorage.getItem('refreshToken'))
 
-            const res = await axios.post('http://localhost:8000/users/refreshtoken', {
+            const res = await axios.post('https://flint-server.herokuapp.com/users/refreshtoken', {
                 email: decoded.email,
                 token: localStorage.getItem('refreshToken')
             }).catch((err) => {
@@ -178,7 +178,7 @@ const Dashboard = () => {
 
         try {
             const url =
-                process.env.NODE_ENV === 'production'
+                process.env.REACT_APP_NODE_ENV === 'production'
                     ? `https://flint-server.herokuapp.com/users/${userId}`
                     : `http://localhost:8000/users/${userId}`
 

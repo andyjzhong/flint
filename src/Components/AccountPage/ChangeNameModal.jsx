@@ -22,10 +22,10 @@ function ChangeNameModal(props) {
   const [lastName, setLastName] = useState(props.userInfo.lastName)
 
   async function submitNameChange(){
-    
+
     const url =
-            process.env.NODE_ENV === 'production'
-                ? `http://flint-server.herokuapp.com/users/changename/${userId}`
+            process.env.REACT_APP_NODE_ENV === 'production'
+                ? `https://flint-server.herokuapp.com/users/changename/${userId}`
                 : `http://localhost:8000/users/changename/${userId}`
     const res = axios.put(url, {
       firstName: firstName,
@@ -53,23 +53,23 @@ function ChangeNameModal(props) {
               <ModalBody pb={6}>
                 <FormControl>
                   <FormLabel>First name</FormLabel>
-                  <Input 
-                    placeholder="First name" 
+                  <Input
+                    placeholder="First name"
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
                   />
                 </FormControl>
-    
+
                 <FormControl mt={4}>
                   <FormLabel>Last name</FormLabel>
-                  <Input 
+                  <Input
                     placeholder="Last name"
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
                   />
                 </FormControl>
               </ModalBody>
-    
+
               <ModalFooter>
                 <Button colorScheme="blue" mr={3} onClick={() => {
                   submitNameChange()
