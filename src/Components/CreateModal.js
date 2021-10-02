@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { DataContext } from './DataContext';
 import DatePickerComponent from './DatePicker.js'
 import categoryOptionsRaw from "../categories"
@@ -27,9 +27,9 @@ const CreateModal = (props) => {
 
     const userId = localStorage.getItem('fuid');
 
-    const { txDate, setUserAction, accessToken } = useContext(DataContext);
+    const { txDate, setUserAction, accessToken, isIncome, setIsIncome } = useContext(DataContext);
     const [description, setDescription] = useState("")
-    const [type, setType] = useState("")
+    const [type, setType] = useState("Expense")
     const [category, setCategory] = useState("")
     const [subcategory, setSubcategory] = useState("")
     const [amount, setAmount] = useState("")
@@ -83,6 +83,9 @@ const CreateModal = (props) => {
             console.log("Success!")
             props.onClose()
             setUserAction("create")
+            setCategory("")
+            setType("Expense")
+            setIsIncome(false)
         })
         .catch(console.error)
     }
@@ -91,20 +94,32 @@ const CreateModal = (props) => {
         setDescription(e.target.value)
     })
 
-    let [isIncome, setIsIncome] = useState();
-
     const storeType = ((e) => {
+        console.log("FLIPPITY FLIP");
         setType(e.target.value)
 
         if (isIncome === true) {
+            console.log("isIncome was: ", isIncome);
             setIsIncome(false)
+            console.log("isIncome is now: ", isIncome);
         } else {
+            console.log("isIncome was: ", isIncome);
             setIsIncome(true)
+            setCategory("Income")
+            console.log("isIncome is now: ", isIncome);
         }
     })
 
+    useEffect(() => {
+        setIsIncome(false)
+    },[])
+
     const storeCategory = ((e) => {
-        setCategory(e.target.value)
+        if (isIncome === true) {
+            setCategory("Income")
+        } else {
+            setCategory(e.target.value)
+        }
     })
 
     const storeSubcategory = ((e) => {
@@ -117,7 +132,7 @@ const CreateModal = (props) => {
 
     return (
         <>
-            <Modal isOpen={props.isOpen} onClose={props.onClose}>
+            <Modal isCentered isOpen={props.isOpen} onClose={props.onClose}>
                 <ModalOverlay />
                 <ModalContent>
                     <ModalHeader>Add New Transaction</ModalHeader>
@@ -130,7 +145,7 @@ const CreateModal = (props) => {
 
                         <FormControl>
                             <FormLabel>Type</FormLabel>
-                            <RadioGroup defaultValue="2">
+                            <RadioGroup id="radioType" defaultValue="Expense">
                                 <Stack spacing={5} direction="row">
                                     <Radio name="input-type" onChange={storeType} colorScheme="green" value="Income">Income</Radio>
                                     <Radio name="input-type" onChange={storeType} colorScheme="red" value="Expense">Expense</Radio>
@@ -140,7 +155,10 @@ const CreateModal = (props) => {
 
                         <FormControl>
                             <FormLabel>Category</FormLabel>
-                            <Select isDisabled={isIncome ? true : false} value={isIncome ? "Income" : "Select category"} name="input-category" onChange={storeCategory} placeholder="Select category">
+                            <Select
+                                isDisabled={ isIncome ? true : false }
+                                value={ (type === "Income")  ? "Income" : category}
+                                name="input-category" onChange={storeCategory} placeholder="Select category">
                                 {categoryOptions}
                             </Select>
                         </FormControl>

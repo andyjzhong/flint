@@ -57,6 +57,8 @@ function App() {
     const [txSubcategory, setTxSubcategory] = useState("")
     const [txAmount, setTxAmount] = useState(0)
 
+    let [isIncome, setIsIncome] = useState();
+
     return (
         <ChakraProvider theme={theme}>
             <DataContext.Provider
@@ -132,7 +134,9 @@ function App() {
                     setEditModalAmount,
                     setCategory,
                     setSubcategory,
-                    setAmount
+                    setAmount,
+                    isIncome,
+                    setIsIncome
                 }}
             >
                 <Navigation />

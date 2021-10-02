@@ -56,8 +56,6 @@ const EditModal = (props) => {
         setTxDate
     } = useContext(DataContext);
 
-    const [startDate, setStartDate] = useState(new Date());
-
     // console.log("matchingTransactionData is", matchingTransactionData);
 
     let categoryOptions = categoryOptionsRaw.map((item, index) => {
@@ -126,6 +124,8 @@ const EditModal = (props) => {
 
         if (isIncome === true) {
             setIsIncome(false)
+            setTxType("Income")
+            setEditTxType("Income")
         } else {
             setIsIncome(true)
         }
@@ -154,7 +154,7 @@ const EditModal = (props) => {
 
     return (
         <>
-            <Modal isOpen={props.isEditOpen} onClose={props.onEditClose}>
+            <Modal isCentered isOpen={props.isEditOpen} onClose={props.onEditClose}>
                 <ModalOverlay />
                 <ModalContent>
                     <ModalHeader>Edit Transaction</ModalHeader>
