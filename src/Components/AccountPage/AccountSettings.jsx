@@ -61,8 +61,8 @@ export const AccountSettings = (props) => {
     <Stack as="section" spacing="6" {...props}>
 
           <Stack mt={{ base: "6", sm: "6", md: "8", lg: "8"}} mb={{ base: "2", sm: "2", md: "2", lg: "2"}}>
-              <Heading mb={6} size="xl">Account Settings</Heading>
-              <Text textAlign="left" fontSize={20}>Update your profile and manage security preferences</Text>
+              <Heading mb={6} size="xl" textAlign={{ base: "center" }}>Account Settings</Heading>
+              <Text textAlign="left" fontSize={20} textAlign={{ base: "center" }}>Update your profile and manage security preferences</Text>
           </Stack>
       <Card>
         <Stack divider={<StackDivider />} spacing="6">

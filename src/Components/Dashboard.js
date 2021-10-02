@@ -302,7 +302,7 @@ const Dashboard = () => {
                         <Heading fontSize={{ base: '4xl', sm: '4xl', md: '5xl', lg: '5xl' }}>
                             <Text mb={6} size="xl" as={'span'} bgGradient="linear(to-r, green.400,green.300)" bgClip="text">Dashboard</Text>{' '}
                         </Heading>
-                        <Text p={2} fontSize={20}>View and analyze your spending and earnings</Text>
+                        <Text p={2} fontSize={20} textAlign="center">View and analyze your spending and earnings</Text>
 
                     </VStack>
                 </Center>

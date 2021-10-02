@@ -20,7 +20,8 @@ import {
     Button,
     RadioGroup,
     Radio,
-    Stack
+    Stack,
+    SimpleGrid
 } from "@chakra-ui/react"
 
 const CreateModal = (props) => {
@@ -138,55 +139,55 @@ const CreateModal = (props) => {
                     <ModalHeader>Add New Transaction</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody pb={6}>
-                        <FormControl>
-                            <FormLabel>Description</FormLabel>
-                            <Input name="input-description" onChange={storeDescription} placeholder="i.e. Starbucks" />
-                        </FormControl>
-
-                        <FormControl>
+                        <FormControl  mb={4}>
                             <FormLabel>Type</FormLabel>
                             <RadioGroup id="radioType" defaultValue="Expense">
                                 <Stack spacing={5} direction="row">
-                                    <Radio name="input-type" onChange={storeType} colorScheme="green" value="Income">Income</Radio>
-                                    <Radio name="input-type" onChange={storeType} colorScheme="red" value="Expense">Expense</Radio>
+                                    <Radio name="input-type" onChange={storeType} value="Income">Income</Radio>
+                                    <Radio name="input-type" onChange={storeType} value="Expense">Expense</Radio>
                                 </Stack>
                             </RadioGroup>
                         </FormControl>
-
-                        <FormControl>
-                            <FormLabel>Category</FormLabel>
-                            <Select
-                                isDisabled={ isIncome ? true : false }
-                                value={ (type === "Income")  ? "Income" : category}
-                                name="input-category" onChange={storeCategory} placeholder="Select category">
-                                {categoryOptions}
-                            </Select>
+                        <FormControl mb={4}>
+                            <FormLabel>Description</FormLabel>
+                            <Input name="input-description" onChange={storeDescription} placeholder="i.e. Starbucks" />
                         </FormControl>
+                        <SimpleGrid mb={4} columns={2} spacing={2}>
+                            <FormControl>
+                                <FormLabel>Category</FormLabel>
+                                <Select
+                                    isDisabled={ isIncome ? true : false }
+                                    value={ (type === "Income")  ? "Income" : category}
+                                    name="input-category" onChange={storeCategory} placeholder="Select category">
+                                    {categoryOptions}
+                                </Select>
+                            </FormControl>
+                            <FormControl>
+                                <FormLabel>Subcategory</FormLabel>
+                                <Select name="input-subcategory" onChange={storeSubcategory} placeholder="Select category">
+                                    {subcategoryOptions}
+                                </Select>
+                            </FormControl>
+                        </SimpleGrid>
 
-                        <FormControl>
-                            <FormLabel>Subcategory</FormLabel>
-                            <Select name="input-subcategory" onChange={storeSubcategory} placeholder="Select category">
-                                {subcategoryOptions}
-                            </Select>
-                        </FormControl>
-
-                        <FormControl>
-                            <FormLabel>Date</FormLabel>
-                            <DatePickerComponent name="input-date" className="transaction-date-picker"/>
-                        </FormControl>
-
-                        <FormControl mt={4}>
-                            <FormLabel>Amount</FormLabel>
-                            <InputGroup>
-                                <InputLeftElement
-                                    pointerEvents="none"
-                                    color="gray.300"
-                                    fontSize="1.2em"
-                                    children="$"
-                                />
-                                <Input name="input-amount" onChange={storeAmount} placeholder="Enter amount" />
-                            </InputGroup>
-                        </FormControl>
+                        <SimpleGrid mb={4} columns={2} spacing={2}>
+                            <FormControl>
+                                <FormLabel>Date</FormLabel>
+                                <DatePickerComponent wrapperClassName="add-transaction-date" name="input-date" className="transaction-date-picker"/>
+                            </FormControl>
+                            <FormControl>
+                                <FormLabel>Amount</FormLabel>
+                                <InputGroup>
+                                    <InputLeftElement
+                                        pointerEvents="none"
+                                        color="gray.300"
+                                        fontSize="1.2em"
+                                        children="$"
+                                    />
+                                    <Input name="input-amount" onChange={storeAmount} placeholder="Enter amount" />
+                                </InputGroup>
+                            </FormControl>
+                        </SimpleGrid>
                     </ModalBody>
 
                     <ModalFooter>

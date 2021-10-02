@@ -12,6 +12,7 @@ import Login from './Components/Login.js';
 import AccountPage from './Components/AccountPage/AccountPage.jsx';
 import Logout from './Components/Logout.js';
 import AboutPage from './Components/AboutPage/AboutPage.jsx';
+import moment from 'moment'
 
 // for testing purposes only
 import TableComponent from './Components/TableUI/TableComponent.jsx';
@@ -51,7 +52,7 @@ function App() {
     const [editTxAmt, setEditTxAmt] = useState(0)
 
     const [txDescription, setTxDescription] = useState("")
-    const [txDate, setTxDate] = useState("");
+    const [txDate, setTxDate] = useState(moment())
     const [txType, setTxType] = useState("")
     const [txCategory, setTxCategory] = useState("")
     const [txSubcategory, setTxSubcategory] = useState("")

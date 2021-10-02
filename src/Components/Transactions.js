@@ -107,7 +107,7 @@ const Transactions = () => {
                 <Center>
                     <VStack mt={{ base: "6", sm: "6", md: "8", lg: "8"}} mb={{ base: "10", sm: "10", md: "20", lg: "14"}}>
                         <Heading mb={6} size="xl">Transactions</Heading>
-                        <Text p={2} fontSize={20}>Add and review transactional data</Text>
+                        <Text p={2} fontSize={20} textAlign="center">Add and review transactional data</Text>
                     </VStack>
                 </Center>
                 <Grid

@@ -47,7 +47,7 @@ const Budgets = () => {
                     <Center>
                         <VStack mt={{ base: "6", sm: "6", md: "8", lg: "8"}} mb={{ base: "10", sm: "10", md: "20", lg: "14"}}>
                             <Heading mb={6} size="xl">Budgets</Heading>
-                            <Text p={2} fontSize={20}>Track and manage your expenses by category</Text>
+                            <Text p={2} fontSize={20} textAlign="center">Track and manage your expenses by category</Text>
                         </VStack>
                     </Center>
                     <Center>
