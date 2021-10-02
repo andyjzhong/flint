@@ -11,7 +11,7 @@ import {
   import { FaLock, FaChartPie } from 'react-icons/fa'
   import { Feature } from './Feature'
   import { BiDollarCircle } from 'react-icons/bi';
-  
+
   function AboutDetails(){
     return (
       <Box as="section" bg={mode('gray.50', 'gray.800')} pt="32" pb="32" h='100vh'>
@@ -47,7 +47,7 @@ import {
                 <Feature icon={<Box as={FaChartPie} w="6" h="6" />} title="Manage Budgets">
                   Easily manage your finances by creating budgets. Our visual aids, charts and graphs are easy to understand and customizable.
                 </Feature>
-                <Feature icon={<Box as={FaLock} w="6" h="6" />} title="2FA">
+                <Feature icon={<Box as={FaLock} w="6" h="6" />} title="Security & Privacy">
                   Always know your privacy is protected with multiple ways to enable 2-Factor-Authentication on your account. Choose one that fits you best.
                 </Feature>
               </Stack>
