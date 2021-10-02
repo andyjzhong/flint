@@ -139,7 +139,7 @@ const CreateModal = (props) => {
                     <ModalHeader>Add New Transaction</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody pb={6}>
-                        <FormControl  mb={4}>
+                        <FormControl  mb={6}>
                             <FormLabel>Type</FormLabel>
                             <RadioGroup id="radioType" defaultValue="Expense">
                                 <Stack spacing={5} direction="row">
@@ -148,11 +148,11 @@ const CreateModal = (props) => {
                                 </Stack>
                             </RadioGroup>
                         </FormControl>
-                        <FormControl mb={4}>
+                        <FormControl mb={6}>
                             <FormLabel>Description</FormLabel>
                             <Input name="input-description" onChange={storeDescription} placeholder="i.e. Starbucks" />
                         </FormControl>
-                        <SimpleGrid mb={4} columns={2} spacing={2}>
+                        <SimpleGrid mb={6} columns={2} spacing={2}>
                             <FormControl>
                                 <FormLabel>Category</FormLabel>
                                 <Select
@@ -170,7 +170,7 @@ const CreateModal = (props) => {
                             </FormControl>
                         </SimpleGrid>
 
-                        <SimpleGrid mb={4} columns={2} spacing={2}>
+                        <SimpleGrid mb={6} columns={2} spacing={2}>
                             <FormControl>
                                 <FormLabel>Date</FormLabel>
                                 <DatePickerComponent wrapperClassName="add-transaction-date" name="input-date" className="transaction-date-picker"/>
