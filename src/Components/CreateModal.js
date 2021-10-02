@@ -41,26 +41,25 @@ const CreateModal = (props) => {
         )
     })
 
-    // TODO: Currently hardcoded.
-    let selectedCategory = "Entertainment"
+    let subcategoryPreview = ""
 
-    const matchingCategory = categoryOptionsRaw.filter((item, index) => {
-        return item.major === selectedCategory;
-    })
+    if (category) {
+        let selectedCategory = categoryOptionsRaw.filter((item, index) => {
+            return item.major === category
+        })
 
-    let subcategoryOptions = matchingCategory[0].minor.map((item, index) => {
-
-        if (selectedCategory.length > 0) {
-            return (
-                <option key={item} value={item}>{item}</option>
-            )
-        } else {
-            return (
-                <option>No Category Selected</option>
-            )
-        }
-
-    })
+        subcategoryPreview = selectedCategory[0].minor.map((item, index) => {
+            if (selectedCategory.length > 0) {
+                return (
+                    <option key={index} value={item}>{item}</option>
+                )
+            } else {
+                return (
+                    <option>No Category Selected</option>
+                )
+            }
+        })
+    }
 
     const createTransaction = async () => {
         console.log("Attempting to create a new transaction...")
@@ -165,7 +164,7 @@ const CreateModal = (props) => {
                             <FormControl>
                                 <FormLabel>Subcategory</FormLabel>
                                 <Select name="input-subcategory" onChange={storeSubcategory} placeholder="Select category">
-                                    {subcategoryOptions}
+                                    {subcategoryPreview}
                                 </Select>
                             </FormControl>
                         </SimpleGrid>
@@ -201,24 +200,3 @@ const CreateModal = (props) => {
 }
 
 export default CreateModal;
-
-
-//
-// <SimpleGrid mb={6} columns={2} spacing={2}>
-//     <FormControl>
-//         <FormLabel>Date</FormLabel>
-//         <DatePickerComponent wrapperClassName="add-transaction-date" name="input-date" className="transaction-date-picker"/>
-//     </FormControl>
-//     <FormControl>
-//         <FormLabel>Amount</FormLabel>
-//         <InputGroup>
-//             <InputLeftElement
-//                 pointerEvents="none"
-//                 color="gray.300"
-//                 fontSize="1.2em"
-//                 children="$"
-//             />
-//             <Input name="input-amount" onChange={storeAmount} placeholder="Enter amount" />
-//         </InputGroup>
-//     </FormControl>
-// </SimpleGrid>

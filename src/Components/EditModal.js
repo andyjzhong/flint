@@ -163,8 +163,8 @@ const EditModal = (props) => {
                             <FormLabel>Type</FormLabel>
                             <RadioGroup value={editTxType} defaultValue="2">
                                 <Stack spacing={5} direction="row">
-                                    <Radio name="input-type" onChange={storeType} colorScheme="green" value="Income">Income</Radio>
-                                    <Radio name="input-type" onChange={storeType} colorScheme="red" value="Expense">Expense</Radio>
+                                    <Radio name="input-type" onChange={storeType} value="Income">Income</Radio>
+                                    <Radio name="input-type" onChange={storeType} value="Expense">Expense</Radio>
                                 </Stack>
                             </RadioGroup>
                         </FormControl>
