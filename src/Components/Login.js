@@ -24,7 +24,7 @@ export default function Login() {
 
     const { setIsUserLoggedIn } = useContext(DataContext);
     const { currentUserId, setCurrentUserId } = useContext(DataContext);
-    const [email, setEmail] = useState('')
+    const [email, setEmail] = useState(localStorage.getItem('email') || '')
     const [password, setPassword] = useState('')
     const [show, setShow] = useState(false)
     const [loginMethod, setLoginMethod] = useState('default')
@@ -156,6 +156,13 @@ export default function Login() {
             smsLogin()
         }
     }
+    const handleKeypress = (e) => {
+        //it triggers by pressing the enter key
+      if (e.keyCode === 13) {
+        console.log('enterpressed')
+        loginButton()
+      }
+    };
 
     // Effective usage of useEffect
     useEffect(() => {
@@ -183,7 +190,7 @@ export default function Login() {
                     <Stack align={'center'}>
                         <Heading fontSize={'4xl'}>Sign in to your account</Heading>
                         <Text fontSize={'lg'} color={'gray.600'}>
-                            to enjoy all of our cool <Link color={'blue.400'}>features</Link> ✌️
+                            to enjoy all of our cool <Link href="/about" color={'blue.400'}>features</Link> ✌️
                         </Text>
                     </Stack>
                     <Box
@@ -208,6 +215,7 @@ export default function Login() {
                                     type={show ? "text" : "password"}
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
+                                    onKeyDown={handleKeypress}
                                     />
                                     <InputRightElement width="4.5rem">
                                         <Button h="1.75rem" size="sm" onClick={handleClick}>
@@ -222,6 +230,7 @@ export default function Login() {
                                     type="text"
                                     value={authToken}
                                     onChange={(e) => setAuthToken(e.target.value)}
+                                    onKeyDown={handleKeypress}
                                 />
                             </FormControl>
                             <FormControl id="sms" display={smsInputDisplay}>
@@ -231,6 +240,7 @@ export default function Login() {
                                     placeholder="6-digit code"
                                     value={smsCode}
                                     onChange={(e) => setSmsCode(e.target.value)}
+                                    onKeyDown={handleKeypress}
                                 />
                             </FormControl>
                             <Stack spacing={10}>
@@ -239,7 +249,7 @@ export default function Login() {
                                     align={'start'}
                                     justify={'space-between'}
                                 >
-                                    <Checkbox>Remember me</Checkbox>
+                                    <Checkbox onChange={() => localStorage.setItem('email', email)}>Remember me</Checkbox>
                                     <Link color={'blue.400'}>Forgot password?</Link>
                                 </Stack>
                                 <Text color='red.400' display={loginErrorDisplay}>{loginErrorText}</Text>
