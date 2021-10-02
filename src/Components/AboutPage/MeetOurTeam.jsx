@@ -50,21 +50,19 @@ function MeetOurTeam() {
               maxW="2xl"
               color={useColorModeValue('blackAlpha.700', 'whiteAlpha.800')}
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-              exercitation
+              Our team of engineers at General Assembly designed and built this application for our final Capstone project.
             </Text>
             <HStack
               mt="8"
               as="a"
               display="inline-flex"
-              href="#"
+              href="about"
               className="group"
               fontSize="lg"
               fontWeight="bold"
               color={useColorModeValue('blue.600', 'blue.300')}
             >
-              <span>Join the team</span>
+              <span>Contact us</span>
               <Box
                 as={FaArrowRight}
                 transition="all 0.2s"

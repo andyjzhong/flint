@@ -26,8 +26,8 @@ import {
             md: '8',
           }}
         >
-          <Heading textAlign="center" letterSpacing="tight" fontWeight="extrabold">
-            If you like organization, you’re gonna love this
+          <Heading textAlign="center" letterSpacing="tight" fontWeight="bold">
+            Flint provides you with more control over your finances.
           </Heading>
           <Box mt="24">
             <SimpleGrid
