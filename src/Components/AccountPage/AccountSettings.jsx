@@ -10,6 +10,9 @@ import {
   Text,
   Stack,
   StackDivider,
+  Center,
+  VStack,
+  Heading,
 } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react';
 import { Card } from './Card'
@@ -56,10 +59,11 @@ export const AccountSettings = (props) => {
     return (
 
     <Stack as="section" spacing="6" {...props}>
-      <HeadingGroup
-        title="Account Settings"
-        description="Change your profile, request your data, and more"
-      />
+
+          <Stack mt={{ base: "6", sm: "6", md: "8", lg: "8"}} mb={{ base: "2", sm: "2", md: "2", lg: "2"}}>
+              <Heading mb={6} size="xl">Account Settings</Heading>
+              <Text textAlign="left" fontSize={20}>Update your profile and manage security preferences</Text>
+          </Stack>
       <Card>
         <Stack divider={<StackDivider />} spacing="6">
           <FieldGroup title="Name &amp; Avatar" description="Change your name and profile picture">
