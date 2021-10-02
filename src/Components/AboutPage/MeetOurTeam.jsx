@@ -91,8 +91,9 @@ function MeetOurTeam() {
                 image={member.image}
                 role={member.role}
                 name={member.name}
-                twitter="#"
-                linkedIn="#"
+                twitter={member.twitter}
+                linkedIn={member.linkedin}
+                portfolio={member.portfolio}
               >
                 {member.description}
               </Member>

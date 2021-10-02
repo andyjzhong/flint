@@ -1,10 +1,10 @@
 import { Box, Flex, Img, Text, useColorModeValue } from '@chakra-ui/react'
 import * as React from 'react'
-import { FaLinkedinIn, FaTwitter } from 'react-icons/fa'
+import { FaLinkedinIn, FaTwitter, FaExternalLinkAlt } from 'react-icons/fa'
 import { SocialLink } from './SocialLink'
 
 export const Member = (props) => {
-  const { image, role, name, twitter, linkedIn, children } = props
+  const { image, role, name, twitter, linkedIn, portfolio, children } = props
   return (
     <Flex
       direction="column"
@@ -47,8 +47,11 @@ export const Member = (props) => {
         <SocialLink icon={FaTwitter} href={twitter} borderEndWidth="1px">
           Twitter
         </SocialLink>
-        <SocialLink icon={FaLinkedinIn} href={linkedIn}>
+        <SocialLink icon={FaLinkedinIn} href={linkedIn} borderEndWidth="1px">
           LinkedIn
+        </SocialLink>
+        <SocialLink icon={FaExternalLinkAlt} href={portfolio}>
+          Portfolio
         </SocialLink>
       </Flex>
     </Flex>

@@ -72,10 +72,18 @@ const MobileNavContext = (props) => {
             </NavLink.Mobile>
           ),
         )}
+        <Button colorScheme="gray" w="full" size="lg" mt="5" as="a" onClick={() => {
+          onToggle()
+          history.push('/account')
+        }}>
+          Account Settings
+        </Button>
         <Button colorScheme="blue" w="full" size="lg" mt="5" as="a" onClick={() => {
           if(isUserLoggedIn){
+            onToggle()
             history.push('/logout')
           } else {
+            onToggle()
             history.push('/login')
           }
         }}>

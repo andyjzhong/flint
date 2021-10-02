@@ -3,6 +3,7 @@ import React from 'react'
 
 export const SocialLink = (props) => {
   const { href, children, icon: SocialIcon, ...rest } = props
+  console.log(href)
   return (
     <Link
       flex="1"

@@ -8,12 +8,13 @@ import {
     useColorModeValue as mode,
   } from '@chakra-ui/react'
   import * as React from 'react'
-  import { FaCopy, FaPlug, FaRecycle } from 'react-icons/fa'
+  import { FaLock, FaChartPie } from 'react-icons/fa'
   import { Feature } from './Feature'
+  import { BiDollarCircle } from 'react-icons/bi';
   
   function AboutDetails(){
     return (
-      <Box as="section" bg={mode('gray.50', 'gray.800')} pt="16" pb="32">
+      <Box as="section" bg={mode('gray.50', 'gray.800')} pt="32" pb="32" h='100vh'>
         <Box
           maxW={{
             base: 'xl',
@@ -26,7 +27,7 @@ import {
           }}
         >
           <Heading textAlign="center" letterSpacing="tight" fontWeight="extrabold">
-            If you like wallets, you’re gonna love this
+            If you like organization, you’re gonna love this
           </Heading>
           <Box mt="24">
             <SimpleGrid
@@ -40,17 +41,14 @@ import {
               }}
             >
               <Stack spacing="12" maxW="lg">
-                <Feature icon={<Box as={FaCopy} w="6" h="6" />} title="100% transparent">
-                  Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit
-                  officia consequat duis enim velit mollit. Exercitation veniam consequat sunt.
+                <Feature icon={<Box as={BiDollarCircle} w="6" h="6" />} title="Add Transactions">
+                  Add, Edit, and Sort your transactions easily. Filter your income and expenses by category and make changes to them in real time.
                 </Feature>
-                <Feature icon={<Box as={FaPlug} w="6" h="6" />} title="Local bank support">
-                  Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit
-                  officia consequat duis enim velit mollit. Exercitation veniam consequat sunt.
+                <Feature icon={<Box as={FaChartPie} w="6" h="6" />} title="Manage Budgets">
+                  Easily manage your finances by creating budgets. Our visual aids, charts and graphs are easy to understand and customizable.
                 </Feature>
-                <Feature icon={<Box as={FaRecycle} w="6" h="6" />} title="Savings automation">
-                  Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit
-                  officia consequat duis enim velit mollit. Exercitation veniam consequat sunt.
+                <Feature icon={<Box as={FaLock} w="6" h="6" />} title="2FA">
+                  Always know your privacy is protected with multiple ways to enable 2-Factor-Authentication on your account. Choose one that fits you best.
                 </Feature>
               </Stack>
               <Center shadow="lg" minH="26rem">
@@ -58,7 +56,7 @@ import {
                   objectFit="cover"
                   w="full"
                   h="full"
-                  src="https://images.unsplash.com/photo-1609921205586-7e8a57516512?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTl8fGRlc2lnbmVyfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
+                  src="https://images.unsplash.com/photo-1628348068343-c6a848d2b6dd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
                   alt="Holding phone with app installed"
                 />
               </Center>
