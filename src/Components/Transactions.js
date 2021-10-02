@@ -110,17 +110,22 @@ const Transactions = () => {
                         <Text p={2} fontSize={20}>Add and review transactional data</Text>
                     </VStack>
                 </Center>
-                <Grid
+                <Grid bg="yellow" justify="right"
                     m={"0 auto"}
                     w={"95%"}
                     gap={4}
                     templateColumns={{
-                        base: "repeat(20, 1fr)",
-                        sm: "repeat(20, 1fr)",
-                        md: "repeat(20, 1fr)",
+                        base: "repeat(1, 1fr)",
+                        sm: "repeat(1, 1fr)",
+                        md: "repeat(4, 1fr)",
                         lg: "repeat(20, 1fr)"
                     }}>
-                    <GridItem id="vBar" colSpan={7}>
+                    <GridItem id="vBar" colSpan={{
+                        base: 7,
+                        sm: 7,
+                        md: 7,
+                        lg: 7
+                    }}>
                         <FormControl id="search">
                             <InputGroup>
                                 <InputLeftElement pointerEvents="none" color="gray.400">
@@ -137,7 +142,12 @@ const Transactions = () => {
                             </InputGroup>
                         </FormControl>
                     </GridItem>
-                    <GridItem id="vSelect" colSpan={3}>
+                    <GridItem id="vSelect" colSpan={{
+                        base: 7,
+                        sm: 7,
+                        md: 7,
+                        lg: 3
+                    }}>
                         <Select
                             bg="white"
                             variant="outline"
@@ -148,30 +158,42 @@ const Transactions = () => {
                             {categoryOptions}
                         </Select>
                     </GridItem>
-                    <GridItem id="vDateStart" colSpan={4}>
+                    <GridItem id="vDateStart" aligh="right" colSpan={{
+                        base: 7,
+                        sm: 7,
+                        md: 2,
+                        lg: 4
+                    }}>
                         <HStack>
-                        <Text w="40%" textAlign="right" pr={2}>Begin: </Text>
-                        <DatePicker
-                            wrapperClassName="datePicker"
-                            name="input-date"
-                            className="begin-date-picker"
-                            selected={searchStartDate}
-                            onChange={(date) => setSearchStartDate(date)} />
+                            <Text w="40%" textAlign="right" pr={2}>Begin: </Text>
+                            <DatePicker
+                                wrapperClassName="datePicker"
+                                name="input-date"
+                                selected={searchStartDate}
+                                onChange={(date) => setSearchStartDate(date)} />
                         </HStack>
                     </GridItem>
-                    <GridItem id="vDateEnd" colSpan={4}>
+                    <GridItem id="vDateEnd" colSpan={{
+                        base: 7,
+                        sm: 7,
+                        md: 2,
+                        lg: 4
+                    }}>
                         <HStack>
-                        <Text w="40%" textAlign="right" pr={2}>End: </Text>
-                        <DatePicker
-                            wrapperClassName="datePicker"
-                            style={{ backgroundColor: "purple" }}
-                            name="input-date"
-                            className="begin-date-picker"
-                            selected={searchEndDate}
-                            onChange={(date) => setSearchEndDate(date)} />
+                            <Text w="40%" textAlign="right" pr={2}>End: </Text>
+                            <DatePicker
+                                wrapperClassName="datePicker"
+                                name="input-date"
+                                selected={searchEndDate}
+                                onChange={(date) => setSearchEndDate(date)} />
                         </HStack>
                     </GridItem>
-                    <GridItem id="vButton" colSpan={2}>
+                    <GridItem id="vButton" colSpan={{
+                        base: 7,
+                        sm: 7,
+                        md: 7,
+                        lg: 2
+                    }}>
                         <Button
                             w="100%"
                             colorScheme="blue"
