@@ -110,20 +110,20 @@ const Transactions = () => {
                         <Text p={2} fontSize={20}>Add and review transactional data</Text>
                     </VStack>
                 </Center>
-                <Grid bg="yellow" justify="right"
+                <Grid
                     m={"0 auto"}
                     w={"95%"}
                     gap={4}
                     templateColumns={{
-                        base: "repeat(1, 1fr)",
-                        sm: "repeat(1, 1fr)",
-                        md: "repeat(4, 1fr)",
+                        base: "repeat(2, 1fr)",
+                        sm: "repeat(2, 1fr)",
+                        md: "repeat(2, 1fr)",
                         lg: "repeat(20, 1fr)"
                     }}>
                     <GridItem id="vBar" colSpan={{
-                        base: 7,
-                        sm: 7,
-                        md: 7,
+                        base: 2,
+                        sm: 2,
+                        md: 2,
                         lg: 7
                     }}>
                         <FormControl id="search">
@@ -143,9 +143,9 @@ const Transactions = () => {
                         </FormControl>
                     </GridItem>
                     <GridItem id="vSelect" colSpan={{
-                        base: 7,
-                        sm: 7,
-                        md: 7,
+                        base: 2,
+                        sm: 2,
+                        md: 2,
                         lg: 3
                     }}>
                         <Select
@@ -159,9 +159,9 @@ const Transactions = () => {
                         </Select>
                     </GridItem>
                     <GridItem id="vDateStart" aligh="right" colSpan={{
-                        base: 7,
-                        sm: 7,
-                        md: 2,
+                        base: 2,
+                        sm: 1,
+                        md: 1,
                         lg: 4
                     }}>
                         <HStack>
@@ -174,9 +174,9 @@ const Transactions = () => {
                         </HStack>
                     </GridItem>
                     <GridItem id="vDateEnd" colSpan={{
-                        base: 7,
-                        sm: 7,
-                        md: 2,
+                        base: 2,
+                        sm: 1,
+                        md: 1,
                         lg: 4
                     }}>
                         <HStack>
@@ -189,9 +189,9 @@ const Transactions = () => {
                         </HStack>
                     </GridItem>
                     <GridItem id="vButton" colSpan={{
-                        base: 7,
-                        sm: 7,
-                        md: 7,
+                        base: 2,
+                        sm: 2,
+                        md: 2,
                         lg: 2
                     }}>
                         <Button

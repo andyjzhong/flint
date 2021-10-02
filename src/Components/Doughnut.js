@@ -65,7 +65,7 @@ function Doughnut() {
     };
 
     return (
-        <DoughnutChart data={data} options={options} height={800} width={800}/>
+        <DoughnutChart data={data} options={options} height={900} width={900}/>
     )
 }
 

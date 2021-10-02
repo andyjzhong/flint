@@ -12,11 +12,12 @@ import IncomeChart from './IncomeChart';
 import SummaryTable from './SummaryTable';
 import {
     Box,
+    Center,
     Grid,
     GridItem,
     Heading,
     Text,
-    Stack,
+    VStack,
     StatGroup,
     StatLabel,
     StatNumber,
@@ -25,7 +26,6 @@ import {
     Stat,
     useColorModeValue
 } from '@chakra-ui/react';
-import "./Dashboard.css"
 import axios from 'axios';
 import moment from 'moment';
 
@@ -297,15 +297,17 @@ const Dashboard = () => {
     return (
         <div className="dashboard">
             <Box p={4} pt={24} bg={useColorModeValue('gray.50', 'gray.800')}>
-                <div className="screen-header">
-                    <Stack spacing={{ base: 10, md: 20 }}>
-                        <Heading lineHeight={1.1} fontSize={{ base: '4xl', sm: '4xl', md: '5xl', lg: '5xl' }}>
-                            <Text as={'span'} bgGradient="linear(to-r, green.400,green.300)" bgClip="text">Dashboard</Text>{' '}
+                <Center>
+                    <VStack mt={{ base: "6", sm: "6", md: "8", lg: "8"}} mb={{ base: "10", sm: "10", md: "20", lg: "14"}}>
+                        <Heading fontSize={{ base: '4xl', sm: '4xl', md: '5xl', lg: '5xl' }}>
+                            <Text mb={6} size="xl" as={'span'} bgGradient="linear(to-r, green.400,green.300)" bgClip="text">Dashboard</Text>{' '}
                         </Heading>
-                    </Stack>
-                </div>
+                        <Text p={2} fontSize={20}>View and analyze your spending and earnings</Text>
 
-                <StatGroup style={{margin: "4rem auto", padding: "2rem", backgroundColor: "rgb(237,242,246)", borderRadius: "10px", textAlign: "center"}} spacing="24px" maxW={'85vw'} boxShadow="lg">
+                    </VStack>
+                </Center>
+
+                <StatGroup mx="auto" mb="4rem" style={{padding: "2rem", backgroundColor: "rgb(237,242,246)", borderRadius: "10px", textAlign: "center"}} spacing="24px" maxW={'85vw'} boxShadow="lg">
                     <Grid
                         gap={{ base: '1rem', sm: '2rem', md: '2rem', lg: '4rem', xl: '6rem' }}
                         templateColumns={{
