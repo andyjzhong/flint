@@ -32,26 +32,25 @@ const CreateBudgetModal = (props) => {
         )
     })
 
-    // TODO: Currently hardcoded.
-    let selectedCategory = "Entertainment"
+    let subcategoryOptions = ""
 
-    const matchingCategory = categoryOptionsRaw.filter((item, index) => {
-        return item.major === selectedCategory;
-    })
+    if (category) {
+        let selectedCategory = categoryOptionsRaw.filter((item, index) => {
+            return item.major === category
+        })
 
-    let subcategoryOptions = matchingCategory[0].minor.map((item, index) => {
-
-        if (selectedCategory.length > 0) {
-            return (
-                <option key={item} value={item}>{item}</option>
-            )
-        } else {
-            return (
-                <option>No Category Selected</option>
-            )
-        }
-
-    })
+        subcategoryOptions = selectedCategory[0].minor.map((item, index) => {
+            if (selectedCategory.length > 0) {
+                return (
+                    <option key={index} value={item}>{item}</option>
+                )
+            } else {
+                return (
+                    <option>No Category Selected</option>
+                )
+            }
+        })
+    }
 
     const createBudget = async () => {
         console.log("Attempting to create a new budget...")

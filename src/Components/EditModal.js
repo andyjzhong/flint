@@ -55,34 +55,31 @@ const EditModal = (props) => {
         setTxDate
     } = useContext(DataContext);
 
-    // console.log("matchingTransactionData is", matchingTransactionData);
-
     let categoryOptions = categoryOptionsRaw.map((item, index) => {
         return (
             <option key={item.id} value={item.major}>{item.major}</option>
         )
     })
 
-    // TODO: Currently hardcoded.
-    let selectedCategory = "Entertainment"
+    let subcategoryOptions = ""
 
-    const matchingCategory = categoryOptionsRaw.filter((item, index) => {
-        return item.major === selectedCategory;
-    })
+    if (txCategory) {
+        let selectedCategory = categoryOptionsRaw.filter((item, index) => {
+            return item.major === txCategory
+        })
 
-    let subcategoryOptions = matchingCategory[0].minor.map((item, index) => {
-
-        if (selectedCategory.length > 0) {
-            return (
-                <option key={item} value={item}>{item}</option>
-            )
-        } else {
-            return (
-                <option>No Category Selected</option>
-            )
-        }
-
-    })
+        subcategoryOptions = selectedCategory[0].minor.map((item, index) => {
+            if (selectedCategory.length > 0) {
+                return (
+                    <option key={index} value={item}>{item}</option>
+                )
+            } else {
+                return (
+                    <option>No Category Selected</option>
+                )
+            }
+        })
+    }
 
     const editTransaction = async () => {
         console.log(`Attempting to edit a transaction with id of ${transactionId}...`)

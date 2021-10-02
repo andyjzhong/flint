@@ -38,8 +38,8 @@ const DeleteModal = (props) => {
                 </ModalBody>
 
                 <ModalFooter>
-                    <Button variant="ghost" onClick={props.onClose}>Cancel</Button>
-                    <Button colorScheme="blue" mr={3} onClick={() => {
+                    <Button mx={2} variant="ghost" onClick={props.onClose}>Cancel</Button>
+                    <Button mx={2} colorScheme="blue" mr={3} onClick={() => {
                         handleDelete()
                         props.onClose()
                     }}>

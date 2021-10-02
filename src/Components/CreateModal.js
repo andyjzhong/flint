@@ -41,14 +41,14 @@ const CreateModal = (props) => {
         )
     })
 
-    let subcategoryPreview = ""
+    let subcategoryOptions = ""
 
     if (category) {
         let selectedCategory = categoryOptionsRaw.filter((item, index) => {
             return item.major === category
         })
 
-        subcategoryPreview = selectedCategory[0].minor.map((item, index) => {
+        subcategoryOptions = selectedCategory[0].minor.map((item, index) => {
             if (selectedCategory.length > 0) {
                 return (
                     <option key={index} value={item}>{item}</option>
@@ -164,7 +164,7 @@ const CreateModal = (props) => {
                             <FormControl>
                                 <FormLabel>Subcategory</FormLabel>
                                 <Select name="input-subcategory" onChange={storeSubcategory} placeholder="Select category">
-                                    {subcategoryPreview}
+                                    {subcategoryOptions}
                                 </Select>
                             </FormControl>
                         </SimpleGrid>
