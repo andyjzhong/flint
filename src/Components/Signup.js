@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import {
     Box,
@@ -14,39 +14,36 @@ import {
 } from '@chakra-ui/react';
 
 export default function Signup() {
-    const [show, setShow] = React.useState(false)
-    const handleClick = () => setShow(!show)
-
-    const newAccount = {
-        username: "username",
-        email: "email",
-        firstName: "firstName",
-        lastName: "lastName",
-        password: "password"
+    const [show, setShow] = useState(false)
+    const handleClick = (e) => {
+        e.preventDefault();
+        setShow(!show)
     }
 
-    const updateNewAccount = (e) => {
-        if (e.target.name === "input-username") {
-            newAccount.username = e.target.value
-        }
+    const [newUsername, setNewUsername] = useState("")
+    const [newEmail, setNewEmail] = useState("")
+    const [newFirstName, setFirstName] = useState("")
+    const [newLastName, setNewLastName] = useState("")
+    const [newPassword, setNewPassword] = useState("")
 
-        if (e.target.name === "input-email") {
-            newAccount.email = e.target.value
-        }
+    const handleNewUsername = (e) => {
+        setNewUsername(e.target.value)
+    }
 
-        if (e.target.name === "input-firstName") {
-            newAccount.firstName = e.target.value
-        }
+    const handleNewEmail = (e) => {
+        setNewEmail(e.target.value)
+    }
 
-        if (e.target.name === "input-lastName") {
-            newAccount.lastName = e.target.value
-        }
+    const handleNewFirstName = (e) => {
+        setFirstName(e.target.value)
+    }
 
-        if (e.target.name === "input-password") {
-          newAccount.password = e.target.value
-        }
+    const handleNewLastName = (e) => {
+        setNewLastName(e.target.value)
+    }
 
-        console.log("newAccount is", newAccount)
+    const handleNewPassword = (e) => {
+        setNewPassword(e.target.value)
     }
 
     const createAccount = async () => {
@@ -58,17 +55,19 @@ export default function Signup() {
                 : `https://flint-server.herokuapp.com/users`
 
         axios.put(url, {
-            "username": newAccount.username,
-            "email": newAccount.email,
-            "firstName": newAccount.firstName,
-            "lastName": newAccount.lastName,
-            "password": newAccount.password,
+            "username": newUsername,
+            "email": newEmail,
+            "firstName": newFirstName,
+            "lastName": newLastName,
+            "password": newPassword,
             "isAdmin": false
         })
         .then((res) => {
             console.log("Success!")
         })
-        .catch(console.error)
+        .catch(
+            console.log("Email already exists.")
+        )
     }
 
     return (
@@ -117,11 +116,11 @@ export default function Signup() {
                             </Text>
                         </Stack>
 
-                        <Box as={'form'} mt={10}>
+                        <Box mt={10}>
                             <Stack spacing={4}>
                                 <Input
                                     name="input-username"
-                                    onChange={updateNewAccount}
+                                    onChange={handleNewUsername}
                                     placeholder="Username"
                                     bg={'gray.100'}
                                     border={0}
@@ -132,7 +131,7 @@ export default function Signup() {
                                 />
                                 <Input
                                     name="input-email"
-                                    onChange={updateNewAccount}
+                                    onChange={handleNewEmail}
                                     placeholder="Email"
                                     bg={'gray.100'}
                                     border={0}
@@ -143,7 +142,7 @@ export default function Signup() {
                                 />
                                 <Input
                                     name="input-firstName"
-                                    onChange={updateNewAccount}
+                                    onChange={handleNewFirstName}
                                     placeholder="First Name"
                                     bg={'gray.100'}
                                     border={0}
@@ -154,7 +153,7 @@ export default function Signup() {
                                 />
                                 <Input
                                     name="input-lastName"
-                                    onChange={updateNewAccount}
+                                    onChange={handleNewLastName}
                                     placeholder="Last Name"
                                     bg={'gray.100'}
                                     border={0}
@@ -168,7 +167,7 @@ export default function Signup() {
                                         pr="4.5rem"
                                         type={show ? "text" : "password"}
                                         name="input-password"
-                                        onChange={updateNewAccount}
+                                        onChange={handleNewPassword}
                                         placeholder="Enter password"
                                         bg={'gray.100'}
                                         border={0}
