@@ -139,7 +139,7 @@ const CreateModal = (props) => {
                     <ModalHeader>Add New Transaction</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody pb={6}>
-                        <FormControl  mb={6}>
+                        <FormControl mb={6}>
                             <FormLabel>Type</FormLabel>
                             <RadioGroup id="radioType" defaultValue="Expense">
                                 <Stack spacing={5} direction="row">
@@ -201,3 +201,24 @@ const CreateModal = (props) => {
 }
 
 export default CreateModal;
+
+
+//
+// <SimpleGrid mb={6} columns={2} spacing={2}>
+//     <FormControl>
+//         <FormLabel>Date</FormLabel>
+//         <DatePickerComponent wrapperClassName="add-transaction-date" name="input-date" className="transaction-date-picker"/>
+//     </FormControl>
+//     <FormControl>
+//         <FormLabel>Amount</FormLabel>
+//         <InputGroup>
+//             <InputLeftElement
+//                 pointerEvents="none"
+//                 color="gray.300"
+//                 fontSize="1.2em"
+//                 children="$"
+//             />
+//             <Input name="input-amount" onChange={storeAmount} placeholder="Enter amount" />
+//         </InputGroup>
+//     </FormControl>
+// </SimpleGrid>

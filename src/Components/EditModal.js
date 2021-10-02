@@ -21,14 +21,13 @@ import {
     Button,
     RadioGroup,
     Radio,
-    Stack
+    Stack,
+    SimpleGrid
 } from "@chakra-ui/react"
 
 const EditModal = (props) => {
 
     const userId = localStorage.getItem('fuid');
-
-
 
     const { txDate, transactionId, setUserAction, matchingTransactionData, accessToken,
         editTxDesc,
@@ -160,12 +159,7 @@ const EditModal = (props) => {
                     <ModalHeader>Edit Transaction</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody pb={6}>
-                        <FormControl>
-                            <FormLabel>Description</FormLabel>
-                            <Input value={editTxDesc} name="input-description" onChange={storeDescription} placeholder="i.e. Starbucks" />
-                        </FormControl>
-
-                        <FormControl>
+                        <FormControl mb={6}>
                             <FormLabel>Type</FormLabel>
                             <RadioGroup value={editTxType} defaultValue="2">
                                 <Stack spacing={5} direction="row">
@@ -174,44 +168,48 @@ const EditModal = (props) => {
                                 </Stack>
                             </RadioGroup>
                         </FormControl>
-
-                        <FormControl>
-                            <FormLabel>Category</FormLabel>
-                            <Select isDisabled={isIncome ? true : false} value={isIncome ? "Income" : editTxCat} name="input-category" onChange={storeCategory} placeholder="Select category">
-                                {categoryOptions}
-                            </Select>
+                        <FormControl mb={6}>
+                            <FormLabel>Description</FormLabel>
+                            <Input value={editTxDesc} name="input-description" onChange={storeDescription} placeholder="i.e. Starbucks" />
                         </FormControl>
+                        <SimpleGrid mb={6} columns={2} spacing={2}>
+                            <FormControl>
+                                <FormLabel>Category</FormLabel>
+                                <Select isDisabled={isIncome ? true : false} value={isIncome ? "Income" : editTxCat} name="input-category" onChange={storeCategory} placeholder="Select category">
+                                    {categoryOptions}
+                                </Select>
+                            </FormControl>
+                            <FormControl>
+                                <FormLabel>Subcategory</FormLabel>
+                                <Select value={editTxSubcat} name="input-subcategory" onChange={storeSubcategory} placeholder="Select category">
+                                    {subcategoryOptions}
+                                </Select>
+                            </FormControl>
+                        </SimpleGrid>
+                        <SimpleGrid mb={6} columns={2} spacing={2}>
+                            <FormControl>
+                                <FormLabel>Date</FormLabel>
+                                <DatePicker
+                                    startDate={moment(editTxDate).format("MM/DD/YYYY")}
+                                    value={moment(editTxDate).format("MM/DD/YYYY")}
+                                    onChange={handleDateChange}
+                                    className="transaction-date-picker"/>
+                            </FormControl>
 
-                        <FormControl>
-                            <FormLabel>Subcategory</FormLabel>
-                            <Select value={editTxSubcat} name="input-subcategory" onChange={storeSubcategory} placeholder="Select category">
-                                {subcategoryOptions}
-                            </Select>
-                        </FormControl>
-
-                        <FormControl>
-                            <FormLabel>Date</FormLabel>
-                            <DatePicker
-                                startDate={moment(editTxDate).format("MM/DD/YYYY")}
-                                value={moment(editTxDate).format("MM/DD/YYYY")}
-                                onChange={handleDateChange}
-                                className="transaction-date-picker"/>
-                        </FormControl>
-
-                        <FormControl mt={4}>
-                            <FormLabel>Amount</FormLabel>
-                            <InputGroup>
-                                <InputLeftElement
-                                    pointerEvents="none"
-                                    color="gray.300"
-                                    fontSize="1.2em"
-                                    children="$"
-                                />
-                                <Input value={editTxAmt} name="input-amount" onChange={storeTxAmount} placeholder="Enter amount" />
-                            </InputGroup>
-                        </FormControl>
+                            <FormControl>
+                                <FormLabel>Amount</FormLabel>
+                                <InputGroup>
+                                    <InputLeftElement
+                                        pointerEvents="none"
+                                        color="gray.300"
+                                        fontSize="1.2em"
+                                        children="$"
+                                    />
+                                    <Input value={editTxAmt} name="input-amount" onChange={storeTxAmount} placeholder="Enter amount" />
+                                </InputGroup>
+                            </FormControl>
+                        </SimpleGrid>
                     </ModalBody>
-
                     <ModalFooter>
                         <Button colorScheme="blue" mr={3} onClick={editTransaction} type="submit">Save</Button>
                         <Button onClick={props.onEditClose}>Cancel</Button>
