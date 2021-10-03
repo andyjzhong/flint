@@ -322,10 +322,6 @@ const Dashboard = () => {
                                 <RiBankFill style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
                                 <StatLabel>Total Income</StatLabel>
                                 <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${totalIncome.toFixed(0) || 0}</StatNumber>
-                                <StatHelpText>
-                                <StatArrow type="increase" />
-                                23.36%
-                                </StatHelpText>
                             </Stat>
                         </GridItem>
                         <GridItem>
@@ -333,10 +329,6 @@ const Dashboard = () => {
                                 <FaMoneyBillWave style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
                                 <StatLabel>Total Spend</StatLabel>
                                 <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${totalSpend.toFixed(0) || 0}</StatNumber>
-                                <StatHelpText>
-                                <StatArrow type="increase" />
-                                23.36%
-                                </StatHelpText>
                             </Stat>
                         </GridItem>
                         <GridItem>
@@ -344,10 +336,6 @@ const Dashboard = () => {
                                 <FaPiggyBank style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
                                 <StatLabel>Net Income</StatLabel>
                                 <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${(totalIncome - totalSpend).toFixed(0) || 0}</StatNumber>
-                                <StatHelpText>
-                                <StatArrow type={(Math.sign((totalIncome - totalSpend || 0)) >= 0) ? "increase" : "decrease"}  />
-                                9.05%
-                                </StatHelpText>
                             </Stat>
                         </GridItem>
                         <GridItem>
@@ -355,10 +343,6 @@ const Dashboard = () => {
                                 <BsGraphUp style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
                                 <StatLabel>Avg Mo. Income</StatLabel>
                                 <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${Math.round(totalIncome / 12).toFixed(0) || 0}</StatNumber>
-                                <StatHelpText>
-                                <StatArrow type="decrease" />
-                                9.05%
-                                </StatHelpText>
                             </Stat>
                         </GridItem>
                         <GridItem>
@@ -366,10 +350,6 @@ const Dashboard = () => {
                                 <BsGraphDown style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
                                 <StatLabel>Avg Mo. Spend</StatLabel>
                                 <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${Math.round(totalSpend / 12).toFixed(0) || 0}</StatNumber>
-                                <StatHelpText>
-                                <StatArrow type="increase" />
-                                23.36%
-                                </StatHelpText>
                             </Stat>
                         </GridItem>
                         <GridItem>
@@ -377,10 +357,6 @@ const Dashboard = () => {
                                 <BiDollarCircle style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
                                 <StatLabel>Avg Net Income</StatLabel>
                                 <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${((Math.round(totalIncome / 12) - Math.round(totalSpend / 12))).toFixed(0) || 0}</StatNumber>
-                                <StatHelpText>
-                                <StatArrow type="decrease" />
-                                9.05%
-                                </StatHelpText>
                             </Stat>
                         </GridItem>
                     </Grid>

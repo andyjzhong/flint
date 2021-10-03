@@ -90,28 +90,28 @@ const CreateBudgetModal = (props) => {
 
     return (
         <>
-            <Modal isOpen={props.isOpen} onClose={props.onClose}>
+            <Modal isCentered isOpen={props.isOpen} onClose={props.onClose}>
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>Add New Budget</ModalHeader>
+                    <ModalHeader mb={6}>Add New Budget</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody pb={6}>
 
-                        <FormControl>
+                        <FormControl mb={6}>
                             <FormLabel>Category</FormLabel>
                             <Select name="input-category" onChange={storeCategory} placeholder="Select category">
                                 {categoryOptions}
                             </Select>
                         </FormControl>
 
-                        <FormControl>
+                        <FormControl mb={6}>
                             <FormLabel>Subcategory</FormLabel>
                             <Select name="input-subcategory" onChange={storeSubcategory} placeholder="Select category">
                                 {subcategoryOptions}
                             </Select>
                         </FormControl>
 
-                        <FormControl mt={4}>
+                        <FormControl>
                             <FormLabel>Amount</FormLabel>
                             <InputGroup>
                                 <InputLeftElement

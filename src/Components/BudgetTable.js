@@ -80,8 +80,8 @@ const BudgetTableComponent = () => {
                 <Td>{item.category}</Td>
                 <Td>{item.subcategory}</Td>
                 <Td isNumeric>${item.amount.toFixed(2)}</Td>
-                <Td whiteSpace="nowrap" >
-                    <HStack>
+                <Td style={{textAlign: "center"}} whiteSpace="nowrap">
+                    <ButtonGroup variant="solid" size="sm" spacing={2}>
                         <IconButton
                             _hover={{bgGradient: 'linear(to-r, orange.400,orange.400)', boxShadow: 'xl'}}
                             bgGradient="linear(to-r, orange.400,orange.400)"
@@ -105,7 +105,7 @@ const BudgetTableComponent = () => {
                             size="sm"
                             variant="outline"
                         />
-                    </HStack>
+                    </ButtonGroup>
                 </Td>
             </Tr>
         )
