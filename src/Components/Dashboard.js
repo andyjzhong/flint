@@ -203,7 +203,7 @@ const Dashboard = () => {
         totalIncome: 0
     }
 
-    const [monthlyCompMapState, setMonthlyCompMapState] = useState()
+    const [monthlyCompMapState, setMonthlyCompMapState] = useState(0)
 
     const joinMonthlyData = () => {
 
@@ -393,14 +393,14 @@ const Dashboard = () => {
                                         <Stat>
                                             <RiBankFill style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
                                             <StatLabel>Monthly Income</StatLabel>
-                                            <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${monthlyCompMapState.totalIncome.toFixed(0) || 0}</StatNumber>
+                                            <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${monthlyCompMapState.totalIncome || 0}</StatNumber>
                                         </Stat>
                                     </GridItem>
                                     <GridItem>
                                         <Stat>
                                             <FaMoneyBillWave style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
                                             <StatLabel>Monthly Spend</StatLabel>
-                                            <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${monthlyCompMapState.totalSpend.toFixed(0) || 0}</StatNumber>
+                                            <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${monthlyCompMapState.totalSpend || 0}</StatNumber>
                                         </Stat>
                                     </GridItem>
                                     <GridItem>
