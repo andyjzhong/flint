@@ -92,28 +92,28 @@ const EditBudgetModal = (props) => {
 
     return (
         <>
-            <Modal isOpen={props.isEditOpen} onClose={props.onEditClose}>
+            <Modal isCentered isOpen={props.isEditOpen} onClose={props.onEditClose}>
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>Edit Budget</ModalHeader>
+                    <ModalHeader mb={6}>Edit Budget</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody pb={6}>
 
-                        <FormControl>
+                        <FormControl mb={6}>
                             <FormLabel>Category</FormLabel>
                             <Select value={editModalCategory} name="input-category" onChange={storeCategory} placeholder="Select category">
                                 {categoryOptions}
                             </Select>
                         </FormControl>
 
-                        <FormControl>
+                        <FormControl mb={6}>
                             <FormLabel>Subcategory</FormLabel>
                             <Select value={editModalSubcategory} name="input-subcategory" onChange={storeSubcategory} placeholder="Select subcategory">
                                 {subcategoryOptions}
                             </Select>
                         </FormControl>
 
-                        <FormControl mt={4}>
+                        <FormControl>
                             <FormLabel>Amount</FormLabel>
                             <InputGroup>
                                 <InputLeftElement
