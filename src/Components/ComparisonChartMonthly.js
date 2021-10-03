@@ -2,24 +2,24 @@ import React, { useContext } from 'react';
 import { DataContext } from './DataContext';
 import { Bar } from 'react-chartjs-2';
 
-function ComparisonChart() {
+function ComparisonChartMonthly() {
 
-    const { summaryData } = useContext(DataContext);
+    const { monthlySummaryData } = useContext(DataContext);
 
     let categories = []
     let compBudgetValues = []
     let compSpendValues = []
 
-    if (summaryData) {
-        categories = summaryData.map((item) => {
+    if (monthlySummaryData) {
+        categories = monthlySummaryData.map((item) => {
             return item[0]
         });
 
-        compBudgetValues = summaryData.map((item) => {
-            return item[1].totalBudget * 12 || 0
+        compBudgetValues = monthlySummaryData.map((item) => {
+            return item[1].totalBudget || 0
         });
 
-        compSpendValues = summaryData.map((item) => {
+        compSpendValues = monthlySummaryData.map((item) => {
             return item[1].totalSpend || 0
         });
     }
@@ -57,4 +57,4 @@ function ComparisonChart() {
     )
 }
 
-export default ComparisonChart;
+export default ComparisonChartMonthly;

@@ -19,6 +19,9 @@ import TableComponent from './Components/TableUI/TableComponent.jsx';
 
 function App() {
 
+    const [monthlySummaryData, setMonthlySummaryData] = useState();
+    const [monthlySummaryDateData, setMonthlySummaryDateData] = useState();
+
     const [userAction, setUserAction] = useState();
     const [matchingTransactionData, setMatchingTransactionData] = useState();
     const [transactionId, setTransactionId] = useState();
@@ -64,6 +67,10 @@ function App() {
         <ChakraProvider theme={theme}>
             <DataContext.Provider
                 value = {{
+                    monthlySummaryDateData,
+                    setMonthlySummaryDateData,
+                    monthlySummaryData,
+                    setMonthlySummaryData,
                     txDate,
                     editTxDate,
                     setTxDate,
