@@ -203,6 +203,8 @@ const Dashboard = () => {
         totalIncome: 0
     }
 
+    const [monthlyCompMapState, setMonthlyCompMapState] = useState()
+
     const joinMonthlyData = () => {
 
         if (userData) {
@@ -219,7 +221,7 @@ const Dashboard = () => {
                 }
             }
 
-            console.log("monthlyCompMap", monthlyCompMap)
+            setMonthlyCompMapState(monthlyCompMap)
 
             for (let transaction of monthlyTransactions) {
                 if (transaction.type !== "Income") {
@@ -391,21 +393,21 @@ const Dashboard = () => {
                                         <Stat>
                                             <RiBankFill style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
                                             <StatLabel>Monthly Income</StatLabel>
-                                            <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${totalIncome.toFixed(0) || 0}</StatNumber>
+                                            <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${monthlyCompMapState.totalIncome.toFixed(0) || 0}</StatNumber>
                                         </Stat>
                                     </GridItem>
                                     <GridItem>
                                         <Stat>
                                             <FaMoneyBillWave style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
                                             <StatLabel>Monthly Spend</StatLabel>
-                                            <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${monthlyCompMap.totalSpend.toFixed(0) || 0}</StatNumber>
+                                            <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${monthlyCompMapState.totalSpend.toFixed(0) || 0}</StatNumber>
                                         </Stat>
                                     </GridItem>
                                     <GridItem>
                                         <Stat>
                                             <FaPiggyBank style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
                                             <StatLabel>Net Income</StatLabel>
-                                            <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${(totalIncome - totalSpend).toFixed(0) || 0}</StatNumber>
+                                            <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${(monthlyCompMapState.totalIncome - monthlyCompMapState.totalSpend).toFixed(0) || 0}</StatNumber>
                                         </Stat>
                                     </GridItem>
                                     <GridItem>
