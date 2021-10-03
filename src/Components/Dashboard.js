@@ -414,21 +414,21 @@ const Dashboard = () => {
                                         <Stat>
                                             <BsGraphUp style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
                                             <StatLabel>Avg Mo. Income</StatLabel>
-                                            <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${Math.round(totalIncome / 12).toFixed(0) || 0}</StatNumber>
+                                            <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${Math.round(totalIncome / moment().format("M")).toFixed(0) || 0}</StatNumber>
                                         </Stat>
                                     </GridItem>
                                     <GridItem>
                                         <Stat>
                                             <BsGraphDown style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
                                             <StatLabel>Avg Mo. Spend</StatLabel>
-                                            <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${Math.round(totalSpend / 12).toFixed(0) || 0}</StatNumber>
+                                            <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${Math.round(totalSpend / moment().format("M")).toFixed(0) || 0}</StatNumber>
                                         </Stat>
                                     </GridItem>
                                     <GridItem>
                                         <Stat>
                                             <BiDollarCircle style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
                                             <StatLabel>Avg Net Income</StatLabel>
-                                            <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${((Math.round(totalIncome / 12) - Math.round(totalSpend / 12))).toFixed(0) || 0}</StatNumber>
+                                            <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${((Math.round(totalIncome / moment().format("M")) - Math.round(totalSpend / moment().format("M")))).toFixed(0) || 0}</StatNumber>
                                         </Stat>
                                     </GridItem>
                                 </Grid>
@@ -567,21 +567,21 @@ const Dashboard = () => {
                                             <Stat>
                                                 <BsGraphUp style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
                                                 <StatLabel>Avg Mo. Income</StatLabel>
-                                                <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${Math.round(totalIncome / 12).toFixed(0) || 0}</StatNumber>
+                                                <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${Math.round(totalIncome / moment().format("M")).toFixed(0) || 0}</StatNumber>
                                             </Stat>
                                         </GridItem>
                                         <GridItem>
                                             <Stat>
                                                 <BsGraphDown style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
                                                 <StatLabel>Avg Mo. Spend</StatLabel>
-                                                <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${Math.round(totalSpend / 12).toFixed(0) || 0}</StatNumber>
+                                                <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${Math.round(totalSpend / moment().format("M")).toFixed(0) || 0}</StatNumber>
                                             </Stat>
                                         </GridItem>
                                         <GridItem>
                                             <Stat>
                                                 <BiDollarCircle style={{fontSize: "2.5em", color: "rgb(31,180,226)", margin: "1rem auto"}} />
                                                 <StatLabel>Avg Net Income</StatLabel>
-                                                <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${((Math.round(totalIncome / 12) - Math.round(totalSpend / 12))).toFixed(0) || 0}</StatNumber>
+                                                <StatNumber fontSize={{ base: '20px', sm: '24px'}}>${((Math.round(totalIncome / moment().format("M")) - Math.round(totalSpend / moment().format("M")))).toFixed(0) || 0}</StatNumber>
                                             </Stat>
                                         </GridItem>
                                     </Grid>
