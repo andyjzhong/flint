@@ -125,58 +125,64 @@ const DesktopNavContent = (props) => {
                     ))}
             </HStack>
             <HStack spacing="8" minW="240px" style={{position: "absolute", right: "0"}}>
-                <Box
-                    as="a"
-                    href="/logout"
-                    color={mode('blue.600', 'blue.300')}
-                    fontWeight="bold"
-                    display={isUserLoggedIn ? 'block' : 'none'}>
-                    Sign out
-                </Box>
-                <Box
-                    as="a"
-                    href="login"
-                    color={mode('blue.600', 'blue.300')}
-                    fontWeight="bold"
-                    display={isUserLoggedIn ? 'none' : 'block'}>
-                    Sign in
-                </Box>
-                <Button
-                    as="a"
-                    href="signup"
-                    colorScheme="blue"
-                    fontWeight="bold"
-                    display={isUserLoggedIn ? 'none' : 'flex'}>
-                    Sign up
-                </Button>
-                <Menu>
-                    <MenuButton
-                        as={Avatar}
-                        size={"md"}
-                        cursor="pointer"
-                        src={localStorage.getItem('profilePicURL')}
-                        border={"2px solid #2B6CB0"}
-                        display={isUserLoggedIn ? 'block' : 'none'}>
-                    </MenuButton>
-                    <MenuList>
-                        <MenuItem
-                            display={isUserLoggedIn ? 'none' : 'block'}
-                            href="/login"
-                            onClick={() => history.push('/login')}>
-                            Sign In
-                        </MenuItem>
-                        <MenuItem
-                            display={isUserLoggedIn ? 'block' : 'none'}
-                            onClick={() => history.push('/account')}>
-                            Account Settings
-                        </MenuItem>
-                        <MenuItem
-                            display={isUserLoggedIn ? 'block' : 'none'}
-                            onClick={() => history.push('/logout')}>
-                            Sign Out
-                        </MenuItem>
-                    </MenuList>
-                </Menu>
+                <HStack bg="pink" minW="240px" style={{position: "relative"}}>
+                    <HStack bg="lightblue" minW="240px">
+                        <Box style={{position: "absolute", right: "0"}} mr={70}
+                            as="a"
+                            href="/logout"
+                            color={mode('blue.600', 'blue.300')}
+                            fontWeight="bold"
+                            display={isUserLoggedIn ? 'block' : 'none'}>
+                            Sign out
+                        </Box>
+                        <HStack bg="lightblue" minW="240px">
+                            <Box style={{position: "absolute", right: "0"}} mr={120}
+                                as="a"
+                                href="login"
+                                color={mode('blue.600', 'blue.300')}
+                                fontWeight="bold"
+                                display={isUserLoggedIn ? 'none' : 'block'}>
+                                Sign in
+                            </Box>
+                            <Button style={{position: "absolute", right: "0"}} ml={200}
+                                as="a"
+                                href="signup"
+                                colorScheme="blue"
+                                fontWeight="bold"
+                                display={isUserLoggedIn ? 'none' : 'flex'}>
+                                Sign up
+                            </Button>
+                        </HStack>
+                    </HStack>
+                    <Menu>
+                        <MenuButton style={{position: "absolute", right: "0"}}
+                            as={Avatar}
+                            size={"md"}
+                            cursor="pointer"
+                            src={localStorage.getItem('profilePicURL')}
+                            border={"2px solid #2B6CB0"}
+                            display={isUserLoggedIn ? 'block' : 'none'}>
+                        </MenuButton>
+                        <MenuList>
+                            <MenuItem
+                                display={isUserLoggedIn ? 'none' : 'block'}
+                                href="/login"
+                                onClick={() => history.push('/login')}>
+                                Sign In
+                            </MenuItem>
+                            <MenuItem
+                                display={isUserLoggedIn ? 'block' : 'none'}
+                                onClick={() => history.push('/account')}>
+                                Account Settings
+                            </MenuItem>
+                            <MenuItem
+                                display={isUserLoggedIn ? 'block' : 'none'}
+                                onClick={() => history.push('/logout')}>
+                                Sign Out
+                            </MenuItem>
+                        </MenuList>
+                    </Menu>
+                </HStack>
             </HStack>
         </Flex>
     )
