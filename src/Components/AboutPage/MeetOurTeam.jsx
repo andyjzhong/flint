@@ -7,7 +7,6 @@ import { members } from './_data'
 
 function MeetOurTeam() {
   return (
-    <div>
       <Box as="section" bg={useColorModeValue('gray.50', 'gray.800')}>
       <Box
         maxW={{
@@ -100,7 +99,6 @@ function MeetOurTeam() {
         </Grid>
       </Box>
         </Box>
-    </div>
   )
 }
 

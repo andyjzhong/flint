@@ -7,7 +7,7 @@ export const members = [
       twitter: 'https://twitter.com/AndyZhong15',
       linkedin: 'https://www.linkedin.com/in/andyjzhong/',
       portfolio: 'https://andyzhong.squarespace.com/',
-      description: ' I am at the pinacle of professionalism and treat everyone with equal amount of respect.',
+      description: 'I\'m with stupid ->',
     },
     {
       role: 'Software Engineer',

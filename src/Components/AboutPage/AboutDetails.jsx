@@ -14,7 +14,7 @@ import {
 
   function AboutDetails(){
     return (
-      <Box as="section" bg={mode('gray.50', 'gray.800')} pt="32" pb="32" h='100vh'>
+      <Box as="section" bg={mode('gray.50', 'gray.800')} pt="32" pb="32" h={{ base: "180vh", sm: "160vh", md: "120vh", lg: "100vh" }}>
         <Box
           maxW={{
             base: 'xl',
