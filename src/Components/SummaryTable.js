@@ -4,11 +4,11 @@ import { DataContext } from './DataContext';
 
 const SummaryTable = (props) => {
 
-    const { summaryData } = useContext(DataContext);
+    const { monthlySummaryData } = useContext(DataContext);
     let summaryTableRow = []
 
-    if (summaryData) {
-        summaryTableRow = summaryData.map((item, index) => {
+    if (monthlySummaryData) {
+        summaryTableRow = monthlySummaryData.map((item, index) => {
             return (
                 <Tr key={index}>
                     <Td>{item[0]}</Td>
@@ -16,7 +16,7 @@ const SummaryTable = (props) => {
                     <Td isNumeric>${(item[1].totalSpend || 0).toFixed(0)}</Td>
                     <Td isNumeric>${((item[1].totalBudget || 0) - (item[1].totalSpend || 0)).toFixed(0)}</Td>
                     <Td style={{ color: "black", textAlign: "center" }}>
-                        {(Math.sign((item[1].totalBudget || 0) - (item[1].totalSpend || 0))) > 0
+                        {(Math.sign((item[1].totalBudget || 0) - (item[1].totalSpend || 0))) >= 0
                             ? "Under"
                             : "Over"
                         }

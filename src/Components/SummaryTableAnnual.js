@@ -16,7 +16,7 @@ const SummaryTableAnnual = (props) => {
                     <Td isNumeric>${(item[1].totalSpend || 0).toFixed(0)}</Td>
                     <Td isNumeric>${((item[1].totalBudget * 12 || 0) - (item[1].totalSpend || 0)).toFixed(0)}</Td>
                     <Td style={{ color: "black", textAlign: "center" }}>
-                        {(Math.sign((item[1].totalBudget || 0) - (item[1].totalSpend || 0))) > 0
+                        {(Math.sign((item[1].totalBudget * 12 || 0) - (item[1].totalSpend || 0))) >= 0
                             ? "Under"
                             : "Over"
                         }
