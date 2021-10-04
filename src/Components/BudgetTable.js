@@ -46,8 +46,6 @@ const BudgetTableComponent = () => {
     const selectedBudget = (e) => {
         let key = e.currentTarget.name;
         setBudgetId(key);
-        console.log("The selected transaction's id is:", key);
-        console.log("Full List", budgetsList);
 
         if (budgetsList) {
             let selectedBudget = budgetsList.filter((item) => {
@@ -64,13 +62,11 @@ const BudgetTableComponent = () => {
 
     const handleDelete = (e) => {
         selectedBudget(e)
-        console.log("Clicked Delete");
         onDeleteOpen()
     }
 
     const handleEdit = (e) => {
         selectedBudget(e)
-        console.log("Clicked Edit");
         onEditOpen()
     }
 

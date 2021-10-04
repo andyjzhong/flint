@@ -97,7 +97,6 @@ const Transactions = () => {
             }
         })
 
-        console.log("filtered transactions", filtered)
         setFilteredTransactionsList(filtered)
     }
 

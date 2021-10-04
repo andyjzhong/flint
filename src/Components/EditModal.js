@@ -143,7 +143,6 @@ const EditModal = (props) => {
     })
 
     const handleDateChange = (date) => {
-        console.log("Handle Date Change", date)
         setEditTxDate(date)
         setTxDate(date)
     }

@@ -95,18 +95,13 @@ const CreateModal = (props) => {
     })
 
     const storeType = ((e) => {
-        console.log("FLIPPITY FLIP");
         setType(e.target.value)
 
         if (isIncome === true) {
-            console.log("isIncome was: ", isIncome);
             setIsIncome(false)
-            console.log("isIncome is now: ", isIncome);
         } else {
-            console.log("isIncome was: ", isIncome);
             setIsIncome(true)
             setCategory("Income")
-            console.log("isIncome is now: ", isIncome);
         }
     })
 

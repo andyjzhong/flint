@@ -82,15 +82,12 @@ const AccountPage = () => {
     }
   },[accessToken])
 
-  // remove before deploy
   useEffect(()=>{
-    // console.log(userInfo)
   },[userInfo])
 
   if(userLoaded){
     return (
       <Box
-        // bg={useColorModeValue('gray.50', 'gray.800')}
         px={{
           base: '4',
           md: '10',

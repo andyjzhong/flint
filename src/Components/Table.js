@@ -14,14 +14,14 @@ import { RiAddFill } from 'react-icons/ri'
 const TableComponent = () => {
 
     const userId = localStorage.getItem('fuid');
-    const { userAction, 
-        setUserAction, 
-        transactionsList, 
-        setTransactionsList, 
-        transactionId, 
-        setTransactionId, 
-        setMatchingTransactionData, 
-        filteredTransactionsList, 
+    const { userAction,
+        setUserAction,
+        transactionsList,
+        setTransactionsList,
+        transactionId,
+        setTransactionId,
+        setMatchingTransactionData,
+        filteredTransactionsList,
         accessToken,
         setEditTxDesc,
         setEditTxDate,
@@ -53,7 +53,6 @@ const TableComponent = () => {
             const response = await axios(url,{
                 headers: {'authorization': `Bearer ${accessToken}`}
             })
-            console.log("Response data: ", response.data.transactions);
 
             let transactionsArray = response.data.transactions.sort(function(a, b){
                 return moment(a.date).format("YYYYMMDD") - moment(b.date).format("YYYYMMDD")
@@ -77,15 +76,12 @@ const TableComponent = () => {
     const selectedTransaction = (e) => {
         let key = e.currentTarget.name;
         setTransactionId(key);
-        console.log("The selected transaction's id is:", key);
-        console.log("Full List", transactionsList);
 
         if (transactionsList) {
             let selectedTx = transactionsList.filter((item) => {
                 return item._id === key
             })
 
-            console.log("SELECTED TX", selectedTx)
             setEditTxDesc(selectedTx[0].description)
             setEditTxDate(selectedTx[0].date)
             setEditTxType(selectedTx[0].type)
@@ -105,14 +101,11 @@ const TableComponent = () => {
 
     const handleDelete = (e) => {
         selectedTransaction(e)
-        console.log("Clicked Delete");
         onDeleteOpen()
     }
 
     const handleEdit = (e) => {
         selectedTransaction(e)
-        console.log("Clicked Edit");
-        console.log("transactionsList is", transactionsList)
         let matchingTransaction = transactionsList.filter((item) => {
             return item._id === transactionId
         })
