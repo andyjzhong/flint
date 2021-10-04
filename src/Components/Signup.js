@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useHistory } from 'react-router';
 import {
     Box,
     Stack,
@@ -14,11 +15,17 @@ import {
 } from '@chakra-ui/react';
 
 export default function Signup() {
+    const history = useHistory()
     const [show, setShow] = useState(false)
     const handleClick = (e) => {
         e.preventDefault();
         setShow(!show)
     }
+
+    const [errorMessage, setErrorMessage] = useState('')
+    const [errorDisplay, setErrorDisplay] = useState('none')
+    const [isUsernameInvalid, setIsUsernameInvalid] = useState(false)
+    const [isEmailInvalid, setIsEmailInvalid] = useState(false)
 
     const [newUsername, setNewUsername] = useState("")
     const [newEmail, setNewEmail] = useState("")
@@ -53,21 +60,44 @@ export default function Signup() {
             process.env.REACT_APP_NODE_ENV === 'production'
                 ? `https://flint-server.herokuapp.com/users`
                 : `https://flint-server.herokuapp.com/users`
-
-        axios.put(url, {
-            "username": newUsername,
-            "email": newEmail,
+        // change this back to url
+        axios.put('http://localhost:8000/users', {
+            "username": newUsername.toLowerCase(),
+            "email": newEmail.toLowerCase(),
             "firstName": newFirstName,
             "lastName": newLastName,
             "password": newPassword,
             "isAdmin": false
         })
         .then((res) => {
-            console.log("Success!")
+            console.log(res)
+            if('keyValue' in res.data){
+                console.log('it is indeed')
+                if('username' in res.data.keyValue){
+                    setIsUsernameInvalid(true)
+                    setErrorMessage('Username is taken.')
+                    setErrorDisplay('block')
+                } else if('email' in res.data.keyValue){
+                    setIsEmailInvalid(true)
+                    setErrorMessage('Email is already registered.')
+                    setErrorDisplay('block')
+                }
+            } else if('errors' in res.data){
+               if(res.data.errors.email.message === 'invalid email'){
+                setIsEmailInvalid(true)
+                setErrorMessage('Email is not valid.')
+                setErrorDisplay('block')
+               }
+            } else {
+                history.push('/login')
+            }
         })
-        .catch(
-            console.log("Email already exists.")
-        )
+        .catch((err) => {
+            console.log('error is....', err)
+            setIsEmailInvalid(true)
+            setErrorMessage('Email is not valid.')
+            setErrorDisplay('block')
+        })
     }
 
     return (
@@ -119,6 +149,7 @@ export default function Signup() {
                         <Box mt={10}>
                             <Stack spacing={4}>
                                 <Input
+                                    outline={isUsernameInvalid ? '1px solid red' : 'none'}
                                     name="input-username"
                                     onChange={handleNewUsername}
                                     placeholder="Username"
@@ -130,6 +161,7 @@ export default function Signup() {
                                     }}
                                 />
                                 <Input
+                                    outline={isEmailInvalid ? '1px solid red' : 'none'}
                                     name="input-email"
                                     onChange={handleNewEmail}
                                     placeholder="Email"
@@ -182,10 +214,16 @@ export default function Signup() {
                                         </Button>
                                     </InputRightElement>
                                 </InputGroup>
+                                <Text display={errorDisplay} pl='8' color='red.400'>{errorMessage}</Text>
                             </Stack>
 
                             <Button
-                                onClick={createAccount}
+                                onClick={() => {
+                                    createAccount()
+                                    setIsEmailInvalid(false)
+                                    setIsUsernameInvalid(false)
+                                    setErrorDisplay('none')
+                                }}
                                 fontFamily={'heading'}
                                 mt={8}
                                 w={'full'}
