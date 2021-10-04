@@ -94,7 +94,10 @@ const MobileNavContext = (props) => {
                     mt="5"
                     as="a"
                     display={isUserLoggedIn ? 'none' : 'flex'}
-                    onClick={() => history.push('/signup')}>
+                    onClick={() => {
+                      onToggle()
+                      history.push('/signup')
+                    }}>
                     Sign up
                 </Button>
             </NavMenu>
